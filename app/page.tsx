@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowDown, ArrowUpRight } from "lucide-react";
+import { HeroBackdrop } from "@/components/sections/HeroBackdrop";
 import { HeroMarquee } from "@/components/sections/HeroMarquee";
+import { HeroSystemMap } from "@/components/sections/HeroSystemMap";
 import { SpecSheet } from "@/components/sections/SpecSheet";
 import { ProjectRow } from "@/components/sections/ProjectRow";
 import { RulerDivider } from "@/components/ui/RulerDivider";
@@ -22,11 +24,6 @@ export const metadata: Metadata = {
 };
 
 export default function HomePage() {
-  const proofPoints = [
-    { label: "Experience", value: `${profile.yearsExperience} years` },
-    { label: "Systems", value: "AI-native products" },
-    { label: "Depth", value: "Design systems + data UX" },
-  ];
   const qualitySignals = [
     "Architecture",
     "Product thinking",
@@ -99,46 +96,43 @@ export default function HomePage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={jsonLd(structuredData)}
       />
-      <section className="pt-14 md:pt-20 grid-backdrop">
-        <Container>
-          <p className="font-mono text-[11px] tracking-widest uppercase text-signal mb-4">
-            {profile.role} — {profile.yearsExperience} yrs
-          </p>
-          <h1 className="font-display text-4xl md:text-6xl font-bold leading-[1.1] max-w-2xl mb-6">
-            {profile.tagline}
-          </h1>
-          <p className="text-ink-soft max-w-md mb-10">{profile.short}</p>
-          <div className="mb-10 flex flex-col gap-3 sm:flex-row">
-            <Link
-              href="#work"
-              className="inline-flex items-center justify-center gap-2 rounded border border-signal bg-signal px-5 py-3 font-mono text-[12px] tracking-wide text-paper transition-colors hover:bg-signal-dark focus-ring"
-            >
-              View selected work
-              <ArrowDown size={14} aria-hidden="true" />
-            </Link>
-            <Link
-              href="/contact"
-              className="inline-flex items-center justify-center gap-2 rounded border border-line-strong px-5 py-3 font-mono text-[12px] tracking-wide text-ink transition-colors hover:border-ink focus-ring"
-            >
-              Start a conversation
-              <ArrowUpRight size={14} aria-hidden="true" />
-            </Link>
-          </div>
-          <dl className="mb-12 grid grid-cols-1 border-y border-line bg-paper/60 backdrop-blur-sm sm:grid-cols-3">
-            {proofPoints.map((point) => (
-              <div
-                key={point.label}
-                className="border-b border-line py-4 sm:border-b-0 sm:border-r sm:px-5 last:border-b-0 sm:last:border-r-0"
-              >
-                <dt className="mb-1 font-mono text-[10px] uppercase tracking-widest text-ink-soft/70">
-                  {point.label}
-                </dt>
-                <dd className="text-sm font-medium text-ink">{point.value}</dd>
+      <section className="relative overflow-hidden pt-14 md:pt-20">
+        <HeroBackdrop />
+        <Container className="relative z-10">
+          <div className="grid gap-8 lg:grid-cols-[minmax(0,1.42fr)_minmax(300px,0.58fr)] lg:items-start">
+            <div>
+              <p className="font-mono text-[11px] tracking-widest uppercase text-signal mb-4">
+                {profile.role} — {profile.yearsExperience} yrs
+              </p>
+              <h1 className="font-display text-4xl md:text-6xl font-bold leading-[1.1] max-w-3xl mb-6">
+                {profile.tagline}
+              </h1>
+              <p className="text-ink-soft max-w-md mb-10">{profile.short}</p>
+              <div className="mb-10 flex flex-col gap-3 sm:flex-row">
+                <Link
+                  href="#work"
+                  className="inline-flex items-center justify-center gap-2 rounded border border-signal bg-signal px-5 py-3 font-mono text-[12px] tracking-wide text-paper transition-colors hover:bg-signal-dark focus-ring"
+                >
+                  View selected work
+                  <ArrowDown size={14} aria-hidden="true" />
+                </Link>
+                <Link
+                  href="/contact"
+                  className="inline-flex items-center justify-center gap-2 rounded border border-line-strong px-5 py-3 font-mono text-[12px] tracking-wide text-ink transition-colors hover:border-ink focus-ring"
+                >
+                  Start a conversation
+                  <ArrowUpRight size={14} aria-hidden="true" />
+                </Link>
               </div>
-            ))}
-          </dl>
+            </div>
+            <div className="-mt-[44px] lg:-mt-[60px]">
+              <HeroSystemMap />
+            </div>
+          </div>
         </Container>
-        <HeroMarquee />
+        <div className="relative z-10 mt-8 md:mt-10">
+          <HeroMarquee />
+        </div>
       </section>
 
       <section className="border-y border-line bg-surface">

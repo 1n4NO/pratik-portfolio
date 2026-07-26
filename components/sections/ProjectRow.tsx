@@ -7,7 +7,10 @@ import { Container } from "@/components/ui/Container";
 
 export function ProjectRow({ project, reversed }: { project: Project; reversed?: boolean }) {
   return (
-    <Container className="py-14 md:py-20">
+    <Container
+      id={`project-${project.slug}`}
+      className="scroll-mt-20 py-14 md:scroll-mt-28 md:py-20"
+    >
       <div
         className={`flex flex-col ${
           reversed ? "md:flex-row-reverse" : "md:flex-row"
