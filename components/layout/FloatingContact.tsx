@@ -1,21 +1,16 @@
 "use client";
 
-import { useEffect, useRef, useState, FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 import { MessageCircle, X } from "lucide-react";
-
-type Status = "idle" | "submitting" | "success" | "error";
+import { DisabledContactOverlay } from "@/components/ui/DisabledContactOverlay";
 
 export function FloatingContact() {
   const [open, setOpen] = useState(false);
-  const [status, setStatus] = useState<Status>("idle");
-  const [errorMsg, setErrorMsg] = useState("");
   const dialogRef = useRef<HTMLDivElement>(null);
-  const firstFieldRef = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
     if (open) {
       document.body.style.overflow = "hidden";
-      firstFieldRef.current?.focus();
     } else {
       document.body.style.overflow = "";
     }
@@ -32,33 +27,8 @@ export function FloatingContact() {
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [open]);
 
-  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
+  function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setStatus("submitting");
-    setErrorMsg("");
-
-    const form = e.currentTarget;
-    const data = {
-      name: (form.elements.namedItem("name") as HTMLInputElement).value,
-      email: (form.elements.namedItem("email") as HTMLInputElement).value,
-      subject: (form.elements.namedItem("subject") as HTMLInputElement).value,
-      message: (form.elements.namedItem("message") as HTMLTextAreaElement).value,
-    };
-
-    try {
-      const res = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
-      const json = await res.json();
-      if (!res.ok) throw new Error(json.error ?? "Something went wrong.");
-      setStatus("success");
-      form.reset();
-    } catch (err) {
-      setStatus("error");
-      setErrorMsg(err instanceof Error ? err.message : "Something went wrong.");
-    }
   }
 
   return (
@@ -98,65 +68,38 @@ export function FloatingContact() {
               </button>
             </div>
 
-            {status === "success" ? (
-              <div className="px-6 py-10 text-center">
-                <p className="font-display text-lg font-bold mb-2">Message sent.</p>
-                <p className="text-sm text-ink-soft mb-6">
-                  Thanks for reaching out — I&apos;ll get back to you soon.
-                </p>
-                <button
-                  onClick={() => {
-                    setOpen(false);
-                    setStatus("idle");
-                  }}
-                  className="font-mono text-[12px] text-signal hover:text-signal-dark focus-ring rounded"
-                >
-                  Close
-                </button>
-              </div>
-            ) : (
-              <form onSubmit={handleSubmit} className="px-6 py-5 space-y-4">
-                <Field
-                  label="Name"
-                  name="name"
-                  inputRef={(node) => {
-                    firstFieldRef.current = node;
-                  }}
-                  required
-                />
-                <Field label="Email" name="email" type="email" required />
-                <Field label="Subject" name="subject" required />
-                <div>
-                  <label
-                    htmlFor="message"
-                    className="block font-mono text-[11px] tracking-wide text-ink-soft mb-1.5"
+            <div className="relative">
+              <form onSubmit={handleSubmit} className="px-6 py-5 space-y-4" aria-disabled="true">
+                <fieldset disabled className="space-y-4 opacity-45">
+                  <Field label="Name" name="name" required />
+                  <Field label="Email" name="email" type="email" required />
+                  <Field label="Subject" name="subject" required />
+                  <div>
+                    <label
+                      htmlFor="message"
+                      className="block font-mono text-[11px] tracking-wide text-ink-soft mb-1.5"
+                    >
+                      Message
+                    </label>
+                    <textarea
+                      id="message"
+                      name="message"
+                      required
+                      rows={4}
+                      className="w-full rounded border border-line bg-surface px-3 py-2 text-sm focus-ring resize-none"
+                    />
+                  </div>
+
+                  <button
+                    type="submit"
+                    className="w-full inline-flex items-center justify-center gap-2 font-mono text-[12px] tracking-wide rounded px-5 py-3 bg-signal text-paper hover:bg-signal-dark transition-colors focus-ring disabled:opacity-50"
                   >
-                    Message
-                  </label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    required
-                    rows={4}
-                    className="w-full rounded border border-line bg-surface px-3 py-2 text-sm focus-ring resize-none"
-                  />
-                </div>
-
-                {status === "error" && (
-                  <p role="alert" className="text-sm text-danger">
-                    {errorMsg}
-                  </p>
-                )}
-
-                <button
-                  type="submit"
-                  disabled={status === "submitting"}
-                  className="w-full inline-flex items-center justify-center gap-2 font-mono text-[12px] tracking-wide rounded px-5 py-3 bg-signal text-paper hover:bg-signal-dark transition-colors focus-ring disabled:opacity-50"
-                >
-                  {status === "submitting" ? "Sending…" : "Send message"}
-                </button>
+                    Send message
+                  </button>
+                </fieldset>
               </form>
-            )}
+              <DisabledContactOverlay />
+            </div>
           </div>
         </div>
       )}
@@ -169,13 +112,11 @@ function Field({
   name,
   type = "text",
   required,
-  inputRef,
 }: {
   label: string;
   name: string;
   type?: string;
   required?: boolean;
-  inputRef?: (node: HTMLInputElement | null) => void;
 }) {
   return (
     <div>
@@ -186,7 +127,6 @@ function Field({
         {label}
       </label>
       <input
-        ref={inputRef}
         id={name}
         name={name}
         type={type}
