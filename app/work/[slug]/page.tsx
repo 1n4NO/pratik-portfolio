@@ -9,6 +9,7 @@ import { ScreenshotGallery } from "@/components/sections/ScreenshotGallery";
 import { DetailedProcess } from "@/components/sections/DetailedProcess";
 import { CaseStudyNav, type CaseStudyNavItem } from "@/components/sections/CaseStudyNav";
 import { ProjectBrief } from "@/components/sections/ProjectBrief";
+import { ReadingModeToggle } from "@/components/sections/ReadingModeToggle";
 import { ProjectPrevNext } from "@/components/sections/ProjectPrevNext";
 import { ReadingProgressRuler } from "@/components/ui/ReadingProgressRuler";
 import { MotionReveal } from "@/components/ui/MotionReveal";
@@ -142,27 +143,30 @@ export default function ProjectDetailPage({ params }: { params: { slug: string }
             <Tag key={tech}>{tech}</Tag>
           ))}
         </div>
-        <div className="flex gap-4">
-          <a
-            href={project.liveUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 font-mono text-[12px] text-signal hover:text-signal-dark focus-ring rounded"
-          >
-            Visit live site
-            <ArrowUpRight size={14} aria-hidden="true" />
-          </a>
-          {project.githubUrl && (
+        <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
+          <div className="flex gap-4">
             <a
-              href={project.githubUrl}
+              href={project.liveUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 font-mono text-[12px] text-ink-soft hover:text-ink focus-ring rounded"
+              className="inline-flex items-center gap-1.5 font-mono text-[12px] text-signal hover:text-signal-dark focus-ring rounded"
             >
-              View source
+              Visit live site
               <ArrowUpRight size={14} aria-hidden="true" />
             </a>
-          )}
+            {project.githubUrl && (
+              <a
+                href={project.githubUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 font-mono text-[12px] text-ink-soft hover:text-ink focus-ring rounded"
+              >
+                View source
+                <ArrowUpRight size={14} aria-hidden="true" />
+              </a>
+            )}
+          </div>
+          <ReadingModeToggle />
         </div>
       </Container>
 

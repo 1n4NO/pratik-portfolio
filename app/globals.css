@@ -70,6 +70,23 @@ body {
   outline-offset: 2px;
 }
 
+.recruiter-mode-only,
+.engineer-mode-only {
+  display: none;
+}
+
+html[data-case-study-mode="recruiter"] .recruiter-mode-only,
+html[data-case-study-mode="engineer"] .engineer-mode-only {
+  display: block;
+}
+
+html[data-case-study-mode="recruiter"]
+  .case-study-mode-card[data-reading-audience="engineer"],
+html[data-case-study-mode="engineer"]
+  .case-study-mode-card[data-reading-audience="recruiter"] {
+  opacity: 0.52;
+}
+
 .header-link {
   position: relative;
   display: inline-flex;
