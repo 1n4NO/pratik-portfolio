@@ -34,6 +34,17 @@ function readAllThemeColors() {
 }
 
 type ThemeColors = ReturnType<typeof readAllThemeColors>;
+type PerformanceProfile = {
+  tier: "full" | "reduced";
+  coarsePointer: boolean;
+  particleCount: number;
+  particleOpacity: number;
+  particleSize: number;
+  autoRotate: boolean;
+  enableDamping: boolean;
+  showHoverCard: boolean;
+  dpr: [number, number];
+};
 
 function useThemeColors(): ThemeColors {
   const [colors, setColors] = useState<ThemeColors>(() => readAllThemeColors());
@@ -59,6 +70,61 @@ function useReducedMotion() {
     return () => mq.removeEventListener("change", handler);
   }, []);
   return reduced;
+}
+
+function usePerformanceProfile(reducedMotion: boolean): PerformanceProfile {
+  const [profile, setProfile] = useState<PerformanceProfile>(() =>
+    createPerformanceProfile(reducedMotion, false, undefined, undefined)
+  );
+
+  useEffect(() => {
+    const pointerQuery = window.matchMedia("(pointer: coarse)");
+
+    function update() {
+      setProfile(
+        createPerformanceProfile(
+          reducedMotion,
+          pointerQuery.matches,
+          navigator.hardwareConcurrency,
+          getDeviceMemory()
+        )
+      );
+    }
+
+    update();
+    pointerQuery.addEventListener("change", update);
+    return () => pointerQuery.removeEventListener("change", update);
+  }, [reducedMotion]);
+
+  return profile;
+}
+
+function createPerformanceProfile(
+  reducedMotion: boolean,
+  coarsePointer: boolean,
+  hardwareConcurrency?: number,
+  deviceMemory?: number
+): PerformanceProfile {
+  const lowCoreCount = typeof hardwareConcurrency === "number" && hardwareConcurrency <= 4;
+  const lowMemory = typeof deviceMemory === "number" && deviceMemory <= 4;
+  const reduced = reducedMotion || coarsePointer || lowCoreCount || lowMemory;
+
+  return {
+    tier: reduced ? "reduced" : "full",
+    coarsePointer,
+    particleCount: reduced ? 70 : 220,
+    particleOpacity: reduced ? 0.28 : 0.5,
+    particleSize: reduced ? 0.025 : 0.035,
+    autoRotate: !reduced,
+    enableDamping: !reduced,
+    showHoverCard: !coarsePointer,
+    dpr: reduced ? [1, 1] : [1, 1.75],
+  };
+}
+
+function getDeviceMemory() {
+  const nav = navigator as Navigator & { deviceMemory?: number };
+  return nav.deviceMemory;
 }
 
 type NodeDatum = {
@@ -115,10 +181,12 @@ function ProjectNode({
   datum,
   colors,
   reducedMotion,
+  showHoverCard,
 }: {
   datum: NodeDatum;
   colors: ThemeColors;
   reducedMotion: boolean;
+  showHoverCard: boolean;
 }) {
   const [hovered, setHovered] = useState(false);
   const coreRef = useRef<THREE.Mesh>(null);
@@ -174,7 +242,7 @@ function ProjectNode({
         />
       </mesh>
 
-      {hovered && (
+      {hovered && showHoverCard && (
         <Html distanceFactor={7} style={{ pointerEvents: "none" }} zIndexRange={[10, 0]}>
           <div className="w-56 -translate-x-1/2 -translate-y-[120%] rounded-lg border border-line bg-surface/95 px-3 py-2.5 shadow-[0_12px_32px_rgb(var(--color-ink)_/_0.25)] backdrop-blur">
             <p className="mb-1 font-mono text-[9px] uppercase tracking-widest text-amber">
@@ -237,10 +305,18 @@ function ConnectionLines({ nodes, colors }: { nodes: NodeDatum[]; colors: ThemeC
   );
 }
 
-function Particles({ colors, reducedMotion }: { colors: ThemeColors; reducedMotion: boolean }) {
+function Particles({
+  colors,
+  reducedMotion,
+  profile,
+}: {
+  colors: ThemeColors;
+  reducedMotion: boolean;
+  profile: PerformanceProfile;
+}) {
   const ref = useRef<THREE.Points>(null);
   const positions = useMemo(() => {
-    const count = 220;
+    const count = profile.particleCount;
     const arr = new Float32Array(count * 3);
     for (let i = 0; i < count; i += 1) {
       const radius = 5 + Math.random() * 4;
@@ -251,7 +327,7 @@ function Particles({ colors, reducedMotion }: { colors: ThemeColors; reducedMoti
       arr[i * 3 + 2] = radius * Math.sin(phi) * Math.sin(theta);
     }
     return arr;
-  }, []);
+  }, [profile.particleCount]);
 
   useFrame((_, delta) => {
     if (!reducedMotion && ref.current) ref.current.rotation.y += delta * 0.015;
@@ -267,32 +343,49 @@ function Particles({ colors, reducedMotion }: { colors: ThemeColors; reducedMoti
           itemSize={3}
         />
       </bufferGeometry>
-      <pointsMaterial color={colors.inkSoft} size={0.035} transparent opacity={0.5} sizeAttenuation />
+      <pointsMaterial
+        color={colors.inkSoft}
+        size={profile.particleSize}
+        transparent
+        opacity={profile.particleOpacity}
+        sizeAttenuation
+      />
     </points>
   );
 }
 
-function Scene() {
+function Scene({
+  profile,
+  reducedMotion,
+}: {
+  profile: PerformanceProfile;
+  reducedMotion: boolean;
+}) {
   const colors = useThemeColors();
-  const reducedMotion = useReducedMotion();
   const nodes = useLayout();
 
   return (
     <>
       <ambientLight intensity={1.2} />
-      <Particles colors={colors} reducedMotion={reducedMotion} />
+      <Particles colors={colors} reducedMotion={reducedMotion} profile={profile} />
       <ConnectionLines nodes={nodes} colors={colors} />
       <Hub colors={colors} reducedMotion={reducedMotion} />
       {nodes.map((datum) => (
-        <ProjectNode key={datum.project.slug} datum={datum} colors={colors} reducedMotion={reducedMotion} />
+        <ProjectNode
+          key={datum.project.slug}
+          datum={datum}
+          colors={colors}
+          reducedMotion={reducedMotion}
+          showHoverCard={profile.showHoverCard}
+        />
       ))}
       <OrbitControls
         enablePan={false}
         enableZoom={false}
-        autoRotate={!reducedMotion}
+        autoRotate={profile.autoRotate}
         autoRotateSpeed={0.6}
-        enableDamping
-        dampingFactor={0.08}
+        enableDamping={profile.enableDamping}
+        dampingFactor={profile.enableDamping ? 0.08 : 0}
         minPolarAngle={Math.PI / 3}
         maxPolarAngle={(Math.PI * 2) / 3}
       />
@@ -301,13 +394,16 @@ function Scene() {
 }
 
 export function WorkConstellation() {
+  const reducedMotion = useReducedMotion();
+  const profile = usePerformanceProfile(reducedMotion);
+
   return (
     <div className="relative h-[520px] overflow-hidden rounded-lg border border-line bg-surface/40 md:h-[620px]">
-      <Canvas camera={{ position: [0, 1.4, 7.5], fov: 45 }} dpr={[1, 1.75]}>
-        <Scene />
+      <Canvas camera={{ position: [0, 1.4, 7.5], fov: 45 }} dpr={profile.dpr}>
+        <Scene profile={profile} reducedMotion={reducedMotion} />
       </Canvas>
       <p className="pointer-events-none absolute bottom-3 left-1/2 -translate-x-1/2 font-mono text-[10px] uppercase tracking-widest text-ink-soft/50">
-        Drag to orbit · click a node
+        {profile.coarsePointer ? "Swipe to orbit · tap a node" : "Drag to orbit · click a node"}
       </p>
     </div>
   );
