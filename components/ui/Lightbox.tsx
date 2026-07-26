@@ -1,8 +1,10 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
 import type { Screenshot } from "@/data/projects";
+import { motionEase, motionTimings } from "@/lib/motion";
 
 // Always renders on a fixed dark scrim regardless of site theme — same
 // convention as the ContactCTA/Footer panels — since a photo viewer should
@@ -21,6 +23,8 @@ export function Lightbox({
   onNext: () => void;
 }) {
   const closeRef = useRef<HTMLButtonElement>(null);
+  const pointerStartRef = useRef<{ x: number; y: number } | null>(null);
+  const reduceMotion = useReducedMotion();
   const item = items[index];
 
   useEffect(() => {
@@ -46,7 +50,26 @@ export function Lightbox({
 
   const isVideo = isVideoSrc(item.src);
   const controlClass =
-    "flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-[#F7F8FA] transition-colors hover:bg-white/20 focus-ring";
+    "flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-[#05080d]/70 text-[#F7F8FA] shadow-overlay backdrop-blur-md transition-colors hover:bg-[#05080d]/85 focus-ring";
+
+  function onPointerDown(event: React.PointerEvent) {
+    pointerStartRef.current = { x: event.clientX, y: event.clientY };
+  }
+
+  function onPointerUp(event: React.PointerEvent) {
+    if (items.length < 2 || event.pointerType === "mouse" || !pointerStartRef.current) return;
+
+    const deltaX = event.clientX - pointerStartRef.current.x;
+    const deltaY = event.clientY - pointerStartRef.current.y;
+    pointerStartRef.current = null;
+
+    if (Math.abs(deltaX) < 48 || Math.abs(deltaX) < Math.abs(deltaY)) return;
+    if (deltaX > 0) {
+      onPrev();
+    } else {
+      onNext();
+    }
+  }
 
   return (
     <div
@@ -54,7 +77,7 @@ export function Lightbox({
       aria-modal="true"
       aria-label={item.caption ?? item.alt ?? "Screenshot viewer"}
       className="fixed inset-0 z-[60] flex items-center justify-center p-4 md:p-10"
-      style={{ backgroundColor: "rgba(5, 8, 13, 0.92)" }}
+      style={{ backgroundColor: "rgba(5, 8, 13, 0.95)" }}
       onClick={(e) => {
         if (e.target === e.currentTarget) onClose();
       }}
@@ -70,6 +93,9 @@ export function Lightbox({
 
       {items.length > 1 && (
         <>
+          <div className="absolute bottom-5 left-1/2 z-10 -translate-x-1/2 rounded-full border border-white/10 bg-[#05080d]/70 px-3 py-1.5 font-mono text-[11px] text-[#F7F8FA]/75 shadow-overlay backdrop-blur-md md:bottom-8">
+            {index + 1} / {items.length}
+          </div>
           <button
             onClick={onPrev}
             aria-label="Previous screenshot"
@@ -87,41 +113,50 @@ export function Lightbox({
         </>
       )}
 
-      <div className="flex max-h-full max-w-5xl flex-col items-center">
-        {isVideo ? (
-          <video
-            className="max-h-[78vh] w-auto max-w-full rounded-lg border border-white/10 object-contain shadow-overlay"
-            autoPlay
-            muted
-            loop
-            playsInline
-            controls
-            aria-label={item.alt ?? item.caption ?? "Project screen recording"}
+      <motion.div
+        className="flex max-h-full max-w-5xl touch-pan-y flex-col items-center"
+        onPointerDown={onPointerDown}
+        onPointerUp={onPointerUp}
+      >
+        <AnimatePresence mode="wait" initial={false}>
+          <motion.div
+            key={item.src}
+            initial={reduceMotion ? false : { opacity: 0, scale: 0.985, y: 8 }}
+            animate={reduceMotion ? undefined : { opacity: 1, scale: 1, y: 0 }}
+            exit={reduceMotion ? undefined : { opacity: 0, scale: 0.99, y: -6 }}
+            transition={{ duration: motionTimings.base, ease: motionEase.soft }}
           >
-            {item.src.toLowerCase().endsWith(".webm") && (
-              <source src={item.src} type="video/webm" />
+            {isVideo ? (
+              <video
+                className="max-h-[78vh] w-auto max-w-full rounded-lg border border-white/10 object-contain shadow-overlay"
+                autoPlay
+                muted
+                loop
+                playsInline
+                controls
+                aria-label={item.alt ?? item.caption ?? "Project screen recording"}
+              >
+                {item.src.toLowerCase().endsWith(".webm") && (
+                  <source src={item.src} type="video/webm" />
+                )}
+                <source src={videoFallbackSrc(item.src)} type="video/mp4" />
+              </video>
+            ) : (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={item.src}
+                alt={item.alt ?? ""}
+                className="max-h-[78vh] w-auto max-w-full rounded-lg border border-white/10 object-contain shadow-overlay"
+              />
             )}
-            <source src={videoFallbackSrc(item.src)} type="video/mp4" />
-          </video>
-        ) : (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
-            src={item.src}
-            alt={item.alt ?? ""}
-            className="max-h-[78vh] w-auto max-w-full rounded-lg border border-white/10 object-contain shadow-overlay"
-          />
-        )}
-        {(item.caption || items.length > 1) && (
-          <div className="mt-4 flex items-center gap-3 font-mono text-[11px] text-[#F7F8FA]/70">
-            {item.caption && <span>{item.caption}</span>}
-            {items.length > 1 && (
-              <span className="text-[#F7F8FA]/45">
-                {index + 1} / {items.length}
-              </span>
-            )}
+          </motion.div>
+        </AnimatePresence>
+        {item.caption && (
+          <div className="mt-4 font-mono text-[11px] text-[#F7F8FA]/70">
+            {item.caption}
           </div>
         )}
-      </div>
+      </motion.div>
     </div>
   );
 }

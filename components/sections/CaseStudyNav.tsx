@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { motion, useReducedMotion } from "framer-motion";
+import { motionEase, motionTimings } from "@/lib/motion";
 
 export type CaseStudyNavItem = {
   id: string;
@@ -9,6 +11,9 @@ export type CaseStudyNavItem = {
 
 export function CaseStudyNav({ items }: { items: CaseStudyNavItem[] }) {
   const [activeId, setActiveId] = useState(items[0]?.id ?? "");
+  const reduceMotion = useReducedMotion();
+  const activeIndex = Math.max(items.findIndex((item) => item.id === activeId), 0);
+  const progress = items.length > 1 ? ((activeIndex + 1) / items.length) * 100 : 100;
 
   useEffect(() => {
     const observers = items
@@ -59,17 +64,35 @@ export function CaseStudyNav({ items }: { items: CaseStudyNavItem[] }) {
                 }`}
               >
                 <span
-                  className={`hidden h-px w-4 transition-colors md:block ${
-                    active ? "bg-signal" : "bg-line-strong group-hover:bg-ink-soft"
-                  }`}
+                  className="relative hidden h-px w-4 bg-line-strong transition-colors group-hover:bg-ink-soft md:block"
                   aria-hidden="true"
-                />
+                >
+                  {active && (
+                    <motion.span
+                      layoutId="case-study-nav-active-line"
+                      className="absolute inset-0 bg-signal"
+                      transition={{ duration: motionTimings.base, ease: motionEase.soft }}
+                    />
+                  )}
+                </span>
                 {item.label}
               </a>
             </li>
           );
         })}
       </ol>
+      <div className="mt-3 h-px overflow-hidden bg-line md:hidden" aria-hidden="true">
+        <motion.span
+          className="block h-full bg-signal"
+          initial={false}
+          animate={{ width: `${progress}%` }}
+          transition={
+            reduceMotion
+              ? { duration: 0 }
+              : { duration: motionTimings.base, ease: motionEase.soft }
+          }
+        />
+      </div>
     </nav>
   );
 }

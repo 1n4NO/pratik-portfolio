@@ -230,10 +230,18 @@ function RelatedProjects({
   return (
     <motion.div
       className="absolute inset-x-3 top-[380px] md:top-[275px]"
-      initial={reduceMotion ? false : { opacity: 0, y: 8 }}
+      initial={reduceMotion ? false : { opacity: 0, y: -10 }}
       animate={reduceMotion ? undefined : { opacity: 1, y: 0 }}
       transition={{ duration: motionTimings.base, ease: motionEase.soft }}
     >
+      <div
+        className="pointer-events-none absolute -top-9 left-1/2 hidden h-8 w-px -translate-x-1/2 bg-gradient-to-b from-amber via-signal/70 to-transparent md:block"
+        aria-hidden="true"
+      />
+      <div
+        className="pointer-events-none absolute -top-1 left-1/2 hidden h-1.5 w-1.5 -translate-x-1/2 rounded-full bg-amber md:block"
+        aria-hidden="true"
+      />
       <div className="mb-2 flex items-center justify-between gap-3">
         <p className="font-mono text-[10px] uppercase tracking-widest text-signal">
           Related projects
@@ -249,12 +257,12 @@ function RelatedProjects({
             type="button"
             onClick={() => scrollToProject(project.slug)}
             className="group inline-flex w-full items-center justify-between gap-3 rounded border border-line bg-surface/85 px-2.5 py-1.5 text-left transition-colors hover:border-signal focus-ring"
-            initial={reduceMotion ? false : { opacity: 0, width: 0 }}
-            animate={reduceMotion ? undefined : { opacity: 1, width: "auto" }}
+            initial={reduceMotion ? false : { opacity: 0, y: -8 }}
+            animate={reduceMotion ? undefined : { opacity: 1, y: 0 }}
             transition={{
-              duration: 0.32,
+              duration: 0.28,
               ease: motionEase.soft,
-              delay: index * 0.16,
+              delay: 0.08 + index * 0.1,
             }}
           >
             <span className="min-w-0">

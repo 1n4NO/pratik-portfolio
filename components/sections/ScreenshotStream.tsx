@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { MutableRefObject } from "react";
 import type { Project } from "@/data/projects";
 import { ScreenshotTile, type ScreenshotTileItem } from "@/components/ui/ScreenshotTile";
@@ -21,7 +21,18 @@ export function ScreenshotStream({
   const verticalSegmentRef = useRef<HTMLDivElement | null>(null);
   const verticalTrackRef = useRef<HTMLDivElement | null>(null);
   const hoveredRef = useRef(false);
+  const [coarsePointer, setCoarsePointer] = useState(false);
+  const [hintVisible, setHintVisible] = useState(false);
+  const hintSeenRef = useRef(false);
   const items = useMemo(() => getStreamItems(project), [project]);
+
+  useEffect(() => {
+    const query = window.matchMedia("(pointer: coarse)");
+    const update = () => setCoarsePointer(query.matches);
+    update();
+    query.addEventListener("change", update);
+    return () => query.removeEventListener("change", update);
+  }, []);
 
   useEffect(() => {
     if (direction !== "vertical" || !verticalSegmentRef.current || !verticalTrackRef.current) return;
@@ -47,7 +58,7 @@ export function ScreenshotStream({
       const elapsed = Math.min((now - previous) / 1000, 0.05);
       previous = now;
 
-      const targetSpeed = hoveredRef.current ? 0 : 18;
+      const targetSpeed = hoveredRef.current ? 0 : coarsePointer ? 6 : 18;
       currentSpeed += (targetSpeed - currentSpeed) * 0.08;
       offset = (offset + currentSpeed * elapsed) % length;
       trackEl.style.transform = `translate3d(0, ${-offset}px, 0)`;
@@ -57,7 +68,7 @@ export function ScreenshotStream({
 
     frame = window.requestAnimationFrame(tick);
     return () => window.cancelAnimationFrame(frame);
-  }, [direction, items.length]);
+  }, [coarsePointer, direction, items.length]);
 
   const maskClass =
     direction === "horizontal"
@@ -71,13 +82,28 @@ export function ScreenshotStream({
       }`}
       onMouseEnter={() => {
         hoveredRef.current = true;
+        if (!hintSeenRef.current && !coarsePointer) {
+          hintSeenRef.current = true;
+          setHintVisible(true);
+          window.setTimeout(() => setHintVisible(false), 1300);
+        }
       }}
       onMouseLeave={() => {
         hoveredRef.current = false;
       }}
     >
+      {hintVisible && (
+        <div className="pointer-events-none absolute right-3 top-3 z-20 rounded border border-line bg-paper/90 px-2.5 py-1 font-mono text-[10px] uppercase tracking-widest text-ink-soft shadow-card backdrop-blur">
+          Pause on hover
+        </div>
+      )}
       {direction === "horizontal" ? (
-        <RecyclingHorizontalStream items={items} hoveredRef={hoveredRef} priority={priority} />
+        <RecyclingHorizontalStream
+          items={items}
+          hoveredRef={hoveredRef}
+          priority={priority}
+          coarsePointer={coarsePointer}
+        />
       ) : (
         <div ref={verticalTrackRef} className="will-change-transform">
           <VerticalStreamSegment
@@ -128,10 +154,12 @@ function RecyclingHorizontalStream({
   items,
   hoveredRef,
   priority = false,
+  coarsePointer,
 }: {
   items: ScreenshotTileItem[];
   hoveredRef: MutableRefObject<boolean>;
   priority?: boolean;
+  coarsePointer: boolean;
 }) {
   const rows = useMemo(() => getHorizontalRows(items), [items]);
 
@@ -144,6 +172,7 @@ function RecyclingHorizontalStream({
           rowIndex={rowIndex}
           hoveredRef={hoveredRef}
           priority={priority && rowIndex === 0}
+          coarsePointer={coarsePointer}
         />
       ))}
     </div>
@@ -161,15 +190,19 @@ function RecyclingRow({
   rowIndex,
   hoveredRef,
   priority = false,
+  coarsePointer,
 }: {
   row: ScreenshotTileItem[];
   rowIndex: number;
   hoveredRef: MutableRefObject<boolean>;
   priority?: boolean;
+  coarsePointer: boolean;
 }) {
   const trackRef = useRef<HTMLDivElement | null>(null);
   const offsetRef = useRef(0);
   const speedRef = useRef(rowIndex === 0 ? 26 : 22);
+  const draggingRef = useRef(false);
+  const dragXRef = useRef(0);
   const nextIndexRef = useRef(0);
   const instanceIdRef = useRef(0);
   const visibleCount = Math.min(Math.max(row.length, 1), 8);
@@ -179,6 +212,28 @@ function RecyclingRow({
       sourceIndex,
       instanceId: sourceIndex,
     }))
+  );
+
+  const recycleFirstTile = useCallback(
+    (firstTileWidth = 0) => {
+      const sourceIndex = nextIndexRef.current % row.length;
+      const item = row[sourceIndex];
+      nextIndexRef.current += 1;
+      instanceIdRef.current += 1;
+      if (firstTileWidth > 0) {
+        offsetRef.current = Math.max(0, offsetRef.current - firstTileWidth);
+      }
+
+      setMounted((current) => [
+        ...current.slice(1),
+        {
+          item,
+          sourceIndex,
+          instanceId: instanceIdRef.current,
+        },
+      ]);
+    },
+    [row]
   );
 
   useEffect(() => {
@@ -205,27 +260,12 @@ function RecyclingRow({
     let frame = 0;
     let previous = performance.now();
 
-    function recycleFirstTile() {
-      const sourceIndex = nextIndexRef.current % row.length;
-      const item = row[sourceIndex];
-      nextIndexRef.current += 1;
-      instanceIdRef.current += 1;
-
-      setMounted((current) => [
-        ...current.slice(1),
-        {
-          item,
-          sourceIndex,
-          instanceId: instanceIdRef.current,
-        },
-      ]);
-    }
-
     function tick(now: number) {
       const elapsed = Math.min((now - previous) / 1000, 0.05);
       previous = now;
 
-      const targetSpeed = hoveredRef.current ? 0 : rowIndex === 0 ? 26 : 22;
+      const baseSpeed = coarsePointer ? (rowIndex === 0 ? 7 : 6) : rowIndex === 0 ? 26 : 22;
+      const targetSpeed = hoveredRef.current || draggingRef.current ? 0 : baseSpeed;
       speedRef.current += (targetSpeed - speedRef.current) * 0.08;
       offsetRef.current += speedRef.current * elapsed;
 
@@ -233,8 +273,7 @@ function RecyclingRow({
       const firstTileWidth = firstTile ? firstTile.offsetWidth + 12 : 0;
 
       if (firstTileWidth > 0 && offsetRef.current >= firstTileWidth) {
-        offsetRef.current -= firstTileWidth;
-        recycleFirstTile();
+        recycleFirstTile(firstTileWidth);
       }
 
       trackEl.style.transform = `translate3d(${-offsetRef.current}px, 0, 0)`;
@@ -243,13 +282,43 @@ function RecyclingRow({
 
     frame = window.requestAnimationFrame(tick);
     return () => window.cancelAnimationFrame(frame);
-  }, [hoveredRef, row, rowIndex]);
+  }, [coarsePointer, hoveredRef, recycleFirstTile, row.length, rowIndex]);
 
   if (row.length === 0) return null;
 
   return (
-    <div className={`overflow-visible ${rowIndex === 1 ? "pl-24" : ""}`}>
-      <div ref={trackRef} className="flex min-w-max gap-3 will-change-transform">
+    <div
+      className={`overflow-visible ${rowIndex === 1 ? "pl-24" : ""}`}
+      onPointerDown={(event) => {
+        draggingRef.current = true;
+        hoveredRef.current = true;
+        dragXRef.current = event.clientX;
+        event.currentTarget.setPointerCapture(event.pointerId);
+      }}
+      onPointerMove={(event) => {
+        if (!draggingRef.current || !trackRef.current) return;
+        const delta = event.clientX - dragXRef.current;
+        dragXRef.current = event.clientX;
+        offsetRef.current = Math.max(0, offsetRef.current - delta);
+        const firstTile = trackRef.current.firstElementChild as HTMLElement | null;
+        const firstTileWidth = firstTile ? firstTile.offsetWidth + 12 : 0;
+        if (firstTileWidth > 0 && offsetRef.current >= firstTileWidth) {
+          recycleFirstTile(firstTileWidth);
+        }
+        trackRef.current.style.transform = `translate3d(${-offsetRef.current}px, 0, 0)`;
+      }}
+      onPointerUp={(event) => {
+        draggingRef.current = false;
+        hoveredRef.current = false;
+        event.currentTarget.releasePointerCapture(event.pointerId);
+      }}
+      onPointerCancel={(event) => {
+        draggingRef.current = false;
+        hoveredRef.current = false;
+        event.currentTarget.releasePointerCapture(event.pointerId);
+      }}
+    >
+      <div ref={trackRef} className="flex min-w-max touch-pan-y select-none gap-3 will-change-transform">
         {mounted.map(({ item, sourceIndex, instanceId }, mountedIndex) => (
           <ScreenshotTile
             key={`${item.id}-${rowIndex}-${instanceId}`}

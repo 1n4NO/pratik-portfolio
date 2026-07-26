@@ -182,13 +182,16 @@ function ProjectNode({
   colors,
   reducedMotion,
   showHoverCard,
+  onHoverChange,
 }: {
   datum: NodeDatum;
   colors: ThemeColors;
   reducedMotion: boolean;
   showHoverCard: boolean;
+  onHoverChange: (slug: string | null) => void;
 }) {
   const [hovered, setHovered] = useState(false);
+  const [activated, setActivated] = useState(false);
   const coreRef = useRef<THREE.Mesh>(null);
   const haloRef = useRef<THREE.Mesh>(null);
   const router = useRouter();
@@ -200,7 +203,7 @@ function ProjectNode({
       if (coreRef.current) coreRef.current.rotation.y += delta * 0.25;
       if (haloRef.current) haloRef.current.rotation.y -= delta * 0.18;
     }
-    const targetScale = hovered ? baseScale * 1.25 : baseScale;
+    const targetScale = activated ? baseScale * 1.55 : hovered ? baseScale * 1.25 : baseScale;
     if (coreRef.current) {
       coreRef.current.scale.lerp(scratch.set(targetScale, targetScale, targetScale), 0.15);
     }
@@ -216,16 +219,23 @@ function ProjectNode({
       onPointerOver={(e) => {
         e.stopPropagation();
         setHovered(true);
+        onHoverChange(datum.project.slug);
         document.body.style.cursor = "pointer";
       }}
       onPointerOut={(e) => {
         e.stopPropagation();
         setHovered(false);
+        if (!activated) onHoverChange(null);
         document.body.style.cursor = "auto";
       }}
       onClick={(e) => {
         e.stopPropagation();
-        router.push(`/work/${datum.project.slug}`);
+        setActivated(true);
+        onHoverChange(datum.project.slug);
+        document.body.style.cursor = "auto";
+        window.setTimeout(() => {
+          router.push(`/work/${datum.project.slug}`);
+        }, 180);
       }}
     >
       <mesh ref={coreRef} scale={baseScale}>
@@ -241,6 +251,18 @@ function ProjectNode({
           opacity={hovered ? 0.9 : 0.5}
         />
       </mesh>
+
+      <Html center distanceFactor={9} position={[0, -0.78, 0]} style={{ pointerEvents: "none" }}>
+        <span
+          className={`rounded border px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-widest backdrop-blur transition-colors ${
+            hovered || activated
+              ? "border-amber bg-surface/90 text-amber"
+              : "border-line bg-surface/65 text-ink-soft"
+          }`}
+        >
+          {projectInitials(datum.project.name)}
+        </span>
+      </Html>
 
       {hovered && showHoverCard && (
         <Html distanceFactor={7} style={{ pointerEvents: "none" }} zIndexRange={[10, 0]}>
@@ -259,7 +281,15 @@ function ProjectNode({
   );
 }
 
-function ConnectionLines({ nodes, colors }: { nodes: NodeDatum[]; colors: ThemeColors }) {
+function ConnectionLines({
+  nodes,
+  colors,
+  hoveredSlug,
+}: {
+  nodes: NodeDatum[];
+  colors: ThemeColors;
+  hoveredSlug: string | null;
+}) {
   const hubLines = useMemo(
     () => nodes.map((n) => [new THREE.Vector3(0, 0, 0), new THREE.Vector3(...n.position)]),
     [nodes]
@@ -275,7 +305,9 @@ function ConnectionLines({ nodes, colors }: { nodes: NodeDatum[]; colors: ThemeC
 
   return (
     <group>
-      {hubLines.map((pts, i) => (
+      {hubLines.map((pts, i) => {
+        const active = nodes[i]?.project.slug === hoveredSlug;
+        return (
         <line key={`hub-${i}`}>
           <bufferGeometry>
             <bufferAttribute
@@ -285,10 +317,19 @@ function ConnectionLines({ nodes, colors }: { nodes: NodeDatum[]; colors: ThemeC
               itemSize={3}
             />
           </bufferGeometry>
-          <lineBasicMaterial color={colors.signal} transparent opacity={0.32} />
+          <lineBasicMaterial
+            color={active ? colors.amber : colors.signal}
+            transparent
+            opacity={hoveredSlug ? (active ? 0.78 : 0.1) : 0.32}
+          />
         </line>
-      ))}
-      {ringLines.map((pts, i) => (
+        );
+      })}
+      {ringLines.map((pts, i) => {
+        const current = nodes[i]?.project.slug;
+        const next = nodes[(i + 1) % nodes.length]?.project.slug;
+        const active = hoveredSlug === current || hoveredSlug === next;
+        return (
         <line key={`ring-${i}`}>
           <bufferGeometry>
             <bufferAttribute
@@ -298,9 +339,14 @@ function ConnectionLines({ nodes, colors }: { nodes: NodeDatum[]; colors: ThemeC
               itemSize={3}
             />
           </bufferGeometry>
-          <lineBasicMaterial color={colors.lineStrong} transparent opacity={0.22} />
+          <lineBasicMaterial
+            color={active ? colors.amber : colors.lineStrong}
+            transparent
+            opacity={hoveredSlug ? (active ? 0.58 : 0.08) : 0.22}
+          />
         </line>
-      ))}
+        );
+      })}
     </group>
   );
 }
@@ -363,12 +409,13 @@ function Scene({
 }) {
   const colors = useThemeColors();
   const nodes = useLayout();
+  const [hoveredSlug, setHoveredSlug] = useState<string | null>(null);
 
   return (
     <>
       <ambientLight intensity={1.2} />
       <Particles colors={colors} reducedMotion={reducedMotion} profile={profile} />
-      <ConnectionLines nodes={nodes} colors={colors} />
+      <ConnectionLines nodes={nodes} colors={colors} hoveredSlug={hoveredSlug} />
       <Hub colors={colors} reducedMotion={reducedMotion} />
       {nodes.map((datum) => (
         <ProjectNode
@@ -377,6 +424,7 @@ function Scene({
           colors={colors}
           reducedMotion={reducedMotion}
           showHoverCard={profile.showHoverCard}
+          onHoverChange={setHoveredSlug}
         />
       ))}
       <OrbitControls
@@ -391,6 +439,15 @@ function Scene({
       />
     </>
   );
+}
+
+function projectInitials(name: string) {
+  return name
+    .split(/\s+/)
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((part) => part[0])
+    .join("");
 }
 
 export function WorkConstellation() {

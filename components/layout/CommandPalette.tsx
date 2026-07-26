@@ -123,6 +123,8 @@ export function CommandPalette() {
       normalize(`${command.title} ${command.eyebrow} ${command.detail}`).includes(normalizedQuery)
     );
   }, [commands, query]);
+  const groupedCommands = useMemo(() => getCommandGroups(commands), [commands]);
+  const hasQuery = normalize(query).length > 0;
 
   useEffect(() => {
     function onKeyDown(event: KeyboardEvent) {
@@ -231,7 +233,16 @@ export function CommandPalette() {
               transition={{ duration: motionTimings.base, ease: motionEase.soft }}
               onMouseDown={(event) => event.stopPropagation()}
             >
-              <div className="flex items-center gap-3 border-b border-line px-4 py-3">
+              <motion.div
+                className="flex items-center gap-3 border-b border-line px-4 py-3"
+                initial={reduceMotion ? false : { boxShadow: "inset 0 -1px 0 rgb(var(--color-amber) / 0)" }}
+                animate={
+                  reduceMotion
+                    ? undefined
+                    : { boxShadow: "inset 0 -1px 0 rgb(var(--color-amber) / 0.55)" }
+                }
+                transition={{ duration: 0.42, ease: motionEase.soft }}
+              >
                 <Search size={16} className="icon-amber" aria-hidden />
                 <input
                   ref={inputRef}
@@ -249,44 +260,49 @@ export function CommandPalette() {
                 >
                   <X size={15} className="icon-amber" aria-hidden />
                 </button>
-              </div>
+              </motion.div>
 
               <div className="max-h-[min(65vh,520px)] overflow-y-auto p-2">
                 {filtered.length > 0 ? (
-                  <ul className="space-y-1">
-                    {filtered.map((command, index) => {
-                      const active = index === activeIndex;
-                      const Icon = getCommandIcon(command.kind);
-
-                      return (
-                        <li key={command.id}>
-                          <button
-                            type="button"
-                            onMouseEnter={() => setActiveIndex(index)}
-                            onClick={() => runCommand(command)}
-                            className={`flex w-full items-start gap-3 rounded px-3 py-3 text-left transition-colors focus-ring ${
-                              active ? "bg-surface-muted text-ink" : "text-ink-soft hover:bg-surface-muted/70 hover:text-ink"
-                            }`}
-                          >
-                            <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded border border-line bg-surface">
-                              <Icon size={15} className="icon-amber" aria-hidden />
-                            </span>
-                            <span className="min-w-0 flex-1">
-                              <span className="mb-1 block font-mono text-[10px] uppercase tracking-widest text-ink-soft/65">
-                                {command.eyebrow}
-                              </span>
-                              <span className="block truncate font-display text-base font-bold text-ink">
-                                {command.title}
-                              </span>
-                              <span className="mt-1 line-clamp-2 block text-sm leading-snug text-ink-soft">
-                                {command.detail}
-                              </span>
-                            </span>
-                          </button>
-                        </li>
-                      );
-                    })}
-                  </ul>
+                  hasQuery ? (
+                    <ul className="space-y-1">
+                      {filtered.map((command, index) => (
+                        <CommandRow
+                          key={command.id}
+                          command={command}
+                          query={query}
+                          active={index === activeIndex}
+                          onHover={() => setActiveIndex(index)}
+                          onRun={() => runCommand(command)}
+                        />
+                      ))}
+                    </ul>
+                  ) : (
+                    <div className="space-y-5 p-1">
+                      {groupedCommands.map((group) => (
+                        <section key={group.label}>
+                          <h2 className="mb-2 px-2 font-mono text-[10px] uppercase tracking-widest text-ink-soft/60">
+                            {group.label}
+                          </h2>
+                          <ul className="space-y-1">
+                            {group.items.map((command) => (
+                              <CommandRow
+                                key={command.id}
+                                command={command}
+                                query=""
+                                active={command.id === filtered[activeIndex]?.id}
+                                onHover={() => {
+                                  const nextIndex = filtered.findIndex((item) => item.id === command.id);
+                                  if (nextIndex >= 0) setActiveIndex(nextIndex);
+                                }}
+                                onRun={() => runCommand(command)}
+                              />
+                            ))}
+                          </ul>
+                        </section>
+                      ))}
+                    </div>
+                  )
                 ) : (
                   <div className="px-4 py-12 text-center">
                     <p className="font-display text-base font-bold text-ink">No matches</p>
@@ -304,6 +320,102 @@ export function CommandPalette() {
 
 function normalize(value: string) {
   return value.toLowerCase().replace(/\s+/g, " ").trim();
+}
+
+function CommandRow({
+  command,
+  query,
+  active,
+  onHover,
+  onRun,
+}: {
+  command: CommandItem;
+  query: string;
+  active: boolean;
+  onHover: () => void;
+  onRun: () => void;
+}) {
+  const Icon = getCommandIcon(command.kind);
+
+  return (
+    <li>
+      <button
+        type="button"
+        onMouseEnter={onHover}
+        onClick={onRun}
+        className={`flex w-full items-start gap-3 rounded px-3 py-3 text-left transition-colors focus-ring ${
+          active ? "bg-surface-muted text-ink" : "text-ink-soft hover:bg-surface-muted/70 hover:text-ink"
+        }`}
+      >
+        <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded border border-line bg-surface">
+          <Icon size={15} className="icon-amber" aria-hidden />
+        </span>
+        <span className="min-w-0 flex-1">
+          <span className="mb-1 block font-mono text-[10px] uppercase tracking-widest text-ink-soft/65">
+            <HighlightedText value={command.eyebrow} query={query} />
+          </span>
+          <span className="block truncate font-display text-base font-bold text-ink">
+            <HighlightedText value={command.title} query={query} />
+          </span>
+          <span className="mt-1 line-clamp-2 block text-sm leading-snug text-ink-soft">
+            <HighlightedText value={command.detail} query={query} />
+          </span>
+        </span>
+        {active && (
+          <span className="mt-1 hidden shrink-0 rounded border border-line bg-paper px-1.5 py-0.5 font-mono text-[10px] uppercase tracking-widest text-ink-soft/70 sm:inline">
+            Enter
+          </span>
+        )}
+      </button>
+    </li>
+  );
+}
+
+function HighlightedText({ value, query }: { value: string; query: string }) {
+  const tokens = normalize(query)
+    .split(" ")
+    .filter(Boolean)
+    .map(escapeRegExp);
+
+  if (tokens.length === 0) return <>{value}</>;
+
+  const matcher = new RegExp(`(${tokens.join("|")})`, "gi");
+  const exactMatch = new RegExp(`^(?:${tokens.join("|")})$`, "i");
+  const parts = value.split(matcher);
+
+  return (
+    <>
+      {parts.map((part, index) =>
+        exactMatch.test(part) ? (
+          <mark key={`${part}-${index}`} className="rounded bg-amber-bg px-0.5 text-amber">
+            {part}
+          </mark>
+        ) : (
+          part
+        )
+      )}
+    </>
+  );
+}
+
+function escapeRegExp(value: string) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+function getCommandGroups(commands: CommandItem[]) {
+  const groups: { label: string; kinds: CommandKind[]; items: CommandItem[] }[] = [
+    { label: "Pages", kinds: ["page"], items: [] },
+    { label: "Case studies", kinds: ["project"], items: [] },
+    { label: "Writing", kinds: ["post"], items: [] },
+    { label: "Actions", kinds: ["action"], items: [] },
+  ];
+
+  commands.forEach((command) => {
+    const group = groups.find((item) => item.kinds.includes(command.kind));
+    group?.items.push(command);
+  });
+
+  return groups.filter((group) => group.items.length > 0);
 }
 
 function getShortcutLabel() {
