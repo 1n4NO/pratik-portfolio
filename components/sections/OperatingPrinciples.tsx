@@ -29,7 +29,7 @@ export function OperatingPrinciples() {
       aria-labelledby="principles-heading"
       className="relative overflow-hidden border-b border-line bg-surface"
     >
-      <div className="pointer-events-none absolute inset-0 dotted-backdrop opacity-40" aria-hidden="true" />
+      <div className="pointer-events-none absolute inset-0 dotted-backdrop opacity-45" aria-hidden="true" />
       <div
         className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-signal to-transparent"
         aria-hidden="true"
@@ -61,26 +61,26 @@ export function OperatingPrinciples() {
             </div>
           </div>
 
-          <ol className="grid gap-3">
+          <ol className="border-y border-line bg-paper/35 backdrop-blur-sm">
             {operatingPrinciples.map(({ label, body }, index) => (
               <li
                 key={label}
-                className="group relative overflow-hidden rounded border border-line bg-paper/70 shadow-card backdrop-blur transition-all duration-300 hover:-translate-y-0.5 hover:border-signal/70"
+                className="group relative border-b border-line last:border-b-0"
               >
                 <div
-                  className="absolute inset-y-0 left-0 w-1 bg-signal opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                  className="absolute inset-y-0 left-0 w-px bg-signal opacity-0 transition-opacity duration-300 group-hover:opacity-100"
                   aria-hidden="true"
                 />
-                <div className="grid grid-cols-[4.25rem_minmax(0,1fr)] md:grid-cols-[5.25rem_minmax(0,1fr)]">
-                  <span className="flex flex-col items-center border-r border-line py-5 font-mono text-[11px] text-ink-soft/60 transition-colors group-hover:text-signal md:py-6">
+                <div className="grid grid-cols-[4.25rem_minmax(0,1fr)] transition-colors duration-300 group-hover:bg-surface/45 md:grid-cols-[5.25rem_minmax(0,1fr)]">
+                  <span className="flex flex-col items-center border-r border-line py-5 font-mono text-[11px] text-ink-soft/60 transition-colors group-hover:text-signal md:py-7">
                     <span>{String(index + 1).padStart(2, "0")}</span>
                     <PrincipleMarker points={index + 1} />
                   </span>
-                  <div className="px-5 py-5 md:px-7 md:py-6">
+                  <div className="px-5 py-5 md:px-8 md:py-7">
                     <p className="mb-2 font-mono text-[10px] uppercase tracking-widest text-amber">
                       {label}
                     </p>
-                    <p className="max-w-2xl text-base leading-relaxed text-ink md:text-lg">
+                    <p className="max-w-3xl text-base leading-relaxed text-ink md:text-xl">
                       {body}
                     </p>
                   </div>

@@ -69,7 +69,7 @@ export function ReadingModeToggle() {
           className="group relative grid w-[220px] grid-cols-2 rounded border border-line bg-surface p-1 font-mono text-[11px] text-ink-soft focus-ring"
         >
           <span
-            className={`absolute bottom-1 top-1 w-[calc(50%-0.25rem)] rounded bg-signal transition-transform duration-300 ease-out ${
+            className={`absolute bottom-1 left-1 top-1 w-[calc(50%-0.25rem)] rounded bg-signal transition-transform duration-300 ease-out ${
               mode === "engineer" ? "translate-x-[calc(100%+0.25rem)]" : "translate-x-0"
             }`}
             aria-hidden

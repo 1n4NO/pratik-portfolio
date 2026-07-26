@@ -63,7 +63,7 @@ export function BrowserFrame({
             onError={() => setErrored(true)}
           />
         ) : (
-          <div className="absolute inset-0 flex items-center justify-center grid-backdrop">
+          <div className="absolute inset-0 flex items-center justify-center bg-surface-muted">
             <span className="font-mono text-[10px] text-ink-soft/60 bg-paper/90 px-2 py-1 rounded">
               screenshot pending
             </span>

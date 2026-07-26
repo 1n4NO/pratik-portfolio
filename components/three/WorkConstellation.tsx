@@ -183,12 +183,14 @@ function ProjectNode({
   reducedMotion,
   showHoverCard,
   onHoverChange,
+  onActivate,
 }: {
   datum: NodeDatum;
   colors: ThemeColors;
   reducedMotion: boolean;
   showHoverCard: boolean;
   onHoverChange: (slug: string | null) => void;
+  onActivate: (slug: string) => void;
 }) {
   const [hovered, setHovered] = useState(false);
   const [activated, setActivated] = useState(false);
@@ -232,6 +234,7 @@ function ProjectNode({
         e.stopPropagation();
         setActivated(true);
         onHoverChange(datum.project.slug);
+        onActivate(datum.project.slug);
         document.body.style.cursor = "auto";
         window.setTimeout(() => {
           router.push(`/work/${datum.project.slug}`);
@@ -254,12 +257,16 @@ function ProjectNode({
 
       <Html center distanceFactor={9} position={[0, -0.78, 0]} style={{ pointerEvents: "none" }}>
         <span
-          className={`rounded border px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-widest backdrop-blur transition-colors ${
+          className={`inline-flex items-center gap-1 font-mono text-[8px] uppercase tracking-[0.22em] drop-shadow transition-colors ${
             hovered || activated
-              ? "border-amber bg-surface/90 text-amber"
-              : "border-line bg-surface/65 text-ink-soft"
+              ? "text-amber"
+              : "text-ink-soft"
           }`}
         >
+          <span
+            className={`h-1 w-1 rounded-full ${hovered || activated ? "bg-amber" : "bg-line-strong"}`}
+            aria-hidden="true"
+          />
           {projectInitials(datum.project.name)}
         </span>
       </Html>
@@ -285,10 +292,12 @@ function ConnectionLines({
   nodes,
   colors,
   hoveredSlug,
+  pulseSlug,
 }: {
   nodes: NodeDatum[];
   colors: ThemeColors;
   hoveredSlug: string | null;
+  pulseSlug: string | null;
 }) {
   const hubLines = useMemo(
     () => nodes.map((n) => [new THREE.Vector3(0, 0, 0), new THREE.Vector3(...n.position)]),
@@ -307,22 +316,31 @@ function ConnectionLines({
     <group>
       {hubLines.map((pts, i) => {
         const active = nodes[i]?.project.slug === hoveredSlug;
+        const pulsing = nodes[i]?.project.slug === pulseSlug;
         return (
-        <line key={`hub-${i}`}>
-          <bufferGeometry>
-            <bufferAttribute
-              attach="attributes-position"
-              count={2}
-              array={new Float32Array(pts.flatMap((p) => [p.x, p.y, p.z]))}
-              itemSize={3}
-            />
-          </bufferGeometry>
-          <lineBasicMaterial
-            color={active ? colors.amber : colors.signal}
-            transparent
-            opacity={hoveredSlug ? (active ? 0.78 : 0.1) : 0.32}
-          />
-        </line>
+          <group key={`hub-${i}`}>
+            <line>
+              <bufferGeometry>
+                <bufferAttribute
+                  attach="attributes-position"
+                  count={2}
+                  array={new Float32Array(pts.flatMap((p) => [p.x, p.y, p.z]))}
+                  itemSize={3}
+                />
+              </bufferGeometry>
+              <lineBasicMaterial
+                color={active || pulsing ? colors.amber : colors.signal}
+                transparent
+                opacity={hoveredSlug || pulseSlug ? (active || pulsing ? 0.9 : 0.08) : 0.32}
+              />
+            </line>
+            {(active || pulsing) && (
+              <>
+                <DirectionMarker from={pts[0]} to={pts[1]} color={colors.amber} progress={0.72} />
+                {pulsing && <PulseTrail from={pts[0]} to={pts[1]} color={colors.amber} />}
+              </>
+            )}
+          </group>
         );
       })}
       {ringLines.map((pts, i) => {
@@ -330,24 +348,81 @@ function ConnectionLines({
         const next = nodes[(i + 1) % nodes.length]?.project.slug;
         const active = hoveredSlug === current || hoveredSlug === next;
         return (
-        <line key={`ring-${i}`}>
-          <bufferGeometry>
-            <bufferAttribute
-              attach="attributes-position"
-              count={2}
-              array={new Float32Array(pts.flatMap((p) => [p.x, p.y, p.z]))}
-              itemSize={3}
-            />
-          </bufferGeometry>
-          <lineBasicMaterial
-            color={active ? colors.amber : colors.lineStrong}
-            transparent
-            opacity={hoveredSlug ? (active ? 0.58 : 0.08) : 0.22}
-          />
-        </line>
+          <group key={`ring-${i}`}>
+            <line>
+              <bufferGeometry>
+                <bufferAttribute
+                  attach="attributes-position"
+                  count={2}
+                  array={new Float32Array(pts.flatMap((p) => [p.x, p.y, p.z]))}
+                  itemSize={3}
+                />
+              </bufferGeometry>
+              <lineBasicMaterial
+                color={active ? colors.amber : colors.lineStrong}
+                transparent
+                opacity={hoveredSlug ? (active ? 0.66 : 0.07) : 0.22}
+              />
+            </line>
+            {active && <DirectionMarker from={pts[0]} to={pts[1]} color={colors.amber} progress={0.58} />}
+          </group>
         );
       })}
     </group>
+  );
+}
+
+function DirectionMarker({
+  from,
+  to,
+  color,
+  progress,
+}: {
+  from: THREE.Vector3;
+  to: THREE.Vector3;
+  color: THREE.Color;
+  progress: number;
+}) {
+  const { position, quaternion } = useMemo(() => {
+    const direction = new THREE.Vector3().subVectors(to, from).normalize();
+    return {
+      position: new THREE.Vector3().lerpVectors(from, to, progress),
+      quaternion: new THREE.Quaternion().setFromUnitVectors(new THREE.Vector3(0, 1, 0), direction),
+    };
+  }, [from, to, progress]);
+
+  return (
+    <mesh position={position} quaternion={quaternion}>
+      <coneGeometry args={[0.055, 0.18, 3]} />
+      <meshBasicMaterial color={color} transparent opacity={0.88} />
+    </mesh>
+  );
+}
+
+function PulseTrail({ from, to, color }: { from: THREE.Vector3; to: THREE.Vector3; color: THREE.Color }) {
+  const ref = useRef<THREE.Mesh>(null);
+  const materialRef = useRef<THREE.MeshBasicMaterial>(null);
+  const progressRef = useRef(0);
+  const position = useMemo(() => new THREE.Vector3(), []);
+
+  useFrame((_, delta) => {
+    progressRef.current = Math.min(1, progressRef.current + delta / 0.18);
+    position.lerpVectors(from, to, progressRef.current);
+    if (ref.current) {
+      ref.current.position.copy(position);
+      const scale = 1 + progressRef.current * 1.6;
+      ref.current.scale.setScalar(scale);
+    }
+    if (materialRef.current) {
+      materialRef.current.opacity = Math.max(0, 0.95 - progressRef.current * 0.75);
+    }
+  });
+
+  return (
+    <mesh ref={ref}>
+      <sphereGeometry args={[0.065, 12, 12]} />
+      <meshBasicMaterial ref={materialRef} color={color} transparent opacity={0.95} />
+    </mesh>
   );
 }
 
@@ -410,12 +485,18 @@ function Scene({
   const colors = useThemeColors();
   const nodes = useLayout();
   const [hoveredSlug, setHoveredSlug] = useState<string | null>(null);
+  const [pulseSlug, setPulseSlug] = useState<string | null>(null);
+
+  function activateNode(slug: string) {
+    setPulseSlug(slug);
+    window.setTimeout(() => setPulseSlug(null), 220);
+  }
 
   return (
     <>
       <ambientLight intensity={1.2} />
       <Particles colors={colors} reducedMotion={reducedMotion} profile={profile} />
-      <ConnectionLines nodes={nodes} colors={colors} hoveredSlug={hoveredSlug} />
+      <ConnectionLines nodes={nodes} colors={colors} hoveredSlug={hoveredSlug} pulseSlug={pulseSlug} />
       <Hub colors={colors} reducedMotion={reducedMotion} />
       {nodes.map((datum) => (
         <ProjectNode
@@ -425,6 +506,7 @@ function Scene({
           reducedMotion={reducedMotion}
           showHoverCard={profile.showHoverCard}
           onHoverChange={setHoveredSlug}
+          onActivate={activateNode}
         />
       ))}
       <OrbitControls
@@ -456,6 +538,14 @@ export function WorkConstellation() {
 
   return (
     <div className="relative h-[520px] overflow-hidden rounded-lg border border-line bg-surface/40 md:h-[620px]">
+      <div className="pointer-events-none absolute left-3 top-3 z-10 flex flex-wrap gap-2 font-mono text-[10px] uppercase tracking-widest text-ink-soft/60">
+        <span className="rounded border border-line bg-surface/70 px-2 py-1 backdrop-blur">
+          Hover: inspect
+        </span>
+        <span className="rounded border border-line bg-surface/70 px-2 py-1 backdrop-blur">
+          Click: open case study
+        </span>
+      </div>
       <Canvas camera={{ position: [0, 1.4, 7.5], fov: 45 }} dpr={profile.dpr}>
         <Scene profile={profile} reducedMotion={reducedMotion} />
       </Canvas>

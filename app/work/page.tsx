@@ -68,6 +68,9 @@ export default function WorkPage() {
       </section>
 
       <Container className="pt-6 pb-10">
+        <p className="mb-3 font-mono text-[10px] uppercase tracking-widest text-ink-soft/60">
+          Project system / interactive index
+        </p>
         <WorkConstellation />
       </Container>
 

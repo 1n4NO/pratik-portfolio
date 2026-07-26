@@ -159,7 +159,7 @@ body {
 }
 
 .dotted-backdrop {
-  background-image: radial-gradient(circle, rgb(var(--tw-grid-line) / 0.7) 1px, transparent 1.2px);
+  background-image: radial-gradient(circle, rgb(var(--tw-grid-line) / 0.72) 1px, transparent 1.2px);
   background-size: 18px 18px;
 }
 

@@ -137,7 +137,7 @@ export default function PostPage({ params }: { params: { slug: string } }) {
 
       <PostPrevNext newer={newer} older={older} />
 
-      <ContactCTA />
+      <ContactCTA variant="compact" />
     </>
   );
 }

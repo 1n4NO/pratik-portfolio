@@ -30,6 +30,7 @@ export default function HomePage() {
     "AI workflows",
     "Design systems",
   ];
+  const featuredProjects = projects.slice(0, 3);
 
   const structuredData = {
     "@context": "https://schema.org",
@@ -126,18 +127,40 @@ export default function HomePage() {
         </Container>
       </section>
 
-      <div className="relative z-20 -mt-14 border-y border-line/80 bg-transparent py-3 md:-mt-16">
-        <HeroMarquee />
+      <div className="relative z-20 -mt-14 border-y border-line/45 bg-paper/10 py-3 backdrop-blur-md md:-mt-16">
+        <div
+          className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-paper to-transparent md:w-24"
+          aria-hidden="true"
+        />
+        <div
+          className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-paper to-transparent md:w-24"
+          aria-hidden="true"
+        />
+        <div className="[mask-image:linear-gradient(90deg,transparent,black_8%,black_92%,transparent)]">
+          <HeroMarquee />
+        </div>
       </div>
 
       <section className="border-y border-line bg-surface">
         <Container className="py-14 md:py-16 flex flex-col md:flex-row gap-10 md:gap-16">
-          <div className="flex-1 space-y-4">
-            {profile.long.map((para, i) => (
-              <p key={i} className="text-ink-soft leading-relaxed">
-                {para}
+          <div className="flex flex-1 gap-5">
+            <div className="hidden shrink-0 flex-col items-center gap-3 md:flex" aria-hidden="true">
+              <span className="font-mono text-[10px] uppercase tracking-widest text-signal [writing-mode:vertical-rl]">
+                Profile / System context
+              </span>
+              <span className="h-full w-px bg-line" />
+              <span className="font-mono text-[10px] text-ink-soft/50">01</span>
+            </div>
+            <div className="space-y-4">
+              <p className="font-mono text-[10px] uppercase tracking-widest text-signal md:hidden">
+                Profile / System context
               </p>
-            ))}
+              {profile.long.map((para, i) => (
+                <p key={i} className="text-ink-soft leading-relaxed">
+                  {para}
+                </p>
+              ))}
+            </div>
           </div>
           <SpecSheet />
         </Container>
@@ -160,14 +183,30 @@ export default function HomePage() {
           </div>
         </Container>
 
-        {projects.map((project, i) => (
+        {featuredProjects.map((project, i) => (
           <div key={project.slug}>
             <ProjectRow project={project} reversed={i % 2 === 1} />
-            {i < projects.length - 1 && (
-              <RulerDivider index={i + 1} total={projects.length} />
+            {i < featuredProjects.length - 1 && (
+              <RulerDivider index={i + 1} total={featuredProjects.length} />
             )}
           </div>
         ))}
+
+        <Container className="pb-20 pt-4">
+          <div className="border-t border-line pt-8">
+            <Link
+              href="/work"
+              className="group inline-flex items-center gap-2 rounded font-mono text-[12px] uppercase tracking-widest text-signal hover:text-signal-dark focus-ring"
+            >
+              View all work
+              <ArrowUpRight
+                size={14}
+                className="icon-amber transition-transform group-hover:translate-x-0.5"
+                aria-hidden="true"
+              />
+            </Link>
+          </div>
+        </Container>
       </section>
 
       <ContactCTA />

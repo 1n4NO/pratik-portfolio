@@ -56,7 +56,7 @@ export default function MusingsPage() {
         />
       </Container>
 
-      <ContactCTA />
+      <ContactCTA variant="compact" />
     </>
   );
 }

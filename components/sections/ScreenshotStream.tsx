@@ -97,6 +97,11 @@ export function ScreenshotStream({
           Pause on hover
         </div>
       )}
+      {direction === "horizontal" && (
+        <div className="pointer-events-none absolute left-3 top-3 z-20 rounded border border-line bg-paper/90 px-2.5 py-1 font-mono text-[10px] uppercase tracking-widest text-ink-soft shadow-card backdrop-blur">
+          Drag to scrub
+        </div>
+      )}
       {direction === "horizontal" ? (
         <RecyclingHorizontalStream
           items={items}
@@ -200,7 +205,7 @@ function RecyclingRow({
 }) {
   const trackRef = useRef<HTMLDivElement | null>(null);
   const offsetRef = useRef(0);
-  const speedRef = useRef(rowIndex === 0 ? 26 : 22);
+  const speedRef = useRef(0);
   const draggingRef = useRef(false);
   const dragXRef = useRef(0);
   const nextIndexRef = useRef(0);
@@ -238,7 +243,7 @@ function RecyclingRow({
 
   useEffect(() => {
     offsetRef.current = 0;
-    speedRef.current = rowIndex === 0 ? 26 : 22;
+    speedRef.current = 0;
     nextIndexRef.current = visibleCount;
     instanceIdRef.current = visibleCount;
     setMounted(
@@ -259,13 +264,15 @@ function RecyclingRow({
     const trackEl = trackRef.current;
     let frame = 0;
     let previous = performance.now();
+    const start = previous;
 
     function tick(now: number) {
       const elapsed = Math.min((now - previous) / 1000, 0.05);
       previous = now;
 
-      const baseSpeed = coarsePointer ? (rowIndex === 0 ? 7 : 6) : rowIndex === 0 ? 26 : 22;
-      const targetSpeed = hoveredRef.current || draggingRef.current ? 0 : baseSpeed;
+      const waitingForFirstFrame = now - start < 1000;
+      const baseSpeed = coarsePointer ? (rowIndex === 0 ? 4 : 3.5) : rowIndex === 0 ? 15 : 12;
+      const targetSpeed = waitingForFirstFrame || hoveredRef.current || draggingRef.current ? 0 : baseSpeed;
       speedRef.current += (targetSpeed - speedRef.current) * 0.08;
       offsetRef.current += speedRef.current * elapsed;
 

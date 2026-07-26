@@ -224,12 +224,24 @@ export default function ProjectDetailPage({ params }: { params: { slug: string }
                 className="scroll-mt-20 md:scroll-mt-28"
                 aria-labelledby={`${section.key}-heading`}
               >
-                <div className="max-w-[680px] border-l border-line pl-4 md:pl-6">
-                  <h2 id={`${section.key}-heading`} className="font-display text-xl font-bold mb-3">
-                    {section.label}
-                  </h2>
-                  <p className="text-ink-soft leading-relaxed">{project[section.key]}</p>
-                </div>
+                {section.key === "solution" ? (
+                  <div className="max-w-[760px] border-y border-line bg-surface/55 py-6 pl-4 pr-5 md:py-8 md:pl-6 md:pr-8">
+                    <p className="mb-3 font-mono text-[10px] uppercase tracking-widest text-signal">
+                      Conclusion
+                    </p>
+                    <h2 id={`${section.key}-heading`} className="font-display text-2xl font-bold mb-4">
+                      {section.label}
+                    </h2>
+                    <p className="text-lg leading-relaxed text-ink md:text-xl">{project[section.key]}</p>
+                  </div>
+                ) : (
+                  <div className="max-w-[680px] border-l border-line pl-4 md:pl-6">
+                    <h2 id={`${section.key}-heading`} className="font-display text-xl font-bold mb-3">
+                      {section.label}
+                    </h2>
+                    <p className="text-ink-soft leading-relaxed">{project[section.key]}</p>
+                  </div>
+                )}
                 {section.key === "approach" && (
                   <div className="mt-10">
                     <DetailedProcess
@@ -246,15 +258,28 @@ export default function ProjectDetailPage({ params }: { params: { slug: string }
               className="scroll-mt-20 md:scroll-mt-28"
               aria-labelledby="highlights-heading"
             >
-              <div className="max-w-[680px] border-l border-line pl-4 md:pl-6">
-                <h2 id="highlights-heading" className="font-display text-xl font-bold mb-4">
-                  Highlights
-                </h2>
-                <ul className="space-y-3">
-                  {project.highlights.map((h) => (
-                    <li key={h} className="flex gap-3 text-ink-soft">
-                      <Check size={16} className="icon-amber shrink-0 mt-0.5" aria-hidden="true" />
-                      <span>{h}</span>
+              <div className="max-w-[760px]">
+                <div className="mb-5 flex items-end justify-between gap-4 border-b border-line pb-3">
+                  <div>
+                    <p className="mb-2 font-mono text-[10px] uppercase tracking-widest text-signal">
+                      Proof list
+                    </p>
+                    <h2 id="highlights-heading" className="font-display text-xl font-bold">
+                      Highlights
+                    </h2>
+                  </div>
+                  <span className="font-mono text-[10px] uppercase tracking-widest text-ink-soft/60">
+                    {String(project.highlights.length).padStart(2, "0")} signals
+                  </span>
+                </div>
+                <ul className="divide-y divide-line border-y border-line">
+                  {project.highlights.map((h, index) => (
+                    <li key={h} className="grid grid-cols-[3.25rem_minmax(0,1fr)] gap-4 py-4">
+                      <span className="flex items-start gap-2 font-mono text-[10px] uppercase tracking-widest text-amber">
+                        <Check size={14} className="icon-amber mt-0.5 shrink-0" aria-hidden="true" />
+                        {String(index + 1).padStart(2, "0")}
+                      </span>
+                      <span className="text-sm leading-relaxed text-ink md:text-base">{h}</span>
                     </li>
                   ))}
                 </ul>
@@ -281,7 +306,7 @@ export default function ProjectDetailPage({ params }: { params: { slug: string }
 
       <ProjectPrevNext previous={previous} next={next} />
 
-      <ContactCTA />
+      <ContactCTA variant="compact" />
     </>
   );
 }

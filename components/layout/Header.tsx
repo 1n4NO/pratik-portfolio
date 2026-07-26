@@ -1,9 +1,11 @@
 import Link from "next/link";
+import { Mail } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { ThemeToggle } from "@/components/layout/ThemeToggle";
 import { HeaderNav } from "@/components/layout/HeaderNav";
 import { AutoHideHeader } from "@/components/layout/AutoHideHeader";
 import { CommandPalette } from "@/components/layout/CommandPalette";
+import { profile } from "@/data/profile";
 
 export function Header() {
   return (
@@ -17,6 +19,13 @@ export function Header() {
         </Link>
         <div className="flex items-center gap-4 md:gap-8">
           <HeaderNav />
+          <a
+            href={`mailto:${profile.email}?subject=Portfolio%20conversation`}
+            className="hidden h-9 w-9 items-center justify-center rounded border border-line text-ink-soft transition-colors hover:border-line-strong hover:text-ink focus-ring md:inline-flex"
+            aria-label="Email Pratik"
+          >
+            <Mail size={15} className="icon-amber" aria-hidden="true" />
+          </a>
           <div className="mobile-header-actions flex items-center gap-2">
             <CommandPalette />
             <ThemeToggle />
