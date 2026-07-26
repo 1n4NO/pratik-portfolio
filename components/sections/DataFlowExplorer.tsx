@@ -133,7 +133,7 @@ export function DataFlowExplorer({ chart }: { chart: string }) {
 
             <FlowGroup title="Receives from" ids={activeNode.incoming} nodes={parsed.nodeMap} empty="Initial input" />
             <div className="my-4 flex justify-center text-signal" aria-hidden="true">
-              <ArrowDown size={18} />
+              <ArrowDown size={18} aria-hidden="true" />
             </div>
             <FlowGroup title="Sends to" ids={activeNode.outgoing} nodes={parsed.nodeMap} empty="Terminal output" />
           </motion.aside>

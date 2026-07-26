@@ -17,7 +17,7 @@ export function Header() {
         </Link>
         <div className="flex items-center gap-4 md:gap-8">
           <HeaderNav />
-          <div className="flex items-center gap-2">
+          <div className="mobile-header-actions flex items-center gap-2">
             <CommandPalette />
             <ThemeToggle />
           </div>

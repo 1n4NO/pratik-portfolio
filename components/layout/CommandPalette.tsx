@@ -203,7 +203,7 @@ export function CommandPalette() {
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className="inline-flex h-9 items-center gap-2 rounded border border-line bg-surface-muted px-2.5 font-mono text-[11px] text-ink-soft transition-colors hover:border-line-strong hover:text-ink focus-ring"
+        className="command-palette-trigger inline-flex h-9 items-center gap-2 rounded border border-line bg-surface-muted px-2.5 font-mono text-[11px] text-ink-soft transition-colors hover:border-line-strong hover:text-ink focus-ring"
         aria-label="Open command palette"
       >
         <Search size={14} aria-hidden />
@@ -232,7 +232,7 @@ export function CommandPalette() {
               onMouseDown={(event) => event.stopPropagation()}
             >
               <div className="flex items-center gap-3 border-b border-line px-4 py-3">
-                <Search size={16} className="text-signal" aria-hidden />
+                <Search size={16} className="text-amber" aria-hidden />
                 <input
                   ref={inputRef}
                   value={query}
@@ -268,7 +268,7 @@ export function CommandPalette() {
                               active ? "bg-surface-muted text-ink" : "text-ink-soft hover:bg-surface-muted/70 hover:text-ink"
                             }`}
                           >
-                            <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded border border-line bg-surface text-signal">
+                            <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded border border-line bg-surface text-amber">
                               <Icon size={15} aria-hidden />
                             </span>
                             <span className="min-w-0 flex-1">

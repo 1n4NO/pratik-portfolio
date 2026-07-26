@@ -58,6 +58,10 @@ body {
   color: rgb(var(--color-ink));
 }
 
+body svg[aria-hidden="true"] {
+  color: rgb(var(--color-amber));
+}
+
 .grid-backdrop {
   background-image:
     linear-gradient(rgb(var(--tw-grid-line) / 0.6) 1px, transparent 1px),
@@ -165,14 +169,28 @@ html[data-case-study-mode="engineer"]
 }
 
 @media (max-width: 435px) {
-  .theme-toggle {
+  .mobile-header-actions {
     position: fixed;
     top: 4.75rem;
     right: 1rem;
     z-index: 50;
+    flex-direction: row;
+    gap: 0.5rem;
+  }
+
+  .mobile-header-actions .theme-toggle,
+  .mobile-header-actions .command-palette-trigger {
+    height: 2.25rem;
+    width: 2.25rem;
+    justify-content: center;
+    padding-inline: 0;
     background-color: rgb(var(--color-paper) / 0.9);
     box-shadow: 0 12px 32px rgb(var(--color-ink) / 0.16);
     backdrop-filter: blur(10px);
+  }
+
+  .mobile-header-actions .command-palette-trigger svg {
+    color: rgb(var(--color-amber));
   }
 }
 
