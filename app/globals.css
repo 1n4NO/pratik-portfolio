@@ -253,10 +253,6 @@ html[data-case-study-mode="engineer"]
   animation: contact-cta-live 1.35s ease-in-out infinite;
 }
 
-.contact-cta-meter {
-  display: block;
-}
-
 .contact-cta-button {
   transition:
     transform 220ms ease,

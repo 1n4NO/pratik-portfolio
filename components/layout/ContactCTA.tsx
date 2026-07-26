@@ -5,6 +5,12 @@ import { LinkButton } from "@/components/ui/Button";
 import { profile } from "@/data/profile";
 
 const cues = ["Messy brief?", "Scaling pinch?", "AI workflow?", "Design system debt?"];
+const focusItems = [
+  { label: "Architecture", detail: "Systems thinking" },
+  { label: "AI workflows", detail: "Product interfaces" },
+  { label: "Design systems", detail: "Durable UI foundations" },
+  { label: "Performance", detail: "Fast paths to ship" },
+];
 
 export function ContactCTA() {
   return (
@@ -61,13 +67,18 @@ export function ContactCTA() {
                     Turning fuzzy product ambition into interfaces, systems, and delivery plans.
                   </p>
                 </div>
-                <div className="grid grid-cols-3 gap-2" aria-hidden="true">
-                  {[72, 44, 86].map((height, index) => (
-                    <span
-                      key={height}
-                      className="contact-cta-meter rounded bg-signal/30"
-                      style={{ height, animationDelay: `${index * 130}ms` }}
-                    />
+                <div className="grid gap-2">
+                  {focusItems.map((item) => (
+                    <div
+                      key={item.label}
+                      className="grid grid-cols-[0.75rem_minmax(0,0.95fr)_minmax(0,1.25fr)] items-center gap-2 rounded border border-deep-line bg-deep/55 px-3 py-2"
+                    >
+                      <span className="h-1.5 w-1.5 rounded-full bg-amber" aria-hidden="true" />
+                      <span className="font-mono text-[10px] uppercase tracking-widest text-ink">
+                        {item.label}
+                      </span>
+                      <span className="text-right text-xs text-ink-soft">{item.detail}</span>
+                    </div>
                   ))}
                 </div>
               </div>
