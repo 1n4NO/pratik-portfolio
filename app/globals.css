@@ -107,6 +107,18 @@ body {
   transform: scaleX(1);
 }
 
+@media (max-width: 435px) {
+  .theme-toggle {
+    position: fixed;
+    top: 4.75rem;
+    right: 1rem;
+    z-index: 50;
+    background-color: rgb(var(--color-paper) / 0.9);
+    box-shadow: 0 12px 32px rgb(var(--color-ink) / 0.16);
+    backdrop-filter: blur(10px);
+  }
+}
+
 @keyframes header-link-heave {
   0% {
     transform: translateY(0);
