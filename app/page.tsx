@@ -102,7 +102,7 @@ export default function HomePage() {
           <div className="grid gap-8 lg:grid-cols-[minmax(0,1.42fr)_minmax(300px,0.58fr)] lg:items-start">
             <div>
               <p className="font-mono text-[11px] tracking-widest uppercase text-signal mb-4">
-                {profile.role} — {profile.yearsExperience} yrs
+                {profile.name} — {profile.role} — {profile.yearsExperience} yrs
               </p>
               <h1 className="font-display text-4xl md:text-6xl font-bold leading-[1.1] max-w-3xl mb-6">
                 {profile.tagline}
