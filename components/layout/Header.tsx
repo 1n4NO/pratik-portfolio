@@ -3,6 +3,7 @@ import { Container } from "@/components/ui/Container";
 import { ThemeToggle } from "@/components/layout/ThemeToggle";
 import { HeaderNav } from "@/components/layout/HeaderNav";
 import { AutoHideHeader } from "@/components/layout/AutoHideHeader";
+import { CommandPalette } from "@/components/layout/CommandPalette";
 
 export function Header() {
   return (
@@ -16,7 +17,10 @@ export function Header() {
         </Link>
         <div className="flex items-center gap-4 md:gap-8">
           <HeaderNav />
-          <ThemeToggle />
+          <div className="flex items-center gap-2">
+            <CommandPalette />
+            <ThemeToggle />
+          </div>
         </div>
       </Container>
     </AutoHideHeader>
