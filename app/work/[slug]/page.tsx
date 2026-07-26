@@ -8,6 +8,7 @@ import { ScreenshotStream } from "@/components/sections/ScreenshotStream";
 import { ScreenshotGallery } from "@/components/sections/ScreenshotGallery";
 import { DetailedProcess } from "@/components/sections/DetailedProcess";
 import { CaseStudyNav, type CaseStudyNavItem } from "@/components/sections/CaseStudyNav";
+import { ProjectBrief } from "@/components/sections/ProjectBrief";
 import { ProjectPrevNext } from "@/components/sections/ProjectPrevNext";
 import { ReadingProgressRuler } from "@/components/ui/ReadingProgressRuler";
 import { MotionReveal } from "@/components/ui/MotionReveal";
@@ -163,6 +164,10 @@ export default function ProjectDetailPage({ params }: { params: { slug: string }
             </a>
           )}
         </div>
+      </Container>
+
+      <Container className="pb-16">
+        <ProjectBrief project={project} />
       </Container>
 
       <Container className="pb-16">
