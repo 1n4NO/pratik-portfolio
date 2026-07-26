@@ -196,7 +196,7 @@ function DomainCard({
           active ? "border-signal bg-signal text-paper" : "border-line bg-paper text-signal"
         }`}
       >
-        <Icon size={16} aria-hidden />
+        <Icon size={16} className={active ? "icon-current" : "icon-amber"} aria-hidden />
       </span>
       <span>
         <span className="block font-display text-sm font-bold leading-tight">{domain.label}</span>

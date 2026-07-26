@@ -60,7 +60,7 @@ export function ProjectBrief({ project }: { project: Project }) {
               }`}
             >
               <dt className="mb-3 flex items-center gap-2 font-mono text-[10px] uppercase tracking-widest text-ink-soft/70">
-                <Icon size={14} className="text-signal" aria-hidden />
+                <Icon size={14} className="icon-amber" aria-hidden />
                 {label}
               </dt>
               <dd className="text-sm leading-relaxed text-ink">{project[key]}</dd>

@@ -68,7 +68,7 @@ function ModeLabel({
         active ? "text-paper" : "text-ink-soft group-hover:text-ink"
       }`}
     >
-      <Icon size={14} aria-hidden />
+      <Icon size={14} className={active ? "icon-current" : "icon-amber"} aria-hidden />
       {label}
     </span>
   );

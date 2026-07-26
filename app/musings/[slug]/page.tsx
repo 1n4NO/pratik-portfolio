@@ -95,7 +95,7 @@ export default function PostPage({ params }: { params: { slug: string } }) {
           href="/musings"
           className="inline-flex items-center gap-1.5 font-mono text-[11px] text-ink-soft hover:text-signal focus-ring rounded"
         >
-          <ArrowLeft size={14} aria-hidden="true" />
+          <ArrowLeft size={14} className="icon-amber" aria-hidden="true" />
           All musings
         </Link>
       </Container>

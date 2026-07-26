@@ -244,7 +244,7 @@ function ProjectNode({
 
       {hovered && showHoverCard && (
         <Html distanceFactor={7} style={{ pointerEvents: "none" }} zIndexRange={[10, 0]}>
-          <div className="w-56 -translate-x-1/2 -translate-y-[120%] rounded-lg border border-line bg-surface/95 px-3 py-2.5 shadow-[0_12px_32px_rgb(var(--color-ink)_/_0.25)] backdrop-blur">
+          <div className="w-56 -translate-x-1/2 -translate-y-[120%] rounded-lg border border-line bg-surface/95 px-3 py-2.5 shadow-card backdrop-blur">
             <p className="mb-1 font-mono text-[9px] uppercase tracking-widest text-amber">
               {datum.project.industry}
             </p>

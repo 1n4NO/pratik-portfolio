@@ -56,7 +56,7 @@ export function ProjectRow({ project, reversed }: { project: Project; reversed?:
             className="inline-flex items-center gap-1.5 font-mono text-[12px] tracking-wide text-signal hover:text-signal-dark focus-ring rounded"
           >
             View case study
-            <ArrowUpRight size={14} aria-hidden="true" />
+            <ArrowUpRight size={14} className="icon-amber" aria-hidden="true" />
           </Link>
         </div>
       </div>

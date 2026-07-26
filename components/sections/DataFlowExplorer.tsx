@@ -120,7 +120,7 @@ export function DataFlowExplorer({ chart }: { chart: string }) {
           >
             <div className="mb-4 flex items-start gap-3">
               <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded border border-signal bg-signal/10 text-signal">
-                <GitBranch size={17} aria-hidden="true" />
+                <GitBranch size={17} className="icon-amber" aria-hidden="true" />
               </span>
               <div>
                 <h3 className="font-display text-lg font-bold leading-tight">{activeNode.label}</h3>
@@ -133,7 +133,7 @@ export function DataFlowExplorer({ chart }: { chart: string }) {
 
             <FlowGroup title="Receives from" ids={activeNode.incoming} nodes={parsed.nodeMap} empty="Initial input" />
             <div className="my-4 flex justify-center text-signal" aria-hidden="true">
-              <ArrowDown size={18} aria-hidden="true" />
+              <ArrowDown size={18} className="icon-amber" aria-hidden="true" />
             </div>
             <FlowGroup title="Sends to" ids={activeNode.outgoing} nodes={parsed.nodeMap} empty="Terminal output" />
           </motion.aside>

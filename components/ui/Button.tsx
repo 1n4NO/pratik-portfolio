@@ -8,6 +8,8 @@ const variants = {
   secondary: "bg-transparent text-ink border border-line-strong hover:border-ink",
   ghost: "bg-transparent text-signal hover:text-signal-dark",
   inverse: "bg-surface text-ink hover:bg-surface-muted",
+  darkPrimary: "bg-signal text-deep hover:bg-signal-dark",
+  darkSecondary: "bg-surface-muted text-ink hover:bg-line",
 };
 
 type Variant = keyof typeof variants;

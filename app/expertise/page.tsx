@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Download } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { LinkButton } from "@/components/ui/Button";
+import { PageIntro } from "@/components/ui/PageIntro";
 import { ContactCTA } from "@/components/layout/ContactCTA";
 import { skillGroups, industries, profile } from "@/data/profile";
 import { createMetadata } from "@/lib/seo";
@@ -19,20 +20,16 @@ export default function ExpertisePage() {
   return (
     <>
       <Container className="pt-16 pb-10">
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
-          <div>
-            <p className="font-mono text-[11px] tracking-widest uppercase text-signal mb-4">
-              Expertise
-            </p>
-            <h1 className="font-display text-4xl md:text-5xl font-bold max-w-xl">
-              Twelve years, condensed.
-            </h1>
-          </div>
-          <LinkButton href={profile.resumeUrl} download className="shrink-0">
-            <Download size={14} aria-hidden="true" />
+        <PageIntro
+          eyebrow="Expertise"
+          title="Twelve years, condensed."
+          action={(
+            <LinkButton href={profile.resumeUrl} download>
+            <Download size={14} className="icon-current" aria-hidden="true" />
             Download résumé
-          </LinkButton>
-        </div>
+            </LinkButton>
+          )}
+        />
       </Container>
 
       <Container className="pb-16">

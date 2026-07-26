@@ -34,7 +34,11 @@ export function ThemeToggle() {
       title={isDark ? "Light mode" : "Dark mode"}
       className="theme-toggle inline-flex h-9 w-9 shrink-0 items-center justify-center rounded border border-line text-ink-soft transition-colors hover:border-line-strong hover:text-ink focus-ring"
     >
-      {isDark ? <Sun size={16} aria-hidden="true" /> : <Moon size={16} aria-hidden="true" />}
+      {isDark ? (
+        <Sun size={16} className="icon-amber" aria-hidden="true" />
+      ) : (
+        <Moon size={16} className="icon-amber" aria-hidden="true" />
+      )}
     </button>
   );
 }

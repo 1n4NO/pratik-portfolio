@@ -127,7 +127,7 @@ export default function ProjectDetailPage({ params }: { params: { slug: string }
           href="/work"
           className="inline-flex items-center gap-1.5 font-mono text-[11px] text-ink-soft hover:text-signal focus-ring rounded"
         >
-          <ArrowLeft size={14} aria-hidden="true" />
+          <ArrowLeft size={14} className="icon-amber" aria-hidden="true" />
           All work
         </Link>
       </Container>
@@ -152,7 +152,7 @@ export default function ProjectDetailPage({ params }: { params: { slug: string }
               className="inline-flex items-center gap-1.5 font-mono text-[12px] text-signal hover:text-signal-dark focus-ring rounded"
             >
               Visit live site
-              <ArrowUpRight size={14} aria-hidden="true" />
+              <ArrowUpRight size={14} className="icon-amber" aria-hidden="true" />
             </a>
             {project.githubUrl && (
               <a
@@ -162,7 +162,7 @@ export default function ProjectDetailPage({ params }: { params: { slug: string }
                 className="inline-flex items-center gap-1.5 font-mono text-[12px] text-ink-soft hover:text-ink focus-ring rounded"
               >
                 View source
-                <ArrowUpRight size={14} aria-hidden="true" />
+                <ArrowUpRight size={14} className="icon-amber" aria-hidden="true" />
               </a>
             )}
           </div>
@@ -248,7 +248,7 @@ export default function ProjectDetailPage({ params }: { params: { slug: string }
               <ul className="space-y-3 max-w-2xl">
                 {project.highlights.map((h) => (
                   <li key={h} className="flex gap-3 text-ink-soft">
-                    <Check size={16} className="text-signal shrink-0 mt-0.5" aria-hidden="true" />
+                    <Check size={16} className="icon-amber shrink-0 mt-0.5" aria-hidden="true" />
                     <span>{h}</span>
                   </li>
                 ))}

@@ -32,8 +32,8 @@ export function ScreenshotTile({
       : "block h-auto w-full";
   const figureClass =
     mode === "rail"
-      ? `shrink-0 overflow-hidden rounded-lg border border-line bg-surface shadow-[0_18px_50px_rgb(var(--color-ink)_/_0.14)] ${railWidth}`
-      : "mb-3 break-inside-avoid overflow-hidden rounded-lg border border-line bg-surface shadow-[0_18px_50px_rgb(var(--color-ink)_/_0.14)]";
+      ? `shrink-0 overflow-hidden rounded-lg border border-line bg-surface shadow-card ${railWidth}`
+      : "mb-3 break-inside-avoid overflow-hidden rounded-lg border border-line bg-surface shadow-card";
 
   return (
     <motion.figure

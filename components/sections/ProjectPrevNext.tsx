@@ -64,9 +64,9 @@ function PrevNextLink({
             isNext ? "md:justify-end" : ""
           }`}
         >
-          {!isNext && <ArrowLeft size={11} aria-hidden="true" />}
+          {!isNext && <ArrowLeft size={11} className="icon-amber" aria-hidden="true" />}
           {isNext ? "Next project" : "Previous project"}
-          {isNext && <ArrowRight size={11} aria-hidden="true" />}
+          {isNext && <ArrowRight size={11} className="icon-amber" aria-hidden="true" />}
         </p>
         <p className="truncate font-display text-base font-bold text-ink transition-colors group-hover:text-signal">
           {project.name}

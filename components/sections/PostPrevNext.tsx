@@ -47,9 +47,9 @@ function PostLink({ post, direction }: { post: Post; direction: "newer" | "older
           isOlder ? "md:justify-end" : ""
         }`}
       >
-        {!isOlder && <ArrowLeft size={11} aria-hidden="true" />}
+        {!isOlder && <ArrowLeft size={11} className="icon-amber" aria-hidden="true" />}
         {isOlder ? "Older post" : "Newer post"}
-        {isOlder && <ArrowRight size={11} aria-hidden="true" />}
+        {isOlder && <ArrowRight size={11} className="icon-amber" aria-hidden="true" />}
       </p>
       <p className="font-display text-base font-bold text-ink transition-colors group-hover:text-signal">
         {post.title}

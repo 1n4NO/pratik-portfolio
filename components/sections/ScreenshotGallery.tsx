@@ -50,7 +50,7 @@ export function ScreenshotGallery({
               aria-hidden="true"
             >
               <span className="flex h-9 w-9 items-center justify-center rounded-full bg-white/15 text-[#F7F8FA] backdrop-blur-sm">
-                <ZoomIn size={16} aria-hidden="true" />
+                <ZoomIn size={16} className="icon-amber" aria-hidden="true" />
               </span>
             </span>
           </button>

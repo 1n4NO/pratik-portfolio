@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Container } from "@/components/ui/Container";
+import { PageIntro } from "@/components/ui/PageIntro";
 import { LottieAnimation } from "@/components/ui/LottieAnimation";
 import { MusingsFeed } from "@/components/sections/MusingsFeed";
 import { ContactCTA } from "@/components/layout/ContactCTA";
@@ -45,12 +46,7 @@ export default function MusingsPage() {
           posts={sorted}
           intro={
             <div className="pb-2">
-              <p className="font-mono text-[11px] tracking-widest uppercase text-signal mb-4">
-                Musings
-              </p>
-              <h1 className="font-display text-4xl md:text-5xl font-bold max-w-xl">
-                Notes from the architecture desk.
-              </h1>
+              <PageIntro eyebrow="Musings" title="Notes from the architecture desk." />
               <div className="mt-8 md:hidden">
                 <MusingsLottieCircle />
               </div>

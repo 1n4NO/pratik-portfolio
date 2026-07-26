@@ -36,9 +36,9 @@ export function FloatingContact() {
       <button
         onClick={() => setOpen(true)}
         aria-label="Open contact form"
-        className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-signal text-paper flex items-center justify-center shadow-[0_4px_16px_rgba(54,82,224,0.35)] hover:bg-signal-dark transition-colors focus-ring"
+        className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-signal text-paper flex items-center justify-center shadow-card hover:bg-signal-dark transition-colors focus-ring"
       >
-        <MessageCircle size={22} aria-hidden="true" />
+        <MessageCircle size={22} className="icon-current" aria-hidden="true" />
       </button>
 
       {open && (
@@ -53,7 +53,7 @@ export function FloatingContact() {
             role="dialog"
             aria-modal="true"
             aria-labelledby="contact-modal-title"
-            className="w-full max-w-md bg-paper rounded-lg border border-line shadow-[0_20px_60px_rgba(20,23,31,0.25)] max-h-[90vh] overflow-y-auto"
+            className="w-full max-w-md bg-paper rounded-lg border border-line shadow-overlay max-h-[90vh] overflow-y-auto"
           >
             <div className="flex items-center justify-between px-6 py-4 border-b border-line">
               <h2 id="contact-modal-title" className="font-display text-lg font-bold">
@@ -64,7 +64,7 @@ export function FloatingContact() {
                 aria-label="Close"
                 className="text-ink-soft hover:text-ink focus-ring rounded"
               >
-                <X size={20} aria-hidden="true" />
+                <X size={20} className="icon-amber" aria-hidden="true" />
               </button>
             </div>
 

@@ -136,14 +136,14 @@ export default function HomePage() {
                   className="inline-flex items-center justify-center gap-2 rounded border border-signal bg-signal px-5 py-3 font-mono text-[12px] tracking-wide text-paper transition-colors hover:bg-signal-dark focus-ring"
                 >
                   View selected work
-                  <ArrowDown size={14} aria-hidden="true" />
+                  <ArrowDown size={14} className="icon-current" aria-hidden="true" />
                 </Link>
                 <Link
                   href="/contact"
                   className="inline-flex items-center justify-center gap-2 rounded border border-line-strong px-5 py-3 font-mono text-[12px] tracking-wide text-ink transition-colors hover:border-ink focus-ring"
                 >
                   Start a conversation
-                  <ArrowUpRight size={14} aria-hidden="true" />
+                  <ArrowUpRight size={14} className="icon-amber" aria-hidden="true" />
                 </Link>
               </div>
             </div>
@@ -210,7 +210,7 @@ export default function HomePage() {
               {operatingPrinciples.map(({ label, body }, index) => (
                 <li
                   key={label}
-                  className="group relative overflow-hidden rounded border border-line bg-paper/70 shadow-[0_18px_50px_rgb(0_0_0_/_0.08)] backdrop-blur transition-all duration-300 hover:-translate-y-0.5 hover:border-signal/70 hover:shadow-[0_22px_70px_rgb(var(--color-signal)_/_0.16)]"
+                  className="group relative overflow-hidden rounded border border-line bg-paper/70 shadow-card backdrop-blur transition-all duration-300 hover:-translate-y-0.5 hover:border-signal/70"
                 >
                   <div
                     className="absolute inset-y-0 left-0 w-1 bg-signal opacity-0 transition-opacity duration-300 group-hover:opacity-100"

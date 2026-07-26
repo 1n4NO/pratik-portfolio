@@ -22,7 +22,7 @@ export function BrowserFrame({
 
   return (
     <motion.div
-      className="rounded-lg border border-line bg-surface overflow-hidden shadow-[0_1px_0_rgb(var(--color-ink)_/_0.04)]"
+      className="rounded-lg border border-line bg-surface overflow-hidden shadow-subtle"
       variants={reduceMotion ? undefined : mediaHover}
       initial="rest"
       whileHover="hover"

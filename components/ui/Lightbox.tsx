@@ -65,7 +65,7 @@ export function Lightbox({
         aria-label="Close"
         className={`absolute right-4 top-4 md:right-8 md:top-8 ${controlClass}`}
       >
-        <X size={18} aria-hidden="true" />
+        <X size={18} className="icon-amber" aria-hidden="true" />
       </button>
 
       {items.length > 1 && (
@@ -75,14 +75,14 @@ export function Lightbox({
             aria-label="Previous screenshot"
             className={`absolute left-2 top-1/2 -translate-y-1/2 md:left-6 ${controlClass}`}
           >
-            <ChevronLeft size={20} aria-hidden="true" />
+            <ChevronLeft size={20} className="icon-amber" aria-hidden="true" />
           </button>
           <button
             onClick={onNext}
             aria-label="Next screenshot"
             className={`absolute right-2 top-1/2 -translate-y-1/2 md:right-6 ${controlClass}`}
           >
-            <ChevronRight size={20} aria-hidden="true" />
+            <ChevronRight size={20} className="icon-amber" aria-hidden="true" />
           </button>
         </>
       )}
@@ -90,7 +90,7 @@ export function Lightbox({
       <div className="flex max-h-full max-w-5xl flex-col items-center">
         {isVideo ? (
           <video
-            className="max-h-[78vh] w-auto max-w-full rounded-lg border border-white/10 object-contain shadow-[0_30px_90px_rgba(0,0,0,0.55)]"
+            className="max-h-[78vh] w-auto max-w-full rounded-lg border border-white/10 object-contain shadow-overlay"
             autoPlay
             muted
             loop
@@ -108,7 +108,7 @@ export function Lightbox({
           <img
             src={item.src}
             alt={item.alt ?? ""}
-            className="max-h-[78vh] w-auto max-w-full rounded-lg border border-white/10 object-contain shadow-[0_30px_90px_rgba(0,0,0,0.55)]"
+            className="max-h-[78vh] w-auto max-w-full rounded-lg border border-white/10 object-contain shadow-overlay"
           />
         )}
         {(item.caption || items.length > 1) && (

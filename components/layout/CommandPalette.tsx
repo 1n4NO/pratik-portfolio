@@ -206,7 +206,7 @@ export function CommandPalette() {
         className="command-palette-trigger inline-flex h-9 items-center gap-2 rounded border border-line bg-surface-muted px-2.5 font-mono text-[11px] text-ink-soft transition-colors hover:border-line-strong hover:text-ink focus-ring"
         aria-label="Open command palette"
       >
-        <Search size={14} aria-hidden />
+        <Search size={14} className="icon-amber" aria-hidden />
         <kbd className="hidden text-[10px] text-ink-soft/70 sm:inline">{shortcutLabel}</kbd>
       </button>
 
@@ -224,7 +224,7 @@ export function CommandPalette() {
             onMouseDown={() => setOpen(false)}
           >
             <motion.div
-              className="w-full max-w-2xl overflow-hidden rounded-lg border border-line bg-paper shadow-[0_28px_90px_rgb(0_0_0_/_0.38)]"
+              className="w-full max-w-2xl overflow-hidden rounded-lg border border-line bg-paper shadow-overlay"
               initial={reduceMotion ? false : { opacity: 0, y: 12, scale: 0.98 }}
               animate={reduceMotion ? undefined : { opacity: 1, y: 0, scale: 1 }}
               exit={reduceMotion ? undefined : { opacity: 0, y: 8, scale: 0.98 }}
@@ -232,7 +232,7 @@ export function CommandPalette() {
               onMouseDown={(event) => event.stopPropagation()}
             >
               <div className="flex items-center gap-3 border-b border-line px-4 py-3">
-                <Search size={16} className="text-amber" aria-hidden />
+                <Search size={16} className="icon-amber" aria-hidden />
                 <input
                   ref={inputRef}
                   value={query}
@@ -247,7 +247,7 @@ export function CommandPalette() {
                   className="flex h-7 w-7 items-center justify-center rounded text-ink-soft hover:bg-surface-muted hover:text-ink focus-ring"
                   aria-label="Close command palette"
                 >
-                  <X size={15} aria-hidden />
+                  <X size={15} className="icon-amber" aria-hidden />
                 </button>
               </div>
 
@@ -268,8 +268,8 @@ export function CommandPalette() {
                               active ? "bg-surface-muted text-ink" : "text-ink-soft hover:bg-surface-muted/70 hover:text-ink"
                             }`}
                           >
-                            <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded border border-line bg-surface text-amber">
-                              <Icon size={15} aria-hidden />
+                            <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded border border-line bg-surface">
+                              <Icon size={15} className="icon-amber" aria-hidden />
                             </span>
                             <span className="min-w-0 flex-1">
                               <span className="mb-1 block font-mono text-[10px] uppercase tracking-widest text-ink-soft/65">

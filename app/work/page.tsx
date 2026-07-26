@@ -3,6 +3,7 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { Container } from "@/components/ui/Container";
+import { PageIntro } from "@/components/ui/PageIntro";
 import { ContactCTA } from "@/components/layout/ContactCTA";
 import { projects } from "@/data/projects";
 import { absoluteUrl, createMetadata, jsonLd } from "@/lib/seo";
@@ -54,13 +55,23 @@ export default function WorkPage() {
         dangerouslySetInnerHTML={jsonLd(structuredData)}
       />
       <Container className="pt-16 pb-6">
-        <p className="font-mono text-[11px] tracking-widest uppercase text-signal mb-4">Work</p>
-        <h1 className="font-display text-4xl md:text-5xl font-bold max-w-xl">
-          Products shipped, systems architected.
-        </h1>
+        <PageIntro eyebrow="Work" title="Products shipped, systems architected." />
       </Container>
 
       <Container className="pt-6 pb-10">
+        <PageIntro
+          eyebrow="Work map"
+          title="A connected view of the systems behind the projects."
+          size="section"
+          align="stack"
+          titleClassName="max-w-2xl"
+          className="mb-6"
+        >
+          <p>
+            Explore the overlap between AI workflows, frontend architecture, data interfaces, and
+            product systems before jumping into the detailed case studies.
+          </p>
+        </PageIntro>
         <WorkConstellation />
       </Container>
 
@@ -80,7 +91,7 @@ export default function WorkPage() {
                 {project.name}
                 <ArrowUpRight
                   size={12}
-                  className="opacity-0 group-hover:opacity-100 transition-opacity"
+                  className="icon-amber opacity-0 group-hover:opacity-100 transition-opacity"
                   aria-hidden="true"
                 />
               </Link>
