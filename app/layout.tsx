@@ -5,6 +5,7 @@ import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { FloatingContact } from "@/components/layout/FloatingContact";
+import { PageTransition } from "@/components/layout/PageTransition";
 import { createMetadata, siteConfig } from "@/lib/seo";
 import { Analytics } from "@vercel/analytics/next"
 
@@ -67,7 +68,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body className="font-sans antialiased flex min-h-screen flex-col">
         <Header />
-        <main className="flex-1">{children}</main>
+        <PageTransition>{children}</PageTransition>
         <Footer />
         <FloatingContact />
       </body>

@@ -1,7 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import { motion, useReducedMotion } from "framer-motion";
 import type { Screenshot } from "@/data/projects";
+import { mediaHover } from "@/lib/motion";
 
 export type ScreenshotTileItem = Partial<Screenshot> & {
   id: string;
@@ -20,6 +22,7 @@ export function ScreenshotTile({
   mode?: "masonry" | "rail";
 }) {
   const [errored, setErrored] = useState(false);
+  const reduceMotion = useReducedMotion();
   const showDummy = item.dummy || !item.src || errored;
   const isVideo = item.src ? isVideoSrc(item.src) : false;
   const railWidth = ["w-[260px]", "w-[340px]", "w-[300px]", "w-[390px]"][index % 4];
@@ -33,7 +36,12 @@ export function ScreenshotTile({
       : "mb-3 break-inside-avoid overflow-hidden rounded-lg border border-line bg-surface shadow-[0_18px_50px_rgb(var(--color-ink)_/_0.14)]";
 
   return (
-    <figure className={figureClass}>
+    <motion.figure
+      className={figureClass}
+      variants={reduceMotion ? undefined : mediaHover}
+      initial="rest"
+      whileHover="hover"
+    >
       <div className="overflow-hidden bg-surface-muted">
         {!showDummy && item.src && isVideo ? (
           <video
@@ -69,7 +77,7 @@ export function ScreenshotTile({
           {item.caption}
         </figcaption>
       )}
-    </figure>
+    </motion.figure>
   );
 }
 

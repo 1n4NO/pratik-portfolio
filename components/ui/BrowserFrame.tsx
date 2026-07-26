@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import { motion, useReducedMotion } from "framer-motion";
+import { mediaHover } from "@/lib/motion";
 
 export function BrowserFrame({
   src,
@@ -15,10 +17,16 @@ export function BrowserFrame({
   priority?: boolean;
 }) {
   const [errored, setErrored] = useState(false);
+  const reduceMotion = useReducedMotion();
   const isVideo = isVideoSrc(src);
 
   return (
-    <div className="rounded-lg border border-line bg-surface overflow-hidden shadow-[0_1px_0_rgb(var(--color-ink)_/_0.04)]">
+    <motion.div
+      className="rounded-lg border border-line bg-surface overflow-hidden shadow-[0_1px_0_rgb(var(--color-ink)_/_0.04)]"
+      variants={reduceMotion ? undefined : mediaHover}
+      initial="rest"
+      whileHover="hover"
+    >
       <div className="flex items-center gap-1.5 px-3 py-2 border-b border-line bg-surface-muted">
         <span className="w-2.5 h-2.5 rounded-full bg-line-strong" />
         <span className="w-2.5 h-2.5 rounded-full bg-line-strong" />
@@ -62,7 +70,7 @@ export function BrowserFrame({
           </div>
         )}
       </div>
-    </div>
+    </motion.div>
   );
 }
 

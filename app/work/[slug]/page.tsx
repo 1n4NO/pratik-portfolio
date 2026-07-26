@@ -10,6 +10,7 @@ import { DetailedProcess } from "@/components/sections/DetailedProcess";
 import { CaseStudyNav, type CaseStudyNavItem } from "@/components/sections/CaseStudyNav";
 import { ProjectPrevNext } from "@/components/sections/ProjectPrevNext";
 import { ReadingProgressRuler } from "@/components/ui/ReadingProgressRuler";
+import { MotionReveal } from "@/components/ui/MotionReveal";
 import { ContactCTA } from "@/components/layout/ContactCTA";
 import { projects, getProjectBySlug, getAdjacentProjects } from "@/data/projects";
 import { absoluteUrl, createMetadata, jsonLd, siteConfig } from "@/lib/seo";
@@ -208,7 +209,7 @@ export default function ProjectDetailPage({ params }: { params: { slug: string }
 
           <div className="md:col-span-3 space-y-12">
             {sections.map((section) => (
-              <section
+              <MotionReveal
                 key={section.key}
                 id={section.key}
                 className="scroll-mt-20 md:scroll-mt-28"
@@ -224,10 +225,10 @@ export default function ProjectDetailPage({ params }: { params: { slug: string }
                     dataFlowDiagram={project.dataFlowDiagram}
                   />
                 )}
-              </section>
+              </MotionReveal>
             ))}
 
-            <section
+            <MotionReveal
               id="highlights"
               className="scroll-mt-20 md:scroll-mt-28"
               aria-labelledby="highlights-heading"
@@ -243,7 +244,7 @@ export default function ProjectDetailPage({ params }: { params: { slug: string }
                   </li>
                 ))}
               </ul>
-            </section>
+            </MotionReveal>
           </div>
         </div>
       </Container>
