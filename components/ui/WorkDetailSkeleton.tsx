@@ -9,7 +9,7 @@ export function WorkDetailSkeleton() {
     <>
       <div
         aria-hidden="true"
-        className="sticky top-16 z-30 flex h-2 w-full items-end gap-[2px] border-b border-line bg-paper/90 backdrop-blur-sm"
+        className="sticky top-0 z-30 flex h-2 w-full items-end gap-[2px] border-b border-line bg-paper/90 backdrop-blur-sm md:top-16"
       >
         {Array.from({ length: ticks }).map((_, i) => (
           <span

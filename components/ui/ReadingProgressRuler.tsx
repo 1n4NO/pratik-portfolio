@@ -53,7 +53,7 @@ export function ReadingProgressRuler() {
       aria-valuemin={0}
       aria-valuemax={100}
       aria-valuenow={Math.round(progress * 100)}
-      className="sticky top-16 z-30 flex h-2 w-full items-end gap-[2px] border-b border-line bg-paper/90 backdrop-blur-sm"
+      className="sticky top-0 z-30 flex h-2 w-full items-end gap-[2px] border-b border-line bg-paper/90 backdrop-blur-sm md:top-16"
     >
       {Array.from({ length: TICKS }).map((_, i) => (
         <span

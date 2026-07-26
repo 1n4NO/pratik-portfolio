@@ -2,10 +2,11 @@ import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import { ThemeToggle } from "@/components/layout/ThemeToggle";
 import { HeaderNav } from "@/components/layout/HeaderNav";
+import { AutoHideHeader } from "@/components/layout/AutoHideHeader";
 
 export function Header() {
   return (
-    <header className="sticky top-0 z-40 border-b border-line bg-paper/90 backdrop-blur-sm">
+    <AutoHideHeader>
       <Container className="flex items-center justify-between h-16 gap-6">
         <Link
           href="/"
@@ -18,6 +19,6 @@ export function Header() {
           <ThemeToggle />
         </div>
       </Container>
-    </header>
+    </AutoHideHeader>
   );
 }
