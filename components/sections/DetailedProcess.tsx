@@ -2,7 +2,7 @@
 
 import { useState, type ReactNode } from "react";
 import type { Project } from "@/data/projects";
-import { MermaidDiagram } from "@/components/ui/MermaidDiagram";
+import { DataFlowExplorer } from "@/components/sections/DataFlowExplorer";
 
 type ActiveTab = "process" | "data-flow";
 
@@ -59,7 +59,7 @@ export function DetailedProcess({
         </div>
       ) : (
         <div className="min-h-[620px]">
-          <MermaidDiagram chart={dataFlowDiagram} />
+          <DataFlowExplorer chart={dataFlowDiagram} />
         </div>
       )}
     </section>
