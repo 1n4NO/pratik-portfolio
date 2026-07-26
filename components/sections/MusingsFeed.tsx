@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { Post } from "@/data/posts";
+import { tagColorStyle } from "@/lib/tags";
 
 const PAGE_SIZE = 2;
 
@@ -55,10 +56,25 @@ export function MusingsFeed({
       <div className="space-y-14">
         {intro && <div>{intro}</div>}
         {visible.map((post) => (
-          <article key={post.slug} id={`post-${post.slug}`} className="scroll-mt-24 border-t border-line pt-8">
+          <article
+            key={post.slug}
+            id={`post-${post.slug}`}
+            className="relative scroll-mt-24 border-t border-line pl-5 pt-8"
+          >
+            <span
+              className="absolute left-0 top-8 bottom-0 w-1"
+              style={{ backgroundColor: tagColorStyle(post.tag, 0.7) }}
+              aria-hidden="true"
+            />
             <div className="flex items-center gap-3 mb-3">
               {post.tag && (
-                <span className="font-mono text-[10px] uppercase tracking-wide text-amber bg-amber-bg px-2 py-0.5 rounded">
+                <span
+                  className="font-mono text-[10px] uppercase tracking-wide px-2 py-0.5 rounded"
+                  style={{
+                    color: tagColorStyle(post.tag),
+                    backgroundColor: tagColorStyle(post.tag, 0.14),
+                  }}
+                >
                   {post.tag}
                 </span>
               )}

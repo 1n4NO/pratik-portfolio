@@ -7,7 +7,6 @@ const navItems = [
   { href: "/work", label: "Work" },
   { href: "/expertise", label: "Expertise" },
   { href: "/musings", label: "Musings" },
-  { href: "/contact", label: "Contact" },
 ];
 
 export function HeaderNav() {

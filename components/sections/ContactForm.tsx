@@ -9,7 +9,7 @@ export function ContactForm() {
   }
 
   return (
-    <div className="relative max-w-lg rounded-lg">
+    <div className="relative rounded-lg border border-line bg-surface p-6 shadow-card md:p-8">
       <form onSubmit={handleSubmit} className="space-y-5" aria-disabled="true">
         <fieldset disabled className="space-y-5 opacity-45">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
@@ -26,7 +26,7 @@ export function ContactForm() {
               name="message"
               required
               rows={6}
-              className="w-full rounded border border-line bg-surface px-3 py-2.5 text-sm focus-ring resize-none"
+              className="w-full rounded border border-line bg-paper px-3 py-2.5 text-sm focus-ring resize-none"
             />
           </div>
 
@@ -64,7 +64,7 @@ function Field({
         name={name}
         type={type}
         required={required}
-        className="w-full rounded border border-line bg-surface px-3 py-2.5 text-sm focus-ring"
+        className="w-full rounded border border-line bg-paper px-3 py-2.5 text-sm focus-ring"
       />
     </div>
   );

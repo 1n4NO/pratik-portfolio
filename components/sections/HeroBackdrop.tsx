@@ -37,7 +37,7 @@ export function HeroBackdrop({ stableDarkGrid = false }: { stableDarkGrid?: bool
   return (
     <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
       <div
-        className={`absolute inset-0 ${stableDarkGrid ? "opacity-35" : "grid-backdrop opacity-45"}`}
+        className={`absolute inset-0 ${stableDarkGrid ? "opacity-35" : "grid-lines opacity-45"}`}
         style={
           stableDarkGrid
             ? {

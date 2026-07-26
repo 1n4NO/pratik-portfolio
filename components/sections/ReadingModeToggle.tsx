@@ -1,22 +1,25 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { BriefcaseBusiness, Code2 } from "lucide-react";
+import { BriefcaseBusiness, Code2, X } from "lucide-react";
 
 type ReadingMode = "recruiter" | "engineer";
 
 const storageKey = "portfolio-case-study-mode";
 const toastStorageKey = "portfolio-case-study-mode-toast-seen";
+const calloutStorageKey = "portfolio-case-study-mode-callout-seen";
 
 export function ReadingModeToggle() {
   const [mode, setMode] = useState<ReadingMode>("recruiter");
   const [toastVisible, setToastVisible] = useState(false);
+  const [calloutVisible, setCalloutVisible] = useState(false);
 
   useEffect(() => {
     const saved = localStorage.getItem(storageKey);
     const nextMode = saved === "engineer" ? "engineer" : "recruiter";
     setMode(nextMode);
     document.documentElement.dataset.caseStudyMode = nextMode;
+    setCalloutVisible(localStorage.getItem(calloutStorageKey) !== "true");
 
     return () => {
       delete document.documentElement.dataset.caseStudyMode;
@@ -26,6 +29,8 @@ export function ReadingModeToggle() {
   function updateMode(nextMode: ReadingMode) {
     setMode(nextMode);
     localStorage.setItem(storageKey, nextMode);
+    localStorage.setItem(calloutStorageKey, "true");
+    setCalloutVisible(false);
     document.documentElement.dataset.caseStudyMode = nextMode;
     document.documentElement.dataset.caseStudyModePulse = nextMode;
     window.setTimeout(() => {
@@ -37,6 +42,11 @@ export function ReadingModeToggle() {
       localStorage.setItem(toastStorageKey, "true");
       window.setTimeout(() => setToastVisible(false), 2200);
     }
+  }
+
+  function dismissCallout() {
+    localStorage.setItem(calloutStorageKey, "true");
+    setCalloutVisible(false);
   }
 
   return (
@@ -76,6 +86,24 @@ export function ReadingModeToggle() {
           </div>
         )}
       </div>
+
+      {calloutVisible && (
+        <div className="w-full rounded border border-amber/35 bg-amber-bg/70 px-3 py-2 text-left shadow-card sm:w-[360px] sm:bg-paper/95 sm:backdrop-blur">
+          <div className="flex items-start gap-3">
+            <p className="text-xs leading-relaxed text-ink">
+              This page adapts: toggle for hiring signal or engineering depth.
+            </p>
+            <button
+              type="button"
+              onClick={dismissCallout}
+              className="-mr-1 -mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded text-ink-soft hover:bg-surface-muted hover:text-ink focus-ring"
+              aria-label="Dismiss reading mode note"
+            >
+              <X size={13} className="icon-amber" aria-hidden />
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

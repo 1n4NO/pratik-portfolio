@@ -3,8 +3,9 @@ import { Download } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { LinkButton } from "@/components/ui/Button";
 import { PageIntro } from "@/components/ui/PageIntro";
+import { HeroSystemMap } from "@/components/sections/HeroSystemMap";
 import { ContactCTA } from "@/components/layout/ContactCTA";
-import { skillGroups, industries, profile } from "@/data/profile";
+import { skillGroups, industries, profile, type SkillGroup } from "@/data/profile";
 import { createMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = {
@@ -16,23 +17,38 @@ export const metadata: Metadata = {
   }),
 };
 
+const currentYear = new Date().getFullYear();
+const maxYearsActive = Math.max(...skillGroups.map((g) => currentYear - g.since));
+
 export default function ExpertisePage() {
   return (
     <>
-      <Container className="pt-16 pb-10">
-        <PageIntro
-          eyebrow="Expertise"
-          title="Twelve years, condensed."
-          action={(
-            <LinkButton href={profile.resumeUrl} download>
-            <Download size={14} className="icon-current" aria-hidden="true" />
-            Download résumé
-            </LinkButton>
-          )}
-        />
-      </Container>
+      <section className="relative overflow-hidden border-b border-line bg-surface">
+        <div className="pointer-events-none absolute inset-0 grid-backdrop" aria-hidden="true" />
+        <Container className="relative py-10 md:py-14">
+          <div className="grid gap-10 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:items-center">
+            <PageIntro
+              eyebrow="Expertise"
+              title="Twelve years, condensed."
+              align="stack"
+              action={(
+                <LinkButton href={profile.resumeUrl} download>
+                <Download size={14} className="icon-current" aria-hidden="true" />
+                Download résumé
+                </LinkButton>
+              )}
+            >
+              <p>
+                A practical map of depth: core skill areas, the systems behind them, and the
+                shipped work that proves them.
+              </p>
+            </PageIntro>
+            <HeroSystemMap />
+          </div>
+        </Container>
+      </section>
 
-      <Container className="pb-16">
+      <Container className="pt-16 pb-16">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-12">
           {skillGroups.map((group) => (
             <div key={group.title} className="border-t border-line pt-5">
@@ -41,7 +57,8 @@ export default function ExpertisePage() {
                 {group.title}
               </h2>
               <p className="text-sm text-ink-soft mb-4">{group.blurb}</p>
-              <ul className="flex flex-wrap gap-2">
+              <SkillMeter group={group} maxYears={maxYearsActive} />
+              <ul className="mt-4 flex flex-wrap gap-2">
                 {group.items.map((item) => (
                   <li
                     key={item}
@@ -58,21 +75,48 @@ export default function ExpertisePage() {
 
       <Container className="pb-20">
         <div className="border-t border-line pt-8">
-          <h2 className="font-mono text-[11px] tracking-widest uppercase text-ink-soft mb-5">
+          <h2 className="font-mono text-[11px] tracking-widest uppercase text-ink-soft mb-4">
             Industry expertise
           </h2>
-          <ul className="flex flex-wrap gap-2">
-            {industries.map((industry) => (
-              <li key={industry} className="font-mono text-[11px] text-amber bg-amber-bg px-2.5 py-1 rounded">
-                {industry}
-              </li>
-            ))}
-          </ul>
+          <p className="max-w-2xl font-mono text-[12px] leading-relaxed text-ink-soft/75">
+            {industries.join("   ·   ")}
+          </p>
         </div>
       </Container>
 
       <ContactCTA />
     </>
+  );
+}
+
+// A quiet reuse of the ruler tick language elsewhere on the site (see
+// RulerDivider), applied here as a static "instrument reading" for how long
+// a given skill area has actually been part of the work, not just a claim.
+function SkillMeter({ group, maxYears }: { group: SkillGroup; maxYears: number }) {
+  const years = currentYear - group.since;
+  const totalTicks = 20;
+  const filled = Math.max(1, Math.round((years / maxYears) * totalTicks));
+
+  return (
+    <div className="flex items-center gap-2.5" aria-label={`${years} years active, since ${group.since}`}>
+      <span className="shrink-0 font-mono text-[10px] tabular-nums text-signal">
+        {years} yrs
+      </span>
+      <div className="flex h-2 flex-1 items-end gap-[2px]" aria-hidden="true">
+        {Array.from({ length: totalTicks }).map((_, i) => (
+          <span
+            key={i}
+            className="w-px"
+            style={{
+              height: i % 4 === 0 ? "8px" : "4px",
+              backgroundColor:
+                i < filled ? "rgb(var(--color-signal))" : "rgb(var(--color-line-strong))",
+            }}
+          />
+        ))}
+      </div>
+      <span className="shrink-0 font-mono text-[10px] text-ink-soft/50">since {group.since}</span>
+    </div>
   );
 }
 

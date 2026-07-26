@@ -5,6 +5,7 @@ import { ArrowUpRight } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { PageIntro } from "@/components/ui/PageIntro";
 import { ContactCTA } from "@/components/layout/ContactCTA";
+import { OperatingPrinciples } from "@/components/sections/OperatingPrinciples";
 import { projects } from "@/data/projects";
 import { absoluteUrl, createMetadata, jsonLd } from "@/lib/seo";
 
@@ -54,24 +55,19 @@ export default function WorkPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={jsonLd(structuredData)}
       />
-      <Container className="pt-16 pb-6">
-        <PageIntro eyebrow="Work" title="Products shipped, systems architected." />
-      </Container>
+      <section className="relative flex min-h-[572px] items-center overflow-hidden border-b border-line bg-surface">
+        <div className="pointer-events-none absolute inset-0 grid-backdrop" aria-hidden="true" />
+        <Container className="relative py-10 md:py-14">
+          <PageIntro eyebrow="Work" title="Products shipped, systems architected.">
+            <p>
+              Explore the overlap between AI workflows, frontend architecture, data interfaces, and
+              product systems before jumping into the detailed case studies.
+            </p>
+          </PageIntro>
+        </Container>
+      </section>
 
       <Container className="pt-6 pb-10">
-        <PageIntro
-          eyebrow="Work map"
-          title="A connected view of the systems behind the projects."
-          size="section"
-          align="stack"
-          titleClassName="max-w-2xl"
-          className="mb-6"
-        >
-          <p>
-            Explore the overlap between AI workflows, frontend architecture, data interfaces, and
-            product systems before jumping into the detailed case studies.
-          </p>
-        </PageIntro>
         <WorkConstellation />
       </Container>
 
@@ -99,6 +95,8 @@ export default function WorkPage() {
           ))}
         </ul>
       </Container>
+
+      <OperatingPrinciples />
 
       <ContactCTA />
     </>

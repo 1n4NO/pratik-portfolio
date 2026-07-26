@@ -1,4 +1,4 @@
-import { ArrowRight, Mail, MessageCircle, Radio, Sparkles } from "lucide-react";
+import { ArrowRight, Linkedin, MessageCircle, Radio, Sparkles } from "lucide-react";
 import { HeroBackdrop } from "@/components/sections/HeroBackdrop";
 import { Container } from "@/components/ui/Container";
 import { LinkButton } from "@/components/ui/Button";
@@ -85,7 +85,7 @@ export function ContactCTA() {
 
               <div className="mt-5 flex flex-col gap-3 sm:flex-row">
                 <LinkButton
-                  href="/contact"
+                  href={`mailto:${profile.email}?subject=Frontend%20architecture%20conversation`}
                   variant="darkPrimary"
                   className="contact-cta-button group flex-1"
                 >
@@ -98,12 +98,14 @@ export function ContactCTA() {
                   />
                 </LinkButton>
                 <LinkButton
-                  href={`mailto:${profile.email}`}
+                  href={profile.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   variant="darkSecondary"
                   className="contact-cta-button group flex-1"
                 >
-                  <Mail size={15} className="icon-amber" aria-hidden="true" />
-                  Email me
+                  <Linkedin size={15} className="icon-amber" aria-hidden="true" />
+                  LinkedIn
                 </LinkButton>
               </div>
             </div>

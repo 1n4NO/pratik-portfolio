@@ -31,6 +31,7 @@ export type SkillGroup = {
   title: string;
   blurb: string;
   items: string[];
+  since: number; // year this domain became a real part of the work — drives the depth meter on /expertise
 };
 
 // Shown on the Expertise page. Group however makes sense — reorder or add groups freely.
@@ -38,6 +39,7 @@ export const skillGroups: SkillGroup[] = [
   {
     title: "Leadership",
     blurb: "Running the team, not just the code.",
+    since: 2017,
     items: [
       "Frontend architecture & system design",
       "Team leadership & mentorship",
@@ -50,6 +52,7 @@ export const skillGroups: SkillGroup[] = [
   {
     title: "Frontend",
     blurb: "The core toolkit, used daily.",
+    since: 2012,
     items: [
       "React",
       "Next.js (SSR, CSR, streaming, RSC)",
@@ -61,11 +64,13 @@ export const skillGroups: SkillGroup[] = [
   {
     title: "State & data",
     blurb: "Keeping client and server state honest.",
+    since: 2019,
     items: ["TanStack Query", "Redux Toolkit", "REST", "GraphQL", "Node.js (API routes)"],
   },
   {
     title: "AI integration",
     blurb: "Where the frontend meets the model.",
+    since: 2023,
     items: [
       "OpenAI & Ollama APIs",
       "Conversational UI",
@@ -78,11 +83,13 @@ export const skillGroups: SkillGroup[] = [
   {
     title: "Data visualization",
     blurb: "Making dense data legible.",
+    since: 2017,
     items: ["D3.js", "React Charts", "MUI DataGrid Pro", "React Flow"],
   },
   {
     title: "Quality & security",
     blurb: "The parts that don't show up in a demo.",
+    since: 2019,
     items: [
       "OWASP Top 10",
       "XSS / CSRF prevention",
@@ -95,6 +102,7 @@ export const skillGroups: SkillGroup[] = [
   {
     title: "Cloud & DevOps",
     blurb: "Getting it into production and keeping it there.",
+    since: 2020,
     items: ["Docker", "Kubernetes", "AWS", "Azure", "GCP", "CI/CD (GitHub, Bitbucket)"],
   },
 ];

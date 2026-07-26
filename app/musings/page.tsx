@@ -48,11 +48,11 @@ export default function MusingsPage() {
             <div className="pb-2">
               <PageIntro eyebrow="Musings" title="Notes from the architecture desk." />
               <div className="mt-8 md:hidden">
-                <MusingsLottieCircle />
+                <MusingsLottieCircle variant="mobile" />
               </div>
             </div>
           }
-          sidebarVisual={<MusingsLottieCircle />}
+          sidebarVisual={<MusingsLottieCircle variant="sidebar" />}
         />
       </Container>
 
@@ -61,14 +61,22 @@ export default function MusingsPage() {
   );
 }
 
-function MusingsLottieCircle() {
+function MusingsLottieCircle({ variant = "sidebar" }: { variant?: "sidebar" | "mobile" }) {
+  const isSidebar = variant === "sidebar";
+
   return (
-    <div className="relative mx-auto flex aspect-square w-[210px] items-center justify-center rounded-full bg-surface-muted md:w-full">
+    <div
+      className={`relative mx-auto flex aspect-square items-center justify-center rounded-full border ${
+        isSidebar
+          ? "w-[140px] border-line/60 bg-surface-muted/40 opacity-75"
+          : "w-[210px] border-transparent bg-surface-muted"
+      }`}
+    >
       <div className="absolute inset-x-10 bottom-7 h-8 rounded-full bg-line/60 blur-xl" />
       <LottieAnimation
         src="/lottie/man-working-on-laptop.json"
         label="Animated illustration of a person working on a laptop"
-        className="relative h-[145px] w-[145px] md:h-[180px] md:w-[180px]"
+        className={`relative ${isSidebar ? "h-[95px] w-[95px]" : "h-[145px] w-[145px]"}`}
       />
     </div>
   );

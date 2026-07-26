@@ -216,7 +216,7 @@ export default function ProjectDetailPage({ params }: { params: { slug: string }
             </div>
           </div>
 
-          <div className="md:col-span-3 space-y-12">
+          <div className="md:col-span-3 space-y-16">
             {sections.map((section) => (
               <MotionReveal
                 key={section.key}
@@ -224,15 +224,19 @@ export default function ProjectDetailPage({ params }: { params: { slug: string }
                 className="scroll-mt-20 md:scroll-mt-28"
                 aria-labelledby={`${section.key}-heading`}
               >
-                <h2 id={`${section.key}-heading`} className="font-display text-xl font-bold mb-3">
-                  {section.label}
-                </h2>
-                <p className="text-ink-soft leading-relaxed max-w-2xl">{project[section.key]}</p>
+                <div className="max-w-[680px] border-l border-line pl-4 md:pl-6">
+                  <h2 id={`${section.key}-heading`} className="font-display text-xl font-bold mb-3">
+                    {section.label}
+                  </h2>
+                  <p className="text-ink-soft leading-relaxed">{project[section.key]}</p>
+                </div>
                 {section.key === "approach" && (
-                  <DetailedProcess
-                    steps={project.detailedProcess}
-                    dataFlowDiagram={project.dataFlowDiagram}
-                  />
+                  <div className="mt-10">
+                    <DetailedProcess
+                      steps={project.detailedProcess}
+                      dataFlowDiagram={project.dataFlowDiagram}
+                    />
+                  </div>
                 )}
               </MotionReveal>
             ))}
@@ -242,17 +246,19 @@ export default function ProjectDetailPage({ params }: { params: { slug: string }
               className="scroll-mt-20 md:scroll-mt-28"
               aria-labelledby="highlights-heading"
             >
-              <h2 id="highlights-heading" className="font-display text-xl font-bold mb-4">
-                Highlights
-              </h2>
-              <ul className="space-y-3 max-w-2xl">
-                {project.highlights.map((h) => (
-                  <li key={h} className="flex gap-3 text-ink-soft">
-                    <Check size={16} className="icon-amber shrink-0 mt-0.5" aria-hidden="true" />
-                    <span>{h}</span>
-                  </li>
-                ))}
-              </ul>
+              <div className="max-w-[680px] border-l border-line pl-4 md:pl-6">
+                <h2 id="highlights-heading" className="font-display text-xl font-bold mb-4">
+                  Highlights
+                </h2>
+                <ul className="space-y-3">
+                  {project.highlights.map((h) => (
+                    <li key={h} className="flex gap-3 text-ink-soft">
+                      <Check size={16} className="icon-amber shrink-0 mt-0.5" aria-hidden="true" />
+                      <span>{h}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </MotionReveal>
           </div>
         </div>

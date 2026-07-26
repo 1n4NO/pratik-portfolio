@@ -31,12 +31,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly",
       priority: 0.8,
     },
-    {
-      url: absoluteUrl("/contact"),
-      lastModified,
-      changeFrequency: "yearly",
-      priority: 0.6,
-    },
   ];
 
   const projectRoutes: MetadataRoute.Sitemap = projects.map((project) => ({

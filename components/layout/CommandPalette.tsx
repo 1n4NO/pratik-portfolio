@@ -55,14 +55,6 @@ const baseCommands: CommandItem[] = [
     kind: "page",
   },
   {
-    id: "contact",
-    title: "Contact",
-    eyebrow: "Page",
-    detail: "Open the contact page",
-    href: "/contact",
-    kind: "page",
-  },
-  {
     id: "resume",
     title: "Resume",
     eyebrow: "Action",

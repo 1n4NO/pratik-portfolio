@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { useRouter } from "next/navigation";
 import { motion, useReducedMotion } from "framer-motion";
 import { BrainCircuit, Code2, DatabaseZap, GitBranch, Palette } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
@@ -97,7 +98,7 @@ export function HeroSystemMap() {
 
   return (
     <div
-      className="relative h-[620px] overflow-hidden rounded-lg p-3 md:h-[500px] md:p-3"
+      className="relative h-[580px] overflow-hidden rounded-lg p-3 md:h-[460px] md:p-3"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
@@ -113,11 +114,11 @@ export function HeroSystemMap() {
           ))}
         </div>
 
-        <div className="relative hidden h-[305px] md:block">
+        <div className="relative hidden h-[320px] md:block">
           {orbitNodes.map((node) => (
             <motion.div
               key={node.domain.id}
-              className="absolute w-[165px]"
+              className="absolute w-[145px]"
               style={{
                 left: `${node.x}%`,
                 top: `${node.y}%`,
@@ -185,18 +186,18 @@ function DomainCard({
     <button
       type="button"
       onClick={onSelect}
-      className={`group flex w-full items-start gap-3 rounded border p-3 text-left transition-colors focus-ring ${
+      className={`group flex w-full items-start gap-2.5 rounded border p-2.5 text-left transition-colors focus-ring ${
         active
           ? "border-signal bg-signal/10 text-ink"
           : "border-line bg-surface/85 text-ink-soft hover:border-line-strong hover:text-ink"
       }`}
     >
       <span
-        className={`flex h-9 w-9 shrink-0 items-center justify-center rounded border ${
+        className={`flex h-8 w-8 shrink-0 items-center justify-center rounded border ${
           active ? "border-signal bg-signal text-paper" : "border-line bg-paper text-signal"
         }`}
       >
-        <Icon size={16} className={active ? "icon-current" : "icon-amber"} aria-hidden />
+        <Icon size={14} className={active ? "icon-current" : "icon-amber"} aria-hidden />
       </span>
       <span>
         <span className="block font-display text-sm font-bold leading-tight">{domain.label}</span>
@@ -227,21 +228,15 @@ function RelatedProjects({
   projects: Project[];
   reduceMotion: boolean;
 }) {
+  const router = useRouter();
+
   return (
     <motion.div
-      className="absolute inset-x-3 top-[380px] md:top-[275px]"
+      className="absolute inset-x-3 top-[320px] md:top-[240px]"
       initial={reduceMotion ? false : { opacity: 0, y: -10 }}
       animate={reduceMotion ? undefined : { opacity: 1, y: 0 }}
       transition={{ duration: motionTimings.base, ease: motionEase.soft }}
     >
-      <div
-        className="pointer-events-none absolute -top-9 left-1/2 hidden h-8 w-px -translate-x-1/2 bg-gradient-to-b from-amber via-signal/70 to-transparent md:block"
-        aria-hidden="true"
-      />
-      <div
-        className="pointer-events-none absolute -top-1 left-1/2 hidden h-1.5 w-1.5 -translate-x-1/2 rounded-full bg-amber md:block"
-        aria-hidden="true"
-      />
       <div className="mb-2 flex items-center justify-between gap-3">
         <p className="font-mono text-[10px] uppercase tracking-widest text-signal">
           Related projects
@@ -255,7 +250,7 @@ function RelatedProjects({
           <motion.button
             key={project.slug}
             type="button"
-            onClick={() => scrollToProject(project.slug)}
+            onClick={() => router.push(`/work/${project.slug}`)}
             className="group inline-flex w-full items-center justify-between gap-3 rounded border border-line bg-surface/85 px-2.5 py-1.5 text-left transition-colors hover:border-signal focus-ring"
             initial={reduceMotion ? false : { opacity: 0, y: -8 }}
             animate={reduceMotion ? undefined : { opacity: 1, y: 0 }}
@@ -281,12 +276,6 @@ function RelatedProjects({
       </div>
     </motion.div>
   );
-}
-
-function scrollToProject(slug: string) {
-  const node = document.getElementById(`project-${slug}`);
-  if (!node) return;
-  node.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
 function getOrbitNodes(rotation: number): OrbitNode[] {
