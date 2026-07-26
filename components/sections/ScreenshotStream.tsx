@@ -265,19 +265,19 @@ function RecyclingRow({
 }
 
 function getHorizontalRows(items: ScreenshotTileItem[]) {
-  const gifItems = items.filter(isGif);
-  const staticItems = items.filter((item) => !isGif(item));
+  const animatedItems = items.filter(isAnimatedMedia);
+  const staticItems = items.filter((item) => !isAnimatedMedia(item));
 
-  if (gifItems.length === 0 || staticItems.length === 0) {
+  if (animatedItems.length === 0 || staticItems.length === 0) {
     return [items.filter((_, index) => index % 2 === 0), items.filter((_, index) => index % 2 === 1)];
   }
 
-  let gifCursor = 0;
+  let animatedCursor = 0;
   let staticCursor = 0;
 
-  function takeGif() {
-    const item = gifItems[gifCursor];
-    gifCursor += 1;
+  function takeAnimated() {
+    const item = animatedItems[animatedCursor];
+    animatedCursor += 1;
     return item;
   }
 
@@ -287,10 +287,10 @@ function getHorizontalRows(items: ScreenshotTileItem[]) {
     return item;
   }
 
-  function takePreferred(wantsGif: boolean) {
-    if (wantsGif && gifCursor < gifItems.length) return takeGif();
-    if (!wantsGif && staticCursor < staticItems.length) return takeStatic();
-    if (gifCursor < gifItems.length) return takeGif();
+  function takePreferred(wantsAnimated: boolean) {
+    if (wantsAnimated && animatedCursor < animatedItems.length) return takeAnimated();
+    if (!wantsAnimated && staticCursor < staticItems.length) return takeStatic();
+    if (animatedCursor < animatedItems.length) return takeAnimated();
     if (staticCursor < staticItems.length) return takeStatic();
     return null;
   }
@@ -298,7 +298,7 @@ function getHorizontalRows(items: ScreenshotTileItem[]) {
   const rows: ScreenshotTileItem[][] = [[], []];
   let column = 0;
 
-  while (gifCursor < gifItems.length || staticCursor < staticItems.length) {
+  while (animatedCursor < animatedItems.length || staticCursor < staticItems.length) {
     const first = takePreferred(column % 2 === 0);
     if (first) rows[0].push(first);
 
@@ -311,8 +311,8 @@ function getHorizontalRows(items: ScreenshotTileItem[]) {
   return rows;
 }
 
-function isGif(item: ScreenshotTileItem) {
-  return item.src?.toLowerCase().endsWith(".gif") ?? false;
+function isAnimatedMedia(item: ScreenshotTileItem) {
+  return item.src ? /\.(gif|webm|mp4)$/i.test(item.src) : false;
 }
 
 function getStreamItems(project: Project): ScreenshotTileItem[] {
@@ -338,19 +338,19 @@ function getStreamItems(project: Project): ScreenshotTileItem[] {
 }
 
 function alternateMedia(items: ScreenshotTileItem[]) {
-  const gifItems = items.filter(isGif);
-  const staticItems = items.filter((item) => !isGif(item));
+  const animatedItems = items.filter(isAnimatedMedia);
+  const staticItems = items.filter((item) => !isAnimatedMedia(item));
 
-  if (gifItems.length === 0 || staticItems.length === 0) return [...items];
+  if (animatedItems.length === 0 || staticItems.length === 0) return [...items];
 
   const result: ScreenshotTileItem[] = [];
-  const pairs = Math.min(gifItems.length, staticItems.length);
+  const pairs = Math.min(animatedItems.length, staticItems.length);
 
   for (let index = 0; index < pairs; index += 1) {
-    result.push(gifItems[index], staticItems[index]);
+    result.push(animatedItems[index], staticItems[index]);
   }
 
-  return result.concat(gifItems.slice(pairs), staticItems.slice(pairs));
+  return result.concat(animatedItems.slice(pairs), staticItems.slice(pairs));
 }
 
 function uniqueBySrc<T extends { src?: string }>(items: T[]) {

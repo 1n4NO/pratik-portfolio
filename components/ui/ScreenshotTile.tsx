@@ -21,6 +21,7 @@ export function ScreenshotTile({
 }) {
   const [errored, setErrored] = useState(false);
   const showDummy = item.dummy || !item.src || errored;
+  const isVideo = item.src ? isVideoSrc(item.src) : false;
   const railWidth = ["w-[260px]", "w-[340px]", "w-[300px]", "w-[390px]"][index % 4];
   const imageClass =
     mode === "rail"
@@ -34,7 +35,23 @@ export function ScreenshotTile({
   return (
     <figure className={figureClass}>
       <div className="overflow-hidden bg-surface-muted">
-        {!showDummy && item.src ? (
+        {!showDummy && item.src && isVideo ? (
+          <video
+            className={imageClass}
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload={priority ? "auto" : "metadata"}
+            aria-label={item.alt ?? item.caption ?? "Project screen recording"}
+            onError={() => setErrored(true)}
+          >
+            {item.src.toLowerCase().endsWith(".webm") && (
+              <source src={item.src} type="video/webm" />
+            )}
+            <source src={videoFallbackSrc(item.src)} type="video/mp4" />
+          </video>
+        ) : !showDummy && item.src ? (
           <img
             src={item.src}
             alt={item.alt ?? ""}
@@ -91,4 +108,12 @@ function DummyScreenshot({ index }: { index: number }) {
       </div>
     </div>
   );
+}
+
+function isVideoSrc(src: string) {
+  return /\.(webm|mp4)$/i.test(src);
+}
+
+function videoFallbackSrc(src: string) {
+  return src.replace(/\.(webm|mp4)$/i, ".mp4");
 }

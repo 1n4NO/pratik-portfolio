@@ -36,23 +36,23 @@ function getAlternatingHeroMedia() {
 }
 
 function alternateMedia<T extends Screenshot & { id: string }>(items: T[]) {
-  const gifs = items.filter(isGif);
-  const statics = items.filter((item) => !isGif(item));
+  const animated = items.filter(isAnimatedMedia);
+  const statics = items.filter((item) => !isAnimatedMedia(item));
 
-  if (gifs.length === 0 || statics.length === 0) return items;
+  if (animated.length === 0 || statics.length === 0) return items;
 
   const result: T[] = [];
-  const pairs = Math.min(gifs.length, statics.length);
+  const pairs = Math.min(animated.length, statics.length);
 
   for (let index = 0; index < pairs; index += 1) {
-    result.push(gifs[index], statics[index]);
+    result.push(animated[index], statics[index]);
   }
 
-  return result.concat(gifs.slice(pairs), statics.slice(pairs));
+  return result.concat(animated.slice(pairs), statics.slice(pairs));
 }
 
-function isGif(item: Screenshot) {
-  return item.src.toLowerCase().endsWith(".gif");
+function isAnimatedMedia(item: Screenshot) {
+  return /\.(gif|webm|mp4)$/i.test(item.src);
 }
 
 function uniqueBySrc<T extends Screenshot>(items: T[]) {

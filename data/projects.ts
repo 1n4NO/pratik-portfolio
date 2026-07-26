@@ -228,12 +228,12 @@ export const projects: Project[] = [
     },
     screenshots: [
       {
-        src: "/projects/product-studio/ollama-model-selection.gif",
+        src: "/projects/product-studio/ollama-model-selection.webm",
         alt: "Product Studio Ollama setup animation scrolling local models, selecting qwen2.5-coder, and entering the studio",
         caption: "Ollama model selection flow",
       },
             {
-        src: "/projects/product-studio/new-run-generate-light.gif",
+        src: "/projects/product-studio/new-run-generate-light.webm",
         alt: "Product Studio light mode animation starting a new run, filling the product brief, and clicking Generate",
         caption: "New run brief generation — light mode",
       },
@@ -358,27 +358,27 @@ export const projects: Project[] = [
   renderer --> mobile["Mobile preview"]
   dnd["dnd-kit reorder"] --> pages`,
     cover: {
-      src: "/projects/orqestra/login-loop-dark.gif",
+      src: "/projects/orqestra/login-loop-dark.webm",
       alt: "Orqestra animated login page in dark mode",
     },
     screenshots: [
       {
-        src: "/projects/orqestra/login-loop-dark.gif",
+        src: "/projects/orqestra/login-loop-dark.webm",
         alt: "Orqestra animated login page in dark mode with split Lottie and glass sign-in panel",
         caption: "Animated login — dark mode",
       },
             {
-        src: "/projects/orqestra/login-loop-light.gif",
+        src: "/projects/orqestra/login-loop-light.webm",
         alt: "Orqestra animated login page in light mode with split Lottie and glass sign-in panel",
         caption: "Animated login — light mode",
       },
             {
-        src: "/projects/orqestra/page-builder-reorder.gif",
+        src: "/projects/orqestra/page-builder-reorder.webm",
         alt: "Orqestra Page Builder animation showing section reorder reflected in the live page preview",
         caption: "Page builder reorder interaction",
       },
             {
-        src: "/projects/orqestra/preview-responsive-scroll.gif",
+        src: "/projects/orqestra/preview-responsive-scroll.webm",
         alt: "Orqestra Preview animation showing desktop scroll, tablet mode switch, scroll to top, and desktop mode switch",
         caption: "Preview responsive mode walkthrough",
       },
@@ -569,39 +569,39 @@ export const projects: Project[] = [
     },
     screenshots: [
       {
-        src: "/projects/state-dashboard/widget-india-map-hover-dark.gif",
+        src: "/projects/state-dashboard/widget-india-map-hover-dark.webm",
         alt: "Dark mode India map widget showing state hover tooltip",
       },
             {
-        src: "/projects/state-dashboard/widget-india-map-hover-light.gif",
+        src: "/projects/state-dashboard/widget-india-map-hover-light.webm",
         alt: "Light mode India map widget showing state hover tooltip",
       },
             {
-        src: "/projects/state-dashboard/karnataka-constituency-drilldown-dark.gif",
+        src: "/projects/state-dashboard/karnataka-constituency-drilldown-dark.webm",
         alt: "Dark mode interaction showing Karnataka drill-down and constituency selection",
       },
             {
-        src: "/projects/state-dashboard/widget-historical-seat-comparison-hover-dark.gif",
+        src: "/projects/state-dashboard/widget-historical-seat-comparison-hover-dark.webm",
         alt: "Dark mode historical seat comparison widget showing bar hover tooltip",
       },
             {
-        src: "/projects/state-dashboard/widget-historical-seat-comparison-hover-light.gif",
+        src: "/projects/state-dashboard/widget-historical-seat-comparison-hover-light.webm",
         alt: "Light mode historical seat comparison widget showing bar hover tooltip",
       },
             {
-        src: "/projects/state-dashboard/widget-turnout-by-state-hover-dark.gif",
+        src: "/projects/state-dashboard/widget-turnout-by-state-hover-dark.webm",
         alt: "Dark mode turnout by state widget showing bar hover tooltip",
       },
             {
-        src: "/projects/state-dashboard/widget-turnout-by-state-hover-light.gif",
+        src: "/projects/state-dashboard/widget-turnout-by-state-hover-light.webm",
         alt: "Light mode turnout by state widget showing bar hover tooltip",
       },
             {
-        src: "/projects/state-dashboard/widget-election-intelligence-hover-dark.gif",
+        src: "/projects/state-dashboard/widget-election-intelligence-hover-dark.webm",
         alt: "Dark mode election intelligence widget showing feed scroll behavior",
       },
             {
-        src: "/projects/state-dashboard/widget-election-intelligence-hover-light.gif",
+        src: "/projects/state-dashboard/widget-election-intelligence-hover-light.webm",
         alt: "Light mode election intelligence widget showing feed scroll behavior",
       },
           {

@@ -44,6 +44,7 @@ export function Lightbox({
 
   if (!item) return null;
 
+  const isVideo = isVideoSrc(item.src);
   const controlClass =
     "flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-[#F7F8FA] transition-colors hover:bg-white/20 focus-ring";
 
@@ -87,12 +88,29 @@ export function Lightbox({
       )}
 
       <div className="flex max-h-full max-w-5xl flex-col items-center">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={item.src}
-          alt={item.alt ?? ""}
-          className="max-h-[78vh] w-auto max-w-full rounded-lg border border-white/10 object-contain shadow-[0_30px_90px_rgba(0,0,0,0.55)]"
-        />
+        {isVideo ? (
+          <video
+            className="max-h-[78vh] w-auto max-w-full rounded-lg border border-white/10 object-contain shadow-[0_30px_90px_rgba(0,0,0,0.55)]"
+            autoPlay
+            muted
+            loop
+            playsInline
+            controls
+            aria-label={item.alt ?? item.caption ?? "Project screen recording"}
+          >
+            {item.src.toLowerCase().endsWith(".webm") && (
+              <source src={item.src} type="video/webm" />
+            )}
+            <source src={videoFallbackSrc(item.src)} type="video/mp4" />
+          </video>
+        ) : (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={item.src}
+            alt={item.alt ?? ""}
+            className="max-h-[78vh] w-auto max-w-full rounded-lg border border-white/10 object-contain shadow-[0_30px_90px_rgba(0,0,0,0.55)]"
+          />
+        )}
         {(item.caption || items.length > 1) && (
           <div className="mt-4 flex items-center gap-3 font-mono text-[11px] text-[#F7F8FA]/70">
             {item.caption && <span>{item.caption}</span>}
@@ -106,4 +124,12 @@ export function Lightbox({
       </div>
     </div>
   );
+}
+
+function isVideoSrc(src: string) {
+  return /\.(webm|mp4)$/i.test(src);
+}
+
+function videoFallbackSrc(src: string) {
+  return src.replace(/\.(webm|mp4)$/i, ".mp4");
 }

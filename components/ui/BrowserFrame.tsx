@@ -15,7 +15,7 @@ export function BrowserFrame({
   priority?: boolean;
 }) {
   const [errored, setErrored] = useState(false);
-  const isGif = src.toLowerCase().endsWith(".gif");
+  const isVideo = isVideoSrc(src);
 
   return (
     <div className="rounded-lg border border-line bg-surface overflow-hidden shadow-[0_1px_0_rgb(var(--color-ink)_/_0.04)]">
@@ -28,15 +28,22 @@ export function BrowserFrame({
         )}
       </div>
       <div className="relative w-full aspect-[16/10] bg-surface-muted">
-        {!errored && isGif ? (
-          <img
-            src={src}
-            alt={alt}
+        {!errored && isVideo ? (
+          <video
             className="absolute inset-0 h-full w-full object-cover object-top"
-            loading={priority ? "eager" : "lazy"}
-            decoding="async"
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload={priority ? "auto" : "metadata"}
+            aria-label={alt}
             onError={() => setErrored(true)}
-          />
+          >
+            {src.toLowerCase().endsWith(".webm") && (
+              <source src={src} type="video/webm" />
+            )}
+            <source src={videoFallbackSrc(src)} type="video/mp4" />
+          </video>
         ) : !errored ? (
           <Image
             src={src}
@@ -57,4 +64,12 @@ export function BrowserFrame({
       </div>
     </div>
   );
+}
+
+function isVideoSrc(src: string) {
+  return /\.(webm|mp4)$/i.test(src);
+}
+
+function videoFallbackSrc(src: string) {
+  return src.replace(/\.(webm|mp4)$/i, ".mp4");
 }
