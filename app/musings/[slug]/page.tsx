@@ -4,6 +4,7 @@ import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { PostBody } from "@/components/sections/PostBody";
+import { ReadingProgressRuler } from "@/components/ui/ReadingProgressRuler";
 import { ContactCTA } from "@/components/layout/ContactCTA";
 import { posts, getPostBySlug } from "@/data/posts";
 import { absoluteUrl, createMetadata, jsonLd, siteConfig } from "@/lib/seo";
@@ -86,6 +87,7 @@ export default function PostPage({ params }: { params: { slug: string } }) {
         type="application/ld+json"
         dangerouslySetInnerHTML={jsonLd(structuredData)}
       />
+      <ReadingProgressRuler />
       <Container className="pt-10 pb-4">
         <Link
           href="/musings"

@@ -7,6 +7,7 @@ import { Tag } from "@/components/ui/Tag";
 import { ScreenshotTile } from "@/components/ui/ScreenshotTile";
 import { ScreenshotStream } from "@/components/sections/ScreenshotStream";
 import { DetailedProcess } from "@/components/sections/DetailedProcess";
+import { ReadingProgressRuler } from "@/components/ui/ReadingProgressRuler";
 import { ContactCTA } from "@/components/layout/ContactCTA";
 import { projects, getProjectBySlug } from "@/data/projects";
 import { absoluteUrl, createMetadata, jsonLd, siteConfig } from "@/lib/seo";
@@ -104,6 +105,7 @@ export default function ProjectDetailPage({ params }: { params: { slug: string }
         type="application/ld+json"
         dangerouslySetInnerHTML={jsonLd(structuredData)}
       />
+      <ReadingProgressRuler />
       <Container className="pt-10 pb-4">
         <Link
           href="/work"
