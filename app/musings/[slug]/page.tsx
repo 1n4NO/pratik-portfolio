@@ -4,9 +4,10 @@ import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { PostBody } from "@/components/sections/PostBody";
+import { PostPrevNext } from "@/components/sections/PostPrevNext";
 import { ReadingProgressRuler } from "@/components/ui/ReadingProgressRuler";
 import { ContactCTA } from "@/components/layout/ContactCTA";
-import { posts, getPostBySlug } from "@/data/posts";
+import { posts, getPostBySlug, getAdjacentPosts } from "@/data/posts";
 import { absoluteUrl, createMetadata, jsonLd, siteConfig } from "@/lib/seo";
 
 export function generateStaticParams() {
@@ -27,6 +28,7 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
 export default function PostPage({ params }: { params: { slug: string } }) {
   const post = getPostBySlug(params.slug);
   if (!post) notFound();
+  const { newer, older } = getAdjacentPosts(post.slug);
 
   const postUrl = absoluteUrl(`/musings/${post.slug}`);
   const structuredData = {
@@ -118,6 +120,8 @@ export default function PostPage({ params }: { params: { slug: string } }) {
         </h1>
         <PostBody content={post.content} />
       </Container>
+
+      <PostPrevNext newer={newer} older={older} />
 
       <ContactCTA />
     </>

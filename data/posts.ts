@@ -66,3 +66,16 @@ export const posts: Post[] = [
 export function getPostBySlug(slug: string) {
   return posts.find((p) => p.slug === slug);
 }
+
+// Chronological, newest first — matches the order posts appear in the feed.
+// Returns null at either end instead of wrapping, since "older than the oldest
+// post" isn't a meaningful place to send someone.
+export function getAdjacentPosts(slug: string) {
+  const sorted = [...posts].sort((a, b) => (a.date < b.date ? 1 : -1));
+  const index = sorted.findIndex((p) => p.slug === slug);
+  if (index === -1) return { newer: null, older: null };
+  return {
+    newer: index > 0 ? sorted[index - 1] : null,
+    older: index < sorted.length - 1 ? sorted[index + 1] : null,
+  };
+}

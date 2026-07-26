@@ -876,3 +876,13 @@ export const projects: Project[] = [
 export function getProjectBySlug(slug: string) {
   return projects.find((p) => p.slug === slug);
 }
+
+// Wraps around: the project after the last one is the first, and vice versa,
+// so a visitor can keep browsing the curated list end-to-end.
+export function getAdjacentProjects(slug: string) {
+  const index = projects.findIndex((p) => p.slug === slug);
+  if (index === -1) return { previous: null, next: null };
+  const previous = projects[(index - 1 + projects.length) % projects.length];
+  const next = projects[(index + 1) % projects.length];
+  return { previous, next };
+}

@@ -4,12 +4,13 @@ import Link from "next/link";
 import { ArrowLeft, ArrowUpRight, Check } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { Tag } from "@/components/ui/Tag";
-import { ScreenshotTile } from "@/components/ui/ScreenshotTile";
 import { ScreenshotStream } from "@/components/sections/ScreenshotStream";
+import { ScreenshotGallery } from "@/components/sections/ScreenshotGallery";
 import { DetailedProcess } from "@/components/sections/DetailedProcess";
+import { ProjectPrevNext } from "@/components/sections/ProjectPrevNext";
 import { ReadingProgressRuler } from "@/components/ui/ReadingProgressRuler";
 import { ContactCTA } from "@/components/layout/ContactCTA";
-import { projects, getProjectBySlug } from "@/data/projects";
+import { projects, getProjectBySlug, getAdjacentProjects } from "@/data/projects";
 import { absoluteUrl, createMetadata, jsonLd, siteConfig } from "@/lib/seo";
 
 export function generateStaticParams() {
@@ -37,6 +38,7 @@ const sections: { key: "overview" | "problem" | "approach" | "solution"; label: 
 export default function ProjectDetailPage({ params }: { params: { slug: string } }) {
   const project = getProjectBySlug(params.slug);
   if (!project) notFound();
+  const { previous, next } = getAdjacentProjects(project.slug);
 
   const structuredData = {
     "@context": "https://schema.org",
@@ -220,19 +222,11 @@ export default function ProjectDetailPage({ params }: { params: { slug: string }
           <h2 className="font-mono text-[11px] tracking-widest uppercase text-ink-soft mb-8">
             Product screenshots
           </h2>
-          <div className="columns-1 gap-4 md:columns-2 xl:columns-3">
-            {project.screenshots.map((shot, index) => (
-              <ScreenshotTile
-                key={shot.src}
-                item={{ ...shot, id: `${project.slug}-detail-shot-${index}` }}
-                index={index}
-                priority={index < 2}
-                mode="masonry"
-              />
-            ))}
-          </div>
+          <ScreenshotGallery screenshots={project.screenshots} slugPrefix={project.slug} />
         </Container>
       )}
+
+      <ProjectPrevNext previous={previous} next={next} />
 
       <ContactCTA />
     </>
