@@ -9,9 +9,9 @@ function normalizeUrl(url: string) {
 
 export const siteConfig = {
   name: `${profile.name} Portfolio`,
-  title: `${profile.name} | Frontend Architect`,
+  title: `${profile.name} | Frontend Architect | UX, AI, Design Systems`,
   description:
-    "Portfolio and case studies from Pratik Singh, a Frontend Architect building scalable product interfaces, AI-native systems, design systems, and data-heavy web applications.",
+    "Portfolio of Pratik Singh, a Frontend Architect building scalable product interfaces, AI-native systems, design systems, and data-heavy web applications.",
   url: normalizeUrl(
     process.env.NEXT_PUBLIC_SITE_URL ??
       (process.env.VERCEL_PROJECT_PRODUCTION_URL
