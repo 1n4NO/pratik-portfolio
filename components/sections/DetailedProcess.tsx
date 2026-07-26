@@ -17,8 +17,9 @@ export function DetailedProcess({
 
   return (
     <section
+      id="detailed-process"
       aria-labelledby="detailed-process-heading"
-      className="mt-6 rounded-lg border border-line bg-surface p-5 md:p-6"
+      className="mt-6 scroll-mt-20 rounded-lg border border-line bg-surface p-5 md:scroll-mt-28 md:p-6"
     >
       <p className="font-mono text-[11px] tracking-widest uppercase text-signal mb-3">
         Project method

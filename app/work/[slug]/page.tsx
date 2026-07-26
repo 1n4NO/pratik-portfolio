@@ -7,6 +7,7 @@ import { Tag } from "@/components/ui/Tag";
 import { ScreenshotStream } from "@/components/sections/ScreenshotStream";
 import { ScreenshotGallery } from "@/components/sections/ScreenshotGallery";
 import { DetailedProcess } from "@/components/sections/DetailedProcess";
+import { CaseStudyNav, type CaseStudyNavItem } from "@/components/sections/CaseStudyNav";
 import { ProjectPrevNext } from "@/components/sections/ProjectPrevNext";
 import { ReadingProgressRuler } from "@/components/ui/ReadingProgressRuler";
 import { ContactCTA } from "@/components/layout/ContactCTA";
@@ -33,6 +34,16 @@ const sections: { key: "overview" | "problem" | "approach" | "solution"; label: 
   { key: "problem", label: "Problem" },
   { key: "approach", label: "Approach" },
   { key: "solution", label: "Solution" },
+];
+
+const caseStudyNavItems: CaseStudyNavItem[] = [
+  { id: "overview", label: "Overview" },
+  { id: "problem", label: "Problem" },
+  { id: "approach", label: "Approach" },
+  { id: "detailed-process", label: "Process" },
+  { id: "solution", label: "Solution" },
+  { id: "highlights", label: "Highlights" },
+  { id: "screenshots", label: "Screenshots" },
 ];
 
 export default function ProjectDetailPage({ params }: { params: { slug: string } }) {
@@ -160,38 +171,52 @@ export default function ProjectDetailPage({ params }: { params: { slug: string }
       <Container className="pb-16">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
           <div className="md:col-span-1">
-            <dl className="font-mono text-[11px] space-y-4 sticky top-24">
-              <div>
-                <dt className="text-ink-soft/60 uppercase tracking-wide mb-1">Industry</dt>
-                <dd>{project.industry}</dd>
-              </div>
-              <div>
-                <dt className="text-ink-soft/60 uppercase tracking-wide mb-1">Tech stack</dt>
-                <dd className="space-y-1">
-                  {project.techStack.map((tech) => (
-                    <div key={tech}>{tech}</div>
-                  ))}
-                </dd>
-              </div>
-              {project.externalSystems && project.externalSystems.length > 0 && (
+            <div className="sticky top-3 z-20 md:top-24">
+              <CaseStudyNav
+                items={caseStudyNavItems.filter(
+                  (item) => item.id !== "screenshots" || project.screenshots.length > 0
+                )}
+              />
+              <dl className="hidden font-mono text-[11px] space-y-4 md:block">
                 <div>
-                  <dt className="text-ink-soft/60 uppercase tracking-wide mb-1">
-                    External systems
-                  </dt>
+                  <dt className="text-ink-soft/60 uppercase tracking-wide mb-1">Industry</dt>
+                  <dd>{project.industry}</dd>
+                </div>
+                <div>
+                  <dt className="text-ink-soft/60 uppercase tracking-wide mb-1">Tech stack</dt>
                   <dd className="space-y-1">
-                    {project.externalSystems.map((system) => (
-                      <div key={system}>{system}</div>
+                    {project.techStack.map((tech) => (
+                      <div key={tech}>{tech}</div>
                     ))}
                   </dd>
                 </div>
-              )}
-            </dl>
+                {project.externalSystems && project.externalSystems.length > 0 && (
+                  <div>
+                    <dt className="text-ink-soft/60 uppercase tracking-wide mb-1">
+                      External systems
+                    </dt>
+                    <dd className="space-y-1">
+                      {project.externalSystems.map((system) => (
+                        <div key={system}>{system}</div>
+                      ))}
+                    </dd>
+                  </div>
+                )}
+              </dl>
+            </div>
           </div>
 
           <div className="md:col-span-3 space-y-12">
             {sections.map((section) => (
-              <div key={section.key}>
-                <h2 className="font-display text-xl font-bold mb-3">{section.label}</h2>
+              <section
+                key={section.key}
+                id={section.key}
+                className="scroll-mt-20 md:scroll-mt-28"
+                aria-labelledby={`${section.key}-heading`}
+              >
+                <h2 id={`${section.key}-heading`} className="font-display text-xl font-bold mb-3">
+                  {section.label}
+                </h2>
                 <p className="text-ink-soft leading-relaxed max-w-2xl">{project[section.key]}</p>
                 {section.key === "approach" && (
                   <DetailedProcess
@@ -199,11 +224,17 @@ export default function ProjectDetailPage({ params }: { params: { slug: string }
                     dataFlowDiagram={project.dataFlowDiagram}
                   />
                 )}
-              </div>
+              </section>
             ))}
 
-            <div>
-              <h2 className="font-display text-xl font-bold mb-4">Highlights</h2>
+            <section
+              id="highlights"
+              className="scroll-mt-20 md:scroll-mt-28"
+              aria-labelledby="highlights-heading"
+            >
+              <h2 id="highlights-heading" className="font-display text-xl font-bold mb-4">
+                Highlights
+              </h2>
               <ul className="space-y-3 max-w-2xl">
                 {project.highlights.map((h) => (
                   <li key={h} className="flex gap-3 text-ink-soft">
@@ -212,14 +243,20 @@ export default function ProjectDetailPage({ params }: { params: { slug: string }
                   </li>
                 ))}
               </ul>
-            </div>
+            </section>
           </div>
         </div>
       </Container>
 
       {project.screenshots.length > 0 && (
-        <Container className="pb-20">
-          <h2 className="font-mono text-[11px] tracking-widest uppercase text-ink-soft mb-8">
+        <Container
+          id="screenshots"
+          className="scroll-mt-20 pb-20 md:scroll-mt-28"
+        >
+          <h2
+            id="screenshots-heading"
+            className="font-mono text-[11px] tracking-widest uppercase text-ink-soft mb-8"
+          >
             Product screenshots
           </h2>
           <ScreenshotGallery screenshots={project.screenshots} slugPrefix={project.slug} />
