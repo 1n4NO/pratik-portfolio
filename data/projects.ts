@@ -14,6 +14,11 @@ export type Project = {
   slug: string;
   name: string;
   tagline: string;
+  impact: string;
+  role: string;
+  scope: string;
+  constraint: string;
+  technicalBet: string;
   industry: string;
   liveUrl: string;
   githubUrl?: string;
@@ -39,6 +44,11 @@ export const projects: Project[] = [
     slug: "multi-agent-ai-system",
     name: "Multi-Agent AI System",
     tagline: "A team of AIs, thinking together.",
+    impact: "Made local multi-agent research inspectable, checkpointed, and exportable instead of a single opaque model response.",
+    role: "Frontend architecture, agent workflow design, product UI, and local inference integration",
+    scope: "Goal intake, planner review, researcher orchestration, live graph state, critic loop, and final report export",
+    constraint: "The system had to feel transparent and useful while running entirely on local LLM infrastructure.",
+    technicalBet: "A streamed, checkpointed agent graph would build more trust than a conventional chat interface.",
     industry: "AI Agent Systems",
     liveUrl: "https://multi-agent-ai-landing.vercel.app/",
     githubUrl: "https://github.com/1n4NO/multi-agent-ai-system",
@@ -173,6 +183,11 @@ export const projects: Project[] = [
     slug: "product-studio",
     name: "Product Studio",
     tagline: "AI-powered UX design for teams that ship.",
+    impact: "Compressed product brief, blueprint generation, deterministic UX audit, and export into one guided studio workflow.",
+    role: "Product architecture, AI workflow design, design-system modeling, and UX audit implementation",
+    scope: "Provider setup, brief capture, blueprint generation, theme tokens, audit scoring, and export artifacts",
+    constraint: "Generated output needed measurable quality checks instead of relying on model confidence or visual plausibility.",
+    technicalBet: "Pairing generative agents with deterministic HTML audits would make AI page output more shippable.",
     industry: "Design Tooling / SaaS",
     liveUrl: "https://ai-product-studio-studio-web.vercel.app/",
     techStack: [
@@ -308,6 +323,11 @@ export const projects: Project[] = [
     slug: "orqestra",
     name: "Orqestra",
     tagline: "Design. Assemble. Launch.",
+    impact: "Turned theme tokens, structured sections, page ordering, and responsive preview into a coherent site-builder loop.",
+    role: "Frontend architecture, builder UX, design-token system, and preview workflow implementation",
+    scope: "Theme editor, section schemas, page builder, responsive preview, versioning, and login experience",
+    constraint: "The builder needed flexibility without letting arbitrary configuration break preview fidelity.",
+    technicalBet: "A schema-first section model would make global theme propagation and reliable preview possible.",
     industry: "Website Builder / SaaS",
     liveUrl: "https://theme-builder-landing.vercel.app/",
     githubUrl: "https://github.com/1n4NO/orqestra",
@@ -522,6 +542,11 @@ export const projects: Project[] = [
     slug: "state-dashboard",
     name: "PolInsight India",
     tagline: "State-level analytics for election campaign teams.",
+    impact: "Made dense election intelligence scannable through KPI tiles, drill-down maps, hover states, and constituency context.",
+    role: "Dashboard architecture, data visualization, interaction design, and analytics UI implementation",
+    scope: "National KPIs, India map drill-down, state and constituency views, trend widgets, and intelligence panels",
+    constraint: "The interface had to preserve data density without overwhelming campaign users during fast analysis.",
+    technicalBet: "Progressive disclosure through map and widget interactions would outperform a flat dashboard grid.",
     industry: "Compliance & Standards-Driven Applications",
     liveUrl: "https://election-campaign-iota.vercel.app/",
     techStack: ["Next.js", "React", "TypeScript", "D3.js", "Data Visualization"],
@@ -695,6 +720,11 @@ export const projects: Project[] = [
     slug: "fluxion",
     name: "Fluxion",
     tagline: "BPMN workflows at Rust speed.",
+    impact: "Gave a Rust BPMN workflow engine an operator console for deployment, inspection, task action, and observability.",
+    role: "Developer-tool UX, embedded console design, workflow visualization, and operational surface architecture",
+    scope: "Dashboard, process deployment, BPMN modeler, graph inspection, task actions, metrics, and settings",
+    constraint: "The console had to explain a technical runtime without hiding the engine, API, or observability details.",
+    technicalBet: "An embedded operations UI would make a workflow engine easier to evaluate than API docs alone.",
     industry: "Developer Tools / Workflow Engines",
     liveUrl: "https://fluxion-landing-gules.vercel.app/",
     techStack: ["Rust", "Axum", "PostgreSQL", "BPMN 2.0", "Prometheus", "OpenTelemetry"],
@@ -792,6 +822,11 @@ export const projects: Project[] = [
     slug: "rainmatter-air",
     name: "Rainmatter Air",
     tagline: "Know the air you're breathing.",
+    impact: "Moved live air-quality context into the browser toolbar and current page without accounts, analytics, or remote key storage.",
+    role: "Chrome extension architecture, privacy model, AQI calculation, popup UI, and browser smoke testing",
+    scope: "Popup dashboard, settings, background refresh, API normalization, CPCB AQI categories, and page overlay",
+    constraint: "The extension needed useful live data while keeping credentials local and working gracefully offline.",
+    technicalBet: "A small Manifest V3 extension could make AQI awareness more habitual than another standalone dashboard.",
     industry: "Consumer / Environmental Tech",
     liveUrl: "https://rainmatter-air-landing.vercel.app/",
     githubUrl: "https://github.com/1n4NO/rainmatter-air-extension",

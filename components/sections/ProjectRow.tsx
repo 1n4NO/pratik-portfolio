@@ -23,9 +23,26 @@ export function ProjectRow({ project, reversed }: { project: Project; reversed?:
             {project.name}
           </h3>
           <p className="text-ink-soft text-base mb-4">{project.tagline}</p>
+          <p className="mb-5 max-w-md border-l-2 border-signal pl-4 text-sm font-medium leading-relaxed text-ink">
+            {project.impact}
+          </p>
           <p className="text-sm text-ink-soft leading-relaxed mb-5 max-w-md">
             {project.overview}
           </p>
+          <dl className="mb-6 grid max-w-md grid-cols-1 gap-3 border-y border-line py-4 text-sm sm:grid-cols-2">
+            <div>
+              <dt className="mb-1 font-mono text-[10px] uppercase tracking-widest text-ink-soft/70">
+                Role
+              </dt>
+              <dd className="text-ink-soft leading-snug">{project.role}</dd>
+            </div>
+            <div>
+              <dt className="mb-1 font-mono text-[10px] uppercase tracking-widest text-ink-soft/70">
+                Technical bet
+              </dt>
+              <dd className="text-ink-soft leading-snug">{project.technicalBet}</dd>
+            </div>
+          </dl>
           <div className="flex flex-wrap gap-2 mb-6">
             {project.techStack.slice(0, 4).map((tech) => (
               <Tag key={tech}>{tech}</Tag>
