@@ -1,4 +1,5 @@
 import { ArrowRight, Mail, MessageCircle, Radio, Sparkles } from "lucide-react";
+import { HeroBackdrop } from "@/components/sections/HeroBackdrop";
 import { Container } from "@/components/ui/Container";
 import { LinkButton } from "@/components/ui/Button";
 import { profile } from "@/data/profile";
@@ -8,15 +9,8 @@ const cues = ["Messy brief?", "Scaling pinch?", "AI workflow?", "Design system d
 export function ContactCTA() {
   return (
     <section className="relative overflow-hidden bg-[#05080D] text-[#F7F8FA]">
-      <div
-        className="absolute inset-0 opacity-35"
-        aria-hidden="true"
-        style={{
-          backgroundImage:
-            "linear-gradient(rgb(255 255 255 / 0.08) 1px, transparent 1px), linear-gradient(90deg, rgb(255 255 255 / 0.08) 1px, transparent 1px)",
-          backgroundSize: "30px 30px",
-        }}
-      />
+      <HeroBackdrop stableDarkGrid />
+      <div className="absolute inset-0 bg-[#05080D]/72" aria-hidden="true" />
       <Container className="relative py-16 md:py-20">
         <div className="grid gap-8 md:grid-cols-[1.1fr_0.9fr] md:items-center">
           <div>

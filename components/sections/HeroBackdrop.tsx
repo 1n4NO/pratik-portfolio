@@ -12,7 +12,7 @@ type Particle = {
   opacity: number;
 };
 
-export function HeroBackdrop() {
+export function HeroBackdrop({ stableDarkGrid = false }: { stableDarkGrid?: boolean }) {
   const [time, setTime] = useState(0);
   const reduceMotion = useReducedMotion();
   const particles = useMemo(() => createParticles(), []);
@@ -36,8 +36,19 @@ export function HeroBackdrop() {
 
   return (
     <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
-      <div className="absolute inset-0 grid-backdrop opacity-45" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_28%,rgb(var(--color-signal)_/_0.16),transparent_32%),radial-gradient(circle_at_18%_62%,rgb(var(--color-amber)_/_0.12),transparent_28%)]" />
+      <div
+        className={`absolute inset-0 ${stableDarkGrid ? "opacity-35" : "grid-backdrop opacity-45"}`}
+        style={
+          stableDarkGrid
+            ? {
+                backgroundImage:
+                  "linear-gradient(rgb(255 255 255 / 0.08) 1px, transparent 1px), linear-gradient(90deg, rgb(255 255 255 / 0.08) 1px, transparent 1px)",
+                backgroundSize: "32px 32px",
+              }
+            : undefined
+        }
+      />
+      <div className="hero-aurora absolute -inset-[18%]" />
       {particles.map((particle) => {
         const drift = reduceMotion ? 0 : Math.sin(time * 0.9 + particle.drift) * 14;
 

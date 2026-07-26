@@ -65,6 +65,24 @@ body {
   background-size: 32px 32px;
 }
 
+.hero-aurora {
+  background:
+    radial-gradient(circle at 72% 28%, rgb(var(--color-signal) / 0.2), transparent 30%),
+    radial-gradient(circle at 18% 62%, rgb(var(--color-amber) / 0.14), transparent 28%),
+    linear-gradient(
+      115deg,
+      transparent 12%,
+      rgb(var(--color-signal) / 0.11) 34%,
+      transparent 52%,
+      rgb(var(--color-amber) / 0.1) 72%,
+      transparent 88%
+    );
+  filter: blur(18px);
+  opacity: 0.9;
+  transform: translate3d(-2%, -1%, 0) rotate(-4deg) scale(1.04);
+  animation: hero-aurora-drift 18s ease-in-out infinite alternate;
+}
+
 .focus-ring:focus-visible {
   outline: 2px solid rgb(var(--color-signal));
   outline-offset: 2px;
@@ -170,6 +188,18 @@ html[data-case-study-mode="engineer"]
   }
   100% {
     transform: translateY(0);
+  }
+}
+
+@keyframes hero-aurora-drift {
+  0% {
+    transform: translate3d(-4%, -2%, 0) rotate(-5deg) scale(1.04);
+  }
+  45% {
+    transform: translate3d(3%, 2%, 0) rotate(3deg) scale(1.1);
+  }
+  100% {
+    transform: translate3d(-1%, 5%, 0) rotate(-2deg) scale(1.07);
   }
 }
 
