@@ -229,7 +229,7 @@ function RelatedProjects({
 }) {
   return (
     <motion.div
-      className="absolute inset-x-3 top-[300px] md:top-[275px]"
+      className="absolute inset-x-3 top-[380px] md:top-[275px]"
       initial={reduceMotion ? false : { opacity: 0, y: 8 }}
       animate={reduceMotion ? undefined : { opacity: 1, y: 0 }}
       transition={{ duration: motionTimings.base, ease: motionEase.soft }}

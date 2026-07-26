@@ -4,7 +4,7 @@
 export const profile = {
   name: "Pratik Singh",
   role: "Frontend Architect",
-  tagline: "Systems that ship fast, scale clean, and hold up under real traffic.",
+  tagline: "Building systems that ship fast, scale clean, and hold up under real traffic.",
   location: "Bangalore, India",
   email: "pratiksk@outlook.com",
   phone: "+91 99864 25864",
@@ -23,7 +23,7 @@ export const profile = {
     { label: "Experience", value: "12+ yrs" },
     { label: "Focus", value: "Frontend Architecture" },
     { label: "Based", value: "Bangalore, IN" },
-    { label: "Currently", value: "Open to new roles" },
+    { label: "Currently", value: "Exploring Staff / Senior Frontend Architect roles" },
   ],
 };
 
