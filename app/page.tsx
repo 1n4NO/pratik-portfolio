@@ -14,6 +14,9 @@ export const metadata: Metadata = {
     description: siteConfig.description,
     path: "/",
   }),
+  verification: {
+    google: "V3Ju8VXyJ5J5dbzwoeSk2MYeSGvsjEsk0W3lIUV5qr0",
+  },
 };
 
 export default function HomePage() {
