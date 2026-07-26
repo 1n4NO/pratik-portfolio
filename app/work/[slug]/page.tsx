@@ -24,7 +24,7 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
     title: project.name,
     description: project.overview,
     path: `/work/${project.slug}`,
-    image: project.cover.src,
+    image: `/work/${project.slug}/opengraph-image`,
   });
 }
 
