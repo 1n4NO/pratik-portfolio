@@ -5,6 +5,7 @@ import { ArrowUpRight } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { ContactCTA } from "@/components/layout/ContactCTA";
 import { projects } from "@/data/projects";
+import { absoluteUrl, createMetadata, jsonLd } from "@/lib/seo";
 
 // Three.js scene — client-only, so it's loaded via next/dynamic with ssr disabled.
 const WorkConstellation = dynamic(
@@ -17,14 +18,41 @@ const WorkConstellation = dynamic(
   }
 );
 
+const description =
+  "Selected frontend architecture, AI product engineering, workflow systems, design tooling, and data visualization case studies by Pratik Singh.";
+
 export const metadata: Metadata = {
-  title: "Work",
-  description: "Selected frontend architecture and product work.",
+  ...createMetadata({
+    title: "Work",
+    description,
+    path: "/work",
+  }),
 };
 
 export default function WorkPage() {
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: "Work",
+    description,
+    url: absoluteUrl("/work"),
+    mainEntity: {
+      "@type": "ItemList",
+      itemListElement: projects.map((project, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        name: project.name,
+        url: absoluteUrl(`/work/${project.slug}`),
+      })),
+    },
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={jsonLd(structuredData)}
+      />
       <Container className="pt-16 pb-6">
         <p className="font-mono text-[11px] tracking-widest uppercase text-signal mb-4">Work</p>
         <h1 className="font-display text-4xl md:text-5xl font-bold max-w-xl">

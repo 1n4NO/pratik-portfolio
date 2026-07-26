@@ -4,17 +4,42 @@ import { LottieAnimation } from "@/components/ui/LottieAnimation";
 import { MusingsFeed } from "@/components/sections/MusingsFeed";
 import { ContactCTA } from "@/components/layout/ContactCTA";
 import { posts } from "@/data/posts";
+import { absoluteUrl, createMetadata, jsonLd } from "@/lib/seo";
+
+const description =
+  "Notes from Pratik Singh on frontend architecture, rendering strategy, performance budgets, design systems, and AI-assisted engineering.";
 
 export const metadata: Metadata = {
-  title: "Musings",
-  description: "Notes on frontend architecture, performance, and AI-assisted engineering.",
+  ...createMetadata({
+    title: "Musings",
+    description,
+    path: "/musings",
+  }),
 };
 
 export default function MusingsPage() {
   const sorted = [...posts].sort((a, b) => (a.date < b.date ? 1 : -1));
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    name: "Musings",
+    description,
+    url: absoluteUrl("/musings"),
+    blogPost: sorted.map((post) => ({
+      "@type": "BlogPosting",
+      headline: post.title,
+      description: post.excerpt,
+      datePublished: post.date,
+      url: absoluteUrl(`/musings/${post.slug}`),
+    })),
+  };
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={jsonLd(structuredData)}
+      />
       <Container className="pt-16 pb-20">
         <MusingsFeed
           posts={sorted}

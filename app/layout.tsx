@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import { Space_Grotesk, IBM_Plex_Sans, JetBrains_Mono } from "next/font/google";
+// @ts-ignore: CSS module declarations may be missing for side-effect import
 import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { FloatingContact } from "@/components/layout/FloatingContact";
-import { profile } from "@/data/profile";
+import { createMetadata, siteConfig } from "@/lib/seo";
+import { Analytics } from "@vercel/analytics/next"
 
 const display = Space_Grotesk({
   subsets: ["latin"],
@@ -25,13 +27,21 @@ const mono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: `${profile.name} — ${profile.role}`,
-  description: profile.short,
-  metadataBase: new URL("https://example.com"),
-  openGraph: {
-    title: `${profile.name} — ${profile.role}`,
-    description: profile.short,
-    type: "website",
+  ...createMetadata(),
+  metadataBase: new URL(siteConfig.url),
+  applicationName: siteConfig.name,
+  creator: "Pratik Singh",
+  publisher: "Pratik Singh",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
   },
 };
 

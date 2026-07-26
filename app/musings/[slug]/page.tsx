@@ -6,6 +6,7 @@ import { Container } from "@/components/ui/Container";
 import { PostBody } from "@/components/sections/PostBody";
 import { ContactCTA } from "@/components/layout/ContactCTA";
 import { posts, getPostBySlug } from "@/data/posts";
+import { absoluteUrl, createMetadata, jsonLd, siteConfig } from "@/lib/seo";
 
 export function generateStaticParams() {
   return posts.map((p) => ({ slug: p.slug }));
@@ -14,15 +15,77 @@ export function generateStaticParams() {
 export function generateMetadata({ params }: { params: { slug: string } }): Metadata {
   const post = getPostBySlug(params.slug);
   if (!post) return {};
-  return { title: post.title, description: post.excerpt };
+  return createMetadata({
+    title: post.title,
+    description: post.excerpt,
+    path: `/musings/${post.slug}`,
+    type: "article",
+  });
 }
 
 export default function PostPage({ params }: { params: { slug: string } }) {
   const post = getPostBySlug(params.slug);
   if (!post) notFound();
 
+  const postUrl = absoluteUrl(`/musings/${post.slug}`);
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        "@id": `${postUrl}#breadcrumb`,
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: "Home",
+            item: siteConfig.url,
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "Musings",
+            item: absoluteUrl("/musings"),
+          },
+          {
+            "@type": "ListItem",
+            position: 3,
+            name: post.title,
+            item: postUrl,
+          },
+        ],
+      },
+      {
+        "@type": "BlogPosting",
+        "@id": `${postUrl}#article`,
+        headline: post.title,
+        description: post.excerpt,
+        url: postUrl,
+        datePublished: post.date,
+        dateModified: post.date,
+        inLanguage: "en",
+        keywords: post.tag,
+        author: {
+          "@type": "Person",
+          name: "Pratik Singh",
+          url: siteConfig.url,
+        },
+        publisher: {
+          "@type": "Person",
+          name: "Pratik Singh",
+          url: siteConfig.url,
+        },
+        mainEntityOfPage: postUrl,
+      },
+    ],
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={jsonLd(structuredData)}
+      />
       <Container className="pt-10 pb-4">
         <Link
           href="/musings"

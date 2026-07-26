@@ -4,10 +4,15 @@ import { Container } from "@/components/ui/Container";
 import { LinkButton } from "@/components/ui/Button";
 import { ContactCTA } from "@/components/layout/ContactCTA";
 import { skillGroups, industries, profile } from "@/data/profile";
+import { createMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: "Expertise",
-  description: "Strengths, skills, and industry focus.",
+  ...createMetadata({
+    title: "Expertise",
+    description:
+      "Frontend architecture, React, Next.js, TypeScript, design systems, AI integration, data visualization, security, and engineering leadership expertise.",
+    path: "/expertise",
+  }),
 };
 
 export default function ExpertisePage() {

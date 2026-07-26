@@ -3,10 +3,15 @@ import { Container } from "@/components/ui/Container";
 import { LottieAnimation } from "@/components/ui/LottieAnimation";
 import { ContactForm } from "@/components/sections/ContactForm";
 import { profile } from "@/data/profile";
+import { createMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: "Contact",
-  description: "Get in touch.",
+  ...createMetadata({
+    title: "Contact",
+    description:
+      "Contact Pratik Singh for frontend architecture, AI-native product interfaces, design systems, and engineering leadership roles.",
+    path: "/contact",
+  }),
 };
 
 export default function ContactPage() {

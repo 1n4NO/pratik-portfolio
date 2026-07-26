@@ -9,6 +9,7 @@ import { ScreenshotStream } from "@/components/sections/ScreenshotStream";
 import { DetailedProcess } from "@/components/sections/DetailedProcess";
 import { ContactCTA } from "@/components/layout/ContactCTA";
 import { projects, getProjectBySlug } from "@/data/projects";
+import { absoluteUrl, createMetadata, jsonLd, siteConfig } from "@/lib/seo";
 
 export function generateStaticParams() {
   return projects.map((p) => ({ slug: p.slug }));
@@ -17,7 +18,12 @@ export function generateStaticParams() {
 export function generateMetadata({ params }: { params: { slug: string } }): Metadata {
   const project = getProjectBySlug(params.slug);
   if (!project) return {};
-  return { title: project.name, description: project.overview };
+  return createMetadata({
+    title: project.name,
+    description: project.overview,
+    path: `/work/${project.slug}`,
+    image: project.cover.src,
+  });
 }
 
 const sections: { key: "overview" | "problem" | "approach" | "solution"; label: string }[] = [
@@ -31,8 +37,73 @@ export default function ProjectDetailPage({ params }: { params: { slug: string }
   const project = getProjectBySlug(params.slug);
   if (!project) notFound();
 
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        "@id": `${absoluteUrl(`/work/${project.slug}`)}#breadcrumb`,
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: "Home",
+            item: siteConfig.url,
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "Work",
+            item: absoluteUrl("/work"),
+          },
+          {
+            "@type": "ListItem",
+            position: 3,
+            name: project.name,
+            item: absoluteUrl(`/work/${project.slug}`),
+          },
+        ],
+      },
+      {
+        "@type": "CreativeWork",
+        "@id": `${absoluteUrl(`/work/${project.slug}`)}#creative-work`,
+        name: project.name,
+        headline: project.tagline,
+        description: project.overview,
+        url: absoluteUrl(`/work/${project.slug}`),
+        image: absoluteUrl(project.cover.src),
+        creator: {
+          "@type": "Person",
+          name: "Pratik Singh",
+          url: siteConfig.url,
+        },
+        about: project.industry,
+        keywords: [...project.techStack, ...(project.externalSystems ?? [])].join(", "),
+        workExample: project.liveUrl,
+      },
+      {
+        "@type": "SoftwareApplication",
+        "@id": `${absoluteUrl(`/work/${project.slug}`)}#software`,
+        name: project.name,
+        applicationCategory: project.industry,
+        description: project.solution,
+        url: project.liveUrl,
+        operatingSystem: "Web",
+        creator: {
+          "@type": "Person",
+          name: "Pratik Singh",
+          url: siteConfig.url,
+        },
+      },
+    ],
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={jsonLd(structuredData)}
+      />
       <Container className="pt-10 pb-4">
         <Link
           href="/work"

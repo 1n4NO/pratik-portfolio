@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { HeroMarquee } from "@/components/sections/HeroMarquee";
 import { SpecSheet } from "@/components/sections/SpecSheet";
 import { ProjectRow } from "@/components/sections/ProjectRow";
@@ -6,10 +7,80 @@ import { ContactCTA } from "@/components/layout/ContactCTA";
 import { Container } from "@/components/ui/Container";
 import { projects } from "@/data/projects";
 import { profile } from "@/data/profile";
+import { absoluteUrl, createMetadata, jsonLd, siteConfig } from "@/lib/seo";
+
+export const metadata: Metadata = {
+  ...createMetadata({
+    description: siteConfig.description,
+    path: "/",
+  }),
+};
 
 export default function HomePage() {
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": `${siteConfig.url}/#website`,
+        name: siteConfig.name,
+        url: siteConfig.url,
+        description: siteConfig.description,
+        inLanguage: "en",
+      },
+      {
+        "@type": "Person",
+        "@id": `${siteConfig.url}/#person`,
+        name: profile.name,
+        jobTitle: profile.role,
+        description: profile.short,
+        url: siteConfig.url,
+        email: `mailto:${profile.email}`,
+        telephone: profile.phone,
+        address: {
+          "@type": "PostalAddress",
+          addressLocality: "Bangalore",
+          addressCountry: "IN",
+        },
+        sameAs: [profile.linkedin, profile.github],
+        knowsAbout: [
+          "Frontend architecture",
+          "React",
+          "Next.js",
+          "TypeScript",
+          "Design systems",
+          "AI-native interfaces",
+          "Data visualization",
+        ],
+      },
+      {
+        "@type": "ProfilePage",
+        "@id": `${siteConfig.url}/#profile`,
+        url: siteConfig.url,
+        name: siteConfig.title,
+        about: { "@id": `${siteConfig.url}/#person` },
+        mainEntity: { "@id": `${siteConfig.url}/#person` },
+      },
+      {
+        "@type": "ItemList",
+        "@id": `${siteConfig.url}/#selected-work`,
+        name: "Selected work",
+        itemListElement: projects.map((project, index) => ({
+          "@type": "ListItem",
+          position: index + 1,
+          url: absoluteUrl(`/work/${project.slug}`),
+          name: project.name,
+        })),
+      },
+    ],
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={jsonLd(structuredData)}
+      />
       <section className="pt-14 md:pt-20 grid-backdrop">
         <Container>
           <p className="font-mono text-[11px] tracking-widest uppercase text-signal mb-4">
