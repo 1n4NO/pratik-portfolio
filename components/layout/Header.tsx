@@ -20,7 +20,7 @@ export function Header() {
         <div className="flex items-center gap-4 md:gap-8">
           <HeaderNav />
           <a
-            href={`mailto:${profile.email}?subject=Portfolio%20conversation`}
+            href={`mailto:${profile.email}?subject=Portfolio%20conversation%20from%20your%20website`}
             className="hidden h-9 w-9 items-center justify-center rounded border border-line text-ink-soft transition-colors hover:border-line-strong hover:text-ink focus-ring md:inline-flex"
             aria-label="Email Pratik"
           >
