@@ -30,7 +30,7 @@ export default function HomePage() {
     "AI workflows",
     "Design systems",
   ];
-  const featuredProjects = projects.slice(0, 3);
+  const featuredProjects = projects.filter((p) => p.featured);
 
   const structuredData = {
     "@context": "https://schema.org",

@@ -817,6 +817,7 @@ export const projects: Project[] = [
       "BPMN modeler, process graph, task actions, and message correlation in one operator surface",
       "Prometheus metrics and OpenTelemetry tracing represented in the product workflow",
     ],
+    featured: true,
   },
   {
     slug: "rainmatter-air",
