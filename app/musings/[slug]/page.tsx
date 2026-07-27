@@ -10,6 +10,7 @@ import { ContactCTA } from "@/components/layout/ContactCTA";
 import { posts, getPostBySlug, getAdjacentPosts } from "@/data/posts";
 import { absoluteUrl, createMetadata, jsonLd, siteConfig } from "@/lib/seo";
 import { tagColorStyle } from "@/lib/tags";
+import { getMusingsBackground } from "@/lib/musingsBackground";
 
 export function generateStaticParams() {
   return posts.map((p) => ({ slug: p.slug }));
@@ -84,6 +85,8 @@ export default function PostPage({ params }: { params: { slug: string } }) {
     ],
   };
 
+  const backgroundSrc = getMusingsBackground(post.slug);
+
   return (
     <>
       <script
@@ -101,37 +104,48 @@ export default function PostPage({ params }: { params: { slug: string } }) {
         </Link>
       </Container>
 
-      <Container className="pb-16">
-        <div className="relative pl-5 mb-8">
-          <span
-            className="absolute inset-y-1 left-0 w-1"
-            style={{ backgroundColor: tagColorStyle(post.tag, 0.7) }}
-            aria-hidden="true"
-          />
-          <div className="flex items-center gap-3 mb-4">
-            {post.tag && (
-              <span
-                className="font-mono text-[10px] uppercase tracking-wide px-2 py-0.5 rounded"
-                style={{
-                  color: tagColorStyle(post.tag),
-                  backgroundColor: tagColorStyle(post.tag, 0.14),
-                }}
-              >
-                {post.tag}
-              </span>
-            )}
-            <time className="font-mono text-[11px] text-ink-soft/60" dateTime={post.date}>
-              {new Date(post.date).toLocaleDateString("en-US", {
-                month: "short",
-                day: "numeric",
-                year: "numeric",
-              })}
-            </time>
+      <section className="relative overflow-hidden border-b border-line">
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: `url(${backgroundSrc})` }}
+          aria-hidden="true"
+        />
+        <div
+          className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/45 to-black/20"
+          aria-hidden="true"
+        />
+        <Container className="relative flex min-h-[300px] md:min-h-[380px] flex-col justify-end pb-10 pt-24">
+          <div className="relative pl-5">
+            <span
+              className="absolute inset-y-1 left-0 w-1"
+              style={{ backgroundColor: tagColorStyle(post.tag, 0.9) }}
+              aria-hidden="true"
+            />
+            <div className="flex items-center gap-3 mb-4">
+              {post.tag && (
+                <span
+                  className="font-mono text-[10px] uppercase tracking-wide px-2.5 py-1 rounded text-white"
+                  style={{ backgroundColor: tagColorStyle(post.tag, 0.55) }}
+                >
+                  {post.tag}
+                </span>
+              )}
+              <time className="font-mono text-[11px] text-white/70" dateTime={post.date}>
+                {new Date(post.date).toLocaleDateString("en-US", {
+                  month: "short",
+                  day: "numeric",
+                  year: "numeric",
+                })}
+              </time>
+            </div>
+            <h1 className="font-display text-3xl md:text-5xl font-semibold max-w-2xl text-white">
+              {post.title}
+            </h1>
           </div>
-          <h1 className="font-display text-3xl md:text-4xl font-semibold max-w-2xl">
-            {post.title}
-          </h1>
-        </div>
+        </Container>
+      </section>
+
+      <Container className="pt-12 pb-16">
         <PostBody content={post.content} />
       </Container>
 
