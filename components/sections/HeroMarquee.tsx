@@ -1,5 +1,5 @@
-import { projects } from "@/data/projects";
 import type { Screenshot } from "@/data/projects";
+import { homeCarouselItems } from "@/data/homeCarousel";
 import { BrowserFrame } from "@/components/ui/BrowserFrame";
 
 export function HeroMarquee() {
@@ -25,12 +25,7 @@ export function HeroMarquee() {
 }
 
 function getAlternatingHeroMedia() {
-  const media = uniqueBySrc(projects.flatMap((project) =>
-    [project.cover, ...project.screenshots].map((screenshot, index) => ({
-      ...screenshot,
-      id: `${project.slug}-hero-${index}`,
-    }))
-  ));
+  const media = uniqueBySrc(homeCarouselItems);
 
   return alternateMedia(media);
 }
@@ -45,10 +40,10 @@ function alternateMedia<T extends Screenshot & { id: string }>(items: T[]) {
   const pairs = Math.min(animated.length, statics.length);
 
   for (let index = 0; index < pairs; index += 1) {
-    result.push(animated[index], statics[index]);
+    result.push(statics[index], animated[index]);
   }
 
-  return result.concat(animated.slice(pairs), statics.slice(pairs));
+  return result.concat(statics.slice(pairs), animated.slice(pairs));
 }
 
 function isAnimatedMedia(item: Screenshot) {
