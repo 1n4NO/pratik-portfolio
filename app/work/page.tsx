@@ -4,6 +4,8 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { PageIntro } from "@/components/ui/PageIntro";
+import { EditorialSplit } from "@/components/ui/EditorialSplit";
+import { MetaStack } from "@/components/ui/MetaStack";
 import { ContactCTA } from "@/components/layout/ContactCTA";
 import { OperatingPrinciples } from "@/components/sections/OperatingPrinciples";
 import { projects } from "@/data/projects";
@@ -32,6 +34,14 @@ export const metadata: Metadata = {
 };
 
 export default function WorkPage() {
+  const industryCount = new Set(projects.map((p) => p.industry)).size;
+  const openSourceCount = projects.filter((p) => p.githubUrl).length;
+  const workStats = [
+    { label: "Case studies", value: String(projects.length) },
+    { label: "Industries", value: String(industryCount) },
+    { label: "Open source", value: String(openSourceCount) },
+  ];
+
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
@@ -55,15 +65,20 @@ export default function WorkPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={jsonLd(structuredData)}
       />
-      <section className="relative flex min-h-[572px] items-center overflow-hidden border-b border-line bg-surface">
+      <section className="relative overflow-hidden border-b border-line">
         <div className="pointer-events-none absolute inset-0 grid-backdrop" aria-hidden="true" />
-        <Container className="relative py-10 md:py-14">
-          <PageIntro eyebrow="Work" title="Products shipped, systems architected.">
-            <p>
-              Explore the overlap between AI workflows, frontend architecture, data interfaces, and
-              product systems before jumping into the detailed case studies.
-            </p>
-          </PageIntro>
+        <Container className="relative py-16 md:py-20">
+          <EditorialSplit
+            primary={
+              <PageIntro eyebrow="Work" title="Products shipped, systems architected." align="stack">
+                <p>
+                  Explore the overlap between AI workflows, frontend architecture, data interfaces, and
+                  product systems before jumping into the detailed case studies.
+                </p>
+              </PageIntro>
+            }
+            secondary={<MetaStack items={workStats} />}
+          />
         </Container>
       </section>
 

@@ -4,6 +4,9 @@ import Link from "next/link";
 import { ArrowLeft, ArrowUpRight, Check } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { Tag } from "@/components/ui/Tag";
+import { EditorialSplit } from "@/components/ui/EditorialSplit";
+import { EditorialRule } from "@/components/ui/EditorialRule";
+import { MetaStack } from "@/components/ui/MetaStack";
 import { ScreenshotStream } from "@/components/sections/ScreenshotStream";
 import { ScreenshotGallery } from "@/components/sections/ScreenshotGallery";
 import { DetailedProcess } from "@/components/sections/DetailedProcess";
@@ -53,6 +56,11 @@ export default function ProjectDetailPage({ params }: { params: { slug: string }
   const project = getProjectBySlug(params.slug);
   if (!project) notFound();
   const { previous, next } = getAdjacentProjects(project.slug);
+  const quickFacts = [
+    { label: "Industry", value: project.industry },
+    { label: "Tech stack", value: `${project.techStack.length} tools` },
+    { label: "Screens", value: `${project.screenshots.length} shown` },
+  ];
 
   const structuredData = {
     "@context": "https://schema.org",
@@ -133,41 +141,49 @@ export default function ProjectDetailPage({ params }: { params: { slug: string }
       </Container>
 
       <Container className="pb-10">
-        <Tag variant="amber">{project.industry}</Tag>
-        <h1 className="font-display text-3xl md:text-5xl font-bold mt-4 mb-3 max-w-2xl">
-          {project.name}
-        </h1>
-        <p className="text-ink-soft text-lg max-w-xl mb-6">{project.tagline}</p>
-        <div className="flex flex-wrap gap-2 mb-6">
-          {project.techStack.map((tech) => (
-            <Tag key={tech}>{tech}</Tag>
-          ))}
-        </div>
-        <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
-          <div className="flex gap-4">
-            <a
-              href={project.liveUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 font-mono text-[12px] text-signal hover:text-signal-dark focus-ring rounded"
-            >
-              Visit live site
-              <ArrowUpRight size={14} className="icon-amber" aria-hidden="true" />
-            </a>
-            {project.githubUrl && (
-              <a
-                href={project.githubUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 font-mono text-[12px] text-ink-soft hover:text-ink focus-ring rounded"
-              >
-                View source
-                <ArrowUpRight size={14} className="icon-amber" aria-hidden="true" />
-              </a>
-            )}
-          </div>
-          <ReadingModeToggle />
-        </div>
+        <EditorialSplit
+          primary={
+            <div>
+              <Tag variant="amber">{project.industry}</Tag>
+              <h1 className="font-display text-3xl md:text-5xl font-semibold mt-4 mb-3 max-w-2xl">
+                {project.name}
+              </h1>
+              <p className="text-ink-soft text-lg max-w-xl mb-5">{project.tagline}</p>
+              <EditorialRule className="mb-6" />
+              <div className="flex flex-wrap gap-2 mb-6">
+                {project.techStack.map((tech) => (
+                  <Tag key={tech}>{tech}</Tag>
+                ))}
+              </div>
+              <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
+                <div className="flex gap-4">
+                  <a
+                    href={project.liveUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 font-mono text-[12px] text-signal hover:text-signal-dark focus-ring rounded"
+                  >
+                    Visit live site
+                    <ArrowUpRight size={14} className="icon-amber" aria-hidden="true" />
+                  </a>
+                  {project.githubUrl && (
+                    <a
+                      href={project.githubUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 font-mono text-[12px] text-ink-soft hover:text-ink focus-ring rounded"
+                    >
+                      View source
+                      <ArrowUpRight size={14} className="icon-amber" aria-hidden="true" />
+                    </a>
+                  )}
+                </div>
+                <ReadingModeToggle />
+              </div>
+            </div>
+          }
+          secondary={<MetaStack items={quickFacts} />}
+        />
       </Container>
 
       <Container className="pb-16">

@@ -6,6 +6,8 @@ import { HeroMarquee } from "@/components/sections/HeroMarquee";
 import { SpecSheet } from "@/components/sections/SpecSheet";
 import { ProjectRow } from "@/components/sections/ProjectRow";
 import { RulerDivider } from "@/components/ui/RulerDivider";
+import { EditorialSplit } from "@/components/ui/EditorialSplit";
+import { EditorialRule } from "@/components/ui/EditorialRule";
 import { ContactCTA } from "@/components/layout/ContactCTA";
 import { Container } from "@/components/ui/Container";
 import { projects } from "@/data/projects";
@@ -103,9 +105,10 @@ export default function HomePage() {
             <p className="font-mono text-[11px] tracking-widest uppercase text-signal mb-4">
               {profile.name} — {profile.role} — {profile.yearsExperience} yrs
             </p>
-            <h1 className="font-display text-4xl md:text-6xl font-bold leading-[1.1] max-w-3xl mb-6">
+            <h1 className="font-display text-4xl md:text-6xl font-semibold leading-[1.1] max-w-3xl mb-6">
               {profile.tagline}
             </h1>
+            <EditorialRule className="mb-6" />
             <p className="text-ink-soft max-w-md mb-10">{profile.short}</p>
             <div className="mb-10 flex flex-col gap-3 sm:flex-row">
               <Link
@@ -141,46 +144,34 @@ export default function HomePage() {
         </div>
       </div>
 
-      <section className="border-y border-line bg-surface">
-        <Container className="py-14 md:py-16 flex flex-col md:flex-row gap-10 md:gap-16">
-          <div className="flex flex-1 gap-5">
-            <div className="hidden shrink-0 flex-col items-center gap-3 md:flex" aria-hidden="true">
-              <span className="font-mono text-[10px] uppercase tracking-widest text-signal [writing-mode:vertical-rl]">
-                Profile / System context
-              </span>
-              <span className="h-full w-px bg-line" />
-              <span className="font-mono text-[10px] text-ink-soft/50">01</span>
-            </div>
-            <div className="space-y-4">
-              <p className="font-mono text-[10px] uppercase tracking-widest text-signal md:hidden">
-                Profile / System context
-              </p>
-              {profile.long.map((para, i) => (
-                <p key={i} className="text-ink-soft leading-relaxed">
-                  {para}
+      <section className="border-t border-line">
+        <Container className="py-16 md:py-20">
+          <EditorialSplit
+            primary={
+              <div className="space-y-4">
+                <p className="font-mono text-[10px] uppercase tracking-widest text-signal mb-2">
+                  Profile
                 </p>
-              ))}
-            </div>
-          </div>
-          <SpecSheet />
+                {profile.long.map((para, i) => (
+                  <p key={i} className="text-ink-soft leading-relaxed">
+                    {para}
+                  </p>
+                ))}
+              </div>
+            }
+            secondary={<SpecSheet />}
+          />
         </Container>
       </section>
 
       <section id="work" aria-labelledby="work-heading">
         <Container className="pt-14 md:pt-20">
-          <h2 id="work-heading" className="font-mono text-[11px] tracking-widest uppercase text-ink-soft">
+          <h2 id="work-heading" className="font-mono text-[11px] tracking-widest uppercase text-ink-soft mb-4">
             Selected work
           </h2>
-          <div className="mt-5 flex flex-wrap gap-x-4 gap-y-2 border-y border-line py-4">
-            {qualitySignals.map((signal) => (
-              <span
-                key={signal}
-                className="font-mono text-[11px] uppercase tracking-widest text-ink-soft"
-              >
-                {signal}
-              </span>
-            ))}
-          </div>
+          <p className="max-w-2xl font-mono text-[11px] uppercase tracking-wide text-ink-soft/60 border-t border-line pt-4">
+            {qualitySignals.join("   ·   ")}
+          </p>
         </Container>
 
         {featuredProjects.map((project, i) => (

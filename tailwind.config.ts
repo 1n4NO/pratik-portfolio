@@ -4,9 +4,6 @@ const config: Config = {
   content: ["./app/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}", "./data/**/*.{ts,tsx}"],
   theme: {
     extend: {
-      borderWidth: {
-        DEFAULT: "2px",
-      },
       colors: {
         paper: "rgb(var(--color-paper) / <alpha-value>)",
         surface: "rgb(var(--color-surface) / <alpha-value>)",

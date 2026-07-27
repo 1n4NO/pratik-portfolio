@@ -1,47 +1,39 @@
-import type { Variants, Transition } from "framer-motion";
+import type { Variants } from "framer-motion";
 
 export const motionTimings = {
-  fast: 0.18,
-  base: 0.28,
-  slow: 0.44,
+  fast: 0.2,
+  base: 0.36,
+  slow: 0.62,
 };
 
+// Slower, unhurried easing — editorial pacing rather than a snappy,
+// physical bounce. Deceleration only, no overshoot.
 export const motionEase = {
   standard: [0.22, 1, 0.36, 1],
   soft: [0.16, 1, 0.3, 1],
 } as const;
 
-// Physical, spring-driven transitions — real mass/stiffness/damping instead of
-// an eased tween, for a tactile feel rather than a smoothed-out glide.
-export const motionSpring: Transition = {
-  type: "spring",
-  stiffness: 420,
-  damping: 26,
-  mass: 0.9,
-};
-
-export const motionSpringSoft: Transition = {
-  type: "spring",
-  stiffness: 320,
-  damping: 30,
-  mass: 1,
-};
-
 export const pageTransition: Variants = {
-  initial: { opacity: 0, y: 14 },
+  initial: { opacity: 0, y: 8 },
   animate: {
     opacity: 1,
     y: 0,
-    transition: motionSpringSoft,
+    transition: {
+      duration: motionTimings.slow,
+      ease: motionEase.soft,
+    },
   },
 };
 
 export const sectionReveal: Variants = {
-  initial: { opacity: 0, y: 22 },
+  initial: { opacity: 0, y: 14 },
   animate: {
     opacity: 1,
     y: 0,
-    transition: motionSpringSoft,
+    transition: {
+      duration: motionTimings.slow,
+      ease: motionEase.soft,
+    },
   },
 };
 
@@ -51,8 +43,11 @@ export const mediaHover = {
     scale: 1,
   },
   hover: {
-    y: -5,
-    scale: 1.015,
-    transition: motionSpring,
+    y: -3,
+    scale: 1.008,
+    transition: {
+      duration: motionTimings.base,
+      ease: motionEase.standard,
+    },
   },
 };

@@ -128,7 +128,7 @@ export default function PostPage({ params }: { params: { slug: string } }) {
               })}
             </time>
           </div>
-          <h1 className="font-display text-3xl md:text-4xl font-bold max-w-2xl">
+          <h1 className="font-display text-3xl md:text-4xl font-semibold max-w-2xl">
             {post.title}
           </h1>
         </div>

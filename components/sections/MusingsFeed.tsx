@@ -82,7 +82,7 @@ export function MusingsFeed({
                 {formatDate(post.date)}
               </time>
             </div>
-            <h2 className="font-display text-2xl font-bold mb-3">
+            <h2 className="font-display text-2xl font-semibold mb-3">
               <Link href={`/musings/${post.slug}`} className="hover:text-signal focus-ring rounded">
                 {post.title}
               </Link>

@@ -50,12 +50,17 @@ export default function ExpertisePage() {
 
       <Container className="pt-16 pb-16">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-12">
-          {skillGroups.map((group) => (
+          {skillGroups.map((group, index) => (
             <div key={group.title} className="border-t border-line pt-5">
-              <h2 className="mb-1 flex items-center gap-2 font-display text-lg font-bold">
-                <ExpertiseTitleIcon title={group.title} />
-                {group.title}
-              </h2>
+              <div className="mb-1 flex items-center gap-2">
+                <span className="font-mono text-[10px] text-ink-soft/40">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <h2 className="flex items-center gap-2 font-display text-lg font-semibold">
+                  <ExpertiseTitleIcon title={group.title} />
+                  {group.title}
+                </h2>
+              </div>
               <p className="text-sm text-ink-soft mb-4">{group.blurb}</p>
               <SkillMeter group={group} maxYears={maxYearsActive} />
               <ul className="mt-4 flex flex-wrap gap-2">

@@ -34,7 +34,7 @@ export function PageIntro({
         <p className="mb-4 font-mono text-[11px] uppercase tracking-widest text-signal">
           {eyebrow}
         </p>
-        <h1 className={`max-w-xl font-display font-bold ${titleSize} ${titleClassName}`}>
+        <h1 className={`max-w-xl font-display font-semibold ${titleSize} ${titleClassName}`}>
           {title}
         </h1>
         {children && <div className="mt-4 max-w-md text-ink-soft">{children}</div>}

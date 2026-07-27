@@ -13,9 +13,9 @@ export function Header() {
       <Container className="flex items-center justify-between h-16 gap-6">
         <Link
           href="/"
-          className="font-mono text-sm font-medium tracking-tight focus-ring rounded"
+          className="font-display text-sm font-medium tracking-tight focus-ring rounded"
         >
-          [PS]
+          Pratik Singh
         </Link>
         <div className="flex items-center gap-4 md:gap-8">
           <HeaderNav />
