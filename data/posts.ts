@@ -8,9 +8,21 @@ export type Post = {
   excerpt: string;
   content: string;
   tag?: string;
+  background?: string; // optional: force a specific /public/projects/Musings/*.svg file instead of the automatic pick
 };
 
 export const posts: Post[] = [
+  {
+    slug: "decide-the-schema-before-the-ui",
+    title: "The one decision I make before writing a single line of UI",
+    date: "2026-07-24",
+    tag: "Architecture",
+    background: "stacked-waves-haikei.svg",
+    excerpt:
+      "Every project I've shipped in the last two years shares one habit: the data shape gets locked down before a single component does.",
+    content:
+      "Across six very different products \u2014 a multi-agent research assistant, a UX audit studio, a website builder, an election analytics dashboard, a workflow engine's docs site, a browser extension \u2014 the thing that made each one maintainable wasn't the framework or the styling. It was deciding, before any UI got built, exactly what shape the data would take, and refusing to let a component invent its own version of that shape.\n\nOrqestra is the clearest example: every section type \u2014 hero, FAQ, testimonials, CTA \u2014 has a fixed, editable schema rather than a freeform block, and that constraint is the only reason a single theme change can propagate correctly across every section at once. Product Studio does the same thing from the opposite direction: its audit engine is a fixed 38-check pass over real HTML, not an LLM improvising an opinion, because a deterministic schema for 'what counts as a finding' is what makes results reproducible run to run. Even this site works the same way \u2014 every project is one object in an array with a fixed shape, which is the entire reason adding a new case study is a five-minute edit instead of an afternoon spent hunting through components.\n\nThe instinct to skip this step is strong, especially early, because a schema feels like overhead when you don't have real data yet. But every time I've skipped it, the cost showed up later \u2014 either as a UI that couldn't be extended without a rewrite, or an inconsistency between two screens that were supposedly showing the same thing. Deciding the shape first isn't a documentation exercise. It's the actual architecture decision, and everything downstream \u2014 including which framework or rendering strategy makes sense \u2014 follows from it, not the other way around.",
+  },
   {
     slug: "picking-a-rendering-strategy-per-route",
     title: "Stop picking one rendering strategy for the whole app",
