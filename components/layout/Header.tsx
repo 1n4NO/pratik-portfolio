@@ -15,7 +15,7 @@ export function Header() {
           href="/"
           className="font-mono text-sm font-medium tracking-tight focus-ring rounded"
         >
-          [PS]
+          1n4NO
         </Link>
         <div className="flex items-center gap-4 md:gap-8">
           <HeaderNav />
