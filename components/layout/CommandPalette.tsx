@@ -197,7 +197,7 @@ export function CommandPalette() {
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className="command-palette-trigger inline-flex h-9 items-center gap-2 rounded border border-line bg-surface-muted px-2.5 font-mono text-[11px] text-ink-soft transition-colors hover:border-line-strong hover:text-ink focus-ring"
+        className="command-palette-trigger inline-flex h-9 w-full items-center justify-between gap-3 rounded border border-line bg-transparent px-3 font-mono text-[11px] text-ink-soft transition-colors hover:border-line-strong hover:text-ink focus-ring"
         aria-label="Open command palette"
       >
         <Search size={14} className="icon-amber" aria-hidden />

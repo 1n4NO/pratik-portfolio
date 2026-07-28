@@ -74,11 +74,11 @@ export default function WorkPage() {
         </Container>
       </section>
 
-      <Container className="pb-section-sm md:pb-section-md">
+      <Container>
         <SectionGrid
           aside={
-            <div>
-              <p className="mb-4 font-mono text-micro uppercase tracking-caps text-ink-soft/60">
+            <div className="space-y-5 rounded-lg border border-line bg-surface p-6 md:p-8">
+              <p className="font-mono text-micro uppercase tracking-caps text-signal">
                 Project system
               </p>
               <h2 className="font-display text-subsection font-medium tracking-display-tight">
@@ -93,11 +93,11 @@ export default function WorkPage() {
 
       {/* Real, always-rendered links: keyboard nav, screen readers, and SEO don't
           depend on the WebGL scene above. */}
-      <Container className="pb-24">
-        <h2 className="font-mono text-[11px] tracking-widest uppercase text-ink-soft mb-5">
+      <Container className="pb-10">
+        <h2 className="mb-3 font-mono text-[11px] uppercase tracking-widest text-ink-soft">
           All projects
         </h2>
-        <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-8 gap-y-3 border-t border-line pt-5">
+        <ul className="grid grid-cols-1 gap-x-8 gap-y-3 border-t border-line pt-4 sm:grid-cols-2 md:grid-cols-3">
           {projects.map((project) => (
             <li key={project.slug}>
               <Link
@@ -118,7 +118,7 @@ export default function WorkPage() {
 
       <OperatingPrinciples />
 
-      <ContactCTA />
+      <ContactCTA variant="compact" />
     </>
   );
 }

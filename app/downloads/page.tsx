@@ -57,7 +57,7 @@ export default function DownloadsPage() {
         </div>
       </Container>
 
-      <ContactCTA />
+      <ContactCTA variant="compact" />
     </>
   );
 }

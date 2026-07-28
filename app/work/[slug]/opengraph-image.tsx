@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { getProjectBySlug, projects } from "@/data/projects";
 import type { Screenshot } from "@/data/projects";
 import { absoluteUrl } from "@/lib/seo";
+import { themeTokens } from "@/lib/themeTokens";
 
 export const runtime = "edge";
 export const alt = "Project case study preview";
@@ -25,23 +26,22 @@ export default function ProjectOpenGraphImage({ params }: { params: { slug: stri
   return new ImageResponse(
     (
       <div
-        style={{
-          display: "flex",
-          height: "100%",
-          width: "100%",
-          background: "#05080d",
-          color: "#f7f8fa",
-          fontFamily: "Arial, Helvetica, sans-serif",
-          position: "relative",
-          overflow: "hidden",
+          style={{
+            display: "flex",
+            height: "100%",
+            width: "100%",
+            background: `rgb(${themeTokens.deepRgb})`,
+            color: `rgb(${themeTokens.onDeepRgb})`,
+            fontFamily: "Arial, Helvetica, sans-serif",
+            position: "relative",
+            overflow: "hidden",
         }}
       >
         <div
           style={{
             position: "absolute",
             inset: 0,
-            background:
-              "linear-gradient(135deg, rgba(132,156,255,0.18), rgba(246,190,110,0.1) 42%, rgba(5,8,13,0.96))",
+            background: themeTokens.ogOverlayGradient,
           }}
         />
         <div
@@ -68,9 +68,9 @@ export default function ProjectOpenGraphImage({ params }: { params: { slug: stri
                 display: "flex",
                 alignItems: "center",
                 alignSelf: "flex-start",
-                border: "1px solid rgba(132,156,255,0.42)",
-                background: "rgba(132,156,255,0.12)",
-                color: "#aebdff",
+                border: `1px solid ${themeTokens.ogAccentBorder}`,
+                background: themeTokens.ogAccentFill,
+                color: themeTokens.ogAccentText,
                 borderRadius: 8,
                 padding: "10px 14px",
                 fontSize: 22,
@@ -94,7 +94,7 @@ export default function ProjectOpenGraphImage({ params }: { params: { slug: stri
             <p
               style={{
                 margin: 0,
-                color: "#b0b9c9",
+                color: themeTokens.ogMutedText,
                 fontSize: 30,
                 lineHeight: 1.25,
               }}
@@ -107,7 +107,7 @@ export default function ProjectOpenGraphImage({ params }: { params: { slug: stri
                 alignItems: "center",
                 gap: 12,
                 marginTop: 46,
-                color: "#f6be6e",
+                color: themeTokens.ogAmberText,
                 fontSize: 24,
                 letterSpacing: 0.8,
               }}
@@ -118,7 +118,7 @@ export default function ProjectOpenGraphImage({ params }: { params: { slug: stri
                   height: 10,
                   width: 10,
                   borderRadius: 999,
-                  background: "#f6be6e",
+                  background: themeTokens.ogAmberText,
                 }}
               />
               Case study by Pratik Singh
@@ -126,17 +126,17 @@ export default function ProjectOpenGraphImage({ params }: { params: { slug: stri
           </div>
 
           <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              width: 560,
-              border: "1px solid rgba(255,255,255,0.16)",
-              borderRadius: 18,
-              overflow: "hidden",
-              background: "#141822",
-              boxShadow: "0 34px 90px rgba(0,0,0,0.45)",
-              transform: "rotate(1.2deg)",
-            }}
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                width: 560,
+                border: "1px solid rgba(255,255,255,0.16)",
+                borderRadius: 18,
+                overflow: "hidden",
+                background: themeTokens.ogPanelFill,
+                boxShadow: "0 34px 90px rgba(0,0,0,0.45)",
+                transform: "rotate(1.2deg)",
+              }}
           >
             <div
               style={{
@@ -146,7 +146,7 @@ export default function ProjectOpenGraphImage({ params }: { params: { slug: stri
                 height: 42,
                 padding: "0 18px",
                 borderBottom: "1px solid rgba(255,255,255,0.12)",
-                background: "#1b2030",
+                background: themeTokens.ogChromeFill,
               }}
             >
               <span style={dotStyle} />
@@ -176,7 +176,7 @@ const dotStyle = {
   height: 11,
   width: 11,
   borderRadius: 999,
-  background: "rgba(247,248,250,0.38)",
+  background: themeTokens.ogDotFill,
 };
 
 function getStaticScreenshot(cover: Screenshot, screenshots: Screenshot[]) {

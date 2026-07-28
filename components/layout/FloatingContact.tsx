@@ -36,7 +36,7 @@ export function FloatingContact() {
       <button
         onClick={() => setOpen(true)}
         aria-label="Open contact form"
-        className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-signal text-paper flex items-center justify-center shadow-card hover:bg-signal-dark transition-colors focus-ring"
+        className="fixed bottom-6 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-signal text-paper shadow-card transition-colors hover:bg-signal-dark focus-ring"
       >
         <MessageCircle size={22} className="icon-current" aria-hidden="true" />
       </button>
@@ -92,7 +92,7 @@ export function FloatingContact() {
 
                   <button
                     type="submit"
-                    className="w-full inline-flex items-center justify-center gap-2 font-mono text-[12px] tracking-wide rounded px-5 py-3 bg-signal text-paper hover:bg-signal-dark transition-colors focus-ring disabled:opacity-50"
+                    className="w-full inline-flex items-center justify-center gap-2 rounded bg-signal px-5 py-3 font-mono text-[12px] tracking-wide text-paper transition-colors hover:bg-signal-dark focus-ring disabled:opacity-50"
                   >
                     Send message
                   </button>

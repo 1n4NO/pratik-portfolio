@@ -60,20 +60,20 @@ export function ContactCTA({ variant = "full" }: { variant?: "full" | "compact" 
   }
 
   return (
-    <section className="relative overflow-hidden bg-deep text-ink">
+    <section className="relative overflow-hidden bg-panel text-muted-copy">
       <HeroBackdrop stableDarkGrid />
       <div className="absolute inset-0 bg-deep/72" aria-hidden="true" />
       <Container className="relative py-16 md:py-20">
         <div className="grid gap-8 md:grid-cols-[1.1fr_0.9fr] md:items-center">
           <div>
-            <div className="mb-5 inline-flex items-center gap-2 rounded border border-signal/35 bg-signal/10 px-3 py-1.5 font-mono text-[11px] uppercase tracking-widest text-signal">
+            <div className="mb-5 inline-flex items-center gap-2 rounded border border-signal/35 bg-signal/10 px-3 py-1.5 font-mono text-[11px] uppercase tracking-widest text-muted-copy">
               <Radio size={13} className="contact-cta-ping icon-amber" aria-hidden="true" />
               Get in touch
             </div>
-            <h2 className="max-w-2xl font-display text-3xl font-bold leading-tight md:text-5xl">
+            <h2 className="max-w-2xl font-display text-3xl font-bold leading-tight md:text-5xl text-muted-copy">
               Bring the thorny frontend thing. I&apos;ll bring a sharper path to ship it.
             </h2>
-            <p className="mt-5 max-w-xl text-sm leading-relaxed text-ink-soft md:text-base">
+            <p className="mt-5 max-w-xl text-sm leading-relaxed text-muted-copy-soft md:text-base">
               Architecture, product UX, AI-native workflows, performance, design systems. The fun
               usually starts where the ticket gets vague.
             </p>
@@ -82,7 +82,7 @@ export function ContactCTA({ variant = "full" }: { variant?: "full" | "compact" 
               {cues.map((cue, index) => (
                 <span
                   key={cue}
-                  className="rounded border border-deep-line bg-surface/80 px-3 py-1.5 font-mono text-[11px] text-ink-soft"
+                  className="rounded border border-deep-line bg-surface/80 px-3 py-1.5 font-mono text-[11px] text-muted-copy-subtle"
                   style={{ animationDelay: `${index * 90}ms` }}
                 >
                   {cue}
@@ -92,13 +92,13 @@ export function ContactCTA({ variant = "full" }: { variant?: "full" | "compact" 
           </div>
 
           <div className="relative">
-            <div className="contact-cta-card rounded-lg border border-deep-line bg-surface/75 p-4 shadow-overlay backdrop-blur">
+            <div className="contact-cta-card rounded-lg border border-deep-line bg-surface/75 p-4 text-muted-copy shadow-overlay backdrop-blur">
               <div className="mb-4 flex items-center justify-between gap-4 border-b border-deep-line pb-3">
-                <div className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-widest text-ink-soft">
+                <div className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-widest text-muted-copy">
                   <Sparkles size={14} className="icon-amber" aria-hidden="true" />
                   Open channel
                 </div>
-                <div className="flex items-center gap-1.5 text-[10px] text-signal">
+                <div className="flex items-center gap-1.5 text-[10px] text-muted-copy">
                   <span className="h-2 w-2 rounded-full bg-signal contact-cta-live" />
                   available
                 </div>
@@ -106,10 +106,10 @@ export function ContactCTA({ variant = "full" }: { variant?: "full" | "compact" 
 
               <div className="space-y-3">
                 <div className="rounded border border-deep-line bg-deep/70 p-3">
-                  <p className="font-mono text-[11px] uppercase tracking-widest text-ink-soft">
+                  <p className="font-mono text-[11px] uppercase tracking-widest text-muted-copy">
                     Current mode
                   </p>
-                  <p className="mt-2 text-sm text-ink">
+                  <p className="mt-2 text-sm text-muted-copy">
                     Turning fuzzy product ambition into interfaces, systems, and delivery plans.
                   </p>
                 </div>
@@ -120,10 +120,10 @@ export function ContactCTA({ variant = "full" }: { variant?: "full" | "compact" 
                       className="grid grid-cols-[0.75rem_minmax(0,0.95fr)_minmax(0,1.25fr)] items-center gap-2 rounded border border-deep-line bg-deep/55 px-3 py-2"
                     >
                       <span className="h-1.5 w-1.5 rounded-full bg-amber" aria-hidden="true" />
-                      <span className="font-mono text-[10px] uppercase tracking-widest text-ink">
+                      <span className="font-mono text-[10px] uppercase tracking-widest text-muted-copy">
                         {item.label}
                       </span>
-                      <span className="text-right text-xs text-ink-soft">{item.detail}</span>
+                      <span className="text-right text-xs text-muted-copy-subtle">{item.detail}</span>
                     </div>
                   ))}
                 </div>

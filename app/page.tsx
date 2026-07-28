@@ -99,14 +99,14 @@ export default function HomePage() {
       />
 
       {/* Hero */}
-      <section className="blueprint-surface relative overflow-hidden pt-section-sm pb-section-sm md:min-h-[640px] md:pt-section-md md:pb-section-md">
+      <section className="blueprint-surface relative overflow-hidden bg-dark pt-section-sm pb-section-sm md:min-h-[640px] md:pt-section-md md:pb-section-md">
         <HeroBackdrop />
         <Container className="relative z-10">
         <SectionGrid
           wide
           aside={
             <div className="space-y-5 md:max-w-xs">
-                <Eyebrow index="00" total="03">
+                <Eyebrow>
                   {profile.name}
                 </Eyebrow>
                 <p className="font-mono text-caption uppercase tracking-caps text-ink-soft/70">
@@ -146,13 +146,13 @@ export default function HomePage() {
       </section>
 
       {/* Marquee strip */}
-      <div className="relative z-20 -mt-8 border-y border-line/45 bg-paper/10 py-4 backdrop-blur-md md:-mt-12">
+      <div className="relative z-20 -mt-8 border-y border-line/45 bg-white py-4 md:-mt-12">
         <div
-          className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-paper to-transparent md:w-24"
+          className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-white to-transparent md:w-24"
           aria-hidden="true"
         />
         <div
-          className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-paper to-transparent md:w-24"
+          className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-white to-transparent md:w-24"
           aria-hidden="true"
         />
         <div className="[mask-image:linear-gradient(90deg,transparent,black_8%,black_92%,transparent)]">
@@ -161,14 +161,16 @@ export default function HomePage() {
       </div>
 
       {/* Profile */}
-      <section className="border-y border-line bg-surface py-section-sm md:py-section-md">
+      <section
+        className="border-y border-deep-line bg-deep py-section-sm text-muted-copy md:py-section-md"
+      >
         <Container>
           <SectionGrid
             stickyAside
             aside={
               <div className="space-y-8">
                 <div>
-                  <Eyebrow index="01" total="03">
+                  <Eyebrow>
                     Background
                   </Eyebrow>
                   <h2 className="font-display text-section-title font-medium tracking-display">
@@ -181,7 +183,7 @@ export default function HomePage() {
             contentClassName="space-y-6"
           >
             {profile.long.map((para, i) => (
-              <p key={i} className="max-w-prose-wide text-body leading-body text-ink-soft">
+              <p key={i} className="max-w-prose-wide text-body leading-body">
                 {para}
               </p>
             ))}
@@ -190,12 +192,16 @@ export default function HomePage() {
       </section>
 
       {/* Selected work */}
-      <section id="work" aria-labelledby="work-heading" className="pb-section-sm md:pb-section-md">
+      <section
+        id="work"
+        aria-labelledby="work-heading"
+        className="bg-dark pb-section-sm md:pb-section-md"
+      >
         <Container className="pt-section-sm md:pt-section-md">
           <SectionGrid
             aside={
               <div>
-                <Eyebrow index="02" total="03">
+                <Eyebrow>
                   Selected work
                 </Eyebrow>
                 <h2

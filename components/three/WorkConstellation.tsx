@@ -537,7 +537,7 @@ export function WorkConstellation() {
   const profile = usePerformanceProfile(reducedMotion);
 
   return (
-    <div className="relative h-[520px] overflow-hidden rounded-lg border border-line bg-surface/40 md:h-[620px]">
+    <div className="relative h-[520px] overflow-hidden rounded-lg border border-line bg-[#1b2030] md:h-[620px]">
       <div className="pointer-events-none absolute left-3 top-3 z-10 flex flex-wrap gap-2 font-mono text-[10px] uppercase tracking-widest text-ink-soft/60">
         <span className="rounded border border-line bg-surface/70 px-2 py-1 backdrop-blur">
           Hover: inspect

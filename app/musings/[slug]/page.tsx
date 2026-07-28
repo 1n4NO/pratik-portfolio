@@ -97,7 +97,7 @@ export default function PostPage({ params }: { params: { slug: string } }) {
       <Container className="pt-10 pb-4">
         <Link
           href="/musings"
-          className="inline-flex items-center gap-1.5 font-mono text-[11px] text-ink-soft hover:text-signal focus-ring rounded"
+          className="inline-flex items-center gap-1.5 font-mono text-micro text-ink-soft hover:text-signal focus-ring rounded"
         >
           <ArrowLeft size={14} className="icon-amber" aria-hidden="true" />
           All musings
@@ -124,13 +124,13 @@ export default function PostPage({ params }: { params: { slug: string } }) {
             <div className="flex items-center gap-3 mb-4">
               {post.tag && (
                 <span
-                  className="font-mono text-[10px] uppercase tracking-wide px-2.5 py-1 rounded text-white"
+                  className="font-mono text-micro uppercase tracking-caps px-2.5 py-1 rounded text-white"
                   style={{ backgroundColor: tagColorStyle(post.tag, 0.55) }}
                 >
                   {post.tag}
                 </span>
               )}
-              <time className="font-mono text-[11px] text-white/70" dateTime={post.date}>
+              <time className="font-mono text-micro text-white/70" dateTime={post.date}>
                 {new Date(post.date).toLocaleDateString("en-US", {
                   month: "short",
                   day: "numeric",
@@ -138,20 +138,22 @@ export default function PostPage({ params }: { params: { slug: string } }) {
                 })}
               </time>
             </div>
-            <h1 className="font-display text-3xl md:text-5xl font-semibold max-w-2xl text-white">
+            <h1 className="font-display text-section-title font-medium tracking-display max-w-2xl text-white">
               {post.title}
             </h1>
           </div>
         </Container>
       </section>
 
-      <Container className="pt-12 pb-16">
-        <PostBody content={post.content} />
-      </Container>
+      <div className="bg-dark">
+        <Container className="pt-12 pb-16">
+          <PostBody content={post.content} />
+        </Container>
 
-      <PostPrevNext newer={newer} older={older} />
+        <PostPrevNext newer={newer} older={older} />
 
-      <ContactCTA variant="compact" />
+        <ContactCTA variant="compact" />
+      </div>
     </>
   );
 }

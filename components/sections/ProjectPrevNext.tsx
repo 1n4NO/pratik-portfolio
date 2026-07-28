@@ -15,7 +15,7 @@ export function ProjectPrevNext({
   return (
     <nav
       aria-label="More projects"
-      className="grid grid-cols-1 md:grid-cols-2 border-t border-line"
+      className="grid grid-cols-1 border-t border-panel bg-panel text-panel md:grid-cols-2"
     >
       {previous ? (
         <PrevNextLink project={previous} direction="previous" />
@@ -43,13 +43,13 @@ function PrevNextLink({
   return (
     <Link
       href={`/work/${project.slug}`}
-      className={`group flex items-center gap-4 border-line py-8 focus-ring ${
+      className={`group flex items-center gap-4 border-panel py-8 focus-ring ${
         isNext
           ? "md:flex-row-reverse md:text-right md:pl-8"
           : "border-b md:border-b-0 md:border-r md:pr-8"
       }`}
     >
-      <div className="relative h-16 w-24 shrink-0 overflow-hidden rounded-md border border-line">
+      <div className="relative h-16 w-24 shrink-0 overflow-hidden rounded-md border border-panel">
         <Image
           src={project.cover.src}
           alt=""
@@ -60,15 +60,15 @@ function PrevNextLink({
       </div>
       <div className="min-w-0">
         <p
-          className={`mb-1 flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-widest text-ink-soft/60 ${
+          className={`mb-1 flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-widest text-panel-muted ${
             isNext ? "md:justify-end" : ""
           }`}
         >
-          {!isNext && <ArrowLeft size={11} className="icon-amber" aria-hidden="true" />}
+          {!isNext && <ArrowLeft size={11} className="text-panel" aria-hidden="true" />}
           {isNext ? "Next project" : "Previous project"}
-          {isNext && <ArrowRight size={11} className="icon-amber" aria-hidden="true" />}
+          {isNext && <ArrowRight size={11} className="text-panel" aria-hidden="true" />}
         </p>
-        <p className="truncate font-display text-base font-bold text-ink transition-colors group-hover:text-signal">
+        <p className="truncate font-display text-base font-bold text-panel transition-colors group-hover:text-signal">
           {project.name}
         </p>
       </div>

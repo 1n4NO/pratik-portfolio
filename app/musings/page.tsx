@@ -41,22 +41,24 @@ export default function MusingsPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={jsonLd(structuredData)}
       />
-      <Container className="pt-16 pb-20">
-        <MusingsFeed
-          posts={sorted}
-          intro={
-            <div className="pb-2">
-              <PageIntro eyebrow="Musings" title="Notes from the workbench." />
-              <div className="mt-8 md:hidden">
-                <MusingsLottieCircle variant="mobile" />
+      <div className="bg-dark">
+        <Container className="pt-16 pb-20">
+          <MusingsFeed
+            posts={sorted}
+            intro={
+              <div className="pb-2">
+                <PageIntro eyebrow="Musings" title="Notes from the workbench." />
+                <div className="mt-8 md:hidden">
+                  <MusingsLottieCircle variant="mobile" />
+                </div>
               </div>
-            </div>
-          }
-          sidebarVisual={<MusingsLottieCircle variant="sidebar" />}
-        />
-      </Container>
+            }
+            sidebarVisual={<MusingsLottieCircle variant="sidebar" />}
+          />
+        </Container>
 
-      <ContactCTA variant="compact" />
+        <ContactCTA variant="compact" />
+      </div>
     </>
   );
 }

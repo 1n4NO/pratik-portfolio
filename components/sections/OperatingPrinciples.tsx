@@ -27,9 +27,8 @@ export function OperatingPrinciples() {
   return (
     <section
       aria-labelledby="principles-heading"
-      className="relative overflow-hidden border-b border-line bg-surface"
+      className="relative overflow-hidden border-b border-line bg-panel text-muted-copy"
     >
-      <div className="pointer-events-none absolute inset-0 dotted-backdrop opacity-45" aria-hidden="true" />
       <div
         className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-signal to-transparent"
         aria-hidden="true"
@@ -46,22 +45,24 @@ export function OperatingPrinciples() {
             >
               How I keep complex frontend work shippable.
             </h2>
-            <p className="mt-5 max-w-sm text-sm leading-relaxed text-ink-soft">
+            <p className="mt-5 max-w-sm text-sm leading-relaxed text-panel">
               The throughline across my work: make the architecture explicit, keep product
               behavior inspectable, and leave teams with systems they can keep evolving.
             </p>
             <div
-              className="mt-8 hidden max-w-[15rem] border-y border-line py-4 font-mono text-[11px] uppercase tracking-widest text-ink-soft md:block"
+              className="mt-8 hidden max-w-[15rem] border-y border-line py-4 font-mono text-[11px] uppercase tracking-widest md:block"
               aria-hidden="true"
             >
               <div className="flex items-center justify-between">
                 <span>Principles</span>
-                <span className="text-signal">05</span>
+                <span>05</span>
               </div>
             </div>
           </div>
 
-          <ol className="border-y border-line bg-paper/35 backdrop-blur-sm">
+          <ol
+            className="border-y border-line bg-muted-copy text-deep backdrop-blur-sm"
+          >
             {operatingPrinciples.map(({ label, body }, index) => (
               <li
                 key={label}
@@ -71,16 +72,16 @@ export function OperatingPrinciples() {
                   className="absolute inset-y-0 left-0 w-px bg-signal opacity-0 transition-opacity duration-300 group-hover:opacity-100"
                   aria-hidden="true"
                 />
-                <div className="grid grid-cols-[4.25rem_minmax(0,1fr)] transition-colors duration-300 group-hover:bg-surface/45 md:grid-cols-[5.25rem_minmax(0,1fr)]">
-                  <span className="flex flex-col items-center border-r border-line py-5 font-mono text-[11px] text-ink-soft/60 transition-colors group-hover:text-signal md:py-7">
+                <div className="grid grid-cols-[4.25rem_minmax(0,1fr)] transition-colors duration-300 group-hover:bg-dark md:grid-cols-[5.25rem_minmax(0,1fr)]">
+                  <span className="flex flex-col items-center border-r border-line py-5 font-mono text-[11px] transition-colors group-hover:text-deep md:py-7">
                     <span>{String(index + 1).padStart(2, "0")}</span>
                     <PrincipleMarker points={index + 1} />
                   </span>
                   <div className="px-5 py-5 md:px-8 md:py-7">
-                    <p className="mb-2 font-mono text-[10px] uppercase tracking-widest text-amber">
+                    <p className="mb-2 font-mono text-[10px] uppercase tracking-widest">
                       {label}
                     </p>
-                    <p className="max-w-3xl text-base leading-relaxed text-ink md:text-xl">
+                    <p className="max-w-3xl text-base leading-relaxed md:text-xl">
                       {body}
                     </p>
                   </div>
@@ -95,7 +96,8 @@ export function OperatingPrinciples() {
 }
 
 function PrincipleMarker({ points }: { points: number }) {
-  const baseClass = "mt-3 h-5 w-5 text-amber transition-transform duration-300 group-hover:scale-110";
+  const baseClass =
+    "mt-3 h-5 w-5 text-amber transition-transform duration-300 group-hover:scale-110";
 
   if (points === 1) {
     return (

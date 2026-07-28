@@ -45,47 +45,53 @@ export default function ExpertisePage() {
         </Container>
       </section>
 
-      <Container className="py-section-sm md:py-section-md">
-        <HeroSystemMap />
-      </Container>
+      <section className="bg-paper-dark relative overflow-hidden p-0">
+        <Container>
+          <HeroSystemMap />
+        </Container>
+        <div
+          className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-signal to-transparent"
+          aria-hidden="true"
+        />
+      </section>
 
-      <Container className="pb-section-sm md:pb-section-md">
-        <div className="grid grid-cols-1 gap-x-12 gap-y-14 md:grid-cols-2">
-          {skillGroups.map((group) => (
-            <div key={group.title} className="border-t border-line pt-6">
-              <h2 className="mb-2 flex items-center gap-2 font-display text-subsection font-medium tracking-display-tight">
-                <ExpertiseTitleIcon title={group.title} />
-                {group.title}
-              </h2>
-              <p className="mb-5 text-body leading-body text-ink-soft">{group.blurb}</p>
-              <SkillMeter group={group} maxYears={maxYearsActive} />
-              <ul className="mt-5 flex flex-wrap gap-2">
-                {group.items.map((item) => (
-                  <li
-                    key={item}
-                    className="rounded bg-surface-muted px-2.5 py-1 font-mono text-micro text-ink-soft"
-                  >
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-      </Container>
+      <section className="bg-dark py-section-md md:py-section-lg">
+        <Container>
+          <div className="mb-10 border-b border-line pb-8 md:mb-12 md:pb-10">
+            <p className="mb-4 font-mono text-micro uppercase tracking-caps text-signal">
+              Industry expertise
+            </p>
+            <p className="max-w-prose-wide font-mono text-caption leading-relaxed text-ink-soft/75">
+              {industries.join("   ·   ")}
+            </p>
+          </div>
 
-      <Container className="pb-section-sm md:pb-section-md">
-        <div className="border-t border-line pt-8">
-          <p className="mb-4 font-mono text-micro uppercase tracking-caps text-ink-soft/60">
-            Industry expertise
-          </p>
-          <p className="max-w-prose-wide font-mono text-caption leading-relaxed text-ink-soft/75">
-            {industries.join("   ·   ")}
-          </p>
-        </div>
-      </Container>
+          <div className="grid grid-cols-1 gap-x-12 gap-y-14 md:grid-cols-2">
+            {skillGroups.map((group) => (
+              <div key={group.title} className="border-t border-line pt-6">
+                <h2 className="mb-2 flex items-center gap-2 font-display text-subsection font-medium tracking-display-tight">
+                  <ExpertiseTitleIcon title={group.title} />
+                  {group.title}
+                </h2>
+                <p className="mb-5 text-body leading-body text-ink-soft">{group.blurb}</p>
+                <SkillMeter group={group} maxYears={maxYearsActive} />
+                <ul className="mt-5 flex flex-wrap gap-2">
+                  {group.items.map((item) => (
+                    <li
+                      key={item}
+                      className="rounded bg-surface-muted px-2.5 py-1 font-mono text-micro text-ink-soft"
+                    >
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </Container>
+      </section>
 
-      <ContactCTA />
+      <ContactCTA variant="compact" />
     </>
   );
 }
@@ -100,7 +106,7 @@ function SkillMeter({ group, maxYears }: { group: SkillGroup; maxYears: number }
 
   return (
     <div className="flex items-center gap-2.5" aria-label={`${years} years active, since ${group.since}`}>
-      <span className="shrink-0 font-mono text-[10px] tabular-nums text-signal">
+      <span className="shrink-0 font-mono text-micro tabular-nums text-signal">
         {years} yrs
       </span>
       <div className="flex h-2 flex-1 items-end gap-[2px]" aria-hidden="true">
@@ -116,7 +122,7 @@ function SkillMeter({ group, maxYears }: { group: SkillGroup; maxYears: number }
           />
         ))}
       </div>
-      <span className="shrink-0 font-mono text-[10px] text-ink-soft/50">since {group.since}</span>
+      <span className="shrink-0 font-mono text-micro text-ink-soft/50">since {group.since}</span>
     </div>
   );
 }

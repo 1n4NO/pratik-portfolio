@@ -14,7 +14,7 @@ export function PostPrevNext({
   return (
     <nav
       aria-label="More posts"
-      className="grid grid-cols-1 md:grid-cols-2 border-t border-line"
+      className="grid grid-cols-1 border-t border-panel bg-panel text-panel md:grid-cols-2"
     >
       {newer ? (
         <PostLink post={newer} direction="newer" />
@@ -36,22 +36,22 @@ function PostLink({ post, direction }: { post: Post; direction: "newer" | "older
   return (
     <Link
       href={`/musings/${post.slug}`}
-      className={`group flex flex-col justify-center gap-1.5 border-line py-8 focus-ring ${
+      className={`group flex flex-col justify-center gap-1.5 border-panel py-8 focus-ring ${
         isOlder
           ? "md:text-right md:pl-8"
-          : "border-b md:border-b-0 md:border-r md:pr-8"
+          : "border-b border-panel md:border-b-0 md:border-r md:pr-8"
       }`}
     >
         <p
-          className={`flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-widest text-ink-soft/60 ${
+          className={`flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-widest text-panel-muted ${
             isOlder ? "md:justify-end" : ""
           }`}
         >
-        {!isOlder && <ArrowLeft size={11} className="icon-amber" aria-hidden="true" />}
+        {!isOlder && <ArrowLeft size={11} className="text-panel" aria-hidden="true" />}
         {isOlder ? "Older post" : "Newer post"}
-        {isOlder && <ArrowRight size={11} className="icon-amber" aria-hidden="true" />}
+        {isOlder && <ArrowRight size={11} className="text-panel" aria-hidden="true" />}
       </p>
-      <p className="font-display text-base font-bold text-ink transition-colors group-hover:text-signal">
+      <p className="font-display text-base font-bold text-panel transition-colors group-hover:text-signal">
         {post.title}
       </p>
     </Link>
