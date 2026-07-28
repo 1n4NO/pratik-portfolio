@@ -4,7 +4,7 @@
 export const profile = {
   name: "Pratik Singh",
   role: "Frontend Architect",
-  tagline: "Building systems that ship fast, scale clean, and hold up under real traffic.",
+  tagline: "Building frontend systems that ship quickly and still make sense later.",
   location: "Bangalore, India",
   email: "pratiksk@outlook.com",
   phone: "+91 99864 25864",
@@ -13,11 +13,11 @@ export const profile = {
   resumeUrl: "/resume/Pratik_Singh_Resume_2026.pdf",
   yearsExperience: "12+",
   short:
-    "I turn ambiguous product goals into durable frontend systems: clear rendering boundaries, reusable UI foundations, and teams that can keep shipping without slowing down.",
+    "I take messy product goals and turn them into frontend systems that are clear to build on, easy to maintain, and practical for teams that need to keep shipping.",
   long: [
-    "I'm a Frontend Architect and engineering leader with 12+ years of experience building and scaling high-performance, user-centric web applications across enterprise, SaaS, and AI-native domains.",
-    "My focus sits at the intersection of frontend architecture, rendering strategy, and team leadership — choosing the right Next.js rendering model per route, standing up design systems that hold up across product verticals, and setting the engineering standards a team actually follows.",
-    "Lately that includes AI-native interfaces: conversational UIs where agent responses drive dynamic rendering, structured-output pipelines, and the engineering standards for reviewing AI-generated code responsibly.",
+    "I'm a Frontend Architect and engineering leader with 12+ years of experience building and scaling web applications across enterprise, SaaS, and AI-heavy products.",
+    "My work sits at the intersection of frontend architecture, rendering strategy, and team leadership: choosing the right Next.js model per route, shaping design systems that survive across product lines, and setting standards people actually use.",
+    "Lately that has included conversational interfaces, structured outputs, and the review habits needed to keep AI-assisted code honest.",
   ],
   specSheet: [
     { label: "Experience", value: "12+ yrs" },
@@ -38,7 +38,7 @@ export type SkillGroup = {
 export const skillGroups: SkillGroup[] = [
   {
     title: "Leadership",
-    blurb: "Running the team, not just the code.",
+    blurb: "Helping the team ship well, not just ship.",
     since: 2017,
     items: [
       "Frontend architecture & system design",
@@ -51,7 +51,7 @@ export const skillGroups: SkillGroup[] = [
   },
   {
     title: "Frontend",
-    blurb: "The core toolkit, used daily.",
+    blurb: "The core toolkit I use every day.",
     since: 2012,
     items: [
       "React",
@@ -63,13 +63,13 @@ export const skillGroups: SkillGroup[] = [
   },
   {
     title: "State & data",
-    blurb: "Keeping client and server state honest.",
+    blurb: "Keeping client and server state in sync.",
     since: 2019,
     items: ["TanStack Query", "Redux Toolkit", "REST", "GraphQL", "Node.js (API routes)"],
   },
   {
     title: "AI integration",
-    blurb: "Where the frontend meets the model.",
+    blurb: "Where interface work meets model work.",
     since: 2023,
     items: [
       "OpenAI & Ollama APIs",
@@ -82,13 +82,13 @@ export const skillGroups: SkillGroup[] = [
   },
   {
     title: "Data visualization",
-    blurb: "Making dense data legible.",
+    blurb: "Making dense data easier to read.",
     since: 2017,
     items: ["D3.js", "React Charts", "MUI DataGrid Pro", "React Flow"],
   },
   {
     title: "Quality & security",
-    blurb: "The parts that don't show up in a demo.",
+    blurb: "The parts that matter after the demo.",
     since: 2019,
     items: [
       "OWASP Top 10",
@@ -108,7 +108,7 @@ export const skillGroups: SkillGroup[] = [
 ];
 
 export const industries = [
-  "AI agent marketplaces & conversational systems",
+  "AI agent products and conversational systems",
   "Enterprise SaaS platforms",
   "Analytics & data visualization",
   "Compliance & standards-driven applications",

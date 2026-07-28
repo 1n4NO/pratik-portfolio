@@ -61,14 +61,14 @@ export default function WorkPage() {
         <Container className="relative">
           <PageIntro
             eyebrow="Work"
-            title="Products shipped, systems architected."
+            title="Products shipped, systems thought through."
             align="editorial"
             index="00"
             total="02"
           >
             <p>
-              Explore the overlap between AI workflows, frontend architecture, data interfaces, and
-              product systems before jumping into the detailed case studies.
+              See how AI workflows, frontend architecture, data interfaces, and product systems
+              show up in the work.
             </p>
           </PageIntro>
         </Container>

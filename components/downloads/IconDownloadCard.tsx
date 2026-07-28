@@ -92,7 +92,7 @@ export function IconDownloadCard({ icon }: { icon: DownloadableIcon }) {
         </button>
       </div>
       {status === "error" && (
-        <p className="font-mono text-[10px] text-danger">PNG export failed — try SVG instead.</p>
+        <p className="font-mono text-[10px] text-danger">PNG export failed. Try SVG instead.</p>
       )}
     </div>
   );

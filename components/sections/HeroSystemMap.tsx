@@ -20,14 +20,14 @@ const domains: Domain[] = [
   {
     id: "architecture",
     label: "Frontend architecture",
-    summary: "Rendering strategy, durable UI foundations, and product shells built to scale.",
+    summary: "Rendering choices, durable UI foundations, and product shells that hold up.",
     icon: Code2,
     projectSlugs: ["product-studio", "orqestra", "multi-agent-ai-system"],
   },
   {
     id: "ai",
-    label: "AI-native interfaces",
-    summary: "Inspectable agent flows, local inference paths, and deterministic review loops.",
+    label: "AI-enabled interfaces",
+    summary: "Inspectable agent flows, local inference paths, and clear review loops.",
     icon: BrainCircuit,
     projectSlugs: ["multi-agent-ai-system", "product-studio"],
   },

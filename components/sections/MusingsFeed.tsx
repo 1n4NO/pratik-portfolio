@@ -99,7 +99,7 @@ export function MusingsFeed({
 
         {count < posts.length && (
           <div ref={sentinelRef} className="py-6 text-center">
-            <span className="font-mono text-[11px] text-ink-soft/50">Loading more…</span>
+          <span className="font-mono text-[11px] text-ink-soft/50">Loading more…</span>
           </div>
         )}
       </div>

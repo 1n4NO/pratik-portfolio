@@ -10,7 +10,7 @@ import { downloadableIcons } from "@/data/downloadableIcons";
 
 export const metadata: Metadata = {
   title: "Downloads",
-  description: "Résumé and brand-asset icons, in SVG and PNG.",
+  description: "Résumé and brand-asset icons in SVG and PNG.",
 };
 
 export default function DownloadsPage() {
@@ -22,8 +22,8 @@ export default function DownloadsPage() {
           title="Résumé and brand assets."
         >
           <p>
-            Everything below is free to use for press, recruiting, or reference. More assets get
-            added here over time — this is the starting set.
+            Everything below is available for press, hiring, or reference. More assets will be
+            added here over time.
           </p>
         </PageIntro>
       </Container>

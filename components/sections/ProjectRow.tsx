@@ -12,11 +12,13 @@ export function ProjectRow({
   reversed,
   index,
   total,
+  mediaTheme = "all",
 }: {
   project: Project;
   reversed?: boolean;
   index?: number;
   total?: number;
+  mediaTheme?: "all" | "light";
 }) {
   const indexLabel = index !== undefined ? String(index).padStart(2, "0") : undefined;
   const totalLabel = total !== undefined ? String(total).padStart(2, "0") : undefined;
@@ -74,7 +76,7 @@ export function ProjectRow({
             {project.impact}
           </blockquote>
           <p className="max-w-prose text-body leading-body text-ink-soft">{project.overview}</p>
-          <ScreenshotStream project={project} />
+          <ScreenshotStream project={project} theme={mediaTheme} />
         </div>
       </SectionGrid>
     </Container>

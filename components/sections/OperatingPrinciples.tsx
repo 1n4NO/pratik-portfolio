@@ -7,7 +7,7 @@ const operatingPrinciples = [
   },
   {
     label: "Systems",
-    body: "Design for ownership, reuse, and change.",
+    body: "Design for ownership, reuse, and change over time, not just the first release.",
   },
   {
     label: "AI quality",
@@ -19,7 +19,7 @@ const operatingPrinciples = [
   },
   {
     label: "Standards",
-    body: "Set engineering standards that still hold after launch.",
+    body: "Set engineering standards that still hold after launch, when the work starts getting real.",
   },
 ];
 

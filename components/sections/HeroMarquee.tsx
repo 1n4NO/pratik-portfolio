@@ -1,6 +1,7 @@
 import type { Screenshot } from "@/data/projects";
 import { homeCarouselItems } from "@/data/homeCarousel";
 import { BrowserFrame } from "@/components/ui/BrowserFrame";
+import { matchesMediaTheme } from "@/lib/media";
 
 export function HeroMarquee() {
   const media = getAlternatingHeroMedia();
@@ -25,7 +26,9 @@ export function HeroMarquee() {
 }
 
 function getAlternatingHeroMedia() {
-  const media = uniqueBySrc(homeCarouselItems);
+  const media = uniqueBySrc(homeCarouselItems).filter((item) =>
+    matchesMediaTheme(item.src, "light")
+  );
 
   return alternateMedia(media);
 }

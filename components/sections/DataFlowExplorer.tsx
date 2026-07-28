@@ -39,7 +39,7 @@ export function DataFlowExplorer({ chart }: { chart: string }) {
             Data flow map
           </p>
           <p className="mt-1 text-sm text-ink-soft">
-            Select a system node to inspect how data enters and leaves it.
+            Select a node to see what goes in, what comes out, and how it connects.
           </p>
         </div>
         <div className="inline-flex rounded border border-line bg-surface p-1">
@@ -138,7 +138,7 @@ export function DataFlowExplorer({ chart }: { chart: string }) {
                     <h3 className="font-display text-lg font-bold leading-tight">{activeNode.label}</h3>
                     <p className="mt-1 text-sm leading-relaxed text-ink-soft">
                       This node connects {activeNode.incoming.length + activeNode.outgoing.length} part
-                      {activeNode.incoming.length + activeNode.outgoing.length === 1 ? "" : "s"} of the project workflow.
+                      {activeNode.incoming.length + activeNode.outgoing.length === 1 ? "" : "s"} of the workflow.
                     </p>
                   </div>
                 </div>
@@ -183,7 +183,7 @@ function ModeButton({
       type="button"
       onClick={onClick}
       className={`rounded px-3 py-1.5 font-mono text-[11px] transition-colors focus-ring ${
-        active ? "bg-surface-muted text-ink shadow-sm" : "text-ink-soft hover:text-ink"
+        active ? "bg-surface-muted text-ink shadow-none" : "text-ink-soft hover:text-ink"
       }`}
     >
       {children}

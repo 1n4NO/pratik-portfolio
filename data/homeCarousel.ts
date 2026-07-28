@@ -8,7 +8,7 @@ export const homeCarouselItems: HomeCarouselItem[] = [
   {
     id: "run-full-light",
     src: "/projects/home-carousel/run-full-light.png",
-    alt: "Full run view showing the agent workflow in light mode",
+    alt: "Agent workflow running in light mode",
   },
   {
     id: "login-loop-dark",
@@ -18,12 +18,12 @@ export const homeCarouselItems: HomeCarouselItem[] = [
   {
     id: "modeler-right-editor",
     src: "/projects/home-carousel/modeler-right-editor.png",
-    alt: "Model selection and editor panel in the right sidebar",
+    alt: "Model selection and editor panel on the right",
   },
   {
     id: "new-run-generate-light",
     src: "/projects/home-carousel/new-run-generate-light.mp4",
-    alt: "Generating a new run in the light theme",
+    alt: "Starting a new run in the light theme",
   },
   {
     id: "observability-above-fold",

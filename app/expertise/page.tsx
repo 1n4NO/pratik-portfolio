@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   ...createMetadata({
     title: "Expertise",
     description:
-      "Frontend architecture, React, Next.js, TypeScript, design systems, AI integration, data visualization, security, and engineering leadership expertise.",
+      "Frontend architecture, React, Next.js, TypeScript, design systems, AI integration, data visualization, security, and engineering leadership.",
     path: "/expertise",
   }),
 };
@@ -28,7 +28,7 @@ export default function ExpertisePage() {
         <Container className="relative">
           <PageIntro
             eyebrow="Expertise"
-            title="Twelve years, condensed."
+            title="Twelve years, in brief."
             align="editorial"
             action={(
               <LinkButton href={profile.resumeUrl} download>
@@ -38,8 +38,8 @@ export default function ExpertisePage() {
             )}
           >
             <p>
-              A practical map of depth: core skill areas, the systems behind them, and the
-              shipped work that proves them.
+              A practical map of the areas I work in, the systems behind them, and the shipped
+              work that backs them up.
             </p>
           </PageIntro>
         </Container>

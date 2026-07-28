@@ -76,11 +76,11 @@ function TabButton({
   onClick: () => void;
 }) {
   return (
-    <button
+      <button
       type="button"
       onClick={onClick}
       className={`rounded px-3 py-1.5 font-mono text-[11px] transition-colors focus-ring ${
-        active ? "bg-surface text-ink shadow-sm" : "text-ink-soft hover:text-ink"
+        active ? "bg-surface text-ink shadow-none" : "text-ink-soft hover:text-ink"
       }`}
     >
       {children}

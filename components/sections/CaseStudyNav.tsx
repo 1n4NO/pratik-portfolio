@@ -48,7 +48,7 @@ export function CaseStudyNav({ items }: { items: CaseStudyNavItem[] }) {
       className="-mx-6 mb-8 border-y border-line bg-paper/95 px-6 py-3 backdrop-blur-sm md:mx-0 md:mb-7 md:border-y-0 md:bg-transparent md:px-0 md:py-0 md:backdrop-blur-none"
     >
       <p className="mb-3 hidden font-mono text-[10px] uppercase tracking-widest text-ink-soft/60 md:block">
-        Case study
+        On this page
       </p>
       <ol className="flex gap-2 overflow-x-auto md:flex-col md:gap-1 md:overflow-visible">
         {items.map((item) => {

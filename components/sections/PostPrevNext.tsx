@@ -42,11 +42,11 @@ function PostLink({ post, direction }: { post: Post; direction: "newer" | "older
           : "border-b md:border-b-0 md:border-r md:pr-8"
       }`}
     >
-      <p
-        className={`flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-widest text-ink-soft/60 ${
-          isOlder ? "md:justify-end" : ""
-        }`}
-      >
+        <p
+          className={`flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-widest text-ink-soft/60 ${
+            isOlder ? "md:justify-end" : ""
+          }`}
+        >
         {!isOlder && <ArrowLeft size={11} className="icon-amber" aria-hidden="true" />}
         {isOlder ? "Older post" : "Newer post"}
         {isOlder && <ArrowRight size={11} className="icon-amber" aria-hidden="true" />}

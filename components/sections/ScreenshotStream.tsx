@@ -4,6 +4,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { MutableRefObject } from "react";
 import type { Project } from "@/data/projects";
 import { ScreenshotTile, type ScreenshotTileItem } from "@/components/ui/ScreenshotTile";
+import { matchesMediaTheme, type MediaTheme } from "@/lib/media";
 
 type Direction = "vertical" | "horizontal";
 
@@ -13,10 +14,12 @@ export function ScreenshotStream({
   project,
   direction = "vertical",
   priority = false,
+  theme = "all",
 }: {
   project: Project;
   direction?: Direction;
   priority?: boolean;
+  theme?: MediaTheme;
 }) {
   const verticalSegmentRef = useRef<HTMLDivElement | null>(null);
   const verticalTrackRef = useRef<HTMLDivElement | null>(null);
@@ -24,7 +27,8 @@ export function ScreenshotStream({
   const [coarsePointer, setCoarsePointer] = useState(false);
   const [hintVisible, setHintVisible] = useState(false);
   const hintSeenRef = useRef(false);
-  const items = useMemo(() => getStreamItems(project), [project]);
+  const repeatMedia = direction === "horizontal";
+  const items = useMemo(() => getStreamItems(project, theme, repeatMedia), [project, theme, repeatMedia]);
 
   useEffect(() => {
     const query = window.matchMedia("(pointer: coarse)");
@@ -391,7 +395,7 @@ function isAnimatedMedia(item: ScreenshotTileItem) {
   return item.src ? /\.(gif|webm|mp4)$/i.test(item.src) : false;
 }
 
-function getStreamItems(project: Project): ScreenshotTileItem[] {
+function getStreamItems(project: Project, theme: MediaTheme, repeatMedia: boolean): ScreenshotTileItem[] {
   const realItems: ScreenshotTileItem[] = uniqueBySrc([project.cover, ...project.screenshots]).map(
     (screenshot, index) => ({
       ...screenshot,
@@ -399,11 +403,14 @@ function getStreamItems(project: Project): ScreenshotTileItem[] {
     })
   );
 
-  if (realItems.length === 0) return [];
+  const filteredItems = realItems.filter((item) => matchesMediaTheme(item.src ?? "", theme));
 
-  const items = alternateMedia(realItems);
+  if (filteredItems.length === 0) return [];
+  if (!repeatMedia) return filteredItems;
+
+  const items = alternateMedia(filteredItems);
   while (items.length < minItems) {
-    const source = realItems[items.length % realItems.length];
+    const source = filteredItems[items.length % filteredItems.length];
     items.push({
       ...source,
       id: `${source.id}-repeat-${items.length}`,

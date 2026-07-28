@@ -43,12 +43,12 @@ export const projects: Project[] = [
   {
     slug: "multi-agent-ai-system",
     name: "Multi-Agent AI System",
-    tagline: "A team of AIs, thinking together.",
-    impact: "Turned opaque AI research into an inspectable agent workflow with live execution state, manual checkpoints, reruns, citations, and exportable reports.",
+    tagline: "A research workflow you can inspect while it runs.",
+    impact: "Turned opaque AI research into a workflow with live state, manual checkpoints, reruns, citations, and exportable reports.",
     role: "Frontend architecture, agent workflow design, product UI, and local inference integration",
     scope: "Goal intake, planner review, researcher orchestration, live graph state, critic loop, and final report export",
     constraint: "The system had to feel transparent and useful while running entirely on local LLM infrastructure.",
-    technicalBet: "A streamed, checkpointed agent graph would build more trust than a conventional chat interface.",
+    technicalBet: "A streamed, checkpointed agent graph would earn more trust than a plain chat window.",
     industry: "AI Agent Systems",
     liveUrl: "https://multi-agent-ai-landing.vercel.app/",
     githubUrl: "https://github.com/1n4NO/multi-agent-ai-system",
@@ -164,30 +164,30 @@ export const projects: Project[] = [
       },
         ],
     overview:
-      "A guided multi-agent research assistant. A goal goes in, a planner breaks it into discrete tasks, a research router grounds each one in web or reasoning, and a writer/critic loop turns the result into a cited, polished report — running entirely on local LLMs via Ollama.",
+      "A guided multi-agent research assistant. You give it a goal, a planner breaks the work into stages, a research router grounds each step in web or reasoning, and a writer/critic loop turns the result into a cited report on local Ollama inference.",
     problem:
-      "Most \"AI research assistant\" demos are a single opaque call to a hosted model: you can't inspect what it's doing mid-run, you can't pause it, and you're paying per token to a third party for something that could run locally.",
+      "Most AI research demos are just one opaque model call. You can't see what's happening mid-run, you can't pause it, and you end up paying a hosted API for work that could run locally.",
     approach:
-      "I broke the pipeline into five inspectable stages — planner, research router, researchers, writer, critic — and built the frontend around a React Flow graph so every stage is visible as it runs, not just the final output. Server-sent events stream state updates live, so the UI reflects the actual execution, not a simulated progress bar.",
+      "I broke the pipeline into five visible stages — planner, research router, researchers, writer, critic — and built the frontend around a React Flow graph so each step stays visible while it runs. Server-sent events keep the UI in sync with real state instead of a fake progress bar.",
     solution:
-      "The result is a pipeline you can watch think: a live graph shows planner → router → researchers → writer → critic, with \"needs rerun\" badges on stale outputs, pause/continue and auto-run toggles, and zero dependency on a paid API since inference runs fully on Ollama.",
+      "The result is a pipeline you can follow: planner → router → researchers → writer → critic, with rerun badges for stale outputs, pause/continue controls, and no paid API in the loop because inference runs on Ollama.",
     highlights: [
-      "Live execution graph built with React Flow, streamed over server-sent events",
+      "Live execution graph built with React Flow and streamed over server-sent events",
       "Checkpointed pipeline with pause / continue and manual review at each stage",
       "100% local inference via Ollama — no API key, no per-call cost",
-      "Cited, sourced report generation with a recursive writer/critic loop",
+      "Cited report generation with a writer/critic loop",
     ],
     featured: true,
   },
   {
     slug: "product-studio",
     name: "Product Studio",
-    tagline: "AI-powered UX design for teams that ship.",
-    impact: "Built an AI product studio that moves from brief to blueprint, deterministic UX audit, and exportable artifacts in one guided workflow.",
+    tagline: "UX design with checks, not guesses.",
+    impact: "Built a product studio that moves from brief to blueprint, through deterministic UX checks, and out to exportable assets.",
     role: "Product architecture, AI workflow design, design-system modeling, and UX audit implementation",
     scope: "Provider setup, brief capture, blueprint generation, theme tokens, audit scoring, and export artifacts",
     constraint: "Generated output needed measurable quality checks instead of relying on model confidence or visual plausibility.",
-    technicalBet: "Pairing generative agents with deterministic HTML audits would make AI page output more shippable.",
+    technicalBet: "Pairing generative agents with deterministic HTML checks would make page output easier to ship.",
     industry: "Design Tooling / SaaS",
     liveUrl: "https://ai-product-studio-studio-web.vercel.app/",
     techStack: [
@@ -304,16 +304,16 @@ export const projects: Project[] = [
       },
         ],
     overview:
-      "A browser-based UX studio: generate structured page blueprints with AI, audit them against real WCAG and readability heuristics, and export production-ready design specs — without leaving the tab.",
+      "A browser-based UX studio: turn a brief into a structured page blueprint, check it against WCAG and readability rules, and export the result without leaving the tab.",
     problem:
-      "AI page generators are good at producing something that looks plausible and bad at proving it's usable. Teams end up shipping AI-generated layouts with no accessibility or readability guarantees, and no deterministic way to check them.",
+      "AI page generators are good at producing something plausible and bad at proving it works. Teams end up with layouts that look fine but have no accessibility or readability checks behind them.",
     approach:
-      "I split the product into a generative half and a verification half on purpose. Blueprint generation uses Anthropic Claude first, with an Ollama fallback and a deterministic mock so the tool never blocks on API availability. The audit engine is intentionally not an LLM — it's a 38-check pass over the real HTML using Cheerio, WCAG 2.1 luminance math, and Flesch-Kincaid scoring, so every finding is reproducible.",
+      "I split the product into a generative side and a verification side. Blueprint generation uses Anthropic Claude first, with an Ollama fallback and a deterministic mock so the tool still works if the API is down. The audit engine is intentionally not an LLM; it's a 38-check pass over real HTML using Cheerio, WCAG 2.1 luminance math, and Flesch-Kincaid scoring so findings are repeatable.",
     solution:
-      "Four stages — brief, blueprint, audit, export — take a product description to a scored, exportable page spec. A command palette (⌘K) keeps every action a keystroke away, and exports (JSON, CSS tokens, full HTML, or a client-side ZIP) require no server round-trip.",
+      "Four stages — brief, blueprint, audit, export — take a product description to a scored page spec. A command palette keeps actions close, and exports to JSON, CSS tokens, full HTML, or a client-side ZIP without a server round-trip.",
     highlights: [
-      "38-point deterministic heuristic audit engine, independent of any LLM",
-      "Three-provider AI fallback chain (Claude → OpenAI/Gemini → Ollama) so generation never hard-fails",
+      "38-check deterministic audit engine, independent of any LLM",
+      "Three-provider fallback chain (Claude → OpenAI/Gemini → Ollama) so generation does not hard-fail",
       "Live sandboxed preview pane with desktop / tablet / mobile viewports",
       "Fully client-side export pipeline — no server round-trip on download",
     ],
@@ -322,8 +322,8 @@ export const projects: Project[] = [
   {
     slug: "orqestra",
     name: "Orqestra",
-    tagline: "Design. Assemble. Launch.",
-    impact: "Turned theme tokens, structured sections, page ordering, and responsive preview into a coherent site-builder loop.",
+    tagline: "Design. Arrange. Ship.",
+    impact: "Turned theme tokens, structured sections, page ordering, and responsive preview into a site-builder loop that hangs together.",
     role: "Frontend architecture, builder UX, design-token system, and preview workflow implementation",
     scope: "Theme editor, section schemas, page builder, responsive preview, versioning, and login experience",
     constraint: "The builder needed flexibility without letting arbitrary configuration break preview fidelity.",
@@ -524,13 +524,13 @@ export const projects: Project[] = [
       },
           ],
     overview:
-      "A schema-driven website builder. Set a theme once, drop in structured sections — hero, FAQ, testimonials, CTA — drag them into order, and preview exactly what ships across desktop, tablet, and mobile.",
+      "A schema-driven website builder. Set a theme once, drop in structured sections — hero, FAQ, testimonials, CTA — drag them into order, and preview what ships on desktop, tablet, and mobile.",
     problem:
-      "Most no-code builders either expose raw config you have to guess at, or lock you into a rigid template with no real device preview — so what you build rarely matches what ships.",
+      "Most no-code builders either expose raw config you have to decode or lock you into a rigid template with no real device preview, so what you build and what ships drift apart.",
     approach:
-      "Every section type — hero, FAQ, about, testimonials, social proof, CTA, header, footer — has its own fixed, editable schema rather than a freeform block. That constraint is what makes the live theme editor possible: since every field is known ahead of time, a single primary color, font, or type-scale change can apply correctly across every section at once.",
+      "Every section type — hero, FAQ, about, testimonials, social proof, CTA, header, footer — has its own fixed, editable schema rather than a freeform block. That constraint is what makes the live theme editor possible: when every field is known ahead of time, one primary color, font, or type scale change can flow across the site without breaking anything.",
     solution:
-      "Sections are dragged into order with dnd-kit across as many pages as needed, animation is picked from a controlled menu and run through Framer Motion, and a dedicated preview route renders desktop, tablet, and mobile without guessing at breakpoints. Theme, sections, and layout are each independently versioned, so any earlier state is one click away.",
+      "Sections are dragged into order with dnd-kit across as many pages as needed, animation comes from a controlled menu and Framer Motion, and a dedicated preview route renders desktop, tablet, and mobile without guessing at breakpoints. Theme, sections, and layout are each independently versioned, so any earlier state is one click away.",
     highlights: [
       "Schema-driven sections — no raw JSON hand-editing required",
       "Instant, global theme propagation across every section on change",
@@ -542,11 +542,11 @@ export const projects: Project[] = [
     slug: "state-dashboard",
     name: "PolInsight India",
     tagline: "State-level analytics for election campaign teams.",
-    impact: "Made dense election intelligence scannable through KPI tiles, drill-down maps, hover states, and constituency context.",
+    impact: "Made dense election data easier to scan with KPI tiles, drill-down maps, hover states, and constituency context.",
     role: "Dashboard architecture, data visualization, interaction design, and analytics UI implementation",
     scope: "National KPIs, India map drill-down, state and constituency views, trend widgets, and intelligence panels",
     constraint: "The interface had to preserve data density without overwhelming campaign users during fast analysis.",
-    technicalBet: "Progressive disclosure through map and widget interactions would outperform a flat dashboard grid.",
+    technicalBet: "Progressive disclosure through map and widget interactions would work better than a flat dashboard grid.",
     industry: "Compliance & Standards-Driven Applications",
     liveUrl: "https://election-campaign-iota.vercel.app/",
     techStack: ["Next.js", "React", "TypeScript", "D3.js", "Data Visualization"],
@@ -703,13 +703,13 @@ export const projects: Project[] = [
       },
           ],
     overview:
-      "A state-level analytics dashboard built for campaign teams working with dense, regional data under compliance constraints — surfacing the numbers that matter without burying the reader in them.",
+      "A state-level analytics dashboard built for campaign teams working with dense regional data under compliance constraints, surfacing the numbers that matter without burying the reader in them.",
     problem:
       "Campaign and civic data is naturally hierarchical — state, region, constituency — and most dashboards either flatten it into one overwhelming view or force a slow drill-down for every question.",
     approach:
-      "I focused the frontend architecture on progressive disclosure: a state-level overview that stays legible at a glance, with drill-down views that load only the data a viewer has actually asked for, kept fast and standards-compliant throughout.",
+      "I focused the frontend architecture on progressive disclosure: a state-level overview that stays legible at a glance, with drill-down views that load only the data the viewer has actually asked for, kept fast and standards-compliant throughout.",
     solution:
-      "A dashboard that scales from a statewide summary down to constituency-level detail without a full page reload, built with accessibility and data accuracy treated as first-class requirements rather than an afterthought.",
+      "A dashboard that scales from a statewide summary down to constituency-level detail without a full page reload, with accessibility and data accuracy treated as first-class requirements.",
     highlights: [
       "Hierarchical drill-down from state to constituency level",
       "Performance-conscious rendering of dense regional datasets",
@@ -719,12 +719,12 @@ export const projects: Project[] = [
   {
     slug: "fluxion",
     name: "Fluxion",
-    tagline: "BPMN workflows at Rust speed.",
-    impact: "Gave a Rust BPMN workflow engine an operator console for deployment, inspection, task action, and observability.",
+    tagline: "A workflow console for a Rust BPMN engine.",
+    impact: "Gave a Rust BPMN workflow engine an operator console for deployment, inspection, task handling, and observability.",
     role: "Developer-tool UX, embedded console design, workflow visualization, and operational surface architecture",
     scope: "Dashboard, process deployment, BPMN modeler, graph inspection, task actions, metrics, and settings",
     constraint: "The console had to explain a technical runtime without hiding the engine, API, or observability details.",
-    technicalBet: "An embedded operations UI would make a workflow engine easier to evaluate than API docs alone.",
+    technicalBet: "An embedded operations UI would make the engine easier to evaluate than API docs alone.",
     industry: "Developer Tools / Workflow Engines",
     liveUrl: "https://fluxion-landing-gules.vercel.app/",
     techStack: ["Rust", "Axum", "PostgreSQL", "BPMN 2.0", "Prometheus", "OpenTelemetry"],
@@ -805,9 +805,9 @@ export const projects: Project[] = [
       },
         ],
     overview:
-      "Fluxion is an early-stage BPMN 2.0 workflow engine and HTTP service written in Rust, with an embedded workflow console for process deployment, graph inspection, task operations, metrics, and API review.",
+      "Fluxion is an early-stage BPMN 2.0 workflow engine and HTTP service written in Rust, with an embedded console for process deployment, graph inspection, task operations, metrics, and API review.",
     problem:
-      "Backend and platform engineers need more than a raw workflow API. They need to see whether definitions are deployed, instances are running, tasks are blocked, messages can be correlated, and the service is healthy enough to operate.",
+      "Backend and platform engineers need more than a raw workflow API. They need to see whether definitions are deployed, instances are running, tasks are blocked, messages can be correlated, and the service is healthy enough to run.",
     approach:
       "I treated the console as an operations surface for a technical runtime: dashboard first, process deployment and graph inspection next, then task actions, message correlation, observability, settings, and a small BPMN modeler for validating workflow structure.",
     solution:
@@ -821,7 +821,7 @@ export const projects: Project[] = [
   {
     slug: "rainmatter-air",
     name: "Rainmatter Air",
-    tagline: "Know the air you're breathing.",
+    tagline: "Live air quality, one click away.",
     impact: "Moved live air-quality context into the browser toolbar and current page without accounts, analytics, or remote key storage.",
     role: "Chrome extension architecture, privacy model, AQI calculation, popup UI, and browser smoke testing",
     scope: "Popup dashboard, settings, background refresh, API normalization, CPCB AQI categories, and page overlay",
@@ -892,13 +892,13 @@ export const projects: Project[] = [
       },
         ],
     overview:
-      "A free, open-source Chrome extension that keeps live air quality data one click away, built for Indian cities on top of OpenAQ and Rainmatter's own OAQ platform.",
+      "A free, open-source Chrome extension that keeps live air quality data one click away, built for Indian cities on top of OpenAQ and Rainmatter's OAQ platform.",
     problem:
-      "Air quality data that matters for day-to-day decisions — should I run outside today — is scattered across dashboards nobody checks. It needed to live somewhere people already look: the browser toolbar.",
+      "Air quality data that affects daily decisions — should I run outside today — is scattered across dashboards nobody checks. It needed to live somewhere people already look: the browser toolbar.",
     approach:
       "I built it privacy-first from the frontend up: the API key never leaves the user's device, there's no tracking or analytics, and the extension still shows the last good reading when offline instead of failing silently.",
     solution:
-      "A toolbar popup with a live AQI gauge and pollutant breakdown (PM2.5, PM10, NO₂, SO₂, CO, O₃), CPCB AQI categories for Indian cities, dual API support so it works with OpenAQ or OAQ, and an optional on-page overlay badge for at-a-glance readings anywhere on the web.",
+      "A toolbar popup with a live AQI gauge and pollutant breakdown (PM2.5, PM10, NO₂, SO₂, CO, O₃), CPCB AQI categories for Indian cities, dual API support so it works with OpenAQ or OAQ, and an optional on-page overlay badge for a quick read anywhere on the web.",
     highlights: [
       "CPCB AQI breakpoints for accurate India-specific readings",
       "Dual data-source support (OpenAQ v3 and OAQ) switchable in settings",

@@ -186,7 +186,7 @@ export default function ProjectDetailPage({ params }: { params: { slug: string }
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-1.5 font-mono text-caption uppercase tracking-caps text-signal transition-colors hover:text-signal-dark focus-ring rounded"
               >
-                Visit live site
+                Open live site
                 <ArrowUpRight size={14} className="icon-amber" aria-hidden="true" />
               </a>
               {project.githubUrl && (
@@ -196,7 +196,7 @@ export default function ProjectDetailPage({ params }: { params: { slug: string }
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-1.5 font-mono text-caption uppercase tracking-caps text-ink-soft transition-colors hover:text-ink focus-ring rounded"
                 >
-                  View source
+                  Open source
                   <ArrowUpRight size={14} className="icon-amber" aria-hidden="true" />
                 </a>
               )}
@@ -211,7 +211,7 @@ export default function ProjectDetailPage({ params }: { params: { slug: string }
       </Container>
 
       <Container className="pb-16">
-        <ScreenshotStream project={project} direction="horizontal" priority />
+        <ScreenshotStream project={project} direction="horizontal" priority theme="dark" />
       </Container>
 
       <Container className="pb-section-sm md:pb-section-md">
@@ -234,7 +234,7 @@ export default function ProjectDetailPage({ params }: { params: { slug: string }
               >
                 {section.key === "solution" ? (
                   <div className="max-w-prose-wide border-y border-line bg-surface/55 py-8 pl-5 pr-6 md:py-10 md:pl-7 md:pr-10">
-                    <Eyebrow>Conclusion</Eyebrow>
+                    <Eyebrow>Takeaway</Eyebrow>
                     <h2
                       id={`${section.key}-heading`}
                       className="font-display text-section-title font-medium tracking-display mb-5"
@@ -272,10 +272,10 @@ export default function ProjectDetailPage({ params }: { params: { slug: string }
               className="scroll-mt-20 md:scroll-mt-28"
               aria-labelledby="highlights-heading"
             >
-              <div className="max-w-prose-wide">
+                <div className="max-w-prose-wide">
                 <div className="mb-6 flex items-end justify-between gap-4 border-b border-line pb-4">
                   <div>
-                    <Eyebrow>Proof list</Eyebrow>
+                    <Eyebrow>Evidence</Eyebrow>
                     <h2
                       id="highlights-heading"
                       className="font-display text-subsection font-medium tracking-display-tight"
@@ -313,9 +313,13 @@ export default function ProjectDetailPage({ params }: { params: { slug: string }
             id="screenshots-heading"
             className="font-mono text-[11px] tracking-widest uppercase text-ink-soft mb-8"
           >
-            Product screenshots
+            Screenshots
           </h2>
-          <ScreenshotGallery screenshots={project.screenshots} slugPrefix={project.slug} />
+          <ScreenshotGallery
+            screenshots={project.screenshots}
+            slugPrefix={project.slug}
+            theme="dark"
+          />
         </Container>
       )}
 

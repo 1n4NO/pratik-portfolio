@@ -25,7 +25,7 @@ export function ProjectBrief({ project }: { project: Project }) {
             Project brief
           </p>
           <h2 id="project-brief-heading" className="font-display text-2xl font-bold leading-tight">
-            The product bet, stated plainly.
+            The product bet, in plain language.
           </h2>
           <p className="mt-4 text-sm leading-relaxed text-ink-soft">
             {project.impact}
@@ -35,7 +35,7 @@ export function ProjectBrief({ project }: { project: Project }) {
               Hiring signal
             </p>
             <p className="mt-2 text-sm leading-relaxed text-ink-soft">
-              Senior ownership across product framing, execution scope, and shipped interface quality.
+              Senior ownership across product framing, scope, and shipped interface quality.
             </p>
           </div>
           <div className="engineer-mode-only mt-5 rounded border border-line bg-surface-muted p-3">
@@ -43,7 +43,7 @@ export function ProjectBrief({ project }: { project: Project }) {
               Engineering read
             </p>
             <p className="mt-2 text-sm leading-relaxed text-ink-soft">
-              Focus on constraints, architecture bets, external systems, and data-flow decisions.
+              Focus on constraints, architecture choices, external systems, and data flow.
             </p>
           </div>
         </div>

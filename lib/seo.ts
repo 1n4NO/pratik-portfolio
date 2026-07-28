@@ -11,7 +11,7 @@ export const siteConfig = {
   name: `${profile.name} Portfolio`,
   title: `${profile.name} | Frontend Architect | UX, AI, Design Systems`,
   description:
-    "Portfolio of Pratik Singh, a Frontend Architect building scalable product interfaces, AI-native systems, design systems, and data-heavy web applications.",
+    "Portfolio of Pratik Singh, a Frontend Architect building product interfaces, AI-enabled systems, design systems, and data-heavy web apps.",
   url: normalizeUrl(
     process.env.NEXT_PUBLIC_SITE_URL ??
       (process.env.VERCEL_PROJECT_PRODUCTION_URL

@@ -5,33 +5,39 @@ import { ZoomIn } from "lucide-react";
 import { ScreenshotTile } from "@/components/ui/ScreenshotTile";
 import { Lightbox } from "@/components/ui/Lightbox";
 import type { Screenshot } from "@/data/projects";
+import { matchesMediaTheme, type MediaTheme } from "@/lib/media";
 
 export function ScreenshotGallery({
   screenshots,
   slugPrefix,
+  theme = "all",
 }: {
   screenshots: Screenshot[];
   slugPrefix: string;
+  theme?: MediaTheme;
 }) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const visibleScreenshots = screenshots.filter((shot) =>
+    matchesMediaTheme(shot.src, theme)
+  );
 
   const close = useCallback(() => setOpenIndex(null), []);
   const prev = useCallback(
     () =>
       setOpenIndex((i) =>
-        i === null ? null : (i - 1 + screenshots.length) % screenshots.length
+        i === null ? null : (i - 1 + visibleScreenshots.length) % visibleScreenshots.length
       ),
-    [screenshots.length]
+    [visibleScreenshots.length]
   );
   const next = useCallback(
-    () => setOpenIndex((i) => (i === null ? null : (i + 1) % screenshots.length)),
-    [screenshots.length]
+    () => setOpenIndex((i) => (i === null ? null : (i + 1) % visibleScreenshots.length)),
+    [visibleScreenshots.length]
   );
 
   return (
     <>
       <div className="columns-1 gap-4 md:columns-2 xl:columns-3">
-        {screenshots.map((shot, index) => (
+        {visibleScreenshots.map((shot, index) => (
           <button
             key={shot.src}
             type="button"
@@ -59,7 +65,8 @@ export function ScreenshotGallery({
 
       {openIndex !== null && (
         <Lightbox
-          items={screenshots}
+          items={visibleScreenshots}
+          pairItems={screenshots}
           index={openIndex}
           onClose={close}
           onPrev={prev}

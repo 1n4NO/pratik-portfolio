@@ -26,9 +26,9 @@ export const metadata: Metadata = {
 export default function HomePage() {
   const qualitySignals = [
     "Architecture",
-    "Product thinking",
-    "Execution systems",
-    "AI workflows",
+    "Product sense",
+    "Delivery systems",
+    "AI work",
     "Design systems",
   ];
   const featuredProjects = projects.slice(0, 3);
@@ -65,7 +65,7 @@ export default function HomePage() {
           "Next.js",
           "TypeScript",
           "Design systems",
-          "AI-native interfaces",
+          "AI-enabled interfaces",
           "Data visualization",
         ],
       },
@@ -102,10 +102,10 @@ export default function HomePage() {
       <section className="blueprint-surface relative overflow-hidden pt-section-sm pb-section-sm md:min-h-[640px] md:pt-section-md md:pb-section-md">
         <HeroBackdrop />
         <Container className="relative z-10">
-          <SectionGrid
-            wide
-            aside={
-              <div className="space-y-5 md:max-w-xs">
+        <SectionGrid
+          wide
+          aside={
+            <div className="space-y-5 md:max-w-xs">
                 <Eyebrow index="00" total="03">
                   {profile.name}
                 </Eyebrow>
@@ -130,14 +130,14 @@ export default function HomePage() {
                 href="#work"
                 className="inline-flex items-center justify-center gap-2 rounded border border-signal bg-signal px-6 py-3.5 font-mono text-caption uppercase tracking-caps text-paper transition-colors hover:bg-signal-dark focus-ring"
               >
-                View selected work
+                View work
                 <ArrowDown size={14} className="icon-current" aria-hidden="true" />
               </Link>
               <Link
                 href={`mailto:${profile.email}?subject=Portfolio%20conversation`}
                 className="inline-flex items-center justify-center gap-2 rounded border border-line-strong px-6 py-3.5 font-mono text-caption uppercase tracking-caps text-ink transition-colors hover:border-ink focus-ring"
               >
-                Start a conversation
+                Contact me
                 <ArrowUpRight size={14} className="icon-amber" aria-hidden="true" />
               </Link>
             </div>
@@ -169,10 +169,10 @@ export default function HomePage() {
               <div className="space-y-8">
                 <div>
                   <Eyebrow index="01" total="03">
-                    Profile
+                    Background
                   </Eyebrow>
                   <h2 className="font-display text-section-title font-medium tracking-display">
-                    System context
+                    What I bring to the work
                   </h2>
                 </div>
                 <SpecSheet />
@@ -202,15 +202,15 @@ export default function HomePage() {
                   id="work-heading"
                   className="font-display text-section-title font-medium tracking-display"
                 >
-                  Case studies with architectural proof
+                  Case studies with clear tradeoffs
                 </h2>
               </div>
             }
             contentClassName="space-y-6"
           >
             <p className="max-w-prose text-standfirst leading-standfirst text-ink-soft">
-              Products where rendering strategy, system boundaries, and team velocity were the
-              primary design decisions — not afterthoughts.
+              Products where rendering choices, system boundaries, and team habits were part of
+              the design from the start.
             </p>
             <div className="flex flex-wrap gap-x-5 gap-y-2 border-y border-line py-5">
               {qualitySignals.map((signal) => (
@@ -232,6 +232,7 @@ export default function HomePage() {
             reversed={i % 2 === 1}
             index={i + 1}
             total={featuredProjects.length}
+            mediaTheme="light"
           />
         ))}
 
