@@ -60,7 +60,7 @@ export function ContactCTA({ variant = "full" }: { variant?: "full" | "compact" 
   }
 
   return (
-    <section className="relative overflow-hidden bg-panel text-muted-copy">
+    <section className="relative overflow-hidden bg-deep text-muted-copy">
       <HeroBackdrop stableDarkGrid />
       <div className="absolute inset-0 bg-deep/72" aria-hidden="true" />
       <Container className="relative py-16 md:py-20">
