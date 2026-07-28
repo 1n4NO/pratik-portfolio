@@ -4,6 +4,7 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { PageIntro } from "@/components/ui/PageIntro";
+import { SectionGrid } from "@/components/ui/SectionGrid";
 import { ContactCTA } from "@/components/layout/ContactCTA";
 import { OperatingPrinciples } from "@/components/sections/OperatingPrinciples";
 import { projects } from "@/data/projects";
@@ -55,10 +56,16 @@ export default function WorkPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={jsonLd(structuredData)}
       />
-      <section className="relative flex min-h-[572px] items-center overflow-hidden border-b border-line bg-surface">
+      <section className="relative overflow-hidden border-b border-line bg-surface py-section-sm md:py-section-md">
         <div className="pointer-events-none absolute inset-0 grid-backdrop" aria-hidden="true" />
-        <Container className="relative py-10 md:py-14">
-          <PageIntro eyebrow="Work" title="Products shipped, systems architected.">
+        <Container className="relative">
+          <PageIntro
+            eyebrow="Work"
+            title="Products shipped, systems architected."
+            align="editorial"
+            index="00"
+            total="02"
+          >
             <p>
               Explore the overlap between AI workflows, frontend architecture, data interfaces, and
               product systems before jumping into the detailed case studies.
@@ -67,11 +74,21 @@ export default function WorkPage() {
         </Container>
       </section>
 
-      <Container className="pt-6 pb-10">
-        <p className="mb-3 font-mono text-[10px] uppercase tracking-widest text-ink-soft/60">
-          Project system / interactive index
-        </p>
-        <WorkConstellation />
+      <Container className="pb-section-sm md:pb-section-md">
+        <SectionGrid
+          aside={
+            <div>
+              <p className="mb-4 font-mono text-micro uppercase tracking-caps text-ink-soft/60">
+                Project system
+              </p>
+              <h2 className="font-display text-subsection font-medium tracking-display-tight">
+                Interactive index
+              </h2>
+            </div>
+          }
+        >
+          <WorkConstellation />
+        </SectionGrid>
       </Container>
 
       {/* Real, always-rendered links: keyboard nav, screen readers, and SEO don't

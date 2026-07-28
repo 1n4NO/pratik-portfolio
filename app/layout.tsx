@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Space_Grotesk, IBM_Plex_Sans, JetBrains_Mono } from "next/font/google";
+import { Newsreader, Inter, JetBrains_Mono } from "next/font/google";
 // @ts-ignore: CSS module declarations may be missing for side-effect import
 import "./globals.css";
 import { Header } from "@/components/layout/Header";
@@ -9,15 +9,16 @@ import { PageTransition } from "@/components/layout/PageTransition";
 import { createMetadata, siteConfig } from "@/lib/seo";
 import { Analytics } from "@vercel/analytics/next"
 
-const display = Space_Grotesk({
+const display = Newsreader({
   subsets: ["latin"],
-  weight: ["500", "700"],
+  weight: ["400", "500", "600"],
+  style: ["normal", "italic"],
   variable: "--font-display",
 });
 
-const body = IBM_Plex_Sans({
+const body = Inter({
   subsets: ["latin"],
-  weight: ["400", "500"],
+  weight: ["400", "500", "600"],
   variable: "--font-body",
 });
 

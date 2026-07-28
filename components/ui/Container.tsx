@@ -9,7 +9,7 @@ export function Container({
   className?: string;
 } & HTMLAttributes<HTMLDivElement>) {
   return (
-    <div className={`mx-auto w-full max-w-content px-6 md:px-10 ${className}`} {...props}>
+    <div className={`mx-auto w-full max-w-content px-gutter ${className}`} {...props}>
       {children}
     </div>
   );

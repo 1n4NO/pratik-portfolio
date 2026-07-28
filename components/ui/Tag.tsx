@@ -8,11 +8,11 @@ export function Tag({
   const styles =
     variant === "amber"
       ? "bg-amber-bg text-amber"
-      : "bg-surface-muted text-ink-soft";
+      : "bg-surface-muted text-ink-soft/80";
 
   return (
     <span
-      className={`font-mono text-[11px] tracking-wide px-2.5 py-1 rounded ${styles}`}
+      className={`inline-flex items-center font-mono text-micro tracking-caps px-2.5 py-1 rounded ${styles}`}
     >
       {children}
     </span>

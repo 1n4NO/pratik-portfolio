@@ -4,62 +4,79 @@ import { Project } from "@/data/projects";
 import { ScreenshotStream } from "@/components/sections/ScreenshotStream";
 import { Tag } from "@/components/ui/Tag";
 import { Container } from "@/components/ui/Container";
+import { Eyebrow } from "@/components/ui/Eyebrow";
+import { SectionGrid } from "@/components/ui/SectionGrid";
 
-export function ProjectRow({ project, reversed }: { project: Project; reversed?: boolean }) {
+export function ProjectRow({
+  project,
+  reversed,
+  index,
+  total,
+}: {
+  project: Project;
+  reversed?: boolean;
+  index?: number;
+  total?: number;
+}) {
+  const indexLabel = index !== undefined ? String(index).padStart(2, "0") : undefined;
+  const totalLabel = total !== undefined ? String(total).padStart(2, "0") : undefined;
+
   return (
     <Container
       id={`project-${project.slug}`}
-      className="scroll-mt-20 py-14 md:scroll-mt-28 md:py-20"
+      className="scroll-mt-20 border-t border-line py-section-sm md:scroll-mt-28 md:py-section-md"
     >
-      <div
-        className={`flex flex-col ${
-          reversed ? "md:flex-row-reverse" : "md:flex-row"
-        } gap-10 md:gap-14 items-center`}
+      <SectionGrid
+        reverse={reversed}
+        wide
+        stickyAside={!reversed}
+        aside={
+          <div className="space-y-6 md:max-w-xs">
+            <Eyebrow index={indexLabel} total={totalLabel}>
+              {project.industry}
+            </Eyebrow>
+            <h3 className="font-display text-subsection font-medium tracking-display-tight">
+              {project.name}
+            </h3>
+            <p className="text-standfirst leading-standfirst text-ink-soft">{project.tagline}</p>
+            <dl className="space-y-4 border-y border-line py-5">
+              <div>
+                <dt className="mb-1.5 font-mono text-micro uppercase tracking-caps text-ink-soft/60">
+                  Role
+                </dt>
+                <dd className="text-body leading-body text-ink-soft">{project.role}</dd>
+              </div>
+              <div>
+                <dt className="mb-1.5 font-mono text-micro uppercase tracking-caps text-ink-soft/60">
+                  Technical bet
+                </dt>
+                <dd className="text-body leading-body text-ink-soft">{project.technicalBet}</dd>
+              </div>
+            </dl>
+            <div className="flex flex-wrap gap-2">
+              {project.techStack.slice(0, 5).map((tech) => (
+                <Tag key={tech}>{tech}</Tag>
+              ))}
+            </div>
+            <Link
+              href={`/work/${project.slug}`}
+              className="inline-flex items-center gap-1.5 font-mono text-caption uppercase tracking-caps text-signal transition-colors hover:text-signal-dark focus-ring rounded"
+            >
+              View case study
+              <ArrowUpRight size={14} className="icon-amber" aria-hidden="true" />
+            </Link>
+          </div>
+        }
+        contentClassName="min-w-0"
       >
-        <div className="w-full md:w-1/2">
+        <div className="space-y-6">
+          <blockquote className="max-w-prose border-l border-signal pl-5 text-body font-medium leading-body text-ink md:pl-6">
+            {project.impact}
+          </blockquote>
+          <p className="max-w-prose text-body leading-body text-ink-soft">{project.overview}</p>
           <ScreenshotStream project={project} />
         </div>
-
-        <div className="w-full md:w-1/2">
-          <Tag variant="amber">{project.industry}</Tag>
-          <h3 className="font-display text-2xl md:text-3xl font-bold mt-4 mb-2">
-            {project.name}
-          </h3>
-          <p className="text-ink-soft text-base mb-4">{project.tagline}</p>
-          <p className="mb-5 max-w-md border-l-2 border-signal pl-4 text-sm font-medium leading-relaxed text-ink">
-            {project.impact}
-          </p>
-          <p className="text-sm text-ink-soft leading-relaxed mb-5 max-w-md">
-            {project.overview}
-          </p>
-          <dl className="mb-6 grid max-w-md grid-cols-1 gap-3 border-y border-line py-4 text-sm sm:grid-cols-2">
-            <div>
-              <dt className="mb-1 font-mono text-[10px] uppercase tracking-widest text-ink-soft/70">
-                Role
-              </dt>
-              <dd className="text-ink-soft leading-snug">{project.role}</dd>
-            </div>
-            <div>
-              <dt className="mb-1 font-mono text-[10px] uppercase tracking-widest text-ink-soft/70">
-                Technical bet
-              </dt>
-              <dd className="text-ink-soft leading-snug">{project.technicalBet}</dd>
-            </div>
-          </dl>
-          <div className="flex flex-wrap gap-2 mb-6">
-            {project.techStack.slice(0, 4).map((tech) => (
-              <Tag key={tech}>{tech}</Tag>
-            ))}
-          </div>
-          <Link
-            href={`/work/${project.slug}`}
-            className="inline-flex items-center gap-1.5 font-mono text-[12px] tracking-wide text-signal hover:text-signal-dark focus-ring rounded"
-          >
-            View case study
-            <ArrowUpRight size={14} className="icon-amber" aria-hidden="true" />
-          </Link>
-        </div>
-      </div>
+      </SectionGrid>
     </Container>
   );
 }

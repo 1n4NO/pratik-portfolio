@@ -66,11 +66,93 @@ html[data-theme="light"] {
 body {
   background-color: rgb(var(--color-paper));
   color: rgb(var(--color-ink));
-  font-weight: 500;
+  font-weight: 400;
+  font-feature-settings: "kern" 1, "liga" 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .font-mono {
-  font-weight: 500;
+  font-weight: 450;
+}
+
+.font-display {
+  font-optical-sizing: auto;
+  text-rendering: optimizeLegibility;
+}
+
+/* ── Editorial layout grid ── */
+
+.editorial-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--editorial-gap, clamp(2rem, 4vw, 4rem));
+}
+
+@media (min-width: 768px) {
+  .editorial-grid {
+    grid-template-columns: minmax(0, 0.38fr) minmax(0, 0.62fr);
+    align-items: start;
+  }
+
+  .editorial-grid--wide {
+    grid-template-columns: minmax(0, 0.32fr) minmax(0, 0.68fr);
+  }
+
+  .editorial-grid--reverse {
+    grid-template-columns: minmax(0, 0.62fr) minmax(0, 0.38fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .editorial-grid {
+    grid-template-columns: minmax(0, 0.34fr) minmax(0, 0.66fr);
+  }
+
+  .editorial-grid--wide {
+    grid-template-columns: minmax(0, 0.28fr) minmax(0, 0.72fr);
+  }
+}
+
+.editorial-grid__aside {
+  position: relative;
+}
+
+@media (min-width: 768px) {
+  .editorial-grid__aside--sticky {
+    position: sticky;
+    top: 6.5rem;
+    align-self: start;
+  }
+}
+
+/* ── Blueprint / architectural surface ── */
+
+.blueprint-surface {
+  position: relative;
+  isolation: isolate;
+}
+
+.blueprint-surface::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image:
+    linear-gradient(rgb(var(--tw-grid-line) / 0.28) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(var(--tw-grid-line) / 0.28) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: linear-gradient(to bottom, black 0%, transparent 100%);
+}
+
+.blueprint-surface > * {
+  position: relative;
+  z-index: 1;
+}
+
+.section-rule {
+  border-top: 1px solid rgb(var(--color-line));
 }
 
 .icon-amber {
@@ -107,9 +189,9 @@ body {
 
 .grid-lines {
   background-image:
-    linear-gradient(rgb(var(--tw-grid-line) / 0.6) 1px, transparent 1px),
-    linear-gradient(90deg, rgb(var(--tw-grid-line) / 0.6) 1px, transparent 1px);
-  background-size: 32px 32px;
+    linear-gradient(rgb(var(--tw-grid-line) / 0.45) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(var(--tw-grid-line) / 0.45) 1px, transparent 1px);
+  background-size: 40px 40px;
 }
 
 .grid-backdrop {

@@ -3,6 +3,8 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, ArrowUpRight, Check } from "lucide-react";
 import { Container } from "@/components/ui/Container";
+import { Eyebrow } from "@/components/ui/Eyebrow";
+import { SectionGrid } from "@/components/ui/SectionGrid";
 import { Tag } from "@/components/ui/Tag";
 import { ScreenshotStream } from "@/components/sections/ScreenshotStream";
 import { ScreenshotGallery } from "@/components/sections/ScreenshotGallery";
@@ -122,52 +124,86 @@ export default function ProjectDetailPage({ params }: { params: { slug: string }
         dangerouslySetInnerHTML={jsonLd(structuredData)}
       />
       <ReadingProgressRuler />
-      <Container className="pt-10 pb-4">
+      <Container className="pt-section-sm pb-8 md:pt-section-md">
         <Link
           href="/work"
-          className="inline-flex items-center gap-1.5 font-mono text-[11px] text-ink-soft hover:text-signal focus-ring rounded"
+          className="mb-10 inline-flex items-center gap-1.5 font-mono text-micro uppercase tracking-caps text-ink-soft transition-colors hover:text-signal focus-ring rounded"
         >
           <ArrowLeft size={14} className="icon-amber" aria-hidden="true" />
           All work
         </Link>
-      </Container>
 
-      <Container className="pb-10">
-        <Tag variant="amber">{project.industry}</Tag>
-        <h1 className="font-display text-3xl md:text-5xl font-bold mt-4 mb-3 max-w-2xl">
-          {project.name}
-        </h1>
-        <p className="text-ink-soft text-lg max-w-xl mb-6">{project.tagline}</p>
-        <div className="flex flex-wrap gap-2 mb-6">
-          {project.techStack.map((tech) => (
-            <Tag key={tech}>{tech}</Tag>
-          ))}
-        </div>
-        <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
-          <div className="flex gap-4">
-            <a
-              href={project.liveUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 font-mono text-[12px] text-signal hover:text-signal-dark focus-ring rounded"
-            >
-              Visit live site
-              <ArrowUpRight size={14} className="icon-amber" aria-hidden="true" />
-            </a>
-            {project.githubUrl && (
+        <SectionGrid
+          wide
+          stickyAside
+          aside={
+            <div className="space-y-6 md:max-w-xs">
+              <Tag variant="amber">{project.industry}</Tag>
+              <dl className="hidden space-y-4 border-y border-line py-5 font-mono text-caption md:block">
+                <div>
+                  <dt className="mb-1.5 uppercase tracking-caps text-ink-soft/60">Industry</dt>
+                  <dd>{project.industry}</dd>
+                </div>
+                <div>
+                  <dt className="mb-1.5 uppercase tracking-caps text-ink-soft/60">Tech stack</dt>
+                  <dd className="space-y-1 text-ink-soft">
+                    {project.techStack.map((tech) => (
+                      <div key={tech}>{tech}</div>
+                    ))}
+                  </dd>
+                </div>
+                {project.externalSystems && project.externalSystems.length > 0 && (
+                  <div>
+                    <dt className="mb-1.5 uppercase tracking-caps text-ink-soft/60">
+                      External systems
+                    </dt>
+                    <dd className="space-y-1 text-ink-soft">
+                      {project.externalSystems.map((system) => (
+                        <div key={system}>{system}</div>
+                      ))}
+                    </dd>
+                  </div>
+                )}
+              </dl>
+            </div>
+          }
+          contentClassName="max-w-prose-wide space-y-8"
+        >
+          <div>
+            <h1 className="font-display text-hero font-medium tracking-display">{project.name}</h1>
+            <p className="mt-6 text-standfirst leading-standfirst text-ink-soft">{project.tagline}</p>
+          </div>
+          <div className="flex flex-wrap gap-2">
+            {project.techStack.map((tech) => (
+              <Tag key={tech}>{tech}</Tag>
+            ))}
+          </div>
+          <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
+            <div className="flex gap-4">
               <a
-                href={project.githubUrl}
+                href={project.liveUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 font-mono text-[12px] text-ink-soft hover:text-ink focus-ring rounded"
+                className="inline-flex items-center gap-1.5 font-mono text-caption uppercase tracking-caps text-signal transition-colors hover:text-signal-dark focus-ring rounded"
               >
-                View source
+                Visit live site
                 <ArrowUpRight size={14} className="icon-amber" aria-hidden="true" />
               </a>
-            )}
+              {project.githubUrl && (
+                <a
+                  href={project.githubUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 font-mono text-caption uppercase tracking-caps text-ink-soft transition-colors hover:text-ink focus-ring rounded"
+                >
+                  View source
+                  <ArrowUpRight size={14} className="icon-amber" aria-hidden="true" />
+                </a>
+              )}
+            </div>
+            <ReadingModeToggle />
           </div>
-          <ReadingModeToggle />
-        </div>
+        </SectionGrid>
       </Container>
 
       <Container className="pb-16">
@@ -178,45 +214,17 @@ export default function ProjectDetailPage({ params }: { params: { slug: string }
         <ScreenshotStream project={project} direction="horizontal" priority />
       </Container>
 
-      <Container className="pb-16">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
-          <div className="md:col-span-1">
-            <div className="sticky top-3 z-20 md:top-24">
-              <CaseStudyNav
-                items={caseStudyNavItems.filter(
-                  (item) => item.id !== "screenshots" || project.screenshots.length > 0
-                )}
-              />
-              <dl className="hidden font-mono text-[11px] space-y-4 md:block">
-                <div>
-                  <dt className="text-ink-soft/60 uppercase tracking-wide mb-1">Industry</dt>
-                  <dd>{project.industry}</dd>
-                </div>
-                <div>
-                  <dt className="text-ink-soft/60 uppercase tracking-wide mb-1">Tech stack</dt>
-                  <dd className="space-y-1">
-                    {project.techStack.map((tech) => (
-                      <div key={tech}>{tech}</div>
-                    ))}
-                  </dd>
-                </div>
-                {project.externalSystems && project.externalSystems.length > 0 && (
-                  <div>
-                    <dt className="text-ink-soft/60 uppercase tracking-wide mb-1">
-                      External systems
-                    </dt>
-                    <dd className="space-y-1">
-                      {project.externalSystems.map((system) => (
-                        <div key={system}>{system}</div>
-                      ))}
-                    </dd>
-                  </div>
-                )}
-              </dl>
-            </div>
+      <Container className="pb-section-sm md:pb-section-md">
+        <div className="editorial-grid editorial-grid--wide gap-grid-gap">
+          <div className="editorial-grid__aside editorial-grid__aside--sticky">
+            <CaseStudyNav
+              items={caseStudyNavItems.filter(
+                (item) => item.id !== "screenshots" || project.screenshots.length > 0
+              )}
+            />
           </div>
 
-          <div className="md:col-span-3 space-y-16">
+          <div className="space-y-section-sm md:space-y-section-md">
             {sections.map((section) => (
               <MotionReveal
                 key={section.key}
@@ -225,25 +233,31 @@ export default function ProjectDetailPage({ params }: { params: { slug: string }
                 aria-labelledby={`${section.key}-heading`}
               >
                 {section.key === "solution" ? (
-                  <div className="max-w-[760px] border-y border-line bg-surface/55 py-6 pl-4 pr-5 md:py-8 md:pl-6 md:pr-8">
-                    <p className="mb-3 font-mono text-[10px] uppercase tracking-widest text-signal">
-                      Conclusion
-                    </p>
-                    <h2 id={`${section.key}-heading`} className="font-display text-2xl font-bold mb-4">
+                  <div className="max-w-prose-wide border-y border-line bg-surface/55 py-8 pl-5 pr-6 md:py-10 md:pl-7 md:pr-10">
+                    <Eyebrow>Conclusion</Eyebrow>
+                    <h2
+                      id={`${section.key}-heading`}
+                      className="font-display text-section-title font-medium tracking-display mb-5"
+                    >
                       {section.label}
                     </h2>
-                    <p className="text-lg leading-relaxed text-ink md:text-xl">{project[section.key]}</p>
+                    <p className="text-standfirst leading-standfirst text-ink md:text-[1.375rem] md:leading-[1.65]">
+                      {project[section.key]}
+                    </p>
                   </div>
                 ) : (
-                  <div className="max-w-[680px] border-l border-line pl-4 md:pl-6">
-                    <h2 id={`${section.key}-heading`} className="font-display text-xl font-bold mb-3">
+                  <div className="max-w-prose-wide border-l border-line pl-5 md:pl-7">
+                    <h2
+                      id={`${section.key}-heading`}
+                      className="font-display text-subsection font-medium tracking-display-tight mb-4"
+                    >
                       {section.label}
                     </h2>
-                    <p className="text-ink-soft leading-relaxed">{project[section.key]}</p>
+                    <p className="text-body leading-body text-ink-soft">{project[section.key]}</p>
                   </div>
                 )}
                 {section.key === "approach" && (
-                  <div className="mt-10">
+                  <div className="mt-12">
                     <DetailedProcess
                       steps={project.detailedProcess}
                       dataFlowDiagram={project.dataFlowDiagram}
@@ -258,28 +272,29 @@ export default function ProjectDetailPage({ params }: { params: { slug: string }
               className="scroll-mt-20 md:scroll-mt-28"
               aria-labelledby="highlights-heading"
             >
-              <div className="max-w-[760px]">
-                <div className="mb-5 flex items-end justify-between gap-4 border-b border-line pb-3">
+              <div className="max-w-prose-wide">
+                <div className="mb-6 flex items-end justify-between gap-4 border-b border-line pb-4">
                   <div>
-                    <p className="mb-2 font-mono text-[10px] uppercase tracking-widest text-signal">
-                      Proof list
-                    </p>
-                    <h2 id="highlights-heading" className="font-display text-xl font-bold">
+                    <Eyebrow>Proof list</Eyebrow>
+                    <h2
+                      id="highlights-heading"
+                      className="font-display text-subsection font-medium tracking-display-tight"
+                    >
                       Highlights
                     </h2>
                   </div>
-                  <span className="font-mono text-[10px] uppercase tracking-widest text-ink-soft/60">
+                  <span className="font-mono text-micro uppercase tracking-caps text-ink-soft/60">
                     {String(project.highlights.length).padStart(2, "0")} signals
                   </span>
                 </div>
                 <ul className="divide-y divide-line border-y border-line">
                   {project.highlights.map((h, index) => (
-                    <li key={h} className="grid grid-cols-[3.25rem_minmax(0,1fr)] gap-4 py-4">
-                      <span className="flex items-start gap-2 font-mono text-[10px] uppercase tracking-widest text-amber">
+                    <li key={h} className="grid grid-cols-[3.5rem_minmax(0,1fr)] gap-4 py-5">
+                      <span className="flex items-start gap-2 font-mono text-micro uppercase tracking-caps text-amber">
                         <Check size={14} className="icon-amber mt-0.5 shrink-0" aria-hidden="true" />
                         {String(index + 1).padStart(2, "0")}
                       </span>
-                      <span className="text-sm leading-relaxed text-ink md:text-base">{h}</span>
+                      <span className="text-body leading-body text-ink">{h}</span>
                     </li>
                   ))}
                 </ul>

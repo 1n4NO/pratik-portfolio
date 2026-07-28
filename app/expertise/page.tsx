@@ -23,46 +23,47 @@ const maxYearsActive = Math.max(...skillGroups.map((g) => currentYear - g.since)
 export default function ExpertisePage() {
   return (
     <>
-      <section className="relative overflow-hidden border-b border-line bg-surface">
+      <section className="relative overflow-hidden border-b border-line bg-surface py-section-sm md:py-section-md">
         <div className="pointer-events-none absolute inset-0 grid-backdrop" aria-hidden="true" />
-        <Container className="relative py-10 md:py-14">
-          <div className="grid gap-10 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:items-center">
-            <PageIntro
-              eyebrow="Expertise"
-              title="Twelve years, condensed."
-              align="stack"
-              action={(
-                <LinkButton href={profile.resumeUrl} download>
+        <Container className="relative">
+          <PageIntro
+            eyebrow="Expertise"
+            title="Twelve years, condensed."
+            align="editorial"
+            action={(
+              <LinkButton href={profile.resumeUrl} download>
                 <Download size={14} className="icon-current" aria-hidden="true" />
                 Download résumé
-                </LinkButton>
-              )}
-            >
-              <p>
-                A practical map of depth: core skill areas, the systems behind them, and the
-                shipped work that proves them.
-              </p>
-            </PageIntro>
-            <HeroSystemMap />
-          </div>
+              </LinkButton>
+            )}
+          >
+            <p>
+              A practical map of depth: core skill areas, the systems behind them, and the
+              shipped work that proves them.
+            </p>
+          </PageIntro>
         </Container>
       </section>
 
-      <Container className="pt-16 pb-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-12">
+      <Container className="py-section-sm md:py-section-md">
+        <HeroSystemMap />
+      </Container>
+
+      <Container className="pb-section-sm md:pb-section-md">
+        <div className="grid grid-cols-1 gap-x-12 gap-y-14 md:grid-cols-2">
           {skillGroups.map((group) => (
-            <div key={group.title} className="border-t border-line pt-5">
-              <h2 className="mb-1 flex items-center gap-2 font-display text-lg font-bold">
+            <div key={group.title} className="border-t border-line pt-6">
+              <h2 className="mb-2 flex items-center gap-2 font-display text-subsection font-medium tracking-display-tight">
                 <ExpertiseTitleIcon title={group.title} />
                 {group.title}
               </h2>
-              <p className="text-sm text-ink-soft mb-4">{group.blurb}</p>
+              <p className="mb-5 text-body leading-body text-ink-soft">{group.blurb}</p>
               <SkillMeter group={group} maxYears={maxYearsActive} />
-              <ul className="mt-4 flex flex-wrap gap-2">
+              <ul className="mt-5 flex flex-wrap gap-2">
                 {group.items.map((item) => (
                   <li
                     key={item}
-                    className="font-mono text-[11px] bg-surface-muted text-ink-soft px-2.5 py-1 rounded"
+                    className="rounded bg-surface-muted px-2.5 py-1 font-mono text-micro text-ink-soft"
                   >
                     {item}
                   </li>
@@ -73,12 +74,12 @@ export default function ExpertisePage() {
         </div>
       </Container>
 
-      <Container className="pb-20">
+      <Container className="pb-section-sm md:pb-section-md">
         <div className="border-t border-line pt-8">
-          <h2 className="font-mono text-[11px] tracking-widest uppercase text-ink-soft mb-4">
+          <p className="mb-4 font-mono text-micro uppercase tracking-caps text-ink-soft/60">
             Industry expertise
-          </h2>
-          <p className="max-w-2xl font-mono text-[12px] leading-relaxed text-ink-soft/75">
+          </p>
+          <p className="max-w-prose-wide font-mono text-caption leading-relaxed text-ink-soft/75">
             {industries.join("   ·   ")}
           </p>
         </div>
