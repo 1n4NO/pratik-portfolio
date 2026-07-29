@@ -6,6 +6,7 @@ import { HeroMarquee } from "@/components/sections/HeroMarquee";
 import { SpecSheet } from "@/components/sections/SpecSheet";
 import { ProjectRow } from "@/components/sections/ProjectRow";
 import { ContactCTA } from "@/components/layout/ContactCTA";
+import { UpcomingProjectSection } from "@/components/sections/UpcomingProjectSection";
 import { Container } from "@/components/ui/Container";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { SectionGrid } from "@/components/ui/SectionGrid";
@@ -242,19 +243,7 @@ export default function HomePage() {
           />
         ))}
 
-        <Container className="border-t border-line pt-10">
-          <Link
-            href="/work"
-            className="group inline-flex items-center gap-2 rounded font-mono text-caption uppercase tracking-caps text-signal hover:text-signal-dark focus-ring"
-          >
-            View all work
-            <ArrowUpRight
-              size={14}
-              className="icon-amber transition-transform group-hover:translate-x-0.5"
-              aria-hidden="true"
-            />
-          </Link>
-        </Container>
+        <UpcomingProjectSection />
       </section>
 
       <ContactCTA />
