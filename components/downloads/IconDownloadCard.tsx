@@ -70,7 +70,7 @@ export function IconDownloadCard({ icon }: { icon: DownloadableIcon }) {
   return (
     <div className="flex flex-col items-center gap-4 rounded-lg border border-line bg-surface p-6 text-center">
       <div
-        className="flex h-16 w-16 items-center justify-center rounded border border-line bg-paper text-amber [&_svg]:h-9 [&_svg]:w-9"
+        className="flex h-16 w-16 items-center justify-center rounded border border-line text-amber [&_svg]:h-9 [&_svg]:w-9"
         dangerouslySetInnerHTML={{ __html: previewSvg }}
       />
       <p className="font-mono text-[11px] uppercase tracking-wide text-ink-soft">{icon.name}</p>
