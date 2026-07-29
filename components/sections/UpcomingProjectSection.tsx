@@ -9,13 +9,14 @@ import { Container } from "@/components/ui/Container";
 const upcomingImages = [
   { src: "/upcoming/1.png", alt: "Upcoming project preview image 1", className: "md:col-span-2 md:row-span-2" },
   { src: "/upcoming/2.png", alt: "Upcoming project preview image 2", className: "md:row-span-2" },
-  { src: "/upcoming/3.png", alt: "Upcoming project preview image 3", className: "md:row-span-2" },
+  { src: "/upcoming/3.png", alt: "Upcoming project preview image 3", className: "" },
   { src: "/upcoming/4.png", alt: "Upcoming project preview image 4", className: "" },
   { src: "/upcoming/5.png", alt: "Upcoming project preview image 5", className: "md:col-span-2" },
-  { src: "/upcoming/6.png", alt: "Upcoming project preview image 6", className: "" },
+  { src: "/upcoming/6.png", alt: "Upcoming project preview image 6", className: "md:row-span-2" },
   { src: "/upcoming/7.png", alt: "Upcoming project preview image 7", className: "" },
   { src: "/upcoming/8.png", alt: "Upcoming project preview image 8", className: "md:row-span-2" },
   { src: "/upcoming/9.png", alt: "Upcoming project preview image 9", className: "md:col-span-2 md:row-span-2" },
+  { src: "/upcoming/10.png", alt: "Upcoming project preview image 10", className: "md:row-span-2" },
 ] as const;
 
 export function UpcomingProjectSection() {
