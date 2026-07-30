@@ -19,6 +19,16 @@ const upcomingImages = [
   { src: "/upcoming/10.png", alt: "Upcoming project preview image 10", className: "md:row-span-2" },
 ] as const;
 
+const blueLotusTags = [
+  "visual design",
+  "frontend architecture",
+  "animation",
+  "interaction design",
+  "storytelling",
+  "branding",
+  "art direction",
+] as const;
+
 export function UpcomingProjectSection() {
   const reduceMotion = useReducedMotion();
   const { scrollYProgress } = useScroll();
@@ -61,6 +71,17 @@ export function UpcomingProjectSection() {
 
       <section aria-label="Upcoming project images" className="border-t border-white/10 bg-[#000000]">
         <Container className="py-section-sm md:py-section-md">
+          <div className="mb-8 flex flex-wrap justify-center gap-2.5 sm:gap-3">
+            {blueLotusTags.map((tag) => (
+              <span
+                key={tag}
+                className="inline-flex items-center rounded-full border border-white/12 bg-white/5 px-4 py-2 font-mono text-[9px] uppercase tracking-[0.34em] text-white/72"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+
           <motion.div
             initial={reduceMotion ? { opacity: 1 } : { opacity: 0 }}
             whileInView={reduceMotion ? { opacity: 1 } : { opacity: 1 }}
