@@ -111,27 +111,31 @@ function hasAll(tokens: Set<string>, required: string[]) {
 }
 
 function scoreIntent(questionText: string, tokens: Set<string>, intent: IntentDefinition) {
-  let score = intent.baseScore;
+  let score = 0;
+  let matched = false;
 
   for (const phrase of intent.phrases) {
     if (questionText.includes(normalizeText(phrase))) {
       score += 7;
+      matched = true;
     }
   }
 
   for (const keyword of intent.keywords) {
     if (tokens.has(keyword)) {
       score += 1.2;
+      matched = true;
     }
   }
 
   for (const group of intent.keywordGroups) {
     if (hasAll(tokens, group)) {
       score += 2.5;
+      matched = true;
     }
   }
 
-  return score;
+  return matched ? score + intent.baseScore : 0;
 }
 
 function getRecognitionConstructor(): RecognitionConstructor | null {
@@ -170,6 +174,80 @@ function resolveIntent(rawQuestion: string): IntentResult {
   const projectTarget = selectProjectTarget(tokens) ?? { kind: "hash", value: "#work" };
 
   const intents: IntentDefinition[] = [
+    {
+      id: "latest-work",
+      baseScore: 10,
+      phrases: [
+        "what is your latest work",
+        "show me your latest work",
+        "show me the latest work",
+        "what is your newest work",
+        "show me your newest work",
+        "tell me about blue lotus",
+        "show me blue lotus",
+        "blue lotus",
+        "latest project",
+        "recent work",
+      ],
+      keywords: ["latest", "newest", "recent", "blue", "lotus", "upcoming", "work", "project"],
+      keywordGroups: [["blue", "lotus"], ["latest", "work"], ["newest", "work"], ["recent", "work"]],
+      response: () => "I’ve opened Blue Lotus Experience below. It’s the latest work I’m sharing right now.",
+      spokenResponse: () =>
+        "I’ve opened Blue Lotus Experience below. It’s the latest work I’m sharing right now.",
+      followUps: () => [
+        "Visit site",
+        "Show me the screenshots",
+        "What was your role?",
+        "Show me Product Studio",
+      ],
+      target: { kind: "hash", value: "#upcoming-project" },
+    },
+    {
+      id: "project-specific",
+      baseScore: 9,
+      phrases: [
+        "show me product studio",
+        "tell me about product studio",
+        "show me the multi agent system",
+        "show me the multi-agent system",
+        "tell me about the multi agent system",
+        "tell me about the multi-agent system",
+        "take me to product studio",
+        "take me to the multi agent system",
+        "take me to the multi-agent system",
+      ],
+      keywords: ["productstudio", "multiagent", "studio", "project", "projects", "system"],
+      keywordGroups: [["product", "studio"], ["multiagent", "system"], ["show", "project"]],
+      response: () => {
+        if (projectTarget.value === "#project-product-studio") {
+          return "I’ve opened Product Studio below. It’s the clearest fit for brief-to-blueprint workflows and exportable output.";
+        }
+
+        if (projectTarget.value === "#project-multi-agent-ai-system") {
+          return "I’ve opened the Multi-Agent AI System below. It shows the planner, researcher, critic, and export flow in one place.";
+        }
+
+        return "I’ve opened Selected Work below so you can start with the strongest case studies.";
+      },
+      spokenResponse: () => {
+        if (projectTarget.value === "#project-product-studio") {
+          return "I’ve opened Product Studio below. It’s the clearest fit for brief to blueprint workflows and exportable output.";
+        }
+
+        if (projectTarget.value === "#project-multi-agent-ai-system") {
+          return "I’ve opened the Multi-Agent AI System below. It shows the planner, researcher, critic, and export flow in one place.";
+        }
+
+        return "I’ve opened Selected Work below so you can start with the strongest case studies.";
+      },
+      followUps: () => [
+        "Show me the multi-agent system",
+        "What was your role?",
+        "What is your React experience?",
+        "Show me Product Studio",
+      ],
+      target: () => projectTarget,
+    },
     {
       id: "resume",
       baseScore: 10,
@@ -269,9 +347,22 @@ function resolveIntent(rawQuestion: string): IntentResult {
         "what have you built with agents",
         "tell me about the multi agent project",
         "have you worked with conversational interfaces",
+        "show me product studio",
+        "show me the multi agent system",
+        "show me the multi-agent system",
       ],
-      keywords: ["ai", "agent", "agents", "conversational", "interface", "llm", "ollama"],
-      keywordGroups: [["multiagent", "system"], ["conversational", "interfaces"]],
+      keywords: [
+        "ai",
+        "agent",
+        "agents",
+        "conversational",
+        "interface",
+        "llm",
+        "ollama",
+        "productstudio",
+        "multiagent",
+      ],
+      keywordGroups: [["multiagent", "system"], ["conversational", "interfaces"], ["product", "studio"]],
       response: () => {
         if (projectTarget.value === "#project-product-studio") {
           return "I’ve opened Product Studio below. It’s the cleanest fit for brief-to-blueprint workflows, audits, and exported frontend output.";
@@ -872,23 +963,19 @@ export function HeroVoicePortfolio() {
     ? "Listening"
     : isSpeaking
       ? "Speaking"
-      : voiceOutputSupported
-        ? autoVoice
-          ? "Ready"
-          : "Voice replies muted"
-        : "Text only";
+      : "Text only";
 
   const helperText = !mounted
     ? "Voice controls load in the browser."
     : !voiceInputSupported
       ? "Voice input isn’t available here, so typing stays fully functional."
-      : "Speak one question at a time, or type it below.";
+      : "Click on the mic, speak one question at a time, or type it below.";
 
   const currentSuggestions = followUps.length ? followUps : DEFAULT_FOLLOW_UPS;
   const liveRegion = error || spokenStatus || response || "Ask about my work, architecture, experience or contact.";
 
   return (
-    <div className="mt-8 space-y-5 bg-[rgb(10_14_20_/_0.18)] p-4 shadow-[0_20px_56px_rgba(0,0,0,0.24)] backdrop-blur-xl md:p-5">
+    <div className="space-y-5 bg-[rgb(10_14_20_/_0.18)] p-4 shadow-[0_20px_56px_rgba(0,0,0,0.24)] backdrop-blur-xl md:p-5">
       <div className="flex flex-col gap-3 border-b border-line pb-4 md:flex-row md:items-start md:justify-between">
         <div className="max-w-xl">
           <p className="font-mono text-micro uppercase tracking-caps text-signal">
@@ -898,15 +985,31 @@ export function HeroVoicePortfolio() {
             {helperText}
           </p>
         </div>
-        <div className="flex items-center gap-2 rounded border border-line bg-paper px-3 py-2 font-mono text-micro uppercase tracking-caps text-ink-soft">
-          <span
-            className={`h-2 w-2 rounded-full ${
-              isListening ? "bg-signal" : isSpeaking ? "bg-amber" : "bg-signal/70"
-            }`}
-            aria-hidden="true"
-          />
-          <span>{currentMode}</span>
-        </div>
+        {voiceOutputSupported && !isListening && !isSpeaking ? (
+          <button
+            type="button"
+            onClick={toggleVoicePlayback}
+            className="inline-flex items-center gap-2 rounded border border-line bg-paper px-3 py-2 font-mono text-micro uppercase tracking-caps text-ink-soft transition-colors hover:border-line-strong hover:text-ink focus-ring"
+            aria-label={autoVoice ? "Mute voice replies" : "Enable voice replies"}
+          >
+            {autoVoice ? (
+              <Volume2 size={14} aria-hidden="true" />
+            ) : (
+              <VolumeX size={14} aria-hidden="true" />
+            )}
+            {autoVoice ? "Mute voice replies" : "Enable voice replies"}
+          </button>
+        ) : (
+          <div className="flex items-center gap-2 rounded border border-line bg-paper px-3 py-2 font-mono text-micro uppercase tracking-caps text-ink-soft">
+            <span
+              className={`h-2 w-2 rounded-full ${
+                isListening ? "bg-signal" : isSpeaking ? "bg-amber" : "bg-signal/70"
+              }`}
+              aria-hidden="true"
+            />
+            <span>{currentMode}</span>
+          </div>
+        )}
       </div>
 
       <div className="sr-only" aria-live="polite" aria-atomic="true">
@@ -992,18 +1095,6 @@ export function HeroVoicePortfolio() {
 
           {voiceOutputSupported ? (
             <div className="flex flex-wrap items-center gap-2">
-              <button
-                type="button"
-                onClick={toggleVoicePlayback}
-                className="inline-flex items-center gap-2 rounded border border-line px-3 py-2 font-mono text-micro uppercase tracking-caps text-ink-soft transition-colors hover:border-line-strong hover:text-ink focus-ring"
-              >
-                {autoVoice ? (
-                  <Volume2 size={14} aria-hidden="true" />
-                ) : (
-                  <VolumeX size={14} aria-hidden="true" />
-                )}
-                {autoVoice ? "Mute voice replies" : "Enable voice replies"}
-              </button>
               {isSpeaking ? (
                 <button
                   type="button"
@@ -1014,11 +1105,7 @@ export function HeroVoicePortfolio() {
                 </button>
               ) : null}
             </div>
-          ) : (
-            <p className="font-mono text-micro uppercase tracking-caps text-ink-soft/60">
-              Spoken replies are unavailable in this browser.
-            </p>
-          )}
+          ) : null}
         </div>
       </form>
 
@@ -1065,11 +1152,7 @@ export function HeroVoicePortfolio() {
               </p>
               <p className="max-w-prose text-body leading-body text-ink-soft">{response}</p>
             </div>
-          ) : (
-            <p className="max-w-prose text-body leading-body text-ink-soft">
-              Ask about my projects, architecture, React, experience, resume or contact.
-            </p>
-          )}
+          ) : null}
         </div>
 
       </div>

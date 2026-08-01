@@ -14,7 +14,7 @@ export function Header() {
           href="/"
           className="bg-amber px-0 py-0 font-mono text-sm font-medium tracking-tight text-[#1b2030] focus-ring"
         >
-          1n4NO
+          1N4N0
         </Link>
 
         <div className="flex min-w-0 justify-center px-2">

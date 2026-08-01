@@ -32,36 +32,20 @@ export function HeroSection() {
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgb(4_7_12_/_0.1)_0%,rgb(4_7_12_/_0.28)_44%,rgb(4_7_12_/_0.62)_100%)]" />
       </div>
 
-      <Container className="relative z-10">
-        <div className="grid gap-5 md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] md:items-start md:gap-6">
-          <div className="bg-[rgb(10_14_20_/_0.18)] p-5 shadow-[0_20px_56px_rgba(0,0,0,0.24)] backdrop-blur-xl md:max-w-sm md:p-6">
-            <p className="font-mono text-caption uppercase tracking-caps text-signal">
-              {profile.name}
-            </p>
-            <p className="mt-3 font-mono text-caption uppercase tracking-caps text-ink-soft/80">
-              {profile.role}
-            </p>
-            <p className="mt-2 font-mono text-micro uppercase tracking-caps text-ink-soft/60">
-              {profile.yearsExperience} years · {profile.location}
-            </p>
-          </div>
-
-          <div className="self-start md:pt-2 md:pl-4">
-            <p className="max-w-[12ch] font-display text-hero font-medium tracking-display text-[#f7f7f7]">
+      <Container className="relative z-10 pt-5 md:pt-6">
+        <div className="space-y-5 md:space-y-6">
+          <div className="mb-6 max-w-sm py-6 md:mb-8 md:py-8">
+            <p className="font-display text-hero font-medium tracking-display text-[#f7f7f7] md:text-[clamp(6.25rem,8.75vw,10.5rem)]">
               Delight, Delivered.
             </p>
-            <p className="mt-3 max-w-none whitespace-nowrap text-standfirst leading-standfirst text-ink-soft">
-              <span className="bg-amber px-1 text-[#1b2030] box-decoration-clone">
+            <p className="mt-[-10px] whitespace-nowrap text-standfirst leading-standfirst text-ink-soft">
+              <span className="text-[rgb(166,166,166)]">
                 Every solution, handcrafted with precision
               </span>
             </p>
           </div>
 
-          <div className="md:col-span-2">
-            <HeroVoicePortfolio />
-          </div>
-
-          <div className="md:col-span-2 mt-7 flex flex-col gap-3 sm:flex-row">
+          <div className="flex flex-col gap-3 sm:flex-row">
             <Link
               href="#work"
               className="inline-flex items-center justify-center gap-2 rounded border border-signal bg-signal px-6 py-3.5 font-mono text-caption uppercase tracking-caps text-paper transition-colors hover:bg-signal-dark focus-ring"
@@ -76,6 +60,10 @@ export function HeroSection() {
               Contact me
               <ArrowUpRight size={14} className="icon-amber" aria-hidden="true" />
             </Link>
+          </div>
+
+          <div className="pt-5 md:pt-6">
+            <HeroVoicePortfolio />
           </div>
         </div>
       </Container>

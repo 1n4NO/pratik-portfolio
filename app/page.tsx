@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { HeroSection } from "@/components/sections/HeroSection";
+import { HeroIdentityStrip } from "@/components/sections/HeroIdentityStrip";
 import { HeroMarquee } from "@/components/sections/HeroMarquee";
 import { SpecSheet } from "@/components/sections/SpecSheet";
 import { ProjectRow } from "@/components/sections/ProjectRow";
@@ -98,16 +99,17 @@ export default function HomePage() {
       />
 
       {/* Hero */}
+      <HeroIdentityStrip />
       <HeroSection />
 
       {/* Marquee strip */}
-      <div className="relative z-20 -mt-8 border-y border-line/45 bg-white py-4 md:-mt-12">
+      <div className="relative z-20 -mt-8 border-y border-deep-line/45 bg-deep py-4 md:-mt-12">
         <div
-          className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-white to-transparent md:w-24"
+          className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-deep to-transparent md:w-24"
           aria-hidden="true"
         />
         <div
-          className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-white to-transparent md:w-24"
+          className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-deep to-transparent md:w-24"
           aria-hidden="true"
         />
         <div className="[mask-image:linear-gradient(90deg,transparent,black_8%,black_92%,transparent)]">
