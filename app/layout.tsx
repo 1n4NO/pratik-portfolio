@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Newsreader, Inter, JetBrains_Mono } from "next/font/google";
+import { Archivo, Gloock, Martian_Mono } from "next/font/google";
 // @ts-ignore: CSS module declarations may be missing for side-effect import
 import "./globals.css";
 import { Header } from "@/components/layout/Header";
@@ -10,20 +10,19 @@ import { SmoothScroll } from "@/components/layout/SmoothScroll";
 import { createMetadata, siteConfig } from "@/lib/seo";
 import { Analytics } from "@vercel/analytics/next"
 
-const display = Newsreader({
+const display = Gloock({
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
-  style: ["normal", "italic"],
+  weight: "400",
   variable: "--font-display",
 });
 
-const body = Inter({
+const body = Archivo({
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
+  weight: ["400", "500", "600", "700"],
   variable: "--font-body",
 });
 
-const mono = JetBrains_Mono({
+const mono = Martian_Mono({
   subsets: ["latin"],
   weight: ["400", "500"],
   variable: "--font-mono",

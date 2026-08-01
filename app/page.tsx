@@ -7,7 +7,6 @@ import { ProjectRow } from "@/components/sections/ProjectRow";
 import { ContactCTA } from "@/components/layout/ContactCTA";
 import { UpcomingProjectSection } from "@/components/sections/UpcomingProjectSection";
 import { Container } from "@/components/ui/Container";
-import { Eyebrow } from "@/components/ui/Eyebrow";
 import { SectionGrid } from "@/components/ui/SectionGrid";
 import { projects } from "@/data/projects";
 import { profile } from "@/data/profile";
@@ -127,9 +126,6 @@ export default function HomePage() {
             aside={
               <div className="space-y-8">
                 <div>
-                  <Eyebrow>
-                    Background
-                  </Eyebrow>
                   <h2 className="font-display text-section-title font-medium tracking-display">
                     What I bring to the work
                   </h2>
