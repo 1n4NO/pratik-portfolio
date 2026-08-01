@@ -47,7 +47,7 @@ export default function MusingsPage() {
             posts={sorted}
             intro={
               <div className="pb-2">
-                <PageIntro eyebrow="Musings" title="Notes from the workbench." />
+                <PageIntro title="Notes from the workbench." />
                 <div className="mt-8 md:hidden">
                   <MusingsLottieCircle variant="mobile" />
                 </div>

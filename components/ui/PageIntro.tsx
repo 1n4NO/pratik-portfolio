@@ -14,7 +14,7 @@ export function PageIntro({
   titleClassName = "",
   className = "",
 }: {
-  eyebrow: string;
+  eyebrow?: string;
   title: string;
   children?: ReactNode;
   action?: ReactNode;
@@ -64,9 +64,11 @@ export function PageIntro({
   return (
     <div className={`${layout} ${className}`}>
       <div className="max-w-prose-wide">
-        <Eyebrow index={index} total={total}>
-          {eyebrow}
-        </Eyebrow>
+        {eyebrow ? (
+          <Eyebrow index={index} total={total}>
+            {eyebrow}
+          </Eyebrow>
+        ) : null}
         <h1 className={`font-display font-medium ${titleSize} ${titleClassName}`}>
           {title}
         </h1>
