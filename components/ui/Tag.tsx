@@ -8,7 +8,7 @@ export function Tag({
   const styles =
     variant === "amber"
       ? "bg-amber-bg text-amber"
-      : "bg-surface-muted text-ink-soft/80";
+      : "bg-surface-muted text-[#7c7c7d]";
 
   return (
     <span

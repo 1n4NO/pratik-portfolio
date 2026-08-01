@@ -32,13 +32,13 @@ export function DataFlowExplorer({ chart }: { chart: string }) {
   }
 
   return (
-    <div className="min-h-[620px] rounded border border-line bg-surface-muted p-4 md:p-5">
+    <div
+      className="min-h-[620px] rounded border border-line bg-surface p-4 md:p-5"
+      style={{ color: "rgb(166, 166, 166)" }}
+    >
       <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
         <div>
-          <p className="font-mono text-[10px] uppercase tracking-widest text-signal">
-            Data flow map
-          </p>
-          <p className="mt-1 text-sm text-ink-soft">
+          <p className="mt-1 text-sm text-[rgba(166,166,166,0.6)]">
             Select a node to see what goes in, what comes out, and how it connects.
           </p>
         </div>
@@ -75,12 +75,12 @@ export function DataFlowExplorer({ chart }: { chart: string }) {
                     onClick={() => setActiveId(node.id)}
                     className={`relative flex w-full items-start gap-3 rounded border p-3 text-left transition-colors focus-ring ${
                       active
-                        ? "border-signal bg-surface text-ink"
+                        ? "border-signal bg-surface text-[rgb(166,166,166)]"
                         : relation === "in"
-                          ? "border-signal/55 bg-surface/85 text-ink"
+                          ? "border-signal/55 bg-surface/85 text-[rgb(166,166,166)]"
                           : relation === "out"
-                            ? "border-amber/55 bg-surface/85 text-ink"
-                            : "border-line bg-surface/55 text-ink-soft hover:border-line-strong hover:text-ink"
+                            ? "border-amber/55 bg-surface/85 text-[rgb(166,166,166)]"
+                            : "border-line bg-surface/55 text-[rgba(166,166,166,0.6)] hover:border-line-strong hover:text-[rgb(166,166,166)]"
                     }`}
                     animate={
                       reduceMotion
@@ -99,7 +99,7 @@ export function DataFlowExplorer({ chart }: { chart: string }) {
                             ? "border-signal/55 bg-signal/10 text-signal"
                             : relation === "out"
                               ? "border-amber/55 bg-amber-bg text-amber"
-                              : "border-line bg-paper text-ink-soft"
+                              : "border-line bg-paper text-[rgba(166,166,166,0.6)]"
                       }`}
                     >
                       {String(index + 1).padStart(2, "0")}
@@ -108,7 +108,7 @@ export function DataFlowExplorer({ chart }: { chart: string }) {
                       <span className="block font-display text-base font-bold leading-snug">
                         {node.label}
                       </span>
-                      <span className="mt-1 block font-mono text-[10px] uppercase tracking-widest text-ink-soft/70">
+                      <span className="mt-1 block font-mono text-[10px] uppercase tracking-widest text-[rgba(166,166,166,0.6)]">
                         {node.incoming.length} in / {node.outgoing.length} out
                       </span>
                     </span>
@@ -136,7 +136,7 @@ export function DataFlowExplorer({ chart }: { chart: string }) {
                   </span>
                   <div>
                     <h3 className="font-display text-lg font-bold leading-tight">{activeNode.label}</h3>
-                    <p className="mt-1 text-sm leading-relaxed text-ink-soft">
+                    <p className="mt-1 text-sm leading-relaxed text-[rgba(166,166,166,0.6)]">
                       This node connects {activeNode.incoming.length + activeNode.outgoing.length} part
                       {activeNode.incoming.length + activeNode.outgoing.length === 1 ? "" : "s"} of the workflow.
                     </p>
@@ -206,7 +206,7 @@ function FlowGroup({
 }) {
   return (
     <div>
-      <p className="mb-2 font-mono text-[10px] uppercase tracking-widest text-ink-soft/60">
+      <p className="mb-2 font-mono text-[10px] uppercase tracking-widest text-[rgba(166,166,166,0.6)]">
         {title}
       </p>
       {ids.length > 0 ? (
@@ -214,7 +214,7 @@ function FlowGroup({
           {ids.map((id) => (
             <li
               key={id}
-              className="flex items-center justify-between gap-3 rounded border border-line bg-surface-muted px-3 py-2 text-sm text-ink-soft"
+              className="flex items-center justify-between gap-3 rounded border border-line bg-surface-muted px-3 py-2 text-sm text-[rgba(166,166,166,0.6)]"
             >
               <span>{nodes.get(id)?.label ?? id}</span>
               <RelationBadge relation={relation} />
@@ -222,7 +222,7 @@ function FlowGroup({
           ))}
         </ul>
       ) : (
-        <p className="rounded border border-dashed border-line px-3 py-2 text-sm text-ink-soft">
+        <p className="rounded border border-dashed border-line px-3 py-2 text-sm text-[rgba(166,166,166,0.6)]">
           {empty}
         </p>
       )}

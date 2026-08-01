@@ -3,7 +3,6 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, ArrowUpRight, Check } from "lucide-react";
 import { Container } from "@/components/ui/Container";
-import { Eyebrow } from "@/components/ui/Eyebrow";
 import { SectionGrid } from "@/components/ui/SectionGrid";
 import { Tag } from "@/components/ui/Tag";
 import { ScreenshotStream } from "@/components/sections/ScreenshotStream";
@@ -15,7 +14,7 @@ import { ReadingModeToggle } from "@/components/sections/ReadingModeToggle";
 import { ProjectPrevNext } from "@/components/sections/ProjectPrevNext";
 import { ReadingProgressRuler } from "@/components/ui/ReadingProgressRuler";
 import { MotionReveal } from "@/components/ui/MotionReveal";
-import { ContactCTA } from "@/components/layout/ContactCTA";
+import { CompactContactCTA } from "@/components/layout/CompactContactCTA";
 import { projects, getProjectBySlug, getAdjacentProjects } from "@/data/projects";
 import { absoluteUrl, createMetadata, jsonLd, siteConfig } from "@/lib/seo";
 
@@ -172,7 +171,11 @@ export default function ProjectDetailPage({ params }: { params: { slug: string }
           >
             <div>
               <h1 className="font-display text-hero font-medium tracking-display">{project.name}</h1>
-              <p className="mt-6 text-standfirst leading-standfirst text-ink-soft">{project.tagline}</p>
+              <p className="mt-6 text-standfirst leading-standfirst text-ink-soft">
+                <span className="bg-amber px-1 text-[#1b2030] box-decoration-clone">
+                  {project.tagline}
+                </span>
+              </p>
             </div>
             <div className="flex flex-wrap gap-2">
               {project.techStack.map((tech) => (
@@ -202,12 +205,22 @@ export default function ProjectDetailPage({ params }: { params: { slug: string }
                   </a>
                 )}
               </div>
-              <ReadingModeToggle />
             </div>
           </SectionGrid>
         </Container>
 
         <Container className="pb-16">
+          <div className="mb-6 flex flex-col gap-3 md:flex-row md:items-center md:justify-end">
+            <div className="max-w-xl text-right">
+              <p className="font-mono text-[11px] uppercase tracking-widest text-ink-soft/60">
+                Reading mode
+              </p>
+              <p className="mt-1 max-w-[320px] text-xs leading-snug text-ink-soft/70">
+                Prioritize hiring signals or engineering detail.
+              </p>
+            </div>
+            <ReadingModeToggle />
+          </div>
           <ProjectBrief project={project} />
         </Container>
 
@@ -234,15 +247,17 @@ export default function ProjectDetailPage({ params }: { params: { slug: string }
                   aria-labelledby={`${section.key}-heading`}
                 >
                   {section.key === "solution" ? (
-                    <div className="max-w-prose-wide border-y border-line bg-surface/55 py-8 pl-5 pr-6 md:py-10 md:pl-7 md:pr-10">
-                      <Eyebrow>Takeaway</Eyebrow>
+                    <div
+                      className="max-w-prose-wide border-y border-line bg-surface/55 py-8 pl-5 pr-6 md:py-10 md:pl-7 md:pr-10"
+                      style={{ color: "#f7f7f7" }}
+                    >
                       <h2
                         id={`${section.key}-heading`}
                         className="mb-5 font-display text-section-title font-medium tracking-display"
                       >
                         {section.label}
                       </h2>
-                      <p className="text-standfirst leading-standfirst text-ink md:text-[1.375rem] md:leading-[1.65]">
+                      <p className="text-standfirst leading-standfirst md:text-[1.375rem] md:leading-[1.65]">
                         {project[section.key]}
                       </p>
                     </div>
@@ -276,7 +291,6 @@ export default function ProjectDetailPage({ params }: { params: { slug: string }
                 <div className="max-w-prose-wide">
                   <div className="mb-6 flex items-end justify-between gap-4 border-b border-line pb-4">
                     <div>
-                      <Eyebrow>Evidence</Eyebrow>
                       <h2
                         id="highlights-heading"
                         className="font-display text-subsection font-medium tracking-display-tight"
@@ -284,9 +298,6 @@ export default function ProjectDetailPage({ params }: { params: { slug: string }
                         Highlights
                       </h2>
                     </div>
-                    <span className="font-mono text-micro uppercase tracking-caps text-ink-soft/60">
-                      {String(project.highlights.length).padStart(2, "0")} signals
-                    </span>
                   </div>
                   <ul className="divide-y divide-line border-y border-line">
                     {project.highlights.map((h, index) => (
@@ -326,7 +337,7 @@ export default function ProjectDetailPage({ params }: { params: { slug: string }
 
         <ProjectPrevNext previous={previous} next={next} />
 
-        <ContactCTA variant="compact" />
+        <CompactContactCTA />
       </div>
     </>
   );

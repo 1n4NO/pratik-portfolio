@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import dynamic from "next/dynamic";
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowDown, ArrowUpRight } from "lucide-react";
 import { Container } from "@/components/ui/Container";
-import { PageIntro } from "@/components/ui/PageIntro";
+import { LinkButton } from "@/components/ui/Button";
 import { SectionGrid } from "@/components/ui/SectionGrid";
-import { ContactCTA } from "@/components/layout/ContactCTA";
+import { CompactContactCTA } from "@/components/layout/CompactContactCTA";
 import { OperatingPrinciples } from "@/components/sections/OperatingPrinciples";
 import { projects } from "@/data/projects";
 import { absoluteUrl, createMetadata, jsonLd } from "@/lib/seo";
@@ -56,25 +56,40 @@ export default function WorkPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={jsonLd(structuredData)}
       />
-      <section className="relative overflow-hidden border-b border-line bg-surface py-section-sm md:py-section-md">
-        <div className="pointer-events-none absolute inset-0 grid-backdrop" aria-hidden="true" />
-        <Container className="relative">
-          <PageIntro
-            eyebrow="Work"
-            title="Products shipped, systems thought through."
-            align="editorial"
-            index="00"
-            total="02"
-          >
-            <p>
-              See how AI workflows, frontend architecture, data interfaces, and product systems
-              show up in the work.
+      <section className="bg-dark pb-section-sm md:pb-section-md">
+        <Container className="pt-section-sm md:pt-section-md">
+          <div className="space-y-6 md:max-w-4xl">
+            <h1 className="font-display text-hero font-medium tracking-display">
+              <span className="block">Products shipped,</span>
+              <span className="block">systems thought through.</span>
+            </h1>
+            <p className="max-w-[42rem] text-standfirst leading-standfirst text-muted-copy">
+              <span className="bg-amber px-1 text-[#1b2030] box-decoration-clone">
+                See how AI workflows, frontend architecture, data interfaces, and product systems
+                show up in the work.
+              </span>
             </p>
-          </PageIntro>
+            <div className="flex flex-col gap-3 sm:flex-row">
+              <LinkButton
+                href="#selected-work"
+                variant="primary"
+              >
+                Explore work
+                <ArrowDown size={14} className="icon-current" aria-hidden="true" />
+              </LinkButton>
+              <LinkButton
+                href="#manifesto"
+                variant="secondary"
+              >
+                Manifesto
+                <ArrowDown size={14} className="icon-amber" aria-hidden="true" />
+              </LinkButton>
+            </div>
+          </div>
         </Container>
       </section>
 
-      <Container>
+      <Container id="selected-work">
         <SectionGrid
           aside={
             <div className="space-y-5 rounded-lg border border-line bg-surface p-6 md:p-8">
@@ -118,7 +133,7 @@ export default function WorkPage() {
 
       <OperatingPrinciples />
 
-      <ContactCTA variant="compact" />
+      <CompactContactCTA />
     </>
   );
 }

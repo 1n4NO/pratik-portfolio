@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { Download } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { LinkButton } from "@/components/ui/Button";
-import { PageIntro } from "@/components/ui/PageIntro";
 import { HeroSystemMap } from "@/components/sections/HeroSystemMap";
-import { ContactCTA } from "@/components/layout/ContactCTA";
+import { Tag } from "@/components/ui/Tag";
+import { CompactContactCTA } from "@/components/layout/CompactContactCTA";
 import { skillGroups, industries, profile, type SkillGroup } from "@/data/profile";
 import { createMetadata } from "@/lib/seo";
 
@@ -21,31 +21,40 @@ const currentYear = new Date().getFullYear();
 const maxYearsActive = Math.max(...skillGroups.map((g) => currentYear - g.since));
 
 export default function ExpertisePage() {
+  const industryLine = industries.join("   ·   ");
+
   return (
     <>
-      <section className="relative overflow-hidden border-b border-line bg-surface py-section-sm md:py-section-md">
-        <div className="pointer-events-none absolute inset-0 grid-backdrop" aria-hidden="true" />
-        <Container className="relative">
-          <PageIntro
-            eyebrow="Expertise"
-            title="Twelve years, in brief."
-            align="editorial"
-            action={(
-              <LinkButton href={profile.resumeUrl} download>
+      <section className="relative overflow-hidden border-b border-line bg-canvas py-section-sm text-ink md:py-section-md">
+        <Container>
+          <div className="max-w-4xl space-y-6">
+            <h1 className="font-display text-hero font-medium tracking-display">
+              <span className="block">Twelve years,</span>
+              <span className="block">in brief.</span>
+            </h1>
+            <p className="max-w-3xl text-standfirst leading-standfirst text-ink-soft">
+              <span className="bg-amber px-1 text-[#1b2030] box-decoration-clone">
+                A practical map of the areas I work in, the systems behind them, and the shipped
+                work that backs them up.
+              </span>
+            </p>
+            <div className="flex flex-col gap-3 sm:flex-row">
+              <LinkButton href={profile.resumeUrl} download variant="primary">
                 <Download size={14} className="icon-current" aria-hidden="true" />
                 Download résumé
               </LinkButton>
-            )}
-          >
-            <p>
-              A practical map of the areas I work in, the systems behind them, and the shipped
-              work that backs them up.
-            </p>
-          </PageIntro>
+              <LinkButton href="#industry-expertise" variant="secondary">
+                Explore expertise
+              </LinkButton>
+            </div>
+          </div>
         </Container>
       </section>
 
-      <section className="bg-paper-dark relative overflow-hidden p-0">
+      <section
+        id="expertise-map"
+        className="relative overflow-hidden bg-paper-dark p-0 scroll-mt-24 md:scroll-mt-28"
+      >
         <Container>
           <HeroSystemMap />
         </Container>
@@ -55,15 +64,23 @@ export default function ExpertisePage() {
         />
       </section>
 
-      <section className="bg-dark py-section-md md:py-section-lg">
+      <section
+        id="industry-expertise"
+        className="bg-dark pb-section-md scroll-mt-24 md:pb-section-lg md:scroll-mt-28"
+      >
         <Container>
-          <div className="mb-10 border-b border-line pb-8 md:mb-12 md:pb-10">
-            <p className="mb-4 font-mono text-micro uppercase tracking-caps text-signal">
-              Industry expertise
-            </p>
-            <p className="max-w-prose-wide font-mono text-caption leading-relaxed text-ink-soft/75">
-              {industries.join("   ·   ")}
-            </p>
+          <div className="mb-10 pb-8 md:mb-12 md:pb-10" />
+
+          <div
+            className="relative left-1/2 w-screen -translate-x-1/2 overflow-hidden py-4"
+            aria-hidden="true"
+          >
+            <div
+              className="flex w-max animate-marquee-slow gap-8 px-6 font-mono text-caption uppercase tracking-caps text-ink-soft/75 motion-reduce:animate-none"
+            >
+              <span className="whitespace-nowrap">{industryLine}</span>
+              <span className="whitespace-nowrap">{industryLine}</span>
+            </div>
           </div>
 
           <div className="grid grid-cols-1 gap-x-12 gap-y-14 md:grid-cols-2">
@@ -77,11 +94,8 @@ export default function ExpertisePage() {
                 <SkillMeter group={group} maxYears={maxYearsActive} />
                 <ul className="mt-5 flex flex-wrap gap-2">
                   {group.items.map((item) => (
-                    <li
-                      key={item}
-                      className="rounded bg-surface-muted px-2.5 py-1 font-mono text-micro text-ink-soft"
-                    >
-                      {item}
+                    <li key={item}>
+                      <Tag>{item}</Tag>
                     </li>
                   ))}
                 </ul>
@@ -91,7 +105,7 @@ export default function ExpertisePage() {
         </Container>
       </section>
 
-      <ContactCTA variant="compact" />
+      <CompactContactCTA />
     </>
   );
 }

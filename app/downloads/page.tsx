@@ -4,7 +4,7 @@ import { Container } from "@/components/ui/Container";
 import { PageIntro } from "@/components/ui/PageIntro";
 import { LinkButton } from "@/components/ui/Button";
 import { IconDownloadCard } from "@/components/downloads/IconDownloadCard";
-import { ContactCTA } from "@/components/layout/ContactCTA";
+import { CompactContactCTA } from "@/components/layout/CompactContactCTA";
 import { profile } from "@/data/profile";
 import { blueLotusExperienceIcons, downloadableIcons } from "@/data/downloadableIcons";
 
@@ -81,7 +81,7 @@ export default function DownloadsPage() {
         </div>
       </Container>
 
-      <ContactCTA variant="compact" />
+      <CompactContactCTA />
     </>
   );
 }

@@ -1,4 +1,5 @@
 import { Container } from "@/components/ui/Container";
+import { SectionGrid } from "@/components/ui/SectionGrid";
 
 const operatingPrinciples = [
   {
@@ -26,70 +27,55 @@ const operatingPrinciples = [
 export function OperatingPrinciples() {
   return (
     <section
+      id="manifesto"
       aria-labelledby="principles-heading"
-      className="relative overflow-hidden border-b border-line bg-panel text-muted-copy"
+      className="border-y border-deep-line bg-deep py-section-sm text-muted-copy md:py-section-md"
     >
-      <div
-        className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-signal to-transparent"
-        aria-hidden="true"
-      />
-      <Container className="relative py-16 md:py-24">
-        <div className="grid gap-10 md:grid-cols-[minmax(0,0.68fr)_minmax(0,1.32fr)] md:items-start">
-          <div className="md:sticky md:top-24">
-            <p className="mb-4 font-mono text-[11px] uppercase tracking-widest text-signal">
-              Operating principles
-            </p>
-            <h2
-              id="principles-heading"
-              className="max-w-md font-display text-4xl font-bold leading-[1.05] md:text-5xl"
-            >
-              How I keep complex frontend work shippable.
-            </h2>
-            <p className="mt-5 max-w-sm text-sm leading-relaxed text-panel">
+      <Container>
+        <SectionGrid
+          aside={
+            <div>
+              <h2
+                id="principles-heading"
+                className="font-display text-section-title font-medium tracking-display"
+              >
+                How I keep complex frontend work shippable.
+              </h2>
+            </div>
+          }
+          contentClassName="space-y-6"
+        >
+          <p className="max-w-prose text-standfirst leading-standfirst text-muted-copy">
+            <span className="bg-amber text-[#1b2030]">
               The throughline across my work: make the architecture explicit, keep product
               behavior inspectable, and leave teams with systems they can keep evolving.
-            </p>
-            <div
-              className="mt-8 hidden max-w-[15rem] border-y border-line py-4 font-mono text-[11px] uppercase tracking-widest md:block"
-              aria-hidden="true"
-            >
-              <div className="flex items-center justify-between">
-                <span>Principles</span>
-                <span>05</span>
-              </div>
-            </div>
-          </div>
+            </span>
+          </p>
 
-          <ol
-            className="border-y border-line bg-muted-copy text-deep backdrop-blur-sm"
-          >
-            {operatingPrinciples.map(({ label, body }, index) => (
-              <li
-                key={label}
-                className="group relative border-b border-line last:border-b-0"
-              >
+          <div className="border-y border-deep-line">
+            <div className="grid gap-0">
+              {operatingPrinciples.map(({ label, body }, index) => (
                 <div
-                  className="absolute inset-y-0 left-0 w-px bg-signal opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-                  aria-hidden="true"
-                />
-                <div className="grid grid-cols-[4.25rem_minmax(0,1fr)] transition-colors duration-300 group-hover:bg-dark md:grid-cols-[5.25rem_minmax(0,1fr)]">
-                  <span className="flex flex-col items-center border-r border-line py-5 font-mono text-[11px] transition-colors group-hover:text-deep md:py-7">
+                  key={label}
+                  className="group grid grid-cols-[4.25rem_minmax(0,1fr)] border-b border-deep-line last:border-b-0 transition-colors duration-300 hover:bg-paper/10 md:grid-cols-[5.25rem_minmax(0,1fr)]"
+                >
+                  <span className="flex flex-col items-center border-r border-deep-line py-5 font-mono text-[11px] text-muted-copy transition-colors group-hover:text-ink md:py-7">
                     <span>{String(index + 1).padStart(2, "0")}</span>
                     <PrincipleMarker points={index + 1} />
                   </span>
                   <div className="px-5 py-5 md:px-8 md:py-7">
-                    <p className="mb-2 font-mono text-[10px] uppercase tracking-widest">
+                    <p className="mb-2 font-mono text-[10px] uppercase tracking-widest text-signal">
                       {label}
                     </p>
-                    <p className="max-w-3xl text-base leading-relaxed md:text-xl">
+                    <p className="max-w-3xl text-base leading-relaxed text-muted-copy md:text-xl">
                       {body}
                     </p>
                   </div>
                 </div>
-              </li>
-            ))}
-          </ol>
-        </div>
+              ))}
+            </div>
+          </div>
+        </SectionGrid>
       </Container>
     </section>
   );

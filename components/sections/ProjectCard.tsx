@@ -20,8 +20,8 @@ export function ProjectCard({ project }: { project: Project }) {
           <ArrowUpRight
             size={16}
             className="opacity-0 group-hover:opacity-100 transition-opacity text-signal"
-            aria-hidden="true"
-          />
+          aria-hidden="true"
+        />
         </h3>
         <p className="text-sm text-ink-soft">{project.tagline}</p>
       </div>

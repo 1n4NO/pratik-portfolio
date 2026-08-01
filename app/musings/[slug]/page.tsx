@@ -6,7 +6,7 @@ import { Container } from "@/components/ui/Container";
 import { PostBody } from "@/components/sections/PostBody";
 import { PostPrevNext } from "@/components/sections/PostPrevNext";
 import { ReadingProgressRuler } from "@/components/ui/ReadingProgressRuler";
-import { ContactCTA } from "@/components/layout/ContactCTA";
+import { CompactContactCTA } from "@/components/layout/CompactContactCTA";
 import { posts, getPostBySlug, getAdjacentPosts } from "@/data/posts";
 import { absoluteUrl, createMetadata, jsonLd, siteConfig } from "@/lib/seo";
 import { tagColorStyle } from "@/lib/tags";
@@ -152,7 +152,7 @@ export default function PostPage({ params }: { params: { slug: string } }) {
 
         <PostPrevNext newer={newer} older={older} />
 
-        <ContactCTA variant="compact" />
+        <CompactContactCTA />
       </div>
     </>
   );

@@ -6,7 +6,6 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { FloatingContact } from "@/components/layout/FloatingContact";
 import { PageTransition } from "@/components/layout/PageTransition";
-import { ThemeToggle } from "@/components/layout/ThemeToggle";
 import { createMetadata, siteConfig } from "@/lib/seo";
 import { Analytics } from "@vercel/analytics/next"
 
@@ -52,7 +51,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html
       lang="en"
-      data-theme="light"
+      data-theme="dark"
       suppressHydrationWarning
       className={`${display.variable} ${body.variable} ${mono.variable}`}
     >
@@ -61,8 +60,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           dangerouslySetInnerHTML={{
             __html: `
               try {
-                var theme = localStorage.getItem("portfolio-theme") || "light";
-                document.documentElement.dataset.theme = theme;
+                document.documentElement.dataset.theme = "dark";
               } catch (_) {}
             `,
           }}

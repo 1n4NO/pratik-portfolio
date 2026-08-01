@@ -4,7 +4,6 @@ import { Project } from "@/data/projects";
 import { ScreenshotStream } from "@/components/sections/ScreenshotStream";
 import { Tag } from "@/components/ui/Tag";
 import { Container } from "@/components/ui/Container";
-import { Eyebrow } from "@/components/ui/Eyebrow";
 import { SectionGrid } from "@/components/ui/SectionGrid";
 
 export function ProjectRow({
@@ -34,9 +33,6 @@ export function ProjectRow({
         stickyAside={!reversed}
         aside={
           <div className="space-y-6 md:max-w-xs">
-            <Eyebrow index={indexLabel} total={totalLabel}>
-              {project.industry}
-            </Eyebrow>
             <h3 className="font-display text-subsection font-medium tracking-display-tight">
               {project.name}
             </h3>

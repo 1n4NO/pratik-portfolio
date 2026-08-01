@@ -19,16 +19,17 @@ export function DetailedProcess({
     <section
       id="detailed-process"
       aria-labelledby="detailed-process-heading"
-      className="mt-6 scroll-mt-20 rounded-lg border border-line bg-surface p-5 md:scroll-mt-28 md:p-6"
+      className="mt-6 scroll-mt-20 border-y border-line bg-surface p-5 md:scroll-mt-28 md:p-6"
+      style={{ color: "rgb(166, 166, 166)" }}
     >
-      <p className="font-mono text-[11px] tracking-widest uppercase text-signal mb-3">
-        Project method
-      </p>
-      <h2 id="detailed-process-heading" className="font-display text-xl font-bold mb-5">
+      <h2
+        id="detailed-process-heading"
+        className="mb-5 font-display text-xl font-bold leading-tight"
+      >
         Detailed process
       </h2>
 
-      <div className="mb-5 inline-flex rounded border border-line bg-surface-muted p-1">
+      <div className="mb-5 inline-flex rounded border border-line bg-surface-muted p-1 text-[rgba(166,166,166,0.6)]">
         <TabButton
           active={activeTab === "process"}
           onClick={() => setActiveTab("process")}
@@ -50,10 +51,10 @@ export function DetailedProcess({
               key={step.label}
               className="border-t border-line pt-4 first:border-t-0 first:pt-0"
             >
-              <h3 className="font-mono text-[11px] uppercase tracking-wide text-ink mb-2">
+              <h3 className="mb-2 font-mono text-[11px] uppercase tracking-wide text-[rgba(166,166,166,0.6)]">
                 {step.label}
               </h3>
-              <p className="text-ink-soft leading-relaxed">{step.body}</p>
+              <p className="leading-relaxed text-[rgba(166,166,166,0.6)]">{step.body}</p>
             </article>
           ))}
         </div>
@@ -76,11 +77,13 @@ function TabButton({
   onClick: () => void;
 }) {
   return (
-      <button
+    <button
       type="button"
       onClick={onClick}
       className={`rounded px-3 py-1.5 font-mono text-[11px] transition-colors focus-ring ${
-        active ? "bg-surface text-ink shadow-none" : "text-ink-soft hover:text-ink"
+        active
+          ? "bg-surface text-[rgb(166,166,166)] shadow-none"
+          : "text-[rgba(166,166,166,0.6)] hover:text-[rgb(166,166,166)]"
       }`}
     >
       {children}

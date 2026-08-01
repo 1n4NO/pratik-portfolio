@@ -50,16 +50,8 @@ export function ReadingModeToggle() {
   }
 
   return (
-    <div className="relative inline-flex flex-col items-start gap-2 sm:items-end">
+    <div className="relative inline-flex flex-col items-start gap-2">
       <div className="inline-flex items-center gap-3">
-        <div className="hidden text-right md:block">
-          <span className="block font-mono text-[10px] uppercase tracking-widest text-ink-soft/60">
-            Reading mode
-          </span>
-          <span className="mt-1 block max-w-[260px] text-xs leading-snug text-ink-soft/70">
-            Prioritize hiring signals or engineering detail.
-          </span>
-        </div>
         <button
           type="button"
           role="switch"
@@ -120,7 +112,7 @@ function ModeLabel({
   return (
     <span
       className={`relative z-10 inline-flex items-center justify-center gap-1.5 rounded px-3 py-1.5 transition-colors ${
-        active ? "text-paper" : "text-ink-soft group-hover:text-ink"
+        active ? "text-paper" : "text-[rgba(166,166,166,0.6)] group-hover:text-[rgb(166,166,166)]"
       }`}
     >
       <Icon size={14} className={active ? "icon-current" : "icon-amber"} aria-hidden />

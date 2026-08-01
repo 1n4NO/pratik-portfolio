@@ -3,7 +3,7 @@ import { Container } from "@/components/ui/Container";
 import { PageIntro } from "@/components/ui/PageIntro";
 import { LottieAnimation } from "@/components/ui/LottieAnimation";
 import { MusingsFeed } from "@/components/sections/MusingsFeed";
-import { ContactCTA } from "@/components/layout/ContactCTA";
+import { CompactContactCTA } from "@/components/layout/CompactContactCTA";
 import { posts } from "@/data/posts";
 import { absoluteUrl, createMetadata, jsonLd } from "@/lib/seo";
 
@@ -57,7 +57,7 @@ export default function MusingsPage() {
           />
         </Container>
 
-        <ContactCTA variant="compact" />
+        <CompactContactCTA />
       </div>
     </>
   );

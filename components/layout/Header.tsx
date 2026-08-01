@@ -4,14 +4,16 @@ import { Container } from "@/components/ui/Container";
 import { HeaderNav } from "@/components/layout/HeaderNav";
 import { AutoHideHeader } from "@/components/layout/AutoHideHeader";
 import { CommandPalette } from "@/components/layout/CommandPalette";
-import { ThemeToggle } from "@/components/layout/ThemeToggle";
 import { profile } from "@/data/profile";
 
 export function Header() {
   return (
     <AutoHideHeader>
       <Container className="grid h-16 grid-cols-[auto,minmax(0,1fr),auto] items-center gap-4 md:gap-6">
-        <Link href="/" className="font-mono text-sm font-medium tracking-tight rounded focus-ring">
+        <Link
+          href="/"
+          className="bg-amber px-0 py-0 font-mono text-sm font-medium tracking-tight text-[#1b2030] focus-ring"
+        >
           1n4NO
         </Link>
 
@@ -30,7 +32,6 @@ export function Header() {
           >
             <Mail size={15} className="icon-amber" aria-hidden="true" />
           </a>
-          <ThemeToggle />
         </div>
       </Container>
     </AutoHideHeader>

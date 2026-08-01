@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { ArrowDown, ArrowUpRight } from "lucide-react";
-import { HeroBackdrop } from "@/components/sections/HeroBackdrop";
+import { HeroSection } from "@/components/sections/HeroSection";
 import { HeroMarquee } from "@/components/sections/HeroMarquee";
 import { SpecSheet } from "@/components/sections/SpecSheet";
 import { ProjectRow } from "@/components/sections/ProjectRow";
@@ -100,51 +98,7 @@ export default function HomePage() {
       />
 
       {/* Hero */}
-      <section className="blueprint-surface relative overflow-hidden bg-dark pt-section-sm pb-section-sm md:min-h-[640px] md:pt-section-md md:pb-section-md">
-        <HeroBackdrop />
-        <Container className="relative z-10">
-        <SectionGrid
-          wide
-          aside={
-            <div className="space-y-5 md:max-w-xs">
-                <Eyebrow>
-                  {profile.name}
-                </Eyebrow>
-                <p className="font-mono text-caption uppercase tracking-caps text-ink-soft/70">
-                  {profile.role}
-                </p>
-                <p className="font-mono text-micro uppercase tracking-caps text-ink-soft/50">
-                  {profile.yearsExperience} years · {profile.location}
-                </p>
-              </div>
-            }
-            contentClassName="max-w-prose-wide"
-          >
-            <h1 className="font-display text-hero font-medium tracking-display">
-              {profile.tagline}
-            </h1>
-            <p className="mt-8 max-w-prose text-standfirst leading-standfirst text-ink-soft">
-              {profile.short}
-            </p>
-            <div className="mt-12 flex flex-col gap-3 sm:flex-row">
-              <Link
-                href="#work"
-                className="inline-flex items-center justify-center gap-2 rounded border border-signal bg-signal px-6 py-3.5 font-mono text-caption uppercase tracking-caps text-paper transition-colors hover:bg-signal-dark focus-ring"
-              >
-                View work
-                <ArrowDown size={14} className="icon-current" aria-hidden="true" />
-              </Link>
-              <Link
-                href={`mailto:${profile.email}?subject=Portfolio%20conversation`}
-                className="inline-flex items-center justify-center gap-2 rounded border border-line-strong px-6 py-3.5 font-mono text-caption uppercase tracking-caps text-ink transition-colors hover:border-ink focus-ring"
-              >
-                Contact me
-                <ArrowUpRight size={14} className="icon-amber" aria-hidden="true" />
-              </Link>
-            </div>
-          </SectionGrid>
-        </Container>
-      </section>
+      <HeroSection />
 
       {/* Marquee strip */}
       <div className="relative z-20 -mt-8 border-y border-line/45 bg-white py-4 md:-mt-12">
@@ -202,9 +156,6 @@ export default function HomePage() {
           <SectionGrid
             aside={
               <div>
-                <Eyebrow>
-                  Selected work
-                </Eyebrow>
                 <h2
                   id="work-heading"
                   className="font-display text-section-title font-medium tracking-display"
