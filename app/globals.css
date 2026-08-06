@@ -4,24 +4,24 @@
 
 :root {
   color-scheme: dark;
-  --color-paper: 10 13 20;
-  --color-surface: 20 24 34;
-  --color-surface-muted: 27 32 45;
-  --color-canvas: 244 239 230;
-  --color-panel: 27 32 48;
-  --color-panel-line: 47 55 77;
-  --color-panel-text: 244 244 244;
-  --color-muted-copy: 166 166 166;
-  --color-ink: 245 247 250;
-  --color-ink-soft: 176 185 201;
-  --color-line: 54 62 78;
-  --color-line-strong: 82 93 115;
-  --color-signal: 246 190 110;
-  --color-signal-dark: 226 170 88;
-  --color-amber: 246 190 110;
-  --color-amber-bg: 64 49 28;
-  --color-deep: 5 8 13;
-  --color-deep-line: 37 43 56;
+  --color-paper: 22 21 18;
+  --color-surface: 36 35 31;
+  --color-surface-muted: 52 51 46;
+  --color-canvas: 216 212 206;
+  --color-panel: 36 35 31;
+  --color-panel-line: 70 68 63;
+  --color-panel-text: 234 234 236;
+  --color-muted-copy: 164 160 154;
+  --color-ink: 234 234 236;
+  --color-ink-soft: 196 192 190;
+  --color-line: 70 68 63;
+  --color-line-strong: 118 117 113;
+  --color-signal: 172 152 136;
+  --color-signal-dark: 136 117 101;
+  --color-amber: 172 152 136;
+  --color-amber-bg: 65 55 47;
+  --color-deep: 15 15 13;
+  --color-deep-line: 59 57 53;
   --color-danger: 255 111 122;
   --color-tag-violet: 196 168 255;
   --color-tag-teal: 120 214 178;
@@ -114,6 +114,39 @@ body {
   font-feature-settings: "kern" 1, "liga" 1;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  line-height: 1.5;
+  letter-spacing: normal;
+}
+
+*,
+*::before,
+*::after {
+  letter-spacing: normal !important;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+[role="heading"] {
+  line-height: 1.2 !important;
+}
+
+p,
+li,
+dd,
+dt,
+blockquote,
+figcaption,
+label,
+button,
+a,
+input,
+textarea,
+select {
+  line-height: 1.5;
 }
 
 .font-mono {
@@ -183,11 +216,7 @@ body {
   inset: 0;
   pointer-events: none;
   z-index: 0;
-  background-image:
-    linear-gradient(rgb(var(--tw-grid-line) / 0.28) 1px, transparent 1px),
-    linear-gradient(90deg, rgb(var(--tw-grid-line) / 0.28) 1px, transparent 1px);
-  background-size: 48px 48px;
-  mask-image: linear-gradient(to bottom, black 0%, transparent 100%);
+  background: transparent;
 }
 
 .blueprint-surface > * {
@@ -267,19 +296,19 @@ body {
 }
 
 .bg-dark {
-  background-color: rgb(var(--color-canvas));
-  color: rgb(5 8 13);
-  --color-ink: 5 8 13;
-  --color-ink-soft: 37 43 56;
-  --tw-grid-line: 37 43 56;
+  background-color: rgb(var(--color-paper));
+  color: rgb(var(--color-ink));
+  --color-ink: 234 234 236;
+  --color-ink-soft: 196 192 190;
+  --tw-grid-line: 70 68 63;
 }
 
 .bg-canvas {
   background-color: rgb(var(--color-canvas));
-  color: rgb(5 8 13);
-  --color-ink: 5 8 13;
-  --color-ink-soft: 37 43 56;
-  --tw-grid-line: 37 43 56;
+  color: rgb(22 21 18);
+  --color-ink: 22 21 18;
+  --color-ink-soft: 83 82 79;
+  --tw-grid-line: 118 117 113;
 }
 
 html[data-theme="light"] .bg-paper-dark {
@@ -371,19 +400,13 @@ html[data-theme="dark"] .text-map-active-subtle {
 }
 
 .grid-lines {
-  background-image:
-    linear-gradient(rgb(var(--tw-grid-line) / 0.45) 1px, transparent 1px),
-    linear-gradient(90deg, rgb(var(--tw-grid-line) / 0.45) 1px, transparent 1px);
-  background-size: 40px 40px;
+  background-image: none;
 }
 
 .grid-backdrop {
   isolation: isolate;
   overflow: hidden;
-  background-image:
-    linear-gradient(rgb(var(--tw-grid-line) / 0.46) 1px, transparent 1px),
-    linear-gradient(90deg, rgb(var(--tw-grid-line) / 0.46) 1px, transparent 1px);
-  background-size: 32px 32px;
+  background-image: none;
 }
 
 .grid-backdrop > * {
@@ -511,22 +534,6 @@ html[data-case-study-mode-pulse][data-case-study-mode="engineer"]
 .header-link.is-active::after {
   opacity: 1;
   transform: scaleX(1);
-}
-
-@media (max-width: 435px) {
-  .command-palette-trigger {
-    position: fixed;
-    top: 4.75rem;
-    right: 1rem;
-    z-index: 50;
-    height: 2.25rem;
-    width: 2.25rem;
-    justify-content: center;
-    padding-inline: 0;
-    background-color: rgb(var(--color-paper) / 0.9);
-    box-shadow: var(--shadow-card);
-    backdrop-filter: blur(10px);
-  }
 }
 
 @keyframes reading-mode-card-pulse {

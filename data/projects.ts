@@ -587,10 +587,10 @@ export const projects: Project[] = [
   store --> charts["Trend charts"]
   store --> map
   map --> selection["State or AC selection"]
-  selection --> panels["Drill-down panels"]`,
+    selection --> panels["Drill-down panels"]`,
     cover: {
-      src: "/projects/state-dashboard/kpi-nda-total-seats-dark.png",
-      alt: "Dark mode KPI tile showing NDA total seats",
+      src: "/projects/state-dashboard/widget-india-map-dark.png",
+      alt: "Dark mode India map showing state-level Lok Sabha results and drill-down regions",
     },
     screenshots: [
       {

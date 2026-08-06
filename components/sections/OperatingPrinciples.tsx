@@ -45,11 +45,9 @@ export function OperatingPrinciples() {
           }
           contentClassName="space-y-6"
         >
-          <p className="max-w-prose text-standfirst leading-standfirst text-muted-copy">
-            <span className="bg-amber text-[#1b2030]">
-              The throughline across my work: make the architecture explicit, keep product
-              behavior inspectable, and leave teams with systems they can keep evolving.
-            </span>
+          <p className="max-w-prose text-standfirst text-muted-copy">
+            The throughline across my work: make the architecture explicit, keep product
+            behavior inspectable, and leave teams with systems they can keep evolving.
           </p>
 
           <div className="border-y border-deep-line">

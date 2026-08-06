@@ -1,16 +1,12 @@
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
-import { Project } from "@/data/projects";
-import { ScreenshotStream } from "@/components/sections/ScreenshotStream";
-import { Tag } from "@/components/ui/Tag";
+import type { Project } from "@/data/projects";
 import { Container } from "@/components/ui/Container";
-import { SectionGrid } from "@/components/ui/SectionGrid";
 
 export function ProjectRow({
   project,
-  reversed,
   index,
-  total,
   mediaTheme = "all",
 }: {
   project: Project;
@@ -19,62 +15,61 @@ export function ProjectRow({
   total?: number;
   mediaTheme?: "all" | "light";
 }) {
-  const indexLabel = index !== undefined ? String(index).padStart(2, "0") : undefined;
-  const totalLabel = total !== undefined ? String(total).padStart(2, "0") : undefined;
+  const darkCover = mediaTheme === "light" ? project.cover.src.replace(/dark/gi, "light") : project.cover.src;
+  const isVideo = /\.(webm|mp4)$/i.test(darkCover);
 
   return (
-    <Container
-      id={`project-${project.slug}`}
-      className="scroll-mt-20 border-t border-line py-section-sm md:scroll-mt-28 md:py-section-md"
-    >
-      <SectionGrid
-        reverse={reversed}
-        wide
-        stickyAside={!reversed}
-        aside={
-          <div className="space-y-6 md:max-w-xs">
-            <h3 className="font-display text-subsection font-medium tracking-display-tight">
-              {project.name}
-            </h3>
-            <p className="text-standfirst leading-standfirst text-ink-soft">{project.tagline}</p>
-            <dl className="space-y-4 border-y border-line py-5">
-              <div>
-                <dt className="mb-1.5 font-mono text-micro uppercase tracking-caps text-ink-soft/60">
-                  Role
-                </dt>
-                <dd className="text-body leading-body text-ink-soft">{project.role}</dd>
-              </div>
-              <div>
-                <dt className="mb-1.5 font-mono text-micro uppercase tracking-caps text-ink-soft/60">
-                  Technical bet
-                </dt>
-                <dd className="text-body leading-body text-ink-soft">{project.technicalBet}</dd>
-              </div>
-            </dl>
-            <div className="flex flex-wrap gap-2">
-              {project.techStack.slice(0, 5).map((tech) => (
-                <Tag key={tech}>{tech}</Tag>
-              ))}
-            </div>
-            <Link
-              href={`/work/${project.slug}`}
-              className="inline-flex items-center gap-1.5 font-mono text-caption uppercase tracking-caps text-signal transition-colors hover:text-signal-dark focus-ring rounded"
-            >
-              View case study
-              <ArrowUpRight size={14} className="icon-amber" aria-hidden="true" />
-            </Link>
+    <article id={`project-${project.slug}`} className="scroll-mt-24 border-t border-line bg-paper text-ink">
+      <Container className="py-12 md:py-20">
+        <Link href={`/work/${project.slug}`} className="group block focus-ring">
+          <div className="relative aspect-[16/9] overflow-hidden bg-surface-muted">
+            {isVideo ? (
+              <video
+                className="h-full w-full object-cover object-top transition duration-700 ease-out group-hover:scale-[1.015]"
+                autoPlay
+                muted
+                loop
+                playsInline
+                aria-label={project.cover.alt}
+              >
+                <source src={darkCover} />
+              </video>
+            ) : (
+              <Image
+                src={darkCover}
+                alt={project.cover.alt}
+                fill
+                sizes="(max-width: 768px) 100vw, 1240px"
+                priority={index === 1}
+                className="object-cover object-top transition duration-700 ease-out group-hover:scale-[1.015]"
+              />
+            )}
+            <span className="absolute right-4 top-4 flex h-12 w-12 items-center justify-center rounded-full bg-paper text-ink opacity-0 transition duration-300 group-hover:opacity-100 md:right-6 md:top-6">
+              <ArrowUpRight size={18} aria-hidden="true" />
+            </span>
           </div>
-        }
-        contentClassName="min-w-0"
-      >
-        <div className="space-y-6">
-          <blockquote className="max-w-prose border-l border-signal pl-5 text-body font-medium leading-body text-ink md:pl-6">
-            {project.impact}
-          </blockquote>
-          <p className="max-w-prose text-body leading-body text-ink-soft">{project.overview}</p>
-          <ScreenshotStream project={project} theme={mediaTheme} />
-        </div>
-      </SectionGrid>
-    </Container>
+
+          <div className="grid gap-8 pt-7 md:grid-cols-[minmax(0,1.15fr)_minmax(18rem,0.85fr)] md:pt-10">
+            <div>
+              <p className="mb-3 font-mono text-xs text-muted-copy">
+                {index ? String(index).padStart(2, "0") : "Case study"} · {project.industry}
+              </p>
+              <h3 className="max-w-[14ch] font-display text-[clamp(2.6rem,5vw,5.8rem)] font-normal">
+                {project.name}
+              </h3>
+            </div>
+            <div className="space-y-5 md:pt-8">
+              <p className="text-xl text-ink md:text-2xl">{project.tagline}</p>
+              <p className="max-w-xl text-base text-ink-soft">{project.overview}</p>
+              <div className="flex flex-wrap gap-x-5 gap-y-2 border-t border-line pt-5 font-mono text-[11px] text-muted-copy">
+                {project.techStack.slice(0, 5).map((tech) => (
+                  <span key={tech}>{tech}</span>
+                ))}
+              </div>
+            </div>
+          </div>
+        </Link>
+      </Container>
+    </article>
   );
 }

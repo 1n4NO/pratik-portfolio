@@ -49,7 +49,7 @@ export function AutoHideHeader({ children }: { children: React.ReactNode }) {
 
   return (
     <header
-      className={`sticky top-0 z-40 border-b border-line bg-paper/90 backdrop-blur-sm transition-transform duration-300 ease-out will-change-transform ${
+      className={`sticky top-0 z-40 border-b border-line bg-paper/95 backdrop-blur-md transition-transform duration-300 ease-out will-change-transform ${
         hidden ? "-translate-y-full" : "translate-y-0"
       }`}
     >

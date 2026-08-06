@@ -14,16 +14,16 @@ export function HeaderNav() {
 
   return (
     <nav aria-label="Primary">
-      <ul className="flex items-center gap-4 md:gap-8">
-        {navItems.map((item) => {
+      <ul className="flex items-center gap-4 md:gap-7">
+        {navItems.map((item, index) => {
           const active = pathname === item.href || pathname.startsWith(`${item.href}/`);
 
           return (
-            <li key={item.href}>
+            <li key={item.href} className={index === 0 ? "block" : "hidden sm:block"}>
               <Link
                 href={item.href}
                 aria-current={active ? "page" : undefined}
-                className={`header-link font-mono text-[11px] tracking-widest uppercase focus-ring ${
+                className={`header-link font-sans text-sm focus-ring ${
                   active ? "is-active text-signal" : "text-ink-soft"
                 }`}
               >

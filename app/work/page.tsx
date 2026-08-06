@@ -56,18 +56,16 @@ export default function WorkPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={jsonLd(structuredData)}
       />
-      <section className="bg-dark pb-section-sm md:pb-section-md">
+      <section className="border-b border-line bg-paper pb-section-sm text-ink md:pb-section-md">
         <Container className="pt-section-sm md:pt-section-md">
           <div className="space-y-6 md:max-w-4xl">
             <h1 className="font-display text-hero font-medium tracking-display">
               <span className="block">Products shipped,</span>
               <span className="block">systems thought through.</span>
             </h1>
-            <p className="max-w-[42rem] text-standfirst leading-standfirst text-muted-copy">
-              <span className="bg-amber px-1 text-[#1b2030] box-decoration-clone">
-                See how AI workflows, frontend architecture, data interfaces, and product systems
-                show up in the work.
-              </span>
+            <p className="max-w-[42rem] text-standfirst text-ink-soft">
+              See how AI workflows, frontend architecture, data interfaces, and product systems
+              show up in the work.
             </p>
             <div className="flex flex-col gap-3 sm:flex-row">
               <LinkButton
@@ -92,8 +90,8 @@ export default function WorkPage() {
       <Container id="selected-work">
         <SectionGrid
           aside={
-            <div className="space-y-5 rounded-lg border border-line bg-surface p-6 md:p-8">
-              <p className="font-mono text-micro uppercase tracking-caps text-signal">
+            <div className="space-y-5 border-t border-line pt-6">
+              <p className="font-mono text-micro text-muted-copy">
                 Project system
               </p>
               <h2 className="font-display text-subsection font-medium tracking-display-tight">

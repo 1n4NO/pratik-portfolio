@@ -5,14 +5,14 @@ import { profile } from "@/data/profile";
 
 export function CompactContactCTA() {
   return (
-    <section className="bg-surface" style={{ color: "rgb(166, 166, 166)" }}>
+    <section className="border-t border-line bg-canvas text-[#161512]">
       <Container className="py-10 md:py-12">
         <div className="flex flex-col gap-5 py-6 md:flex-row md:items-center md:justify-between">
           <div>
-            <h2 className="max-w-xl font-display text-2xl font-bold leading-tight">
+            <h2 className="max-w-xl font-display text-3xl font-normal md:text-5xl">
               Need a sharper frontend path?
             </h2>
-            <p className="mt-3 max-w-xl text-sm leading-relaxed text-[rgba(166,166,166,0.6)]">
+            <p className="mt-3 max-w-xl text-sm text-[#53524f]">
               Architecture, AI workflows, design systems, and interfaces that need to hold up after
               launch.
             </p>
@@ -36,7 +36,7 @@ export function CompactContactCTA() {
               target="_blank"
               rel="noopener noreferrer"
               variant="secondary"
-              className="!text-[rgba(166,166,166,0.6)] hover:!text-[rgb(166,166,166)]"
+              className="!border-[#887f77] !text-[#53524f] hover:!border-[#161512] hover:!text-[#161512]"
             >
               <Linkedin size={15} className="icon-amber" aria-hidden="true" />
               LinkedIn

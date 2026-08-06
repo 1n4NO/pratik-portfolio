@@ -31,36 +31,36 @@ const config: Config = {
       fontSize: {
         hero: [
           "clamp(2.75rem, 4vw + 1.5rem, 6rem)",
-          { lineHeight: "1.04", letterSpacing: "-0.035em", fontWeight: "500" },
+          { lineHeight: "1.2", letterSpacing: "normal", fontWeight: "500" },
         ],
         "section-title": [
           "clamp(1.875rem, 2.5vw + 0.75rem, 3rem)",
-          { lineHeight: "1.08", letterSpacing: "-0.03em", fontWeight: "500" },
+          { lineHeight: "1.2", letterSpacing: "normal", fontWeight: "500" },
         ],
         subsection: [
           "clamp(1.375rem, 1.5vw + 0.75rem, 2rem)",
-          { lineHeight: "1.15", letterSpacing: "-0.025em", fontWeight: "500" },
+          { lineHeight: "1.2", letterSpacing: "normal", fontWeight: "500" },
         ],
         standfirst: [
           "clamp(1.125rem, 1vw + 0.75rem, 1.5rem)",
-          { lineHeight: "1.65" },
+          { lineHeight: "1.5" },
         ],
         body: [
           "clamp(1rem, 0.25vw + 0.9375rem, 1.0625rem)",
-          { lineHeight: "1.7" },
+          { lineHeight: "1.5" },
         ],
-        caption: ["0.8125rem", { lineHeight: "1.4" }],
-        micro: ["0.6875rem", { lineHeight: "1.35" }],
+        caption: ["0.8125rem", { lineHeight: "1.5" }],
+        micro: ["0.6875rem", { lineHeight: "1.5" }],
       },
       letterSpacing: {
-        display: "-0.035em",
-        "display-tight": "-0.025em",
-        caps: "0.12em",
-        "caps-wide": "0.18em",
+        display: "normal",
+        "display-tight": "normal",
+        caps: "normal",
+        "caps-wide": "normal",
       },
       lineHeight: {
-        standfirst: "1.65",
-        body: "1.7",
+        standfirst: "1.5",
+        body: "1.5",
       },
       spacing: {
         gutter: "clamp(1.25rem, 3vw, 2.75rem)",

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">Forge logo</title>
+  <desc id="desc">A geometric orange forge spark inside a dark hexagon.</desc>
+  <defs>
+    <linearGradient id="forge" x1="80" y1="64" x2="432" y2="448" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FF9A62"/>
+      <stop offset="1" stop-color="#F0522A"/>
+    </linearGradient>
+  </defs>
+  <path fill="#171A21" d="M256 24 452 138v236L256 488 60 374V138L256 24Z"/>
+  <path fill="url(#forge)" d="m256 83 124 72v102l-58 34v-66l-66 38-66-38v66l-58-34V155l124-72Z"/>
+  <path fill="#FFD4B9" d="m256 204 66 38-66 38-66-38 66-38Zm0 91 66-38v72l-66 38-66-38v-72l66 38Z"/>
+</svg>

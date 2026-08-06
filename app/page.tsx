@@ -1,37 +1,31 @@
+/*
+THESIS: The work leads; this is a studio portfolio, not a technical dashboard.
+OWN-WORLD: Graphite fields, mineral neutrals, warm-grey accent, thin rules, and oversized Gloock statements.
+STORY: Meet Pratik, see proof at full scale, understand how he works, then start a conversation.
+FIRST VIEWPORT: A dominant three-part practice statement fills the left; a concise offer and actions anchor the right.
+FORM: Image-led independent studio portfolio, adapted from the user-pinned Piñt reference.
+*/
 import type { Metadata } from "next";
+import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { HeroIdentityStrip } from "@/components/sections/HeroIdentityStrip";
 import { HeroMarquee } from "@/components/sections/HeroMarquee";
-import { SpecSheet } from "@/components/sections/SpecSheet";
 import { ProjectRow } from "@/components/sections/ProjectRow";
-import { ContactCTA } from "@/components/layout/ContactCTA";
 import { UpcomingProjectSection } from "@/components/sections/UpcomingProjectSection";
+import { ContactCTA } from "@/components/layout/ContactCTA";
 import { Container } from "@/components/ui/Container";
-import { SectionGrid } from "@/components/ui/SectionGrid";
 import { projects } from "@/data/projects";
 import { profile } from "@/data/profile";
 import { absoluteUrl, createMetadata, jsonLd, siteConfig } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  ...createMetadata({
-    description: siteConfig.description,
-    path: "/",
-  }),
-  verification: {
-    google: "V3Ju8VXyJ5J5dbzwoeSk2MYeSGvsjEsk0W3lIUV5qr0",
-  },
+  ...createMetadata({ description: siteConfig.description, path: "/" }),
+  verification: { google: "V3Ju8VXyJ5J5dbzwoeSk2MYeSGvsjEsk0W3lIUV5qr0" },
 };
 
 export default function HomePage() {
-  const qualitySignals = [
-    "Architecture",
-    "Product sense",
-    "Delivery systems",
-    "AI work",
-    "Design systems",
-  ];
-  const featuredProjects = projects.slice(0, 3);
-
+  const featuredProjects = projects.slice(0, 4);
   const structuredData = {
     "@context": "https://schema.org",
     "@graph": [
@@ -51,30 +45,7 @@ export default function HomePage() {
         description: profile.short,
         url: siteConfig.url,
         email: `mailto:${profile.email}`,
-        telephone: profile.phone,
-        address: {
-          "@type": "PostalAddress",
-          addressLocality: "Bangalore",
-          addressCountry: "IN",
-        },
         sameAs: [profile.linkedin, profile.github],
-        knowsAbout: [
-          "Frontend architecture",
-          "React",
-          "Next.js",
-          "TypeScript",
-          "Design systems",
-          "AI-enabled interfaces",
-          "Data visualization",
-        ],
-      },
-      {
-        "@type": "ProfilePage",
-        "@id": `${siteConfig.url}/#profile`,
-        url: siteConfig.url,
-        name: siteConfig.title,
-        about: { "@id": `${siteConfig.url}/#person` },
-        mainEntity: { "@id": `${siteConfig.url}/#person` },
       },
       {
         "@type": "ItemList",
@@ -92,107 +63,91 @@ export default function HomePage() {
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={jsonLd(structuredData)}
-      />
-
-      {/* Hero */}
+      <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(structuredData)} />
       <HeroIdentityStrip />
       <HeroSection />
 
-      {/* Marquee strip */}
-      <div className="relative z-20 -mt-8 border-y border-deep-line/45 bg-deep py-4 md:-mt-12">
-        <div
-          className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-deep to-transparent md:w-24"
-          aria-hidden="true"
-        />
-        <div
-          className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-deep to-transparent md:w-24"
-          aria-hidden="true"
-        />
-        <div className="[mask-image:linear-gradient(90deg,transparent,black_8%,black_92%,transparent)]">
-          <HeroMarquee />
-        </div>
-      </div>
+      <section className="border-y border-line bg-surface py-5 text-ink" aria-label="Project reel">
+        <HeroMarquee />
+      </section>
 
-      {/* Profile */}
-      <section
-        className="border-y border-deep-line bg-deep py-section-sm text-muted-copy md:py-section-md"
-      >
-        <Container>
-          <SectionGrid
-            stickyAside
-            aside={
-              <div className="space-y-8">
-                <div>
-                  <h2 className="font-display text-section-title font-medium tracking-display">
-                    What I bring to the work
-                  </h2>
-                </div>
-                <SpecSheet />
+      <section className="bg-canvas text-[#161512]">
+        <Container className="py-16 md:py-24 lg:py-28">
+          <div className="grid gap-12 md:grid-cols-[minmax(0,0.7fr)_minmax(0,1.3fr)]">
+            <p className="font-mono text-xs text-[#53524f]">What I bring to the work</p>
+            <div>
+              <h2 className="max-w-[16ch] font-display text-[clamp(2.8rem,5.6vw,6.2rem)] font-normal">
+                Complex products deserve interfaces that feel inevitable.
+              </h2>
+              <div className="mt-10 grid gap-6 border-t border-[#9c9892] pt-7 md:grid-cols-2">
+                {profile.long.slice(0, 2).map((paragraph) => (
+                  <p key={paragraph} className="text-base text-[#53524f] md:text-lg">
+                    {paragraph}
+                  </p>
+                ))}
               </div>
-            }
-            contentClassName="space-y-6"
-          >
-            {profile.long.map((para, i) => (
-              <p key={i} className="max-w-prose-wide text-body leading-body">
-                {para}
-              </p>
-            ))}
-          </SectionGrid>
+              <Link
+                href="/expertise"
+                className="mt-9 inline-flex items-center gap-2 border-b border-[#161512] pb-1 text-sm transition-opacity hover:opacity-60 focus-ring"
+              >
+                More about how I work
+                <ArrowUpRight size={15} aria-hidden="true" />
+              </Link>
+            </div>
+          </div>
         </Container>
       </section>
 
-      {/* Selected work */}
-      <section
-        id="work"
-        aria-labelledby="work-heading"
-        className="bg-dark pb-section-sm md:pb-section-md"
-      >
-        <Container className="pt-section-sm md:pt-section-md">
-          <SectionGrid
-            aside={
-              <div>
-                <h2
-                  id="work-heading"
-                  className="font-display text-section-title font-medium tracking-display"
-                >
-                  Case studies with clear tradeoffs
-                </h2>
-              </div>
-            }
-            contentClassName="space-y-6"
-          >
-            <p className="max-w-prose text-standfirst leading-standfirst text-ink-soft">
-              Products where rendering choices, system boundaries, and team habits were part of
-              the design from the start.
-            </p>
-            <div className="flex flex-wrap gap-x-5 gap-y-2 border-y border-line py-5">
-              {qualitySignals.map((signal) => (
-                <span
-                  key={signal}
-                  className="font-mono text-micro uppercase tracking-caps text-ink-soft/60"
-                >
-                  {signal}
-                </span>
-              ))}
-            </div>
-          </SectionGrid>
+      <section id="work" aria-labelledby="work-heading" className="bg-paper text-ink">
+        <Container className="py-16 md:py-24">
+          <div className="grid gap-10 md:grid-cols-[minmax(0,1fr)_auto] md:items-end">
+            <h2 id="work-heading" className="max-w-[10ch] font-display text-[clamp(3.4rem,7vw,8rem)] font-normal">
+              Selected work
+            </h2>
+            <Link
+              href="/work"
+              className="inline-flex w-fit items-center gap-2 border-b border-line-strong pb-1 text-sm text-ink transition-colors hover:border-signal hover:text-signal focus-ring"
+            >
+              View all projects
+              <ArrowUpRight size={15} aria-hidden="true" />
+            </Link>
+          </div>
         </Container>
 
-        {featuredProjects.map((project, i) => (
+        {featuredProjects.map((project, index) => (
           <ProjectRow
             key={project.slug}
             project={project}
-            reversed={i % 2 === 1}
-            index={i + 1}
-            total={featuredProjects.length}
+            index={index + 1}
             mediaTheme="light"
           />
         ))}
+      </section>
 
-        <UpcomingProjectSection />
+      <UpcomingProjectSection />
+
+      <section className="border-t border-line bg-surface text-ink">
+        <Container className="py-16 md:py-24">
+          <div className="grid gap-10 md:grid-cols-[minmax(0,1.2fr)_minmax(18rem,0.8fr)] md:items-end">
+            <h2 className="max-w-[13ch] font-display text-[clamp(2.8rem,5.5vw,6rem)] font-normal">
+              I worry about the details so teams can move with confidence.
+            </h2>
+            <div className="space-y-6 border-t border-line pt-6 text-ink-soft">
+              <p>
+                Architecture, interaction, performance, and delivery are treated as one product
+                problem—not separate handoffs.
+              </p>
+              <div className="grid grid-cols-2 gap-x-8 gap-y-3 font-mono text-xs text-muted-copy">
+                <span>Frontend systems</span>
+                <span>Product strategy</span>
+                <span>AI workflows</span>
+                <span>Design systems</span>
+                <span>Performance</span>
+                <span>Team enablement</span>
+              </div>
+            </div>
+          </div>
+        </Container>
       </section>
 
       <ContactCTA />

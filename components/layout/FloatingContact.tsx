@@ -36,7 +36,7 @@ export function FloatingContact() {
       <button
         onClick={() => setOpen(true)}
         aria-label="Open contact form"
-        className="fixed bottom-6 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-signal text-paper shadow-card transition-colors hover:bg-signal-dark focus-ring"
+        className="fixed bottom-3 right-3 z-50 flex h-11 w-11 items-center justify-center rounded-full bg-signal text-paper shadow-card transition-colors hover:bg-signal-dark focus-ring sm:bottom-6 sm:right-6 sm:h-14 sm:w-14"
       >
         <MessageCircle size={22} className="icon-current" aria-hidden="true" />
       </button>
