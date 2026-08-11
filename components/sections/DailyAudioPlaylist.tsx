@@ -18,6 +18,9 @@ export function DailyAudioPlaylist() {
       <h3 className="font-display text-[clamp(2.3rem,4vw,4.8rem)] font-normal leading-none text-[#f3f1e9]">
         {playlist.title}
       </h3>
+      <p className="mt-4 font-display text-lg font-thin italic leading-tight text-[#d0cbc1] md:text-xl">
+        {playlist.microcopy}
+      </p>
 
       <div className="mt-7 overflow-hidden bg-[#161512] md:mt-8">
         <iframe
