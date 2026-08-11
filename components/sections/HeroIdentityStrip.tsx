@@ -3,7 +3,7 @@ import { profile } from "@/data/profile";
 
 export function HeroIdentityStrip() {
   return (
-    <div className="border-b border-line bg-paper text-ink">
+    <div data-header-theme="dark" className="border-b border-line bg-paper text-ink">
       <Container>
         <div className="flex min-h-12 items-center justify-between gap-4 py-3 font-mono text-[11px] text-muted-copy">
           <span>{profile.name}</span>

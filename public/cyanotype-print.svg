@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">Cyanotype print texture</title>
+  <desc id="desc">A soft paper cyanotype print with uneven chemical washes and blueprint linework.</desc>
+  <defs>
+    <linearGradient id="paper" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f1ebdf"/>
+      <stop offset="0.58" stop-color="#e1d7c8"/>
+      <stop offset="1" stop-color="#d5c8b7"/>
+    </linearGradient>
+    <linearGradient id="blueDeep" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#3d92d4"/>
+      <stop offset="0.55" stop-color="#1f6da6"/>
+      <stop offset="1" stop-color="#0c3f73"/>
+    </linearGradient>
+    <linearGradient id="blueWash" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#58ade0"/>
+      <stop offset="1" stop-color="#185f91"/>
+    </linearGradient>
+    <filter id="blurSoft" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="20" />
+    </filter>
+    <filter id="blurMid" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="10" />
+    </filter>
+    <filter id="blurEdge" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="4" />
+    </filter>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#paper)" />
+
+  <g filter="url(#blurSoft)" opacity="0.9">
+    <path d="M-52 166C80 46 217 10 352 54c117 38 172 112 287 126 105 13 190-50 291-98 127-60 279-65 438-16 99 31 173 83 230 154-27 78-80 126-160 146-111 28-217 6-314-15-118-26-204-8-287 31-111 52-202 86-312 65-130-25-213-94-316-153-82-47-176-64-274-57-72 6-133 20-181 46-28-43-27-91 10-134Z" fill="url(#blueDeep)" opacity="0.92"/>
+    <path d="M1248 54c131 22 233 80 300 175 15 22 28 45 39 69-42 63-109 103-202 119-124 21-214-16-313-52-88-31-164-29-247 5-109 44-210 82-323 68-90-11-176-58-257-137-62-61-134-102-214-123-70-18-142-17-216 3-15-48-13-93 6-135 39-86 124-152 239-184 157-43 322-2 470 51 122 44 232 56 329 35 90-20 175-26 249-10Z" fill="url(#blueWash)" opacity="0.8"/>
+    <path d="M-14 622c83-102 187-158 311-166 125-8 220 28 285 105 65 76 154 121 267 136 126 17 249-11 369-82 116-69 230-91 341-66 83 18 145 62 186 129-12 84-56 155-131 214-95 75-209 97-341 69-130-27-234-19-311 23-116 64-235 87-356 65-119-22-215-73-288-154-50-54-92-85-127-92-53-10-109-2-164 24-46-10-79-31-101-65 10-31 26-61 49-92Z" fill="url(#blueDeep)" opacity="0.78"/>
+  </g>
+
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.88">
+    <path d="M118 204c108-25 192-19 252 19 74 48 130 97 169 147 41 53 90 85 148 96 61 11 132 1 214-30 72-27 147-35 225-24 70 10 135 38 196 84 62 47 123 75 183 84" stroke="#e9f4ff" stroke-opacity="0.54" stroke-width="2.4" filter="url(#blurEdge)"/>
+    <path d="M88 286c92 23 161 72 207 147 42 69 93 114 154 136 66 24 138 20 217-11 79-31 156-47 230-47 76 0 146 17 211 50 70 35 145 49 227 42" stroke="#2a76ac" stroke-opacity="0.6" stroke-width="2.2" filter="url(#blurEdge)"/>
+    <path d="M170 84c20 82 67 154 141 216 73 61 118 123 133 186 15 62 1 129-41 198-43 71-57 131-41 180" stroke="#f7f1e7" stroke-opacity="0.3" stroke-width="2.4" filter="url(#blurEdge)"/>
+    <path d="M1310 100c-40 78-47 147-22 209 27 67 80 118 160 154 80 36 134 80 162 133 25 49 27 104 4 164" stroke="#f7f1e7" stroke-opacity="0.24" stroke-width="2.2" filter="url(#blurEdge)"/>
+    <path d="M1012 150c-42 54-57 109-44 164 14 60 52 108 113 145 58 35 93 79 106 133 12 52 3 102-28 151" stroke="#2c7eb4" stroke-opacity="0.55" stroke-width="2.6" filter="url(#blurEdge)"/>
+  </g>
+
+  <g opacity="0.42" filter="url(#blurMid)">
+    <path d="M314 110c69-43 151-50 247-20 93 29 153 74 180 134 27 60 72 104 133 133 63 31 150 43 260 36 97-6 174 2 231 24 48 18 90 50 126 96-37 57-95 90-173 98-96 10-177-8-245-55-71-49-150-67-239-56-108 13-194 11-257-8-74-22-146-66-216-133-54-53-107-83-161-90-42-6-88 1-136 20-28-51-24-102 10-149 34-47 80-77 127-110Z" fill="#6fbae2"/>
+    <path d="M1078 496c78-22 152-20 221 5 66 24 121 63 163 116 34 42 79 68 134 77-23 56-67 95-132 116-93 30-170 12-241-55-68-64-130-92-185-84-58 8-106 36-145 83-40 48-85 77-134 88-48 11-92 6-132-15 34-57 77-100 130-130 56-31 115-83 178-157 47-55 87-84 123-94Z" fill="#0f4c79"/>
+  </g>
+
+  <g fill="none" stroke="#eff7ff" stroke-opacity="0.7" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M160 150h224m-224 0v138m0-138 104 102 120-102" stroke-width="3.6" />
+    <path d="M1164 132h170m-170 0v150m0-150 82 78 88-78" stroke-width="3.6" />
+    <path d="M212 608c84-62 178-83 283-64 96 17 166 57 211 118 45 61 104 95 176 101 74 7 146-4 217-34 76-32 144-43 205-34" stroke-width="4.2" />
+    <path d="M936 236c60-34 122-43 184-27 68 18 120 55 158 113 33 48 84 82 154 100" stroke-width="4.2" />
+    <circle cx="426" cy="338" r="96" stroke-width="4.2" />
+    <circle cx="1098" cy="546" r="118" stroke-width="4.2" />
+    <path d="M346 338h160M426 258v160" stroke-width="2.8" />
+    <path d="M980 546h236M1098 428v236" stroke-width="2.8" />
+  </g>
+
+  <g opacity="0.2">
+    <circle cx="426" cy="338" r="10" fill="#f7f3ec" />
+    <circle cx="1098" cy="546" r="8" fill="#f7f3ec" />
+    <circle cx="1242" cy="196" r="6" fill="#f7f3ec" />
+    <circle cx="240" cy="640" r="7" fill="#f7f3ec" />
+    <circle cx="1400" cy="742" r="8" fill="#f7f3ec" />
+  </g>
+</svg>

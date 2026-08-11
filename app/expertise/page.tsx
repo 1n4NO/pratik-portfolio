@@ -25,7 +25,7 @@ export default function ExpertisePage() {
 
   return (
     <>
-      <section className="relative overflow-hidden border-b border-line bg-canvas py-section-sm text-ink md:py-section-md">
+      <section data-header-theme="light" className="relative overflow-hidden border-b border-line bg-canvas py-section-sm text-ink md:py-section-md">
         <Container>
           <div className="max-w-4xl space-y-6">
             <h1 className="font-display text-hero font-medium tracking-display">
@@ -52,6 +52,7 @@ export default function ExpertisePage() {
       </section>
 
       <section
+        data-header-theme="dark"
         id="expertise-map"
         className="relative overflow-hidden bg-paper-dark p-0 scroll-mt-24 md:scroll-mt-28"
       >
@@ -65,6 +66,7 @@ export default function ExpertisePage() {
       </section>
 
       <section
+        data-header-theme="dark"
         id="industry-expertise"
         className="bg-dark pb-section-md scroll-mt-24 md:pb-section-lg md:scroll-mt-28"
       >

@@ -158,6 +158,15 @@ select {
   text-rendering: optimizeLegibility;
 }
 
+header[data-header-active-theme] {
+  --color-paper: var(--header-paper);
+  --color-ink: var(--header-ink);
+  --color-ink-soft: var(--header-ink-soft);
+  --color-line: var(--header-line);
+  --color-line-strong: var(--header-line-strong);
+  --color-signal: var(--header-signal);
+}
+
 /* ── Editorial layout grid ── */
 
 .editorial-grid {

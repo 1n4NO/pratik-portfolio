@@ -41,7 +41,7 @@ export default function MusingsPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={jsonLd(structuredData)}
       />
-      <div className="bg-dark">
+      <div data-header-theme="dark" className="bg-dark">
         <Container className="pt-16 pb-20">
           <MusingsFeed
             posts={sorted}

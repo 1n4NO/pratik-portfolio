@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 
 import { Container } from "@/components/ui/Container";
@@ -54,6 +54,41 @@ const forgeScreenshotSlots = [
   },
 ] as const;
 
+const musicollabSurfaceCards = [
+  {
+    title: "Mac composer deck",
+    detail:
+      "A web app for arranging drums, loops, instruments, samples, and transport on the desktop.",
+    mark: "/upcoming/musicollab-web-mark.svg",
+    alt: "MusiCollab web mark",
+  },
+  {
+    title: "iPhone 14 performer",
+    detail:
+      "A native app for low-latency drums, instruments, sample slices, and expressive performance.",
+    mark: "/upcoming/musicollab-app-mark.svg",
+    alt: "MusiCollab app mark",
+  },
+  {
+    title: "Shared session protocol",
+    detail:
+      "A local Wi-Fi WebSocket session that synchronizes compact musical events and state.",
+    mark: "/upcoming/musicollab-wordmark.svg",
+    alt: "MusiCollab wordmark",
+  },
+] as const;
+
+const musicollabTags = [
+  "Mac composer",
+  "iPhone 14 performance",
+  "Local Wi-Fi",
+  "WebSocket session",
+  "Sample import",
+  "Sample slicing",
+  "Drum pads",
+  "Transport",
+] as const;
+
 export function UpcomingProjectSection() {
   const reduceMotion = useReducedMotion();
   const { scrollYProgress } = useScroll();
@@ -62,7 +97,7 @@ export function UpcomingProjectSection() {
   const grain = useTransform(scrollYProgress, [0.82, 1], [0.06, 0.12]);
 
   return (
-    <section aria-labelledby="upcoming-project" className="bg-[#000000] text-white">
+    <section data-header-theme="dark" aria-labelledby="upcoming-project" className="bg-[#000000] text-white">
       <div className="relative min-h-screen overflow-hidden border-t border-white/10 bg-[#000000]">
         <div
           aria-hidden="true"
@@ -94,7 +129,7 @@ export function UpcomingProjectSection() {
         </Container>
       </div>
 
-      <section aria-label="Upcoming project images" className="border-t border-white/10 bg-[#000000]">
+      <section data-header-theme="dark" aria-label="Upcoming project images" className="border-t border-white/10 bg-[#000000]">
         <Container className="py-section-sm md:py-section-md">
           <div className="mb-8 flex flex-wrap justify-center gap-2.5 sm:gap-3">
             {blueLotusTags.map((tag) => (
@@ -160,7 +195,7 @@ export function UpcomingProjectSection() {
 
 function ForgeUpcomingProject({ reduceMotion }: { reduceMotion: boolean }) {
   return (
-    <section aria-labelledby="forge-upcoming-project" className="border-t border-[#080b12]">
+    <section data-header-theme="light" aria-labelledby="forge-upcoming-project" className="border-t border-[#080b12]">
       <div className="relative min-h-[92svh] overflow-hidden bg-[#f36a38] text-[#080b12]">
         <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
           <Image
@@ -250,7 +285,7 @@ function ForgeUpcomingProject({ reduceMotion }: { reduceMotion: boolean }) {
         </Container>
       </div>
 
-      <div className="bg-[#080b12] text-[#f3f1e9]">
+      <div data-header-theme="dark" className="bg-[#080b12] text-[#f3f1e9]">
         <Container className="py-section-sm md:py-section-md">
           <div className="grid gap-10 border-b border-[#273244] pb-10 md:grid-cols-[minmax(0,0.7fr)_minmax(18rem,1.3fr)] md:items-end md:pb-14">
             <div>
@@ -278,7 +313,157 @@ function ForgeUpcomingProject({ reduceMotion }: { reduceMotion: boolean }) {
           </div>
         </Container>
       </div>
+
+      <MusicollabUpcomingProject reduceMotion={Boolean(reduceMotion)} />
     </section>
+  );
+}
+
+function MusicollabUpcomingProject({ reduceMotion }: { reduceMotion: boolean }) {
+  const sectionRef = useRef<HTMLDivElement | null>(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"],
+  });
+
+  const titleY = useTransform(scrollYProgress, [0, 0.45, 1], [28, -8, -120]);
+  const titleOpacity = useTransform(scrollYProgress, [0, 0.15, 0.7, 1], [0.92, 1, 0.92, 0.78]);
+  const cardsY = useTransform(scrollYProgress, [0, 0.45, 1], [18, -6, -72]);
+  const cardsScale = useTransform(scrollYProgress, [0, 1], [0.995, 1.01]);
+
+  return (
+    <div
+      ref={sectionRef}
+      data-header-theme="dark"
+      className="relative isolate overflow-hidden border-t border-[#0d1218] bg-[#0a0d15] text-[#f5f7fb]"
+    >
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 top-0 h-[34rem] bg-[radial-gradient(circle_at_18%_20%,rgba(42,207,229,0.16),transparent_28%),radial-gradient(circle_at_84%_18%,rgba(255,87,87,0.12),transparent_24%),radial-gradient(circle_at_50%_78%,rgba(143,92,255,0.1),transparent_30%)]"
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(6,9,14,0.02),rgba(6,9,14,0.26)_28%,rgba(10,13,21,0.9)_70%,rgba(10,13,21,1)_100%)]"
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:120px_100%,100%_96px] opacity-20 [mask-image:linear-gradient(180deg,transparent,black_12%,black_88%,transparent)]"
+      />
+      <Container className="relative z-10 py-section-md md:py-section-lg lg:py-section-xl">
+        <div className="grid gap-10 lg:grid-cols-[minmax(0,0.78fr)_minmax(19rem,1.22fr)] lg:items-end lg:min-h-[86svh]">
+          <motion.div
+            initial={reduceMotion ? false : { opacity: 0, y: 24 }}
+            whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.35 }}
+            style={reduceMotion ? undefined : { y: titleY, opacity: titleOpacity }}
+            transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1] }}
+            className="relative z-10 max-w-2xl lg:sticky lg:top-24 lg:pt-10"
+          >
+            <h2
+              id="musicollab-upcoming-project"
+              className="max-w-[10ch] font-display text-[clamp(4rem,9vw,9.5rem)] font-normal leading-[0.92] tracking-[-0.045em] text-[#f5f7fb]"
+            >
+              MusiCollab
+            </h2>
+            <p className="mt-6 max-w-2xl text-base leading-7 text-[#c8d2e6] md:text-lg md:leading-8">
+              Make the room part of the instrument. MusiCollab is a shared music workspace where
+              the Mac composer deck and the iPhone 14 performer stay locked to one local session.
+            </p>
+            <p className="mt-5 max-w-xl text-sm leading-6 text-[#9ba7bb] md:text-base">
+              The system synchronizes compact musical events and session state instead of raw
+              audio, so each device can do the job it does best.
+            </p>
+
+            <div className="mt-8 flex flex-wrap gap-2.5">
+              {musicollabTags.map((tag) => (
+                <span
+                  key={tag}
+                  className="inline-flex items-center border border-[#2c3850] bg-[#11182a] px-4 py-2 font-mono text-[10px] uppercase tracking-[0.28em] text-[#cbd5e5]"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial={reduceMotion ? false : { opacity: 0, scale: 0.96, y: 18 }}
+            whileInView={reduceMotion ? undefined : { opacity: 1, scale: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.28 }}
+            style={reduceMotion ? undefined : { y: cardsY, scale: cardsScale }}
+            transition={{ duration: 0.95, ease: [0.22, 1, 0.36, 1] }}
+            className="relative lg:pt-2 lg:translate-y-8"
+          >
+            <div
+              aria-hidden="true"
+              className="absolute inset-x-[8%] top-[6%] h-[86%] bg-[radial-gradient(circle_at_top,rgba(42,207,229,0.16),transparent_42%),radial-gradient(circle_at_bottom,rgba(255,87,87,0.12),transparent_38%),linear-gradient(180deg,rgba(143,92,255,0.08),transparent_35%,rgba(143,92,255,0.04))] blur-2xl"
+            />
+            <div className="relative grid gap-4 sm:grid-cols-2">
+              {musicollabSurfaceCards.map((card, index) => (
+                <figure
+                  key={card.title}
+                  className={[
+                    "group relative overflow-hidden border border-[#2c3850] bg-[linear-gradient(180deg,#111827_0%,#0e1522_100%)]",
+                    index === 2 ? "sm:col-span-2" : "",
+                  ]
+                    .filter(Boolean)
+                    .join(" ")}
+                >
+                  <div className="flex min-h-[15rem] items-center justify-center p-8 md:min-h-[16.5rem] md:p-9">
+                    <Image
+                      src={card.mark}
+                      alt={card.alt}
+                      width={index === 2 ? 640 : 420}
+                      height={index === 2 ? 160 : 420}
+                      className={[
+                        "object-contain transition duration-700 ease-out group-hover:scale-[1.01]",
+                        index === 2 ? "w-full max-w-[28rem]" : "w-full max-w-[12rem]",
+                      ].join(" ")}
+                    />
+                  </div>
+                  <figcaption className="border-t border-[#2c3850] p-5 md:p-6">
+                    <p className="font-display text-[1.75rem] leading-[0.95] tracking-[-0.03em] text-[#f5f7fb] md:text-[1.95rem]">
+                      {card.title}
+                    </p>
+                    <p className="mt-3 max-w-md text-sm leading-6 text-[#9ba7bb] md:text-base">
+                      {card.detail}
+                    </p>
+                  </figcaption>
+                </figure>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+
+        <div className="mt-10 grid gap-4 border-t border-[#2c3850] pt-6 md:grid-cols-3 md:gap-5">
+          <div className="space-y-3 border border-[#2c3850] bg-[#11182a] p-5">
+            <p className="font-mono text-[10px] uppercase tracking-[0.28em] text-[#a5b0c4]">
+              Composer deck
+            </p>
+            <p className="text-base leading-7 text-[#f5f7fb]">
+              Build patterns, arrange samples, and control transport from the Mac web app.
+            </p>
+          </div>
+          <div className="space-y-3 border border-[#2c3850] bg-[#11182a] p-5">
+            <p className="font-mono text-[10px] uppercase tracking-[0.28em] text-[#a5b0c4]">
+              Performer app
+            </p>
+            <p className="text-base leading-7 text-[#f5f7fb]">
+              Play drums and instruments locally on iPhone 14 with low-latency audio.
+            </p>
+          </div>
+          <div className="space-y-3 border border-[#2c3850] bg-[#11182a] p-5">
+            <p className="font-mono text-[10px] uppercase tracking-[0.28em] text-[#a5b0c4]">
+              Shared session
+            </p>
+            <p className="text-base leading-7 text-[#f5f7fb]">
+              Keep the room in sync over one LAN session and coordinate events without raw audio
+              streaming.
+            </p>
+          </div>
+        </div>
+      </Container>
+    </div>
   );
 }
 

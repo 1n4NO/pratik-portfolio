@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" role="img" aria-labelledby="title desc">
+  <title id="title">Moire print texture</title>
+  <desc id="desc">Black and white interference bands with wavy halftone dots.</desc>
+  <defs>
+    <linearGradient id="paper" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f3f3ee" />
+      <stop offset="52%" stop-color="#d1d1cc" />
+      <stop offset="100%" stop-color="#7c7d79" />
+    </linearGradient>
+    <pattern id="dots" patternUnits="userSpaceOnUse" width="14" height="14">
+      <circle cx="3.5" cy="3.5" r="2.15" fill="#0b0b0b" />
+    </pattern>
+    <pattern id="dotsOffset" patternUnits="userSpaceOnUse" width="14" height="14" patternTransform="translate(7 7)">
+      <circle cx="3.5" cy="3.5" r="2.15" fill="#0b0b0b" />
+    </pattern>
+    <filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="2.5" />
+    </filter>
+  </defs>
+
+  <rect width="1600" height="1000" fill="url(#paper)" />
+
+  <g opacity="0.98" filter="url(#soft)">
+    <path d="M-120 120C20 8 170 24 300 116c103 74 180 90 262 49 105-52 194-48 274 11 93 69 171 84 244 46 62-31 118-95 169-193 59 6 109 24 148 53 37 28 66 62 87 103-13 69-55 127-126 174-79 52-166 62-251 28-72-28-138-24-200 11-82 45-160 79-234 101-105 31-202 24-292-20-95-46-174-57-240-31-56 22-102 61-137 116-58-8-107-31-145-67-37-35-58-79-65-131 12-43 36-84 71-123Z" fill="url(#dots)" />
+    <path d="M-70 340C70 246 196 240 308 322c82 59 147 82 196 68 58-17 121-67 188-152 79-100 181-150 307-151 92-1 176 26 251 80 80 57 161 84 244 82 69-2 138-26 208-73 42 48 61 98 57 151-4 60-28 111-72 154-51 51-114 74-187 69-89-6-156 10-200 49-54 48-127 85-219 110-96 27-200 29-312 7-97-19-176-14-239 15-83 38-164 67-244 87-98 24-186 23-262-3-73-25-128-72-166-141-8-63 6-120 41-171 34-50 77-91 128-123Z" fill="url(#dotsOffset)" opacity="0.9"/>
+  </g>
+
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.98">
+    <path d="M-80 178C64 62 196 38 316 107c92 52 170 67 235 44 82-29 171-20 266 27 88 44 171 53 250 28 89-28 177-83 264-166" stroke="#0b0b0b" stroke-width="52" />
+    <path d="M-96 216C48 96 188 76 324 154c90 51 168 64 233 40 80-30 164-22 252 25 81 44 158 54 234 31 88-26 179-86 272-180" stroke="#f7f7f2" stroke-width="28" />
+    <path d="M-110 248C30 132 168 116 304 196c87 51 164 63 233 36 84-32 168-25 250 21 79 43 155 55 228 34 86-24 180-82 278-172" stroke="#0b0b0b" stroke-width="12" />
+
+    <path d="M-120 522C18 408 152 384 282 450c92 47 168 58 230 32 78-32 165-20 259 36 86 51 165 62 238 34 89-33 183-98 282-195" stroke="#0b0b0b" stroke-width="56" />
+    <path d="M-100 560C42 446 174 424 298 492c85 46 157 54 215 23 72-39 157-33 238 18 77 48 149 58 218 32 88-33 187-104 300-213" stroke="#f7f7f2" stroke-width="30" />
+    <path d="M-82 596C56 484 184 462 304 528c82 44 154 50 216 18 70-36 148-30 223 16 71 43 140 53 208 31 88-28 192-94 312-201" stroke="#0b0b0b" stroke-width="12" />
+
+    <path d="M-110 798C26 684 158 658 286 720c93 45 171 57 233 35 81-29 165-18 252 36 82 52 159 65 232 39 90-32 187-96 296-193" stroke="#111211" stroke-width="112" />
+    <path d="M-78 932C60 820 188 798 308 864c82 44 152 50 214 18 69-36 146-30 219 15 72 44 141 55 210 33 90-28 192-94 313-203" stroke="#111211" stroke-width="112" />
+  </g>
+
+  <g opacity="0.24">
+    <circle cx="238" cy="312" r="52" fill="#0b0b0b" />
+    <circle cx="1120" cy="210" r="66" fill="#0b0b0b" />
+    <circle cx="1266" cy="650" r="94" fill="#0b0b0b" />
+    <circle cx="410" cy="736" r="86" fill="#0b0b0b" />
+    <circle cx="238" cy="312" r="26" fill="#f7f7f2" />
+    <circle cx="1120" cy="210" r="28" fill="#f7f7f2" />
+    <circle cx="1266" cy="650" r="34" fill="#f7f7f2" />
+    <circle cx="410" cy="736" r="32" fill="#f7f7f2" />
+  </g>
+</svg>

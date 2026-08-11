@@ -39,7 +39,7 @@ export type Project = {
   featured?: boolean;
 };
 
-export const projects: Project[] = [
+const projectCatalog: Project[] = [
   {
     slug: "multi-agent-ai-system",
     name: "Multi-Agent AI System",
@@ -539,184 +539,6 @@ export const projects: Project[] = [
     ],
   },
   {
-    slug: "state-dashboard",
-    name: "PolInsight India",
-    tagline: "State-level analytics for election campaign teams.",
-    impact: "Made dense election data easier to scan with KPI tiles, drill-down maps, hover states, and constituency context.",
-    role: "Dashboard architecture, data visualization, interaction design, and analytics UI implementation",
-    scope: "National KPIs, India map drill-down, state and constituency views, trend widgets, and intelligence panels",
-    constraint: "The interface had to preserve data density without overwhelming campaign users during fast analysis.",
-    technicalBet: "Progressive disclosure through map and widget interactions would work better than a flat dashboard grid.",
-    industry: "Compliance & Standards-Driven Applications",
-    liveUrl: "https://election-campaign-iota.vercel.app/",
-    techStack: ["Next.js", "React", "TypeScript", "D3.js", "Data Visualization"],
-    externalSystems: [
-      "Regional analytics datasets",
-      "Client-side D3 visualization runtime",
-      "Route-level drill-down data loading",
-    ],
-    detailedProcess: [
-      {
-        label: "Requirements",
-        body: "The dashboard needed to make dense election data scannable for campaign teams: national view, state drill-down, constituency detail, turnout, vote share, alliance splits, and trend context across election years. The key requirement was speed of interpretation, not just chart coverage.",
-      },
-      {
-        label: "Stack choices",
-        body: "Vite and React kept the dashboard fast and client-focused, TypeScript protected the regional data model, Zustand handled navigation and selection state, TanStack Query was available for data workflows, and D3 powered the custom map and charting needs that generic dashboard components would not cover well.",
-      },
-      {
-        label: "Design system",
-        body: "The interface moved toward an atomic structure with atoms such as StatNumber, ProgressBar, Sparkline, Badge, and ChartTooltip; molecules such as MetricCard and PartyBreakdown; and organisms such as StateMap and historical charts. Design tokens such as bg-base, bg-header, bg-surface, border, text-primary, text-muted, nda, india, others, and info kept the analytics UI consistent.",
-      },
-      {
-        label: "MVP definition",
-        body: "The MVP was an India-to-state drill-down with year switching for 2014, 2019, and 2024, KPI cards, alliance comparison, map interaction, and constituency-level panels. Authentication, advanced filtering, and broader campaign tooling were secondary to proving the core exploration flow.",
-      },
-      {
-        label: "Progression",
-        body: "The project progressed from normalized election data and hash-based navigation into bento-style dashboard composition. Once the state selection model worked, maps, trend sparklines, vote-share donuts, and constituency panels were layered in to support progressively deeper analysis without forcing full page transitions.",
-      },
-    ],
-    dataFlowDiagram: `flowchart TD
-  data["Election datasets"] --> normalize["Typed regional model"]
-  maps["GeoJSON and shapefiles"] --> map["D3 state map"]
-  normalize --> store["Zustand dashboard state"]
-  hash["Hash navigation"] --> store
-  year["Year selector"] --> store
-  store --> kpis["KPI cards"]
-  store --> charts["Trend charts"]
-  store --> map
-  map --> selection["State or AC selection"]
-    selection --> panels["Drill-down panels"]`,
-    cover: {
-      src: "/projects/state-dashboard/widget-india-map-dark.png",
-      alt: "Dark mode India map showing state-level Lok Sabha results and drill-down regions",
-    },
-    screenshots: [
-      {
-        src: "/projects/state-dashboard/widget-india-map-hover-dark.webm",
-        alt: "Dark mode India map widget showing state hover tooltip",
-      },
-            {
-        src: "/projects/state-dashboard/widget-india-map-hover-light.webm",
-        alt: "Light mode India map widget showing state hover tooltip",
-      },
-            {
-        src: "/projects/state-dashboard/karnataka-constituency-drilldown-dark.webm",
-        alt: "Dark mode interaction showing Karnataka drill-down and constituency selection",
-      },
-            {
-        src: "/projects/state-dashboard/widget-historical-seat-comparison-hover-dark.webm",
-        alt: "Dark mode historical seat comparison widget showing bar hover tooltip",
-      },
-            {
-        src: "/projects/state-dashboard/widget-historical-seat-comparison-hover-light.webm",
-        alt: "Light mode historical seat comparison widget showing bar hover tooltip",
-      },
-            {
-        src: "/projects/state-dashboard/widget-turnout-by-state-hover-dark.webm",
-        alt: "Dark mode turnout by state widget showing bar hover tooltip",
-      },
-            {
-        src: "/projects/state-dashboard/widget-turnout-by-state-hover-light.webm",
-        alt: "Light mode turnout by state widget showing bar hover tooltip",
-      },
-            {
-        src: "/projects/state-dashboard/widget-election-intelligence-hover-dark.webm",
-        alt: "Dark mode election intelligence widget showing feed scroll behavior",
-      },
-            {
-        src: "/projects/state-dashboard/widget-election-intelligence-hover-light.webm",
-        alt: "Light mode election intelligence widget showing feed scroll behavior",
-      },
-          {
-        src: "/projects/state-dashboard/kpi-nda-total-seats-dark.png",
-        alt: "Dark mode KPI tile showing NDA total seats",
-      },
-            {
-        src: "/projects/state-dashboard/kpi-nda-total-seats-light.png",
-        alt: "Light mode KPI tile showing NDA total seats",
-      },
-            {
-        src: "/projects/state-dashboard/kpi-india-alliance-seats-dark.png",
-        alt: "Dark mode KPI tile showing INDIA alliance seats",
-      },
-            {
-        src: "/projects/state-dashboard/kpi-india-alliance-seats-light.png",
-        alt: "Light mode KPI tile showing INDIA alliance seats",
-      },
-            {
-        src: "/projects/state-dashboard/kpi-national-voter-turnout-dark.png",
-        alt: "Dark mode KPI tile showing national voter turnout",
-      },
-            {
-        src: "/projects/state-dashboard/kpi-national-voter-turnout-light.png",
-        alt: "Light mode KPI tile showing national voter turnout",
-      },
-            {
-        src: "/projects/state-dashboard/kpi-vote-share-dark.png",
-        alt: "Dark mode KPI tile showing vote share breakdown",
-      },
-            {
-        src: "/projects/state-dashboard/kpi-vote-share-light.png",
-        alt: "Light mode KPI tile showing vote share breakdown",
-      },
-            {
-        src: "/projects/state-dashboard/widget-india-map-dark.png",
-        alt: "Dark mode India map widget for national election drill-down",
-      },
-            {
-        src: "/projects/state-dashboard/widget-india-map-light.png",
-        alt: "Light mode India map widget for national election drill-down",
-      },
-            {
-        src: "/projects/state-dashboard/widget-top-states-dark.png",
-        alt: "Dark mode Top States widget with seat totals and flipped states",
-      },
-            {
-        src: "/projects/state-dashboard/widget-top-states-light.png",
-        alt: "Light mode Top States widget with seat totals and flipped states",
-      },
-            {
-        src: "/projects/state-dashboard/widget-historical-seat-comparison-dark.png",
-        alt: "Dark mode historical seat comparison widget",
-      },
-            {
-        src: "/projects/state-dashboard/widget-historical-seat-comparison-light.png",
-        alt: "Light mode historical seat comparison widget",
-      },
-            {
-        src: "/projects/state-dashboard/widget-turnout-by-state-dark.png",
-        alt: "Dark mode turnout by state widget",
-      },
-            {
-        src: "/projects/state-dashboard/widget-turnout-by-state-light.png",
-        alt: "Light mode turnout by state widget",
-      },
-            {
-        src: "/projects/state-dashboard/widget-election-intelligence-dark.png",
-        alt: "Dark mode election intelligence widget",
-      },
-            {
-        src: "/projects/state-dashboard/widget-election-intelligence-light.png",
-        alt: "Light mode election intelligence widget",
-      },
-          ],
-    overview:
-      "A state-level analytics dashboard built for campaign teams working with dense regional data under compliance constraints, surfacing the numbers that matter without burying the reader in them.",
-    problem:
-      "Campaign and civic data is naturally hierarchical — state, region, constituency — and most dashboards either flatten it into one overwhelming view or force a slow drill-down for every question.",
-    approach:
-      "I focused the frontend architecture on progressive disclosure: a state-level overview that stays legible at a glance, with drill-down views that load only the data the viewer has actually asked for, kept fast and standards-compliant throughout.",
-    solution:
-      "A dashboard that scales from a statewide summary down to constituency-level detail without a full page reload, with accessibility and data accuracy treated as first-class requirements.",
-    highlights: [
-      "Hierarchical drill-down from state to constituency level",
-      "Performance-conscious rendering of dense regional datasets",
-      "Built to standards-compliance requirements from day one",
-    ],
-  },
-  {
     slug: "fluxion",
     name: "Fluxion",
     tagline: "A workflow console for a Rust BPMN engine.",
@@ -907,6 +729,8 @@ export const projects: Project[] = [
     ],
   },
 ];
+
+export const projects = projectCatalog;
 
 export function getProjectBySlug(slug: string) {
   return projects.find((p) => p.slug === slug);

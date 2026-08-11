@@ -43,7 +43,7 @@ const domains: Domain[] = [
     label: "Data visualization",
     summary: "Dense data made legible through drill-downs, maps, and progressive disclosure.",
     icon: DatabaseZap,
-    projectSlugs: ["state-dashboard", "fluxion"],
+    projectSlugs: ["fluxion"],
   },
   {
     id: "design",

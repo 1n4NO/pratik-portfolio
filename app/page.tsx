@@ -11,6 +11,7 @@ import { ArrowUpRight } from "lucide-react";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { HeroIdentityStrip } from "@/components/sections/HeroIdentityStrip";
 import { HeroMarquee } from "@/components/sections/HeroMarquee";
+import { DailyAudioPlaylist } from "@/components/sections/DailyAudioPlaylist";
 import { ProjectRow } from "@/components/sections/ProjectRow";
 import { UpcomingProjectSection } from "@/components/sections/UpcomingProjectSection";
 import { ContactCTA } from "@/components/layout/ContactCTA";
@@ -67,14 +68,14 @@ export default function HomePage() {
       <HeroIdentityStrip />
       <HeroSection />
 
-      <section className="border-y border-line bg-surface py-5 text-ink" aria-label="Project reel">
+      <section data-header-theme="dark" className="border-y border-line bg-surface py-5 text-ink" aria-label="Project reel">
         <HeroMarquee />
       </section>
 
-      <section className="bg-canvas text-[#161512]">
+      <section data-header-theme="light" className="bg-canvas text-[#161512]">
         <Container className="py-16 md:py-24 lg:py-28">
           <div className="grid gap-12 md:grid-cols-[minmax(0,0.7fr)_minmax(0,1.3fr)]">
-            <p className="font-mono text-xs text-[#53524f]">What I bring to the work</p>
+            <DailyAudioPlaylist />
             <div>
               <h2 className="max-w-[16ch] font-display text-[clamp(2.8rem,5.6vw,6.2rem)] font-normal">
                 Complex products deserve interfaces that feel inevitable.
@@ -98,7 +99,7 @@ export default function HomePage() {
         </Container>
       </section>
 
-      <section id="work" aria-labelledby="work-heading" className="bg-paper text-ink">
+      <section data-header-theme="dark" id="work" aria-labelledby="work-heading" className="bg-paper text-ink">
         <Container className="py-16 md:py-24">
           <div className="grid gap-10 md:grid-cols-[minmax(0,1fr)_auto] md:items-end">
             <h2 id="work-heading" className="max-w-[10ch] font-display text-[clamp(3.4rem,7vw,8rem)] font-normal">
@@ -126,18 +127,33 @@ export default function HomePage() {
 
       <UpcomingProjectSection />
 
-      <section className="border-t border-line bg-surface text-ink">
-        <Container className="py-16 md:py-24">
+      <section
+        data-header-theme="light"
+        className="relative isolate overflow-hidden border-t border-[#c9b79f] bg-[#ded2c2] text-[#f8f4ef]"
+      >
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 bg-[url('/marbled-print.svg')] bg-cover bg-center bg-no-repeat opacity-100"
+        />
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(230,218,202,0.18)_0%,rgba(230,218,202,0.08)_34%,rgba(25,26,27,0.18)_100%)]"
+        />
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_52%,rgba(255,248,240,0.24),transparent_18%),linear-gradient(92deg,rgba(255,255,255,0.18)_0%,transparent_12%,transparent_88%,rgba(255,255,255,0.12)_100%)] opacity-60 mix-blend-overlay"
+        />
+        <Container className="relative py-16 md:py-24">
           <div className="grid gap-10 md:grid-cols-[minmax(0,1.2fr)_minmax(18rem,0.8fr)] md:items-end">
-            <h2 className="max-w-[13ch] font-display text-[clamp(2.8rem,5.5vw,6rem)] font-normal">
+            <h2 className="max-w-[13ch] font-display text-[clamp(2.8rem,5.5vw,6rem)] font-normal text-[#f8f3eb] drop-shadow-[0_2px_10px_rgba(0,0,0,0.22)]">
               I worry about the details so teams can move with confidence.
             </h2>
-            <div className="space-y-6 border-t border-line pt-6 text-ink-soft">
-              <p>
+            <div className="space-y-6 border-t border-white/22 pt-6 text-[#f5efe6]">
+              <p className="max-w-md text-[#f6efe6]">
                 Architecture, interaction, performance, and delivery are treated as one product
                 problem—not separate handoffs.
               </p>
-              <div className="grid grid-cols-2 gap-x-8 gap-y-3 font-mono text-xs text-muted-copy">
+              <div className="grid grid-cols-2 gap-x-8 gap-y-3 font-mono text-xs text-[#f3eadc]">
                 <span>Frontend systems</span>
                 <span>Product strategy</span>
                 <span>AI workflows</span>
@@ -150,7 +166,9 @@ export default function HomePage() {
         </Container>
       </section>
 
-      <ContactCTA />
+      <div data-header-theme="light">
+        <ContactCTA />
+      </div>
     </>
   );
 }

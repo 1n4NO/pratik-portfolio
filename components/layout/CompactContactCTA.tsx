@@ -5,7 +5,7 @@ import { profile } from "@/data/profile";
 
 export function CompactContactCTA() {
   return (
-    <section className="border-t border-line bg-canvas text-[#161512]">
+    <section data-header-theme="light" className="border-t border-line bg-canvas text-[#161512]">
       <Container className="py-10 md:py-12">
         <div className="flex flex-col gap-5 py-6 md:flex-row md:items-center md:justify-between">
           <div>

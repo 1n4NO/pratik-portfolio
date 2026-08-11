@@ -16,7 +16,6 @@ Pratik is based in Bangalore, India and is currently exploring Staff and Senior 
 - [Multi-Agent AI System](https://pratik-portfolio-chi-three.vercel.app/work/multi-agent-ai-system): A local-first, multi-agent research assistant with an inspectable React Flow execution graph, Server-Sent Events, manual checkpoints, citations, report export, and Ollama-based inference.
 - [Product Studio](https://pratik-portfolio-chi-three.vercel.app/work/product-studio): A browser-based UX studio that turns briefs into page blueprints, runs deterministic accessibility and readability checks, and exports production artifacts.
 - [Orqestra](https://pratik-portfolio-chi-three.vercel.app/work/orqestra): A schema-driven website builder with theme tokens, structured sections, drag-and-drop page composition, responsive previews, and versioned design configuration.
-- [PolInsight India](https://pratik-portfolio-chi-three.vercel.app/work/state-dashboard): A state-level data dashboard focused on making complex public and regional datasets easier to explore and understand.
 - [Fluxion](https://pratik-portfolio-chi-three.vercel.app/work/fluxion): A product case study covering frontend systems, interface architecture, and workflow design.
 - [Rainmatter Air](https://pratik-portfolio-chi-three.vercel.app/work/rainmatter-air): A data-rich product interface and visualization case study.
 

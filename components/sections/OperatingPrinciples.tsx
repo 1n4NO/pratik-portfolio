@@ -27,6 +27,7 @@ const operatingPrinciples = [
 export function OperatingPrinciples() {
   return (
     <section
+      data-header-theme="dark"
       id="manifesto"
       aria-labelledby="principles-heading"
       className="border-y border-deep-line bg-deep py-section-sm text-muted-copy md:py-section-md"

@@ -56,7 +56,7 @@ export default function WorkPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={jsonLd(structuredData)}
       />
-      <section className="border-b border-line bg-paper pb-section-sm text-ink md:pb-section-md">
+      <section data-header-theme="dark" className="border-b border-line bg-paper pb-section-sm text-ink md:pb-section-md">
         <Container className="pt-section-sm md:pt-section-md">
           <div className="space-y-6 md:max-w-4xl">
             <h1 className="font-display text-hero font-medium tracking-display">

@@ -8,7 +8,7 @@ import { profile } from "@/data/profile";
 
 export function HeroSection() {
   return (
-    <section className="relative overflow-hidden bg-paper text-ink">
+    <section data-header-theme="dark" className="relative overflow-hidden bg-paper text-ink">
       <Container className="relative py-14 md:py-20 lg:py-24">
         <div className="grid min-h-[calc(100svh-9rem)] content-between gap-16">
           <div className="grid gap-10 lg:grid-cols-[minmax(0,1.55fr)_minmax(18rem,0.45fr)] lg:items-end">

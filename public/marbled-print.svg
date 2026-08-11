@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1200" role="img" aria-labelledby="title desc">
+  <title id="title">Marbled print texture</title>
+  <desc id="desc">A blue and orange marbled print with fluid veining and paper tone.</desc>
+  <defs>
+    <linearGradient id="paper" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#e8dccb"/>
+      <stop offset="1" stop-color="#d7c2aa"/>
+    </linearGradient>
+    <linearGradient id="blueFlow" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2a9ac0"/>
+      <stop offset="0.5" stop-color="#196f93"/>
+      <stop offset="1" stop-color="#0f4d69"/>
+    </linearGradient>
+    <linearGradient id="orangeFlow" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ff8a2b"/>
+      <stop offset="0.5" stop-color="#f36a08"/>
+      <stop offset="1" stop-color="#d45100"/>
+    </linearGradient>
+    <linearGradient id="creamVein" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fff7ed"/>
+      <stop offset="1" stop-color="#f0e5d6"/>
+    </linearGradient>
+    <filter id="softBlur" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="18" />
+    </filter>
+    <filter id="wash" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="4" />
+    </filter>
+  </defs>
+
+  <rect width="1600" height="1200" fill="url(#paper)" />
+
+  <g filter="url(#softBlur)" opacity="0.95">
+    <path d="M-40 160C120 40 286 4 446 54c116 36 170 111 280 118 105 7 171-74 287-114 158-54 312-10 451 115 62 55 101 127 120 197-51 60-121 84-205 74-111-13-168-83-288-91-154-10-218 104-350 117-118 12-175-56-279-111C402 299 282 321 164 290 83 269 25 229-40 160Z" fill="url(#blueFlow)" opacity="0.95"/>
+    <path d="M1304 46c141 36 255 122 316 247 14 29 24 58 30 88-39 53-97 88-171 104-122 25-195-36-297-47-121-13-180 58-297 77-109 17-180-27-263-95-81-67-193-121-286-144-96-23-166-4-246 29-42-54-57-121-44-180 22-96 122-186 245-220 153-43 295 20 418 71 116 48 222 51 322 12 99-38 184-39 273-2Z" fill="url(#orangeFlow)" opacity="0.88"/>
+    <path d="M-20 760c90-110 197-152 325-118 136 36 201 126 332 163 110 31 228 8 332-48 129-69 247-86 359-49 79 26 127 71 172 137-11 72-49 132-112 182-94 74-212 87-340 61-147-31-228-100-359-106-134-6-212 63-338 83-100 16-198-2-278-49-62-36-98-93-93-156Z" fill="url(#blueFlow)" opacity="0.78"/>
+    <path d="M1070 728c125-55 227-36 328 6 79 33 131 62 177 123-27 112-106 194-217 244-153 69-310 47-446 0-104-37-177-36-283 15-107 52-228 71-373 56-78-8-152-24-227-49-18-56-11-123 23-185 34-63 84-114 150-152 107-61 222-70 342-34 132 40 267 31 426-24Z" fill="url(#orangeFlow)" opacity="0.78"/>
+  </g>
+
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round" filter="url(#wash)" opacity="0.96">
+    <path d="M66 186c116 3 170-85 303-87 122-2 180 70 274 104 86 31 169 21 257-21 111-53 190-50 305 2 114 52 194 71 310 48" stroke="#f4eadc" stroke-width="10"/>
+    <path d="M76 276c98-24 181-8 249 48 72 59 124 104 194 125 90 26 173 7 275-39 110-50 202-57 302-23 86 29 161 85 224 167" stroke="#1f89b0" stroke-width="24"/>
+    <path d="M41 388c83 24 151 80 204 153 59 81 121 128 206 146 97 20 186-1 279-49 129-66 238-77 348-33 86 34 162 86 228 158" stroke="#f46a08" stroke-width="34"/>
+    <path d="M86 1004c94-51 187-76 275-71 115 6 194 60 292 88 95 27 190 24 296-12 101-34 190-40 282-16 73 18 137 59 195 123" stroke="#1f89b0" stroke-width="30"/>
+    <path d="M116 914c122-24 224 1 305 72 69 60 129 94 198 105 92 15 186-8 292-63 112-59 202-68 299-36 81 27 149 81 204 162" stroke="#f36a08" stroke-width="22"/>
+    <path d="M238 82c-17 96 15 176 100 239 83 61 148 133 160 211 12 78-10 156-69 234-61 80-84 157-68 232 10 47 32 85 67 114" stroke="#f2e6d8" stroke-width="14"/>
+    <path d="M1396 106c-83 74-140 147-170 219-29 71-26 144 9 219 35 74 46 146 32 216-14 65-49 124-106 177" stroke="#f4eadc" stroke-width="14"/>
+    <path d="M516 14c16 76 63 143 142 200 80 57 127 122 144 194 17 73 2 151-43 236-41 77-51 148-29 214" stroke="#196f93" stroke-width="20"/>
+    <path d="M1016 42c53 70 74 140 64 209-12 78-57 144-136 200-88 63-133 132-133 208 0 76 27 144 80 204" stroke="#ff8a2b" stroke-width="18"/>
+  </g>
+
+  <g opacity="0.55">
+    <path d="M164 144c110-48 205-56 286-24 102 40 178 102 236 187 58 85 143 130 255 133 116 4 225 46 327 128 37 30 66 65 87 107" fill="none" stroke="#ffffff" stroke-opacity="0.38" stroke-width="2.4"/>
+    <path d="M131 332c87 31 157 84 210 160 46 66 110 117 191 155 82 39 164 55 248 48 100-8 184-43 255-104 55-46 118-76 189-89" fill="none" stroke="#174f69" stroke-opacity="0.42" stroke-width="2.2"/>
+    <path d="M108 864c86-25 170-19 252 19 69 32 135 80 198 144 60 60 121 95 183 105 79 13 161-4 247-52 92-51 178-61 258-31" fill="none" stroke="#fff1df" stroke-opacity="0.28" stroke-width="2.4"/>
+  </g>
+</svg>
