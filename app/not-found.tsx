@@ -1,7 +1,13 @@
+"use client";
+
 import Link from "next/link";
+import { useState } from "react";
 import { Container } from "@/components/ui/Container";
 
 export default function NotFound() {
+  const [clicks, setClicks] = useState(0);
+  const foundEasterEgg = clicks >= 5;
+
   return (
     <main className="relative isolate flex min-h-[calc(100svh-10rem)] items-center overflow-hidden bg-[#05080d] text-[#f5f7fb]">
       <div
@@ -14,9 +20,16 @@ export default function NotFound() {
             <p className="mb-8 font-mono text-[10px] uppercase tracking-[0.34em] text-[#d8b34a]">
               Error / wrong turn
             </p>
-            <p className="font-display text-[clamp(8rem,24vw,19rem)] leading-[0.72] tracking-[-0.08em] text-[#f5f7fb]">
+            <button
+              type="button"
+              aria-label={`404 hidden control, ${Math.min(clicks, 5)} of 5 taps`}
+              onClick={() => setClicks((count) => (count >= 5 ? 0 : count + 1))}
+              className="group block cursor-crosshair text-left focus-ring"
+            >
+              <span className="font-display text-[clamp(8rem,24vw,19rem)] leading-[0.72] tracking-[-0.08em] text-[#f5f7fb] transition-colors duration-300 group-hover:text-[#d8b34a]">
               404
-            </p>
+              </span>
+            </button>
           </div>
 
           <div className="border-t border-[#2b3442] pt-6 md:mb-4">
@@ -43,6 +56,42 @@ export default function NotFound() {
         <div className="mt-20 flex items-center justify-between border-t border-[#202936] pt-5 font-mono text-[10px] uppercase tracking-[0.22em] text-[#667286]">
           <span>1N4N0 / signal lost</span>
           <span className="hidden sm:inline">Nothing to see here. Probably.</span>
+        </div>
+
+        <div
+          aria-live="polite"
+          className={`grid transition-[grid-template-rows,opacity,margin] duration-500 ease-in-out ${
+            foundEasterEgg ? "mt-8 grid-rows-[1fr] opacity-100" : "mt-0 grid-rows-[0fr] opacity-0"
+          }`}
+        >
+          <div className="min-h-0 overflow-hidden">
+            <div className="border border-[#d8b34a]/60 bg-[#10151d] p-5 font-mono text-[11px] text-[#c7d0df] md:p-6">
+              <div className="mb-4 flex items-center justify-between gap-4 text-[#d8b34a]">
+                <span>maintenance hatch / unlocked</span>
+                <span aria-hidden="true">● ● ●</span>
+              </div>
+              <pre className="overflow-x-auto whitespace-pre text-[#f5f7fb]" aria-label="Hidden message">
+{`      .--.
+     |o_o |
+     |:_/ |
+    //   \\ \
+   (|     | )
+  /'\\_   _/\
+  \\___)=(___/`}
+              </pre>
+              <p className="mt-5 max-w-xl leading-6 text-[#9ba7bb]">
+                You found the route that was not supposed to be indexed. There is no prize, but
+                there is a homepage.
+              </p>
+              <button
+                type="button"
+                onClick={() => setClicks(0)}
+                className="mt-5 border-b border-[#d8b34a] pb-1 text-[#d8b34a] transition-colors hover:text-[#f0cf70] focus-ring"
+              >
+                Close hatch
+              </button>
+            </div>
+          </div>
         </div>
       </Container>
     </main>
