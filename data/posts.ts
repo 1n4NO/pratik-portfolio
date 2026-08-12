@@ -13,6 +13,16 @@ export type Post = {
 
 export const posts: Post[] = [
   {
+    slug: "the-ui-is-where-architecture-becomes-visible",
+    title: "The UI is where architecture becomes visible",
+    date: "2026-08-12",
+    tag: "Frontend Architecture",
+    excerpt:
+      "A frontend does more than display a system. It reveals whether the system has been understood.",
+    content:
+      "A frontend is often treated as the last step in a product. The backend is designed, the data is shaped, the APIs are agreed on, then the interface is expected to make everything feel simple.\n\nThat is rarely how it works in practice.\n\nThe interface is where the decisions made elsewhere become visible. If the data model is unclear, the UI starts collecting exceptions. If the API has no consistent concept of loading or failure, every screen invents its own. If ownership is vague, components become small islands that are difficult to change without breaking something nearby.\n\nThis is why I spend time looking at the frontend before deciding how to build it. Not because the UI should dictate everything, but because it exposes the gaps quickly. A missing state, an awkward transition or a confusing piece of copy is often evidence of a deeper product or architecture problem.\n\nThe best frontend systems make those problems easier to see. They give the team clear boundaries, predictable states and enough structure to change direction without starting over.\n\nGood architecture is not hidden behind the interface. It is what allows the interface to feel obvious.",
+  },
+  {
     slug: "decide-the-schema-before-the-ui",
     title: "The one decision I make before writing a single line of UI",
     date: "2026-07-24",
