@@ -41,6 +41,61 @@ export type Project = {
 
 const projectCatalog: Project[] = [
   {
+    slug: "prismate",
+    name: "Prismate",
+    tagline: "Accessibility QA for designers, built into the browser.",
+    impact: "Turned accessibility review into a practical design-time workflow with one bundled suite and eight focused browser capabilities.",
+    role: "Product direction, extension architecture, interaction design, visual identity, and landing-page system",
+    scope: "Eight standalone Chrome extensions, bundled suite, shared localization, persistent settings, interactive landing page, and evidence-led messaging",
+    constraint: "The tool had to stay useful as a fast review aid without pretending to replace disabled-user testing or guarantee compliance.",
+    technicalBet: "A shared browser runtime with independently selectable modules would make accessibility checks feel like one calm workflow instead of eight disconnected tools.",
+    industry: "Accessibility tooling / Browser extensions",
+    liveUrl: "https://github.com/1n4NO/Prismate",
+    githubUrl: "https://github.com/1n4NO/Prismate",
+    techStack: ["Chrome Manifest V3", "Vanilla JavaScript", "Chrome Storage", "10-language localization", "CSS filters and DOM inspection"],
+    externalSystems: ["Chrome activeTab and scripting APIs", "chrome.storage.local for persistent settings", "WCAG and accessibility research sources"],
+    detailedProcess: [
+      { label: "Requirements", body: "Prismate started as a color-vision simulator and grew into a suite for the decisions designers make before handoff: color, contrast, focus, motion, readability, touch targets, meaning, and alternative text." },
+      { label: "Architecture", body: "Each capability remains useful as a standalone extension, while the bundled suite composes the same content modules behind one popup. Namespaced local storage keeps settings persistent without coupling the modules together." },
+      { label: "Product language", body: "The product deliberately uses review prompts instead of compliance verdicts. The landing page pairs the interactive checks with cited prevalence and disability research so the work stays grounded in people." },
+      { label: "Progression", body: "The project moved from the original Vision extension through seven additional MVPs, then into suite packaging with shared localization, shared icons, and a release validator that checks module routes and ten locale catalogs." },
+    ],
+    dataFlowDiagram: `flowchart TD
+  page["Web page"] --> runtime["Shared content runtime"]
+  runtime --> vision["Vision"]
+  runtime --> contrast["Contrast"]
+  runtime --> focus["Focus"]
+  runtime --> motion["Motion"]
+  runtime --> read["Read"]
+  runtime --> touch["Touch"]
+  runtime --> meaning["Meaning"]
+  runtime --> alt["Alt"]
+  popup["Suite or standalone popup"] --> storage["Namespaced local settings"]
+  storage --> popup`,
+    cover: { src: "/projects/prismate/prismate.png", alt: "Prismate umbrella icon representing the accessibility QA suite" },
+    screenshots: [
+      { src: "/projects/prismate/prismate-vision.png", alt: "Prismate Vision extension icon", caption: "Vision: color perception" },
+      { src: "/projects/prismate/prismate-contrast.png", alt: "Prismate Contrast extension icon", caption: "Contrast: readable relationships" },
+      { src: "/projects/prismate/prismate-focus.png", alt: "Prismate Focus extension icon", caption: "Focus: keyboard flow" },
+      { src: "/projects/prismate/prismate-motion.png", alt: "Prismate Motion extension icon", caption: "Motion: reduced motion review" },
+      { src: "/projects/prismate/prismate-read.png", alt: "Prismate Read extension icon", caption: "Read: readable layouts" },
+      { src: "/projects/prismate/prismate-touch.png", alt: "Prismate Touch extension icon", caption: "Touch: target sizing" },
+      { src: "/projects/prismate/prismate-meaning.png", alt: "Prismate Meaning extension icon", caption: "Meaning: non-color cues" },
+      { src: "/projects/prismate/prismate-alt.png", alt: "Prismate Alt extension icon", caption: "Alt: image context" },
+    ],
+    overview: "Prismate is a browser-based accessibility QA suite for designers. It lets people inspect a live page or prototype through eight focused lenses before an accessibility issue becomes expensive to change.",
+    problem: "Accessibility checks often arrive after the design has hardened. Designers need fast, local review prompts that sit beside the browser work and make invisible barriers easier to notice.",
+    approach: "I expanded the original color-vision extension into a family of focused modules, gave each one persistent settings and ten-language support, then composed them into a bundled suite with a single popup and a shared module contract.",
+    solution: "The result is Prismate: eight standalone extensions plus a bundled suite, with interactive scans, issue cycling, browser-native overlays, and an evidence-led landing page that explains why each check matters.",
+    highlights: [
+      "Eight accessibility QA capabilities with a standalone-first architecture",
+      "Bundled Prismate Suite with one popup and per-module settings",
+      "Ten popup languages with persistent local preferences",
+      "Issue highlighting and cycling for actionable review prompts",
+    ],
+    featured: true,
+  },
+  {
     slug: "multi-agent-ai-system",
     name: "Multi-Agent AI System",
     tagline: "A research workflow you can inspect while it runs.",

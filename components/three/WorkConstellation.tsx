@@ -115,8 +115,11 @@ function createPerformanceProfile(
     particleCount: reduced ? 70 : 220,
     particleOpacity: reduced ? 0.28 : 0.5,
     particleSize: reduced ? 0.025 : 0.035,
-    autoRotate: !reduced,
-    enableDamping: !reduced,
+    // Device constraints reduce visual complexity, but should not remove the
+    // constellation's defining idle motion. Only an explicit reduced-motion
+    // preference disables rotation and damping.
+    autoRotate: !reducedMotion,
+    enableDamping: !reducedMotion,
     showHoverCard: !coarsePointer,
     dpr: reduced ? [1, 1] : [1, 1.75],
   };

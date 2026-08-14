@@ -4,6 +4,7 @@ import { Container } from "@/components/ui/Container";
 import { PageIntro } from "@/components/ui/PageIntro";
 import { LinkButton } from "@/components/ui/Button";
 import { IconDownloadCard } from "@/components/downloads/IconDownloadCard";
+import { PrismateIconCard } from "@/components/downloads/PrismateIconCard";
 import { CompactContactCTA } from "@/components/layout/CompactContactCTA";
 import { profile } from "@/data/profile";
 import { blueLotusExperienceIcons, downloadableIcons } from "@/data/downloadableIcons";
@@ -43,6 +44,36 @@ export default function DownloadsPage() {
             <Download size={14} aria-hidden="true" />
             Download résumé
           </LinkButton>
+        </div>
+      </Container>
+
+      <Container className="pb-20">
+        <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <h2 className="font-display text-2xl font-bold text-ink">Prismate suite icons</h2>
+            <p className="mt-2 max-w-xl text-sm text-ink-soft">
+              The umbrella mark and eight module icons from Prismate, available as PNG files.
+            </p>
+          </div>
+          <a
+            href="https://github.com/1n4NO/Prismate"
+            target="_blank"
+            rel="noreferrer"
+            className="font-mono text-[11px] uppercase tracking-widest text-ink-soft hover:text-ink focus-ring"
+          >
+            View project ↗
+          </a>
+        </div>
+        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-5">
+          <PrismateIconCard name="Prismate" filename="prismate.png" />
+          <PrismateIconCard name="Vision" filename="prismate-vision.png" />
+          <PrismateIconCard name="Contrast" filename="prismate-contrast.png" />
+          <PrismateIconCard name="Focus" filename="prismate-focus.png" />
+          <PrismateIconCard name="Motion" filename="prismate-motion.png" />
+          <PrismateIconCard name="Read" filename="prismate-read.png" />
+          <PrismateIconCard name="Touch" filename="prismate-touch.png" />
+          <PrismateIconCard name="Meaning" filename="prismate-meaning.png" />
+          <PrismateIconCard name="Alt" filename="prismate-alt.png" />
         </div>
       </Container>
 

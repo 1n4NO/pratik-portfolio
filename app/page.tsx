@@ -26,7 +26,8 @@ export const metadata: Metadata = {
 };
 
 export default function HomePage() {
-  const featuredProjects = projects.slice(0, 4);
+  // Prismate belongs in the work catalog, but the homepage selection remains curated.
+  const featuredProjects = projects.filter((project) => project.slug !== "prismate").slice(0, 4);
   const structuredData = {
     "@context": "https://schema.org",
     "@graph": [
