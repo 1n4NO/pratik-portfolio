@@ -16,7 +16,7 @@ const upcomingProjects = [
     image: "/upcoming/forge/01-overview.png",
     imageAlt: "Forge workspace overview",
     tags: ["AI systems", "Local-first", "Architecture"],
-    href: "https://forge-landing-pink.vercel.app/",
+    href: "https://forge.1n4n0.com/",
     tone: "amber",
   },
   {
@@ -38,7 +38,7 @@ const upcomingProjects = [
     image: "/upcoming/1.png",
     imageAlt: "Blue Lotus Experience preview",
     tags: ["Art direction", "Experience", "Branding"],
-    href: "https://blue-lotus-experience.vercel.app/",
+    href: "https://www.blue-lotus-experience.com/",
     tone: "green",
   },
 ] as const;

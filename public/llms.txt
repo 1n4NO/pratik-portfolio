@@ -6,26 +6,26 @@ Pratik is based in Bangalore, India and is currently exploring Staff and Senior 
 
 ## Main pages
 
-- [Home](https://pratik-portfolio-chi-three.vercel.app/): Professional overview, current focus, selected projects, and contact links.
-- [Work](https://pratik-portfolio-chi-three.vercel.app/work): Selected product and frontend architecture case studies.
-- [Expertise](https://pratik-portfolio-chi-three.vercel.app/expertise): Skills across frontend architecture, leadership, React, Next.js, TypeScript, AI integration, data visualization, quality, security, cloud, and DevOps.
-- [Musings](https://pratik-portfolio-chi-three.vercel.app/musings): Articles about frontend architecture, design systems, AI-assisted engineering, performance, and local LLM interfaces.
+- [Home](https://1n4n0.com/): Professional overview, current focus, selected projects, and contact links.
+- [Work](https://1n4n0.com/work): Selected product and frontend architecture case studies.
+- [Expertise](https://1n4n0.com/expertise): Skills across frontend architecture, leadership, React, Next.js, TypeScript, AI integration, data visualization, quality, security, cloud, and DevOps.
+- [Musings](https://1n4n0.com/musings): Articles about frontend architecture, design systems, AI-assisted engineering, performance, and local LLM interfaces.
 
 ## Featured case studies
 
-- [Multi-Agent AI System](https://pratik-portfolio-chi-three.vercel.app/work/multi-agent-ai-system): A local-first, multi-agent research assistant with an inspectable React Flow execution graph, Server-Sent Events, manual checkpoints, citations, report export, and Ollama-based inference.
-- [Product Studio](https://pratik-portfolio-chi-three.vercel.app/work/product-studio): A browser-based UX studio that turns briefs into page blueprints, runs deterministic accessibility and readability checks, and exports production artifacts.
-- [Orqestra](https://pratik-portfolio-chi-three.vercel.app/work/orqestra): A schema-driven website builder with theme tokens, structured sections, drag-and-drop page composition, responsive previews, and versioned design configuration.
-- [Fluxion](https://pratik-portfolio-chi-three.vercel.app/work/fluxion): A product case study covering frontend systems, interface architecture, and workflow design.
-- [Rainmatter Air](https://pratik-portfolio-chi-three.vercel.app/work/rainmatter-air): A data-rich product interface and visualization case study.
+- [Multi-Agent AI System](https://1n4n0.com/work/multi-agent-ai-system): A local-first, multi-agent research assistant with an inspectable React Flow execution graph, Server-Sent Events, manual checkpoints, citations, report export, and Ollama-based inference.
+- [Product Studio](https://1n4n0.com/work/product-studio): A browser-based UX studio that turns briefs into page blueprints, runs deterministic accessibility and readability checks, and exports production artifacts.
+- [Orqestra](https://1n4n0.com/work/orqestra): A schema-driven website builder with theme tokens, structured sections, drag-and-drop page composition, responsive previews, and versioned design configuration.
+- [Fluxion](https://1n4n0.com/work/fluxion): A product case study covering frontend systems, interface architecture, and workflow design.
+- [Rainmatter Air](https://1n4n0.com/work/rainmatter-air): A data-rich product interface and visualization case study.
 
 ## Articles
 
-- [Stop picking one rendering strategy for the whole app](https://pratik-portfolio-chi-three.vercel.app/musings/picking-a-rendering-strategy-per-route): A route-by-route framework for choosing SSR, static generation, CSR, streaming, and React Server Components.
-- [What actually moves the needle in a design system](https://pratik-portfolio-chi-three.vercel.app/musings/design-systems-reduce-development-effort): Why governance, versioning, ownership, and decision documentation matter as much as component libraries.
-- [Reviewing AI-generated code needs its own checklist](https://pratik-portfolio-chi-three.vercel.app/musings/ai-code-review-standards): Review practices for the distinct failure modes of AI-assisted code.
-- [The performance budget that actually survived three product teams](https://pratik-portfolio-chi-three.vercel.app/musings/performance-budget-that-survived-three-teams): A practical approach to enforceable performance budgets using ownable limits and CI checks.
-- [What changes when your LLM runs on the user's machine](https://pratik-portfolio-chi-three.vercel.app/musings/local-llms-in-production-frontends): Frontend architecture considerations for local inference, variable hardware, streaming, model availability, privacy, and Ollama.
+- [Stop picking one rendering strategy for the whole app](https://1n4n0.com/musings/picking-a-rendering-strategy-per-route): A route-by-route framework for choosing SSR, static generation, CSR, streaming, and React Server Components.
+- [What actually moves the needle in a design system](https://1n4n0.com/musings/design-systems-reduce-development-effort): Why governance, versioning, ownership, and decision documentation matter as much as component libraries.
+- [Reviewing AI-generated code needs its own checklist](https://1n4n0.com/musings/ai-code-review-standards): Review practices for the distinct failure modes of AI-assisted code.
+- [The performance budget that actually survived three product teams](https://1n4n0.com/musings/performance-budget-that-survived-three-teams): A practical approach to enforceable performance budgets using ownable limits and CI checks.
+- [What changes when your LLM runs on the user's machine](https://1n4n0.com/musings/local-llms-in-production-frontends): Frontend architecture considerations for local inference, variable hardware, streaming, model availability, privacy, and Ollama.
 
 ## Core expertise
 

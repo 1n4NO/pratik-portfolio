@@ -97,7 +97,7 @@ export default function DownloadsPage() {
             </p>
           </div>
           <LinkButton
-            href="https://blue-lotus-experience.vercel.app/"
+              href="https://www.blue-lotus-experience.com/"
             target="_blank"
             rel="noreferrer"
             variant="secondary"

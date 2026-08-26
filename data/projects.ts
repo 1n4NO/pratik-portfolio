@@ -105,7 +105,7 @@ const projectCatalog: Project[] = [
     constraint: "The system had to feel transparent and useful while running entirely on local LLM infrastructure.",
     technicalBet: "A streamed, checkpointed agent graph would earn more trust than a plain chat window.",
     industry: "AI Agent Systems",
-    liveUrl: "https://multi-agent-ai-landing.vercel.app/",
+    liveUrl: "https://multi-agent-ai.1n4n0.com/",
     githubUrl: "https://github.com/1n4NO/multi-agent-ai-system",
     techStack: [
       "Next.js (App Router)",
@@ -244,7 +244,7 @@ const projectCatalog: Project[] = [
     constraint: "Generated output needed measurable quality checks instead of relying on model confidence or visual plausibility.",
     technicalBet: "Pairing generative agents with deterministic HTML checks would make page output easier to ship.",
     industry: "Design Tooling / SaaS",
-    liveUrl: "https://ai-product-studio-studio-web.vercel.app/",
+    liveUrl: "https://ai-product-studio.1n4n0.com/",
     techStack: [
       "Next.js",
       "TypeScript",
@@ -384,7 +384,7 @@ const projectCatalog: Project[] = [
     constraint: "The builder needed flexibility without letting arbitrary configuration break preview fidelity.",
     technicalBet: "A schema-first section model would make global theme propagation and reliable preview possible.",
     industry: "Website Builder / SaaS",
-    liveUrl: "https://theme-builder-landing.vercel.app/",
+    liveUrl: "https://theme-builder.1n4n0.com/",
     githubUrl: "https://github.com/1n4NO/orqestra",
     techStack: [
       "Next.js (App Router)",
@@ -603,7 +603,7 @@ const projectCatalog: Project[] = [
     constraint: "The console had to explain a technical runtime without hiding the engine, API, or observability details.",
     technicalBet: "An embedded operations UI would make the engine easier to evaluate than API docs alone.",
     industry: "Developer Tools / Workflow Engines",
-    liveUrl: "https://fluxion-landing-gules.vercel.app/",
+    liveUrl: "https://fluxion.1n4n0.com/",
     techStack: ["Rust", "Axum", "PostgreSQL", "BPMN 2.0", "Prometheus", "OpenTelemetry"],
     externalSystems: [
       "PostgreSQL-backed workflow persistence",
@@ -705,7 +705,7 @@ const projectCatalog: Project[] = [
     constraint: "The extension needed useful live data while keeping credentials local and working gracefully offline.",
     technicalBet: "A small Manifest V3 extension could make AQI awareness more habitual than another standalone dashboard.",
     industry: "Consumer / Environmental Tech",
-    liveUrl: "https://rainmatter-air-landing.vercel.app/",
+    liveUrl: "https://rainmatter-air.1n4n0.com/",
     githubUrl: "https://github.com/1n4NO/rainmatter-air-extension",
     techStack: ["Manifest V3", "Vanilla JavaScript", "Chrome Extension APIs", "OpenAQ API", "OAQ API"],
     externalSystems: [
