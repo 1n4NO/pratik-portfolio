@@ -6,7 +6,7 @@ export const profile = {
   role: "Frontend Architect",
   tagline: "Building frontend systems that ship quickly and still make sense later.",
   location: "Bangalore, India",
-  email: "pratiksk@outlook.com",
+  email: "contact@thehighlama.com",
   phone: "+91 99864 25864",
   linkedin: "https://linkedin.com/in/in4no",
   github: "https://github.com/1n4NO",
